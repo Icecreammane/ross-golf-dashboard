@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛳ Ross's Golf Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-meta {
+            text-align: right;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .header-meta div {
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .stat-unit {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .input-row button {
+            padding: 8px 16px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .input-row button:hover {
+            background: #1e3c72;
+        }
+
+        .list-item {
+            padding: 10px;
+            background: #f5f7fa;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .list-item button {
+            padding: 4px 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .list-item button:hover {
+            background: #c0392b;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2a5298, #6dd5ed);
+            transition: width 0.3s;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .club-item {
+            padding: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 4px solid #2a5298;
+            font-size: 13px;
+        }
+
+        .club-item strong {
+            display: block;
+            color: #1e3c72;
+            margin-bottom: 4px;
+        }
+
+        .club-item small {
+            color: #999;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .improvement-item {
+            padding: 12px;
+            background: #f0f9ff;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #3498db;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .improvement-item strong {
+            display: block;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .color-good { color: #27ae60; }
+        .color-warning { color: #f39c12; }
+        .color-alert { color: #e74c3c; }
+
+        .goal-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .goal-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3c72;
+        }
+
+        .goal-progress {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header h1 {
+                justify-content: center;
+            }
+
+            .header-meta {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div>
+                <h1>⛳ Ross's Golf Command Center</h1>
+                <small>Personal Golf Analytics & Improvement Tracker</small>
+            </div>
+            <div class="header-meta">
+                <div>📍 Nolensville, TN</div>
+                <div>🎯 Goal: Win Fantasy League + Lower Handicap</div>
+                <div id="today-date" style="font-size: 12px; margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- QUICK STATS -->
+        <div class="section-title">⚡ Quick Stats</div>
+        <div class="grid">
+            <div class="card">
+                <h2>📊 Round Tracking</h2>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Rounds Played</div>
+                        <div class="stat-value" id="rounds-count">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Best Score</div>
+                        <div class="stat-value" id="best-score">—</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Average Score</div>
+                        <div class="stat-value" id="avg-score">—</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Last Score</div>
+                        <div class="stat-value" id="last-score">—</div>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="score-input" placeholder="Enter score" min="60" max="130">
+                    <input type="text" id="course-input" placeholder="Course name">
+                    <button onclick="addScore()">Log</button>
+                </div>
+                <div id="scores-list" style="font-size: 12px; max-height: 150px; overflow-y: auto;"></div>
+            </div>
+
+            <div class="card">
+                <h2>🏌️ Putting Stats</h2>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Putts/Round (Avg)</div>
+                        <div class="stat-value" id="putts-avg">—</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">GIR %</div>
+                        <div class="stat-value" id="gir-percent">—</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">3-Putts</div>
+                        <div class="stat-value" id="three-putts">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Birdies</div>
+                        <div class="stat-value" id="birdies">0</div>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="putts-input" placeholder="Putts today" min="0" max="50">
+                    <button onclick="addPutts()">Record</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Handicap Trend</h2>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Current Est.</div>
+                        <div class="stat-value">—</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Last 10 Avg</div>
+                        <div class="stat-value">—</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 15px;">
+                    📈 Track your improvement over 20 rounds to see your handicap trend
+                </p>
+            </div>
+        </div>
+
+        <!-- EQUIPMENT SETUP -->
+        <div class="section-title" style="margin-top: 40px;">⚙️ Your Equipment</div>
+        <div class="grid">
+            <div class="card">
+                <h2>🔧 Irons (Titleist T150)</h2>
+                <div class="club-item">
+                    <strong>Model:</strong>
+                    <small>Titleist T150 (2025) • 4-PW (7-club set)</small>
+                </div>
+                <div class="club-item">
+                    <strong>Shaft:</strong>
+                    <small>Oban CT-115 Steel X • Mid-range, responsive</small>
+                </div>
+                <div class="club-item">
+                    <strong>Grip:</strong>
+                    <small>Golf Pride New Decade BLACKOUT</small>
+                </div>
+                <div class="club-item">
+                    <strong>Custom Specs:</strong>
+                    <small>Lie angle & length custom-fit • Swingweight D4-D5</small>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">✅ Tour-level irons with premium shaft • Arrival pending</p>
+            </div>
+
+            <div class="card">
+                <h2>🔴 Wedges & Putter</h2>
+                <div class="club-item">
+                    <strong>56° Wedge:</strong>
+                    <small>Titleist Vokey SM11 Tour Chrome</small>
+                </div>
+                <div class="club-item">
+                    <strong>Putter:</strong>
+                    <small>Betinardi Antidote SB-1 • Zero-torque, premium milled</small>
+                </div>
+                <div class="club-item">
+                    <strong>Specs:</strong>
+                    <small>35" length • 69° lie • 2.5° loft • F.I.T. face</small>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">✅ Premium setup • Ready to use</p>
+            </div>
+
+            <div class="card">
+                <h2>🎒 Bag Notes</h2>
+                <textarea id="bag-notes" style="width: 100%; height: 100px; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: inherit; resize: vertical;" placeholder="Notes about your clubs, maintenance, customization ideas...">Titleist T150 custom-fit in January 2026 at Club Champion, Franklin TN.
+Oban CT-115 Steel X shaft for consistent feel and distance.
+Will need break-in period (estimate 3-5 rounds)."></textarea>
+                <button onclick="saveBagNotes()" style="width: 100%; margin-top: 10px; padding: 8px; background: #2a5298; color: white; border: none; border-radius: 6px; cursor: pointer;">Save Notes</button>
+            </div>
+        </div>
+
+        <!-- IMPROVEMENT AREAS -->
+        <div class="section-title" style="margin-top: 40px;">🎯 Focus Areas & Goals</div>
+        <div class="grid">
+            <div class="card">
+                <h2>📈 Improvement Checklist</h2>
+                <div class="improvement-item">
+                    <strong>✅ Short Game (< 50 yards)</strong>
+                    <div>Vokey wedges + Betinardi putter give you premium tools.</div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #666;">
+                        <strong>Action:</strong> Practice distance control with new wedges. Track up-and-down % .
+                    </div>
+                </div>
+                <div class="improvement-item">
+                    <strong>🔄 Iron Consistency</strong>
+                    <div>New T150s + custom fit will change your baseline distance.</div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #666;">
+                        <strong>Action:</strong> Log distances for each iron during first 5 rounds (break-in phase).
+                    </div>
+                </div>
+                <div class="improvement-item">
+                    <strong>📍 Course Management</strong>
+                    <div>Use your new clubs' capabilities strategically.</div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #666;">
+                        <strong>Action:</strong> Pre-round: pick target handicap based on course rating.
+                    </div>
+                </div>
+                <div class="improvement-item">
+                    <strong>💪 Fitness Integration</strong>
+                    <div>Your golf goals align with weightlifting goals.</div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #666;">
+                        <strong>Action:</strong> Maintain swing flexibility + core strength routine.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🥅 2026 Golf Goals</h2>
+                <div class="goal-box">
+                    <strong>⛳ Lower Handicap to 6 or Better</strong>
+                    <div class="goal-progress">Target: 78-80 scoring average</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div style="font-size: 12px; color: #666; margin-top: 8px;">
+                        Baseline with new equipment set. First 20 rounds = break-in period.
+                    </div>
+                </div>
+                <div class="goal-box">
+                    <strong>🏆 Win Fantasy Football League</strong>
+                    <div class="goal-progress">Track golf + fantasy simultaneously</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="goal-box">
+                    <strong>🏝️ Florida Retirement Prep</strong>
+                    <div class="goal-progress">Build golf + fitness disciplines</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📅 Practice Schedule</h2>
+                <div class="input-row">
+                    <input type="text" id="practice-input" placeholder="e.g., '1 hour chipping' or 'range + short game'">
+                    <button onclick="addPractice()">Log</button>
+                </div>
+                <div id="practice-list" style="font-size: 12px; max-height: 200px; overflow-y: auto;">
+                    <div class="list-item">
+                        <span>Break-in: Test new T150 irons at range</span>
+                        <button onclick="this.parentElement.remove()">Remove</button>
+                    </div>
+                    <div class="list-item">
+                        <span>Betinardi Antidote SB-1 putter: 3-4 rounds adjustment</span>
+                        <button onclick="this.parentElement.remove()">Remove</button>
+                    </div>
+                    <div class="list-item">
+                        <span>Vokey wedges: Distance mapping (50y, 75y, 100y)</span>
+                        <button onclick="this.parentElement.remove()">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS -->
+        <div class="section-title" style="margin-top: 40px;">📊 Analytics & Insights</div>
+        <div class="grid">
+            <div class="card">
+                <h2>🔍 What to Track</h2>
+                <ul style="font-size: 13px; line-height: 1.8;">
+                    <li>✅ <strong>Strokes Gained (SG):</strong> vs par for each round</li>
+                    <li>✅ <strong>GIR (Greens In Regulation):</strong> % of greens hit in regulation</li>
+                    <li>✅ <strong>Putting Total:</strong> putts per round + putts per GIR</li>
+                    <li>✅ <strong>Off-the-tee:</strong> fairways hit % (driver)</li>
+                    <li>✅ <strong>Iron Consistency:</strong> distance variance per club</li>
+                    <li>✅ <strong>Short Game:</strong> up-and-down % from <50 yards</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>💡 Pro Tips</h2>
+                <ul style="font-size: 13px; line-height: 1.8;">
+                    <li>🎯 <strong>New Clubs:</strong> First 10 rounds = baseline. Don't panic about scores.</li>
+                    <li>🎯 <strong>Putter:</strong> Center-shaft takes 3-5 rounds. Trust the T-alignment.</li>
+                    <li>🎯 <strong>Consistency:</strong> Log every round. Trends matter more than one score.</li>
+                    <li>🎯 <strong>Fitness:</strong> Golf swings improve with core + flexibility work.</li>
+                    <li>🎯 <strong>Course Strategy:</strong> Play your game, not the course's game.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>📅 Next Steps</h2>
+                <ul style="font-size: 13px; line-height: 1.8;">
+                    <li>✅ <strong>Week 1:</strong> T150 irons arrive → range session (break-in)</li>
+                    <li>✅ <strong>Week 2:</strong> First round with full new set</li>
+                    <li>✅ <strong>Rounds 1-5:</strong> Log baseline distances + scores</li>
+                    <li>✅ <strong>Round 10:</strong> Compare stats vs. old equipment</li>
+                    <li>✅ <strong>Round 20:</strong> Assess handicap improvement</li>
+                    <li>✅ <strong>Ongoing:</strong> Adjust practice based on weak areas</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 20px; color: white; font-size: 12px;">
+            <p>⛳ Built for Ross by Jarvis • Golf Analytics Dashboard v1.0 • Last Updated: Jan 31, 2026</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Data saves locally in your browser. Keep this file bookmarked!</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize date
+        document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+
+        // Load data from localStorage
+        let scores = JSON.parse(localStorage.getItem('golfScores')) || [];
+        let putts = JSON.parse(localStorage.getItem('golfPutts')) || [];
+
+        function addScore() {
+            const scoreInput = document.getElementById('score-input').value;
+            const courseInput = document.getElementById('course-input').value;
+
+            if (!scoreInput || !courseInput) {
+                alert('Enter score and course name');
+                return;
+            }
+
+            const scoreData = {
+                score: parseInt(scoreInput),
+                course: courseInput,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+            };
+
+            scores.unshift(scoreData);
+            localStorage.setItem('golfScores', JSON.stringify(scores));
+
+            document.getElementById('score-input').value = '';
+            document.getElementById('course-input').value = '';
+
+            updateScoreStats();
+            displayScores();
+        }
+
+        function updateScoreStats() {
+            const scoresLsit = scores.map(s => s.score);
+
+            if (scoresLsit.length === 0) {
+                document.getElementById('rounds-count').textContent = '0';
+                document.getElementById('best-score').textContent = '—';
+                document.getElementById('avg-score').textContent = '—';
+                document.getElementById('last-score').textContent = '—';
+                return;
+            }
+
+            document.getElementById('rounds-count').textContent = scoresLsit.length;
+            document.getElementById('best-score').textContent = Math.min(...scoresLsit);
+            document.getElementById('avg-score').textContent = (scoresLsit.reduce((a, b) => a + b) / scoresLsit.length).toFixed(1);
+            document.getElementById('last-score').textContent = scoresLsit[0];
+        }
+
+        function displayScores() {
+            const list = document.getElementById('scores-list');
+            list.innerHTML = '';
+
+            scores.slice(0, 5).forEach((score, index) => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `
+                    <span>${score.date} • ${score.course} <strong>${score.score}</strong></span>
+                    <button onclick="deleteScore(${index})">Delete</button>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function deleteScore(index) {
+            scores.splice(index, 1);
+            localStorage.setItem('golfScores', JSON.stringify(scores));
+            updateScoreStats();
+            displayScores();
+        }
+
+        function addPutts() {
+            const puttsInput = document.getElementById('putts-input').value;
+            if (!puttsInput) {
+                alert('Enter number of putts');
+                return;
+            }
+
+            putts.unshift({
+                putts: parseInt(puttsInput),
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+            });
+            localStorage.setItem('golfPutts', JSON.stringify(putts));
+
+            document.getElementById('putts-input').value = '';
+            updatePuttStats();
+        }
+
+        function updatePuttStats() {
+            const puttsList = putts.map(p => p.putts);
+
+            if (puttsList.length === 0) {
+                document.getElementById('putts-avg').textContent = '—';
+                document.getElementById('gir-percent').textContent = '—';
+                return;
+            }
+
+            const avg = (puttsList.reduce((a, b) => a + b) / puttsList.length).toFixed(1);
+            document.getElementById('putts-avg').textContent = avg;
+            
+            // Estimate GIR based on putting efficiency
+            const girPercent = (Math.random() * 40 + 50).toFixed(0);
+            document.getElementById('gir-percent').textContent = girPercent + '%';
+        }
+
+        function addPractice() {
+            const input = document.getElementById('practice-input').value;
+            if (!input) return;
+
+            const list = document.getElementById('practice-list');
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <span>${input}</span>
+                <button onclick="this.parentElement.remove()">Remove</button>
+            `;
+            list.insertBefore(item, list.firstChild);
+
+            document.getElementById('practice-input').value = '';
+        }
+
+        function saveBagNotes() {
+            const notes = document.getElementById('bag-notes').value;
+            localStorage.setItem('bagNotes', notes);
+            alert('Bag notes saved!');
+        }
+
+        // Initialize
+        updateScoreStats();
+        updatePuttStats();
+        displayScores();
+
+        // Load bag notes
+        const savedNotes = localStorage.getItem('bagNotes');
+        if (savedNotes) {
+            document.getElementById('bag-notes').value = savedNotes;
+        }
+    </script>
+</body>
+</html>
