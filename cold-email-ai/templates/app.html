@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Cold Email | Cold Email AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Input Section */
+        .input-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .generate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Results Section */
+        .results {
+            display: none;
+        }
+        
+        .results.active {
+            display: block;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .company-info {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .company-info h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .company-url {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .email-section {
+            margin-bottom: 30px;
+        }
+        
+        .email-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .email-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #333;
+        }
+        
+        /* Alert Messages */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert.active {
+            display: block;
+        }
+        
+        .alert-error {
+            background: #fee;
+            color: #c33;
+            border-left: 4px solid #c33;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+        
+        /* Footer */
+        .app-footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+        
+        <div class="header">
+            <h1>🤖 Generate Cold Email</h1>
+            <p>Paste a company URL and let AI write a personalized cold email</p>
+        </div>
+        
+        <!-- Alert Messages -->
+        <div class="alert alert-error" id="error-alert"></div>
+        <div class="alert alert-warning" id="warning-alert"></div>
+        
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <label for="company-url">Company Website URL</label>
+                <input 
+                    type="text" 
+                    id="company-url" 
+                    placeholder="https://example.com or example.com"
+                    autofocus
+                >
+            </div>
+            <button class="generate-btn" id="generate-btn" onclick="generateEmail()">
+                Generate Email
+            </button>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing company website and generating personalized email...</p>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results" id="results">
+            <div class="result-card">
+                <div class="company-info">
+                    <h3 id="company-name">Company Name</h3>
+                    <a href="#" id="company-url-link" class="company-url" target="_blank">https://example.com</a>
+                </div>
+                
+                <div class="email-section">
+                    <h4>Subject Line</h4>
+                    <div class="email-content" id="email-subject">Subject line will appear here</div>
+                </div>
+                
+                <div class="email-section">
+                    <h4>Email Body</h4>
+                    <div class="email-content" id="email-body">Email body will appear here</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="copyEmail()">📋 Copy Email</button>
+                    <button class="btn btn-secondary" onclick="generateAnother()">🔄 Generate Another</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="app-footer">
+            <p>💡 Tip: Edit the generated email to match your voice and add specific details about your offer.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Allow Enter key to submit
+        document.getElementById('company-url').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateEmail();
+            }
+        });
+        
+        function showError(message) {
+            const alert = document.getElementById('error-alert');
+            alert.textContent = message;
+            alert.classList.add('active');
+            setTimeout(() => alert.classList.remove('active'), 5000);
+        }
+        
+        function showWarning(message) {
+            const alert = document.getElementById('warning-alert');
+            alert.textContent = message;
+            alert.classList.add('active');
+        }
+        
+        function hideAlerts() {
+            document.getElementById('error-alert').classList.remove('active');
+            document.getElementById('warning-alert').classList.remove('active');
+        }
+        
+        async function generateEmail() {
+            const url = document.getElementById('company-url').value.trim();
+            
+            if (!url) {
+                showError('Please enter a company URL');
+                return;
+            }
+            
+            // Hide previous results and alerts
+            hideAlerts();
+            document.getElementById('results').classList.remove('active');
+            
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('generate-btn').disabled = true;
+            
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to generate email');
+                }
+                
+                // Show warning if using mock mode
+                if (data.is_mock) {
+                    showWarning('⚠️ DEMO MODE: Add your OpenAI API key to generate AI-powered emails. Set environment variable: export OPENAI_API_KEY=your_key');
+                }
+                
+                // Display results
+                document.getElementById('company-name').textContent = data.company.name;
+                document.getElementById('company-url-link').href = data.company.url;
+                document.getElementById('company-url-link').textContent = data.company.url;
+                document.getElementById('email-subject').textContent = data.email.subject;
+                document.getElementById('email-body').textContent = data.email.body;
+                
+                document.getElementById('results').classList.add('active');
+                
+                // Scroll to results
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('generate-btn').disabled = false;
+            }
+        }
+        
+        function copyEmail() {
+            const subject = document.getElementById('email-subject').textContent;
+            const body = document.getElementById('email-body').textContent;
+            const fullEmail = `Subject: ${subject}\n\n${body}`;
+            
+            navigator.clipboard.writeText(fullEmail).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        function generateAnother() {
+            document.getElementById('company-url').value = '';
+            document.getElementById('company-url').focus();
+            document.getElementById('results').classList.remove('active');
+            hideAlerts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
