@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-02-07T10:32:00.000000",
+  "mission": {
+    "target": 500,
+    "deadline": "2026-03-31",
+    "currentMRR": 0,
+    "revenueThisMonth": 0
+  },
+  "costs": {
+    "today": 15,
+    "thisMonth": 48,
+    "breakdown": {
+      "opus": 38,
+      "sonnet": 10
+    }
+  },
+  "agents": [
+    {
+      "name": "Jarvis (Main Agent)",
+      "status": "Active",
+      "task": "Coordinating builds and autonomous operations",
+      "runtime": "1m ago",
+      "sessionId": "agent:main:main",
+      "isMain": true,
+      "model": "claude-sonnet-4-5",
+      "description": "Main orchestration agent"
+    }
+  ],
+  "queue": [
+    {
+      "name": "Stripe Integration",
+      "priority": "High",
+      "description": "Connect Stripe for payment processing and MRR tracking",
+      "eta": "45min",
+      "cost": "$5",
+      "added": "2026-02-07",
+      "category": "Revenue"
+    },
+    {
+      "name": "Golf Coaching Landing Page",
+      "priority": "High",
+      "description": "Sales page for golf coaching service with Stripe checkout",
+      "eta": "30min",
+      "cost": "$3",
+      "added": "2026-02-07",
+      "category": "Revenue"
+    },
+    {
+      "name": "Tweet Content Pipeline",
+      "priority": "Medium",
+      "description": "Automated tweet generation and scheduling system",
+      "eta": "20min",
+      "cost": "$1",
+      "added": "2026-02-07",
+      "category": "Automation"
+    }
+  ],
+  "stats": {
+    "active": 0,
+    "completedToday": 3,
+    "completedThisWeek": 6,
+    "queued": 3,
+    "successRate": "100%",
+    "velocity": 6
+  },
+  "alerts": [],
+  "last_updated": "2026-02-07T11:04:36.336779",
+  "builds_today": 4,
+  "builds_active": 2,
+  "builds_queued": 3,
+  "local_models_enabled": true,
+  "local_models": [
+    "llama3.1:8b",
+    "qwen2.5:14b"
+  ],
+  "cost_today": 4.5,
+  "cost_saved_local": 10.5,
+  "gym_demo_active": true
+}
