@@ -1,0 +1,73 @@
+{
+  "generated_at": "2026-02-07T17:55:49.628696",
+  "timestamp_friendly": "05:55 PM CST",
+  "night_shift": {
+    "status": "complete",
+    "summary": "# Night Shift Summary - 2026-02-07\n\nGenerated at: 03:14 PM CST\n\n## \ud83c\udf19 Overnight Processing Complete\n\nAll 5 night shift features ran successfully. Here's what's ready:\n\n---\n\n## \ud83d\udcc1 Output Files\n\n### Content Generation\n- [tweets-20260207.md](/Users/clawdbot/clawd/content/night-shift/tweets-20260207.md)\n\n### Intelligence & Insights\n- [intelligence-brief-20260207.md](/Users/clawdbot/clawd/reports/intelligence-brief-20260207.md)\n- [code-health-20260207.md](/Users/clawdbot/clawd/reports/code-health-20260",
+    "full_path": "/Users/clawdbot/clawd/reports/night-shift-latest.md"
+  },
+  "pattern_insights": {
+    "status": "analyzing",
+    "insights": [
+      {
+        "type": "workout_correlation",
+        "insight": "Workouts logged: 1 days",
+        "recommendation": "Continue tracking to find workout\u2192productivity patterns",
+        "confidence": 0.5
+      }
+    ]
+  },
+  "recent_events": {
+    "count": 0,
+    "events": []
+  },
+  "twitter": {
+    "status": "active",
+    "scheduled_tweets": 5,
+    "account": "@_icecreammane",
+    "next_tweet": "Monday Feb 10, 9:00 AM"
+  },
+  "reddit": {
+    "status": "no_scans",
+    "opportunities": 0
+  },
+  "pending_decisions": {
+    "total_pending": 1,
+    "aged_pending": []
+  },
+  "system_status": {
+    "total": 11,
+    "operational": 11,
+    "systems": {
+      "persistent_memory": true,
+      "learning_loop": true,
+      "proactive_permissions": true,
+      "twitter": true,
+      "reddit_scanner": true,
+      "voice_briefs": true,
+      "event_monitor": true,
+      "pattern_detection": true,
+      "vision_processor": true,
+      "decision_logger": true,
+      "context_loader": true
+    }
+  },
+  "goal_progress": {
+    "target": 500,
+    "current": 0,
+    "deadline": "2026-03-31",
+    "days_remaining": 51
+  },
+  "fitness": {
+    "workouts_logged": 1,
+    "meals_logged": 2,
+    "last_workout": "shoulder press machine, 90, 140, 180 pounds, 10 reps each",
+    "last_meal": "Chipotle: Steak burrito (2x steak, white rice, pinto beans, fresh tomato salsa, roasted chili-corn salsa) + chips & salsa"
+  },
+  "stats": {
+    "systems_operational": 11,
+    "opportunities": 0,
+    "pending_actions": 1,
+    "tweets_scheduled": 5
+  }
+}
