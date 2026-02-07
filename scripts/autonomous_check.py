@@ -617,20 +617,64 @@ def spawn_next_build():
     label = "build-" + next_task["task"][:30].lower().replace(" ", "-").replace("/", "-")
     label = ''.join(c for c in label if c.isalnum() or c == '-')
     
-    # Determine model based on task category
+    # Determine model based on task category and type
     task_lower = next_task["task"].lower()
-    use_opus = any([
+    
+    # Codex: Production coding (default for builds)
+    use_codex = any([
+        "build" in task_lower,
+        "integrate" in task_lower,
+        "api" in task_lower,
+        "feature" in task_lower,
+        "frontend" in task_lower,
+        "backend" in task_lower,
+        "code" in task_lower,
+        "database" in task_lower,
+        "dashboard" in task_lower,
         "stripe" in task_lower,
-        "payment" in task_lower,
-        "landing page" in task_lower,
-        "revenue" in task_lower,
-        "checkout" in task_lower,
-        "subscription" in task_lower,
-        "conversion" in task_lower,
-        next_task.get("category") == "revenue"
+        "payment" in task_lower
     ])
     
-    model = "opus" if use_opus else "sonnet5"
+    # Opus: Strategic + revenue-critical (when reasoning > coding)
+    use_opus = any([
+        "strategy" in task_lower,
+        "architecture" in task_lower,
+        "landing page" in task_lower and "build" not in task_lower,  # Copy/UX, not coding
+        "conversion" in task_lower,
+        next_task.get("category") == "strategic"
+    ])
+    
+    # Gemini: Multimodal tasks
+    use_gemini = any([
+        "analyze image" in task_lower,
+        "screenshot" in task_lower,
+        "video" in task_lower,
+        "pdf" in task_lower,
+        "document analysis" in task_lower,
+        "extract data" in task_lower
+    ])
+    
+    # Grok: Real-time social/web data
+    use_grok = any([
+        "twitter" in task_lower,
+        "trending" in task_lower,
+        "social" in task_lower,
+        "viral" in task_lower,
+        "x.com" in task_lower,
+        "sentiment" in task_lower
+    ])
+    
+    # Route to appropriate model
+    if use_codex:
+        model = "codex"
+    elif use_opus:
+        model = "opus"
+    elif use_gemini:
+        model = "gemini"  # TODO: Check if provider configured
+    elif use_grok:
+        model = "grok"    # TODO: Check if provider configured
+    else:
+        model = "sonnet5"  # Default workhorse
     
     # Write spawn signal for agent to pick up
     spawn_signal = {
