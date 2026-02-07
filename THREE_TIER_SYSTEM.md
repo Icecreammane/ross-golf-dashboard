@@ -3,7 +3,7 @@
 **Status:** ✅ Live as of February 7, 2026  
 **Goal:** Optimize cost & capability by using the right model for each task
 
-## The Three Tiers
+## The Four Tiers
 
 ### 🤖 Tier 1: Local Daemon (Always-On)
 - **Model:** local-brain (qwen2.5:14b)
@@ -17,11 +17,17 @@
 - **When:** All conversations with you
 - **Handles:** Chat, orchestration, spawning builds
 
-### 🧠 Tier 3: Opus (Revenue Specialist)
+### 💻 Tier 3A: Codex (Technical Specialist)
+- **Model:** gpt-5.2-codex
+- **Cost:** ~$3-8/task
+- **When:** Deep technical work
+- **Handles:** Complex code, API integrations, refactoring
+
+### 🧠 Tier 3B: Opus (Revenue Specialist)
 - **Model:** claude-opus-4-5
 - **Cost:** ~$5-10/task
 - **When:** High-value revenue builds
-- **Handles:** Complex projects, content creation
+- **Handles:** Strategic content, business reasoning
 
 ## Cost Savings
 

@@ -50,18 +50,44 @@ bash ~/clawd/scripts/daemon-control.sh {start|stop|restart|status|logs}
 3. Handle escalations (spawn, notify, etc.)
 4. Respond to Ross
 
-### Tier 3: Opus (Revenue Specialist)
-**Model:** `anthropic/claude-opus-4-5`  
-**Cost:** ~$5-10 per task  
-**Purpose:** High-value revenue builds, complex content creation
+### Tier 3: Specialists (On-Demand Experts)
+
+#### Tier 3A: Codex (Technical Specialist)
+**Model:** `openai/gpt-5.2-codex` (alias: `codex`)  
+**Cost:** ~$3-8 per task  
+**Purpose:** Deep technical work, complex code generation
 
 **Responsibilities:**
-- ✅ Revenue-generating projects (per AUTONOMOUS_AGENT.md)
-- ✅ Strategic planning documents
-- ✅ High-stakes content creation
-- ✅ Complex code generation
+- ✅ Full-stack feature development
+- ✅ Complex API integrations
+- ✅ Large-scale refactoring
+- ✅ Debugging gnarly issues
+- ✅ Technical architecture
 
-**Trigger:**
+**When to use:**
+- Building complete systems (fitness tracker, dashboards)
+- Complex auth flows (OAuth, webhooks)
+- Performance optimization
+- When you need OpenAI's code expertise
+
+#### Tier 3B: Opus (Revenue Specialist)
+**Model:** `anthropic/claude-opus-4-5` (alias: `opus`)  
+**Cost:** ~$5-10 per task  
+**Purpose:** High-value revenue builds, strategic content
+
+**Responsibilities:**
+- ✅ Revenue-generating content (per AUTONOMOUS_AGENT.md)
+- ✅ Strategic planning documents
+- ✅ High-stakes creative work
+- ✅ Complex business reasoning
+
+**When to use:**
+- Landing page copy
+- Sales content
+- Business strategy
+- Content that directly drives revenue
+
+**Trigger (both specialists):**
 - Spawned by Sonnet via `sessions_spawn` tool
 - Isolated session with specific task
 - Reports completion back to main session
@@ -74,18 +100,27 @@ bash ~/clawd/scripts/daemon-control.sh {start|stop|restart|status|logs}
 - Heartbeats: Sonnet ($$$)
 - Task generation: Sonnet ($$$)
 - Conversations: Sonnet ($$$)
+- Technical builds: Sonnet ($$$)
 - Revenue builds: Sonnet ($$$)
 - **Total:** ~$30-40/day
 
-### After (Three-Tier):
+### After (Four-Tier):
 - Background checks: Local ($0)
 - Heartbeats: Local ($0)
 - Task generation: Local ($0)
+- Night shift automation: Local ($0)
 - Conversations: Sonnet ($10-15)
-- Revenue builds: Opus ($5-10)
-- **Total:** ~$15-25/day
+- Technical builds: Codex ($3-8/task)
+- Revenue builds: Opus ($5-10/task)
+- **Total:** ~$15-30/day (depends on build volume)
 
 **Savings:** ~40-50% cost reduction while improving quality where it matters
+
+**Model Cost per 1M tokens (approximate):**
+- Local (Qwen): $0
+- Sonnet: $3 input / $15 output
+- Codex: $2.50 input / $10 output
+- Opus: $15 input / $75 output
 
 ## 🔄 Data Flow
 
@@ -121,11 +156,17 @@ bash ~/clawd/scripts/daemon-control.sh {start|stop|restart|status|logs}
 | Heartbeat checks | Local | Free, fast, good enough |
 | Task generation | Local | Reads GOALS.md, generates tasks |
 | Health monitoring | Local | Simple checks, no cloud needed |
+| Night shift automation | Local | Free to run all night |
+| Content pre-gen | Local | Generate many options, filter later |
 | Chat with Ross | Sonnet | Conversational, contextual |
 | Build orchestration | Sonnet | Needs context & spawn capability |
-| Revenue builds | Opus | Best quality, ROI justifies cost |
-| Code generation | Opus/Codex | Complex work, high quality |
+| Multi-step planning | Sonnet | Best at reasoning + tool use |
+| Technical builds | Codex | Deep code expertise |
+| API integrations | Codex | Complex auth/webhooks |
+| Revenue content | Opus | Best quality, ROI justifies cost |
+| Strategic docs | Opus | Business reasoning excellence |
 | Research summaries | Local | Data extraction, basic reasoning |
+| Data analysis | Local | Pattern detection, insights |
 
 ## 🚀 Startup Sequence
 
