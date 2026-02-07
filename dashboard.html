@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Build Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 16px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .header .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4ade80;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .projects {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .project {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #4ade80;
+            position: relative;
+        }
+        
+        .project.in-progress {
+            border-left-color: #f59e0b;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+        
+        .status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status.complete {
+            background: #4ade80;
+            color: #000;
+        }
+        
+        .status.in-progress {
+            background: #f59e0b;
+            color: #000;
+        }
+        
+        .project-desc {
+            color: #aaa;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .project-link:hover {
+            opacity: 0.9;
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 24px;
+        }
+    </style>
+    <script>
+        // Auto-refresh every 5 minutes
+        setTimeout(() => location.reload(), 300000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Jarvis Build Dashboard</h1>
+            <div class="tagline">Autonomous builds while Ross is at work</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number">8</div>
+                <div class="label">Completed Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">0</div>
+                <div class="label">In Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">14</div>
+                <div class="label">Total Builds</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">~6h</div>
+                <div class="label">Build Time Today</div>
+            </div>
+        </div>
+        
+        <h2 style="color: #667eea; margin-bottom: 16px; font-size: 22px;">✅ Completed Builds (Today)</h2>
+        
+        <div class="projects">
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">📸 Photo Food Logger</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Send food photos → GPT-4o Vision analyzes → Auto-logs macros to fitness tracker. 
+                    Includes portion size estimates and confidence scores.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:04-8:07 AM</span>
+                    <span>🎯 Status: Tested & working</span>
+                </div>
+                <div class="project-desc" style="margin-top: 12px;">
+                    <strong>Test:</strong> Banana - 105 cal, 27g carbs, 1g protein (High confidence) ✅
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">📊 Visual Fitness Dashboard</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Real-time fitness tracking with interactive charts. Progress bars for macros, 
+                    weight trend graphs, auto-refreshing stats. Mobile-optimized dark theme.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:09-8:10 AM</span>
+                    <span>🎯 Tech: Chart.js, Flask API</span>
+                </div>
+                <a href="http://10.0.0.18:3000/" class="project-link">Open Dashboard →</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">💰 Revenue Dashboard</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Visual tracker for side project income and Florida fund progress. Shows Q1 goals ($500 MRR), 
+                    revenue streams (all built, not monetized yet), and roadmap to $5k/mo freedom number.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:34 AM</span>
+                    <span>🎯 Status: Tracking $0 → $5k/mo</span>
+                </div>
+                <a href="http://10.0.0.18:8080/revenue/dashboard.html" class="project-link">View Revenue Dashboard →</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">📖 "The Builder" Story Audio</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Voice-narrated story about building twice (day job + side projects). 
+                    Generated using Jarvis voice system. Perfect for commutes and motivation.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:34 AM</span>
+                    <span>🎯 1.2 MB MP3, Onyx voice</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">🎯 Goal Progress Dashboard</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Visual tracker for all Q1 2026 goals (financial, fitness, golf, fantasy). 
+                    Color-coded status, progress bars, timeline milestones, and weekly trend charts.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 9:06 AM</span>
+                    <span>🎯 Tracking 6 major goals</span>
+                </div>
+                <a href="http://10.0.0.18:8080/goals/progress.html" class="project-link">View Goal Progress →</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">🏠 Command Center Hub</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Central landing page aggregating all Jarvis tools in one place. 
+                    Organized by category with quick stats, real-time clock, and mobile-optimized cards.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 10:06 AM</span>
+                    <span>🎯 One URL for everything</span>
+                </div>
+                <a href="http://10.0.0.18:8080/index.html" class="project-link">Open Command Center →</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">🎤 Jarvis Voice System</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Text-to-speech using OpenAI TTS. "Onyx" voice (deep, authoritative). 
+                    Auto-generate audio briefings, voice confirmations, and narrated updates.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:12-8:13 AM</span>
+                    <span>🎯 Test: Morning brief audio generated ✅</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">📈 Weekly Progress Report</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Auto-generates weekly summaries every Sunday @ 6pm. Tracks fitness metrics, 
+                    builds completed, and goal progress. HTML + Telegram text formats.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: 8:13-8:14 AM</span>
+                    <span>🎯 First report: Next Sunday</span>
+                </div>
+            </div>
+        </div>
+        
+        <h2 style="color: #f59e0b; margin: 32px 0 16px 0; font-size: 22px;">📋 Previous Builds</h2>
+        
+        <div class="projects">
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">⛳ Golf Club Spec Matcher</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Mobile tool for swing-to-club recommendations. Input swing data, get ranked club suggestions with fit scores and pricing.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: Feb 1, 21:52-22:00</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">☀️ Morning Brief System</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Automated daily digest (7:30am). Shows overnight work, today's priorities, goal progress, and proactive insights.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: Feb 1, 21:52-21:58</span>
+                </div>
+                <a href="http://10.0.0.18:8080/morning-brief.html" class="project-link">View Latest →</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-header">
+                    <div class="project-title">🎯 GOALS.md Framework</div>
+                    <span class="status complete">Complete</span>
+                </div>
+                <div class="project-desc">
+                    Quarterly goal tracking with measurable KPIs. Weekly monitoring during heartbeats with pace alerts.
+                </div>
+                <div class="project-meta">
+                    <span>⏱️ Built: Feb 1, 21:52-21:57</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timestamp">
+            Last updated: <span id="timestamp"></span> • Auto-refreshes every 5 min
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>

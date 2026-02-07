@@ -1,0 +1,44 @@
+# Credentials & Secrets
+.env
+calendar/credentials.json
+calendar/token.json
+.credentials/
+*.pem
+*.key
+
+# Local data
+*.db
+*.sqlite*
+data/
+monitoring/*.json
+memory/*.json
+memory/vector_db/
+
+# Logs
+*.log
+logs/
+monitoring/*.log
+
+# Temporary files
+tmp/
+*.tmp
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+
+# Git submodules (nested repos)
+fitness-tracker/
+florida-freedom-dashboard-project/
+golf-coaching-launcher/
+life-os/
+mission-control/
+morning-command-center-project/
+projects/command-center/

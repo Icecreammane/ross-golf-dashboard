@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florida Fund - Path to Freedom</title>
+    <link rel="stylesheet" href="styles/jarvis-design-system.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .hero-card {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            text-align: center;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .hero-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 32px;
+        }
+        
+        .hero-progress {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin: 24px 0;
+        }
+        
+        .hero-icons {
+            font-size: 2.5rem;
+            margin-top: 24px;
+            opacity: 0.9;
+        }
+        
+        .progress-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .progress-numbers {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            margin-bottom: 24px;
+        }
+        
+        .current-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .goal-amount {
+            font-size: 1.25rem;
+            color: var(--text-tertiary);
+        }
+        
+        .progress-bar-large {
+            height: 24px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: 24px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            border-radius: var(--radius-full);
+            transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-weight: 700;
+            color: white;
+            font-size: 0.875rem;
+        }
+        
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .milestone {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+            transition: all var(--transition);
+            position: relative;
+        }
+        
+        .milestone.completed {
+            background: var(--success-light);
+        }
+        
+        .milestone.completed::before {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--success);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .milestone-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .milestone.completed .milestone-amount {
+            color: var(--success);
+        }
+        
+        .milestone-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .income-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            transition: all var(--transition);
+        }
+        
+        .income-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .income-source {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .income-date {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .income-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-tertiary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <span>🤖</span>
+                <span>Jarvis</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">
+                    <span class="nav-link-icon">🏠</span>
+                    <span>Hub</span>
+                </a></li>
+                <li><a href="http://10.0.0.18:3000/" class="nav-link">
+                    <span class="nav-link-icon">💪</span>
+                    <span>Fitness</span>
+                </a></li>
+                <li><a href="http://10.0.0.18:8080/goals/progress.html" class="nav-link">
+                    <span class="nav-link-icon">🎯</span>
+                    <span>Goals</span>
+                </a></li>
+                <li><a href="florida-fund.html" class="nav-link active">
+                    <span class="nav-link-icon">🌴</span>
+                    <span>Florida</span>
+                </a></li>
+                <li><a href="morning-brief.html" class="nav-link">
+                    <span class="nav-link-icon">☀️</span>
+                    <span>Brief</span>
+                </a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-icon btn-ghost" onclick="location.reload()" title="Refresh">
+                    <span>🔄</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-card animate-in">
+                <h1 class="hero-title">Florida Freedom Fund</h1>
+                <p class="hero-subtitle">Your path to beach volleyball & the dream life</p>
+                <div class="hero-progress" id="heroProgress">0%</div>
+                <p class="hero-subtitle">of $50,000 goal</p>
+                <div class="hero-icons">🏐 🌊 ☀️</div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-4 animate-in" style="margin-bottom: 48px;">
+                <div class="metric-card">
+                    <div class="metric-label">Total Saved</div>
+                    <div class="metric-value" id="totalSaved">$0</div>
+                    <div class="metric-change">
+                        <span>💰</span>
+                        <span>Building momentum</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">This Month</div>
+                    <div class="metric-value" id="monthlyIncome">$0</div>
+                    <div class="metric-change">
+                        <span>📈</span>
+                        <span>Side projects</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Remaining</div>
+                    <div class="metric-value" id="remaining">$50,000</div>
+                    <div class="metric-change">
+                        <span>🎯</span>
+                        <span>To freedom</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Timeline</div>
+                    <div class="metric-value" id="timeline">???</div>
+                    <div class="metric-change">
+                        <span>⏱️</span>
+                        <span>At current pace</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Progress -->
+            <div class="progress-section animate-in">
+                <div class="progress-header">
+                    <h2 style="font-size: 1.25rem; font-weight: 600;">Overall Progress</h2>
+                    <span class="badge badge-warning" id="statusBadge">Getting Started</span>
+                </div>
+                
+                <div class="progress-numbers">
+                    <span class="current-amount" id="currentAmount">$0</span>
+                    <span class="goal-amount">/ $50,000</span>
+                </div>
+                
+                <div class="progress-bar-large">
+                    <div class="progress-fill" id="mainProgressBar" style="width: 0%;">
+                        <span id="progressPercent">0%</span>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 32px; margin-bottom: 24px; font-size: 1.125rem; font-weight: 600;">Milestones</h3>
+                <div class="milestones-grid">
+                    <div class="milestone" data-amount="5000">
+                        <div class="milestone-amount">$5k</div>
+                        <div class="milestone-label">Emergency Fund</div>
+                    </div>
+                    <div class="milestone" data-amount="10000">
+                        <div class="milestone-amount">$10k</div>
+                        <div class="milestone-label">Moving Buffer</div>
+                    </div>
+                    <div class="milestone" data-amount="25000">
+                        <div class="milestone-amount">$25k</div>
+                        <div class="milestone-label">Halfway There</div>
+                    </div>
+                    <div class="milestone" data-amount="40000">
+                        <div class="milestone-amount">$40k</div>
+                        <div class="milestone-label">Almost Free</div>
+                    </div>
+                    <div class="milestone" data-amount="50000">
+                        <div class="milestone-amount">$50k</div>
+                        <div class="milestone-label">🎉 Florida!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Income -->
+            <div class="card animate-in">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <h2 style="font-size: 1.25rem; font-weight: 600;">Recent Income</h2>
+                    <button class="btn btn-primary btn-sm" onclick="alert('Coming soon: Add income via Telegram!')">
+                        <span>+</span>
+                        <span>Log Income</span>
+                    </button>
+                </div>
+                
+                <div id="incomeList">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💸</div>
+                        <div style="font-size: 1.125rem; margin-bottom: 8px; color: var(--text-secondary);">No income logged yet</div>
+                        <div style="font-size: 0.875rem;">Start tracking to see your progress toward Florida!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = {
+            total_saved: 0,
+            monthly_income: 0,
+            goal: 50000,
+            income_history: []
+        };
+
+        function formatCurrency(amount) {
+            return '$' + amount.toLocaleString();
+        }
+
+        function updateDashboard() {
+            const progress = (data.total_saved / data.goal) * 100;
+            const remaining = data.goal - data.total_saved;
+            
+            document.getElementById('heroProgress').textContent = progress.toFixed(1) + '%';
+            document.getElementById('totalSaved').textContent = formatCurrency(data.total_saved);
+            document.getElementById('monthlyIncome').textContent = formatCurrency(data.monthly_income);
+            document.getElementById('remaining').textContent = formatCurrency(remaining);
+            document.getElementById('currentAmount').textContent = formatCurrency(data.total_saved);
+            
+            if (data.monthly_income > 0) {
+                const monthsRemaining = Math.ceil(remaining / data.monthly_income);
+                document.getElementById('timeline').textContent = monthsRemaining + ' mo';
+            } else {
+                document.getElementById('timeline').textContent = '???';
+            }
+            
+            document.getElementById('mainProgressBar').style.width = Math.max(progress, 2) + '%';
+            document.getElementById('progressPercent').textContent = progress.toFixed(1) + '%';
+            
+            const statusBadge = document.getElementById('statusBadge');
+            if (progress === 0) {
+                statusBadge.textContent = 'Getting Started';
+            } else if (progress < 10) {
+                statusBadge.textContent = 'Building Momentum';
+            } else if (progress < 50) {
+                statusBadge.textContent = 'Making Progress';
+                statusBadge.className = 'badge badge-primary';
+            } else if (progress < 90) {
+                statusBadge.textContent = 'Almost There!';
+                statusBadge.className = 'badge badge-success';
+            } else {
+                statusBadge.textContent = 'Freedom Unlocked!';
+                statusBadge.className = 'badge badge-success';
+            }
+            
+            document.querySelectorAll('.milestone').forEach(milestone => {
+                const amount = parseInt(milestone.dataset.amount);
+                if (data.total_saved >= amount) {
+                    milestone.classList.add('completed');
+                } else {
+                    milestone.classList.remove('completed');
+                }
+            });
+            
+            const incomeList = document.getElementById('incomeList');
+            if (data.income_history.length > 0) {
+                incomeList.innerHTML = data.income_history
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .map(item => `
+                        <div class="income-item">
+                            <div>
+                                <div class="income-source">${item.source}</div>
+                                <div class="income-date">${new Date(item.date).toLocaleDateString('en-US', { 
+                                    month: 'short', 
+                                    day: 'numeric', 
+                                    year: 'numeric' 
+                                })}</div>
+                            </div>
+                            <div class="income-amount">+${formatCurrency(item.amount)}</div>
+                        </div>
+                    `).join('');
+            }
+        }
+
+        function loadData() {
+            fetch('data/florida-fund.json')
+                .then(response => response.json())
+                .then(loadedData => {
+                    data = loadedData;
+                    updateDashboard();
+                })
+                .catch(error => {
+                    console.log('No data file yet, using defaults');
+                    updateDashboard();
+                });
+        }
+
+        loadData();
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "user": {
+    "name": "Ross",
+    "avatar_emoji": "💪"
+  },
+  "florida_freedom": {
+    "target_date": "2026-06-15",
+    "target_mrr": 3000,
+    "florida_fund_goal": 50000,
+    "why": "Beach volleyball at sunset. Waking up without an alarm. Building something that's MINE. Freedom to work from anywhere. The life I actually want, not the one I settled for."
+  },
+  "revenue_sources": [
+    { "name": "FitTrack AI", "mrr": 0, "color": "#10B981", "icon": "💪" },
+    { "name": "Golf Coaching", "mrr": 0, "color": "#3B82F6", "icon": "⛳" },
+    { "name": "Fantasy Sports", "mrr": 0, "color": "#8B5CF6", "icon": "🏀" },
+    { "name": "Cold Email AI", "mrr": 0, "color": "#F59E0B", "icon": "📧" }
+  ],
+  "streaks": {
+    "workout_days": 3,
+    "wins_logged": 5,
+    "productive_days": 7,
+    "no_scroll_days": 2
+  },
+  "goals": [
+    { "name": "Launch FitTrack MVP", "progress": 60, "deadline": "2026-02-15" },
+    { "name": "First Paying Customer", "progress": 20, "deadline": "2026-02-28" },
+    { "name": "Hit 175 lbs", "progress": 33, "deadline": "2026-05-24" }
+  ],
+  "priorities": {
+    "today": [
+      "Ship fitness tracker improvements",
+      "Record golf coaching video #1",
+      "30 min focused deep work"
+    ]
+  },
+  "fitness": {
+    "daily_calories": 2200,
+    "daily_protein": 200,
+    "daily_carbs": 250,
+    "daily_fat": 70,
+    "target_weight": 210,
+    "current_weight": 225
+  },
+  "quotes": [
+    "The best time to plant a tree was 20 years ago. The second best time is now.",
+    "You're not behind. You're exactly where you need to be to make this happen.",
+    "Every day you work on this is a day closer to Clearwater.",
+    "The grind is temporary. The freedom is forever.",
+    "You didn't come this far to only come this far.",
+    "Beach volleyball isn't going to play itself. Get to work.",
+    "Future you is counting on present you. Don't let him down.",
+    "One year from now, you'll wish you had started today.",
+    "The pain of discipline is nothing compared to the pain of regret.",
+    "Build the business. Buy the freedom. Live the life."
+  ],
+  "screen_time": {
+    "daily_goal_minutes": 60,
+    "social_apps": ["Instagram", "Twitter", "Reddit", "TikTok"]
+  },
+  "quick_links": [
+    { "name": "Florida Dashboard", "url": "florida-freedom-dashboard.html", "icon": "🌴" },
+    { "name": "Fitness Tracker", "url": "fitness-tracker/index.html", "icon": "🏋️" },
+    { "name": "Golf Coaching", "url": "golf-coaching-landing.html", "icon": "⛳" },
+    { "name": "Fantasy Intel", "url": "nba-intel.html", "icon": "🏀" }
+  ],
+  "weather": {
+    "location": "Nashville",
+    "enabled": true
+  },
+  "anti_scroll": {
+    "warning_after_minutes": 5,
+    "enabled": true
+  }
+}

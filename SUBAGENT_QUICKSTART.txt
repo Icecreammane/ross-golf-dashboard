@@ -1,0 +1,132 @@
+================================================================================
+                    SUB-AGENT FRAMEWORK - QUICK START
+================================================================================
+
+🚀 SPAWN YOUR FIRST AGENT (3 COMMANDS)
+
+  1. Estimate cost:
+     ./scripts/spawn-agent.sh "Fix the health monitor bug" --analyze-only
+
+  2. Launch it:
+     ./scripts/spawn-agent.sh "Fix the health monitor bug"
+
+  3. Check progress:
+     ./scripts/track-subagents.py list
+
+================================================================================
+
+💰 THE THREE TIERS
+
+  🟢 QUICK     1-2h    $2-5      Bug fixes, cleanup
+  🟡 DEEP      4-6h    $10-20    Features, integrations
+  🔴 ENFORCER  8-12h   $30-50    Full systems
+
+================================================================================
+
+📋 COMMON COMMANDS
+
+  # Spawn agent
+  ./scripts/spawn-agent.sh "Task description"
+
+  # Estimate only (no spawn)
+  ./scripts/spawn-agent.sh "Task" --analyze-only
+
+  # Force tier
+  ./scripts/spawn-agent.sh "Task" --tier deep
+
+  # Interactive mode
+  ./scripts/spawn-agent.sh --interactive
+
+  # List agents
+  ./scripts/track-subagents.py list
+
+  # Check specific agent
+  ./scripts/track-subagents.py status <session-id>
+
+  # View logs
+  ./scripts/track-subagents.py logs <session-id>
+
+  # Kill agent
+  ./scripts/track-subagents.py kill <session-id>
+
+  # Cost summary
+  ./scripts/track-subagents.py summary
+
+  # Safety check
+  ./scripts/subagent-guardian.py check
+
+================================================================================
+
+📖 DOCUMENTATION
+
+  Quick reference (2 min):
+    cat ~/clawd/SUBAGENT_REFERENCE.md
+
+  Full guide (15 min):
+    cat ~/clawd/SUBAGENT_GUIDE.md
+
+  Deployment info:
+    cat ~/clawd/SUBAGENT_DEPLOYMENT.md
+
+  Integration examples:
+    cat ~/clawd/subagents/INTEGRATION_EXAMPLES.md
+
+================================================================================
+
+🛡️ SAFETY FEATURES (AUTOMATIC)
+
+  ✅ Max cost per task: $50
+  ✅ Max concurrent agents: 3
+  ✅ Max runtime: 12 hours (auto-kill)
+  ✅ Stuck detection: Alert if >60 min idle
+  ✅ Guardian monitoring: Real-time safety checks
+
+================================================================================
+
+🎯 EXAMPLES
+
+  Quick bug fix ($0.50-2):
+    ./scripts/spawn-agent.sh "Fix auth timeout bug" --tier quick
+
+  Feature build ($10-20):
+    ./scripts/spawn-agent.sh "Build Spotify integration" --tier deep
+
+  Full system ($30-50):
+    ./scripts/spawn-agent.sh "Create task dashboard" --tier enforcer
+
+================================================================================
+
+💡 PRO TIPS
+
+  1. Always estimate first (--analyze-only)
+  2. Start with Quick tier to build confidence
+  3. Check progress periodically
+  4. Review completed work before deploying
+  5. Use templates (see subagents/task-templates.json)
+
+================================================================================
+
+🆘 TROUBLESHOOTING
+
+  Agent stuck?
+    ./scripts/track-subagents.py logs <session-id>
+    ./scripts/track-subagents.py kill <session-id>
+
+  Cost too high?
+    ./scripts/spawn-agent.sh "Task" --model google/gemini-2.0-flash-exp:free
+
+  Can't spawn?
+    ./scripts/track-subagents.py list --status running
+    (Kill one if at concurrent limit)
+
+================================================================================
+
+✅ STATUS: PRODUCTION READY
+
+  All scripts tested ✅
+  All documentation complete ✅
+  All safety features active ✅
+
+  Ready to use tonight. Go enjoy that concert. 🎸
+
+================================================================================

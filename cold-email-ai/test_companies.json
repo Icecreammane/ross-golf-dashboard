@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Stripe",
+    "url": "stripe.com",
+    "context": "AI-powered fraud detection for payment processors"
+  },
+  {
+    "name": "Shopify",
+    "url": "shopify.com",
+    "context": "Email marketing automation for e-commerce stores"
+  },
+  {
+    "name": "Notion",
+    "url": "notion.so",
+    "context": "AI writing assistant integration for productivity tools"
+  },
+  {
+    "name": "Figma",
+    "url": "figma.com",
+    "context": "AI-powered design feedback and collaboration tools"
+  },
+  {
+    "name": "Linear",
+    "url": "linear.app",
+    "context": "Sprint analytics and velocity tracking for project management"
+  }
+]

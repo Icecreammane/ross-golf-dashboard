@@ -1,0 +1,112 @@
+{
+  "bug_fix": {
+    "tier": "quick",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "estimated_hours": 1.5,
+    "template": "Fix the following bug: {description}\n\nSteps:\n1. Reproduce the bug and document reproduction steps\n2. Identify root cause\n3. Implement fix\n4. Test thoroughly\n5. Document the fix\n\nDeliverables:\n- Fixed code\n- Test cases\n- Reproduction steps (before fix)\n- Verification that bug is resolved",
+    "examples": [
+      "Fix the health monitor timeout issue",
+      "Resolve the calendar sync bug",
+      "Fix memory leak in the event handler"
+    ]
+  },
+  "feature_build": {
+    "tier": "deep",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 5,
+    "template": "Build the following feature: {description}\n\nRequirements:\n{requirements}\n\nDeliverables:\n- Working implementation\n- Unit tests\n- Integration tests (if applicable)\n- Documentation\n- Usage examples\n\nImplementation notes:\n- Follow existing code patterns\n- Add error handling\n- Include logging\n- Write clear comments",
+    "examples": [
+      "Build a calendar event reminder system",
+      "Implement OAuth2 authentication for API",
+      "Create a file backup scheduler"
+    ]
+  },
+  "optimization": {
+    "tier": "quick",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "estimated_hours": 2,
+    "template": "Optimize {system} for {metric}\n\nTasks:\n1. Benchmark current performance\n2. Profile and identify bottlenecks\n3. Implement optimizations\n4. Benchmark after changes\n5. Document improvements\n\nDeliverables:\n- Optimized code\n- Before/after benchmarks\n- Performance comparison report\n- Documentation of changes",
+    "examples": [
+      "Optimize database query performance",
+      "Reduce API response time",
+      "Improve memory usage in event processing"
+    ]
+  },
+  "integration": {
+    "tier": "deep",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 5,
+    "template": "Integrate {service} with {existing_system}\n\nRequirements:\n{requirements}\n\nDeliverables:\n- Integration code\n- Error handling for API failures\n- Retry logic\n- Logging\n- Tests (unit + integration)\n- Documentation\n- Usage examples\n\nSafety:\n- Handle rate limits\n- Validate all inputs/outputs\n- Fail gracefully\n- Don't expose credentials",
+    "examples": [
+      "Integrate Spotify API for music control",
+      "Connect Google Calendar for event management",
+      "Add Notion integration for note syncing"
+    ]
+  },
+  "full_system": {
+    "tier": "enforcer",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 10,
+    "template": "Build complete system: {description}\n\nArchitecture:\n{architecture}\n\nSuccess criteria:\n{criteria}\n\nDeliverables:\n- Complete working system\n- All components implemented\n- Comprehensive tests\n- Full documentation\n- Deployment guide\n- Usage examples\n- Error handling throughout\n\nApproach:\n1. Design architecture\n2. Build core components\n3. Integrate components\n4. Test thoroughly\n5. Document everything\n6. Verify success criteria met",
+    "examples": [
+      "Build a complete task management dashboard",
+      "Create an automated backup and monitoring system",
+      "Implement a multi-service notification aggregator"
+    ]
+  },
+  "refactor": {
+    "tier": "deep",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 4,
+    "template": "Refactor {component} to {goal}\n\nObjectives:\n{objectives}\n\nConstraints:\n- Maintain backward compatibility (unless specified)\n- Don't break existing tests\n- Improve code quality\n- Add tests for new structure\n\nDeliverables:\n- Refactored code\n- All existing tests passing\n- New tests for refactored code\n- Migration guide (if breaking changes)\n- Documentation updates",
+    "examples": [
+      "Refactor authentication module to use OAuth2",
+      "Restructure database models for better performance",
+      "Refactor API handlers to use async/await"
+    ]
+  },
+  "documentation": {
+    "tier": "quick",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "estimated_hours": 1.5,
+    "template": "Create documentation for {component}\n\nInclude:\n- Overview and purpose\n- Installation/setup\n- Usage examples\n- API reference (if applicable)\n- Configuration options\n- Troubleshooting\n- Examples of common use cases\n\nStyle:\n- Clear and concise\n- Code examples for everything\n- Markdown format\n- Well-structured with headers",
+    "examples": [
+      "Document the sub-agent framework",
+      "Write API documentation for weather service",
+      "Create usage guide for backup system"
+    ]
+  },
+  "testing": {
+    "tier": "quick",
+    "model": "google/gemini-2.0-flash-exp:free",
+    "estimated_hours": 2,
+    "template": "Write tests for {component}\n\nTest coverage:\n- Unit tests for all functions\n- Integration tests for workflows\n- Edge cases\n- Error conditions\n- Mock external dependencies\n\nDeliverables:\n- Complete test suite\n- All tests passing\n- Coverage report\n- Documentation of test scenarios",
+    "examples": [
+      "Write tests for calendar integration",
+      "Create test suite for authentication module",
+      "Add integration tests for backup system"
+    ]
+  },
+  "research": {
+    "tier": "quick",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 2,
+    "template": "Research {topic} and provide recommendations\n\nResearch goals:\n{goals}\n\nDeliverables:\n- Summary of findings\n- Comparison of options (if applicable)\n- Recommendations with justification\n- Implementation considerations\n- Resource links\n- Next steps\n\nFormat: Clear markdown document with sections",
+    "examples": [
+      "Research best practices for API rate limiting",
+      "Evaluate different database options for time-series data",
+      "Research OAuth2 providers and their features"
+    ]
+  },
+  "security_audit": {
+    "tier": "deep",
+    "model": "anthropic/claude-sonnet-4-5",
+    "estimated_hours": 4,
+    "template": "Security audit of {component}\n\nAudit areas:\n- Authentication/authorization\n- Input validation\n- Data sanitization\n- Credential storage\n- API security\n- Error messages (don't leak info)\n- Dependencies (known vulnerabilities)\n\nDeliverables:\n- Detailed audit report\n- List of vulnerabilities found (prioritized)\n- Recommended fixes\n- Implementation plan for fixes\n- Security best practices documentation",
+    "examples": [
+      "Security audit of API endpoints",
+      "Review authentication system for vulnerabilities",
+      "Audit credential storage and handling"
+    ]
+  }
+}

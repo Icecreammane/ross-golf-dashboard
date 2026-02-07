@@ -1,0 +1,50 @@
+{
+  "current": {
+    "timestamp": "2026-02-04T12:33:54.515490-06:00",
+    "context": "work",
+    "user_sent_voice": false,
+    "jarvis_used_voice": false,
+    "recommended_style": {
+      "use_voice": false,
+      "be_concise": true,
+      "greeting_style": "minimal",
+      "response_length": "brief",
+      "explanation": "Work hours - text only, ultra concise"
+    },
+    "hour": 12,
+    "weekday": "Wednesday"
+  },
+  "history": [
+    {
+      "timestamp": "2026-02-04T12:27:40.220003-06:00",
+      "context": "work",
+      "user_sent_voice": false,
+      "jarvis_used_voice": false,
+      "recommended_style": {
+        "use_voice": false,
+        "be_concise": true,
+        "greeting_style": "minimal",
+        "response_length": "brief",
+        "explanation": "Work hours - text only, ultra concise"
+      },
+      "hour": 12,
+      "weekday": "Wednesday"
+    },
+    {
+      "timestamp": "2026-02-04T12:33:54.515490-06:00",
+      "context": "work",
+      "user_sent_voice": false,
+      "jarvis_used_voice": false,
+      "recommended_style": {
+        "use_voice": false,
+        "be_concise": true,
+        "greeting_style": "minimal",
+        "response_length": "brief",
+        "explanation": "Work hours - text only, ultra concise"
+      },
+      "hour": 12,
+      "weekday": "Wednesday"
+    }
+  ],
+  "last_updated": "2026-02-04T12:33:54.515490-06:00"
+}

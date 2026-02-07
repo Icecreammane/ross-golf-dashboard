@@ -1,0 +1,18 @@
+{
+  "vector_db_path": "/Users/clawdbot/clawd/memory/vector_db",
+  "conversations_path": "/Users/clawdbot/clawd/memory/conversations",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "collection_name": "jarvis_memory",
+  "chunk_size": 500,
+  "chunk_overlap": 50,
+  "max_search_results": 5,
+  "search_timeout_ms": 500,
+  "retention_days": 30,
+  "auto_embed": true,
+  "sources": {
+    "memory_file": "/Users/clawdbot/clawd/MEMORY.md",
+    "journal_file": "/Users/clawdbot/clawd/memory/jarvis-journal.md",
+    "daily_logs_pattern": "/Users/clawdbot/clawd/memory/2026-*.md",
+    "conversations_dir": "/Users/clawdbot/clawd/memory/conversations"
+  }
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cold Email AI - Generate Personalized Cold Emails Instantly</title>
+    <title>Cold Email AI - Generate Personalized Outreach</title>
     <style>
         * {
             margin: 0;
@@ -12,262 +12,342 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
             color: #333;
         }
         
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
             font-weight: 700;
         }
         
-        .hero p {
-            font-size: 1.5em;
-            margin-bottom: 40px;
+        .header p {
+            font-size: 1.2em;
             opacity: 0.9;
         }
         
-        .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
+        .card {
             background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        input[type="text"], input[type="url"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: inherit;
         }
         
-        /* Features Section */
-        .features {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
         }
         
-        .features h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 60px;
-            color: #333;
+        textarea {
+            min-height: 100px;
+            resize: vertical;
         }
         
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 30px;
-        }
-        
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        
-        .feature h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #667eea;
-        }
-        
-        .feature p {
-            color: #666;
-            line-height: 1.8;
-        }
-        
-        /* How It Works */
-        .how-it-works {
-            background: #f8f9fa;
-            padding: 80px 20px;
-        }
-        
-        .how-it-works h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 60px;
-        }
-        
-        .steps {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: flex;
-            align-items: start;
-            margin-bottom: 40px;
-        }
-        
-        .step-number {
-            background: #667eea;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            flex-shrink: 0;
-            margin-right: 20px;
-        }
-        
-        .step-content h3 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .step-content p {
-            color: #666;
-        }
-        
-        /* Demo CTA */
-        .demo-cta {
-            padding: 80px 20px;
-            text-align: center;
+        .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .demo-cta h2 {
-            font-size: 2.5em;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-section {
+            display: none;
+        }
+        
+        .result-section.active {
+            display: block;
+        }
+        
+        .email-output {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
             margin-bottom: 20px;
+            max-height: 500px;
+            overflow-y: auto;
         }
         
-        .demo-cta p {
-            font-size: 1.3em;
-            margin-bottom: 40px;
-            opacity: 0.9;
+        .btn-secondary {
+            background: #48bb78;
+            margin-bottom: 10px;
         }
         
-        /* Footer */
-        footer {
-            background: #2d3748;
-            color: white;
-            padding: 40px 20px;
+        .btn-secondary:hover {
+            box-shadow: 0 5px 20px rgba(72, 187, 120, 0.4);
+        }
+        
+        .company-info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #856404;
+        }
+        
+        .loading {
             text-align: center;
+            padding: 40px;
+            display: none;
         }
         
-        footer p {
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .toast.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
             opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>🤖 Cold Email AI</h1>
-        <p>Generate personalized cold emails in seconds.<br>Paste a company URL, get a compelling outreach email.</p>
-        <a href="/app" class="cta-button">Try It Free →</a>
-    </div>
-    
-    <!-- Features Section -->
-    <div class="features">
-        <h2>Why Cold Email AI?</h2>
-        <div class="feature-grid">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast</h3>
-                <p>Generate a personalized cold email in under 30 seconds. No more staring at blank screens.</p>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Cold Email AI</h1>
+            <p>Generate personalized cold emails in seconds</p>
+        </div>
+        
+        <div class="card">
+            <form id="emailForm">
+                <div class="input-group">
+                    <label for="url">Company Website URL</label>
+                    <input 
+                        type="url" 
+                        id="url" 
+                        name="url" 
+                        placeholder="https://example.com or example.com"
+                        required
+                    >
+                </div>
+                
+                <div class="input-group">
+                    <label for="context">Your Offering (Optional)</label>
+                    <textarea 
+                        id="context" 
+                        name="context" 
+                        placeholder="E.g., 'AI automation for customer service' or 'Web development services'... Leave blank for default"
+                    ></textarea>
+                </div>
+                
+                <button type="submit" class="btn" id="generateBtn">
+                    🚀 Generate Email
+                </button>
+            </form>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing company & crafting personalized email...</p>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>Actually Personalized</h3>
-                <p>AI analyzes the company's website to craft emails that show you've done your research.</p>
+            
+            <div class="result-section" id="result">
+                <div class="company-info" id="companyInfo"></div>
+                
+                <div class="email-output" id="emailOutput"></div>
+                
+                <button class="btn btn-secondary" id="copyBtn">
+                    📋 Copy to Clipboard
+                </button>
+                
+                <button class="btn" id="newBtn">
+                    ✨ Generate Another
+                </button>
             </div>
-            <div class="feature">
-                <div class="feature-icon">📈</div>
-                <h3>Higher Response Rates</h3>
-                <p>Personalized emails get 3x more responses than generic templates. Every. Single. Time.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💰</div>
-                <h3>Free to Try</h3>
-                <p>No credit card required. Generate your first 10 emails completely free.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <h3>Private & Secure</h3>
-                <p>Your data stays yours. We don't store or share your generated emails.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🚀</div>
-                <h3>Instant Results</h3>
-                <p>Copy, paste, send. Or edit to match your voice. Either way, you're shipping faster.</p>
-            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Built with ❤️ by Cold Email AI</p>
         </div>
     </div>
     
-    <!-- How It Works -->
-    <div class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Paste Company URL</h3>
-                    <p>Enter the website of the company you want to reach out to.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>AI Analyzes</h3>
-                    <p>Our AI scrapes the website and identifies key topics, pain points, and opportunities.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Get Your Email</h3>
-                    <p>Receive a personalized cold email with subject line and body text, ready to send.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Edit & Send</h3>
-                    <p>Tweak if needed, add your signature, and hit send. Close more deals.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="toast" id="toast">Copied to clipboard! ✨</div>
     
-    <!-- Demo CTA -->
-    <div class="demo-cta">
-        <h2>Ready to Write Better Cold Emails?</h2>
-        <p>Join hundreds of sales professionals closing more deals with AI-powered personalization.</p>
-        <a href="/app" class="cta-button">Start Generating Emails →</a>
-    </div>
-    
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Cold Email AI | Built by Builder Agent | Powered by AI</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">
-            Part of the AI Concierge Service ecosystem
-        </p>
-    </footer>
+    <script>
+        const form = document.getElementById('emailForm');
+        const loading = document.getElementById('loading');
+        const result = document.getElementById('result');
+        const emailOutput = document.getElementById('emailOutput');
+        const companyInfo = document.getElementById('companyInfo');
+        const copyBtn = document.getElementById('copyBtn');
+        const newBtn = document.getElementById('newBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const toast = document.getElementById('toast');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const url = document.getElementById('url').value.trim();
+            const context = document.getElementById('context').value.trim();
+            
+            // Show loading
+            form.style.display = 'none';
+            result.classList.remove('active');
+            loading.classList.add('active');
+            
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url, context })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Display company info
+                    companyInfo.innerHTML = `
+                        <strong>📊 Company:</strong> ${data.company_info.domain}<br>
+                        <strong>Title:</strong> ${data.company_info.title || 'N/A'}
+                    `;
+                    
+                    // Display email
+                    emailOutput.textContent = data.email;
+                    
+                    // Show result
+                    loading.classList.remove('active');
+                    result.classList.add('active');
+                } else {
+                    alert('Error: ' + data.error);
+                    form.style.display = 'block';
+                    loading.classList.remove('active');
+                }
+            } catch (error) {
+                alert('Error generating email: ' + error.message);
+                form.style.display = 'block';
+                loading.classList.remove('active');
+            }
+        });
+        
+        copyBtn.addEventListener('click', () => {
+            const text = emailOutput.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                toast.classList.add('active');
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                }, 2000);
+            });
+        });
+        
+        newBtn.addEventListener('click', () => {
+            result.classList.remove('active');
+            form.style.display = 'block';
+            form.reset();
+        });
+    </script>
 </body>
 </html>

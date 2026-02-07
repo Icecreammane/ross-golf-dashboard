@@ -1,0 +1,30 @@
+{
+  "total_cost": 0.016515000000000002,
+  "total_chars": 1101,
+  "generations": [
+    {
+      "timestamp": "2026-02-04T12:40:17.642446",
+      "purpose": "cli-test",
+      "char_count": 4,
+      "cost_usd": 6e-05
+    },
+    {
+      "timestamp": "2026-02-04T12:41:01.649708",
+      "purpose": "morning_brief",
+      "char_count": 441,
+      "cost_usd": 0.006615
+    },
+    {
+      "timestamp": "2026-02-04T12:41:15.321382",
+      "purpose": "build_completion",
+      "char_count": 200,
+      "cost_usd": 0.003
+    },
+    {
+      "timestamp": "2026-02-05T08:03:13.450306",
+      "purpose": "morning_brief",
+      "char_count": 456,
+      "cost_usd": 0.006840000000000001
+    }
+  ]
+}

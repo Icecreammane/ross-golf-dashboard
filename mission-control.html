@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control | $500 MRR</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --bg-hover: #30363d;
+            --border: #30363d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-green: #3fb950;
+            --accent-yellow: #d29922;
+            --accent-red: #f85149;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #f0883e;
+            --gradient-green: linear-gradient(90deg, #238636, #3fb950);
+            --gradient-yellow: linear-gradient(90deg, #9e6a03, #d29922);
+            --gradient-red: linear-gradient(90deg, #b62324, #f85149);
+            --gradient-blue: linear-gradient(90deg, #1f6feb, #58a6ff);
+            --gradient-purple: linear-gradient(90deg, #8957e5, #a371f7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header - The Mission */
+        .mission-header {
+            background: linear-gradient(135deg, #1a1f2e 0%, #0d1117 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-purple);
+        }
+
+        .mission-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .mission-goal {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #a371f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mission-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-stat {
+            text-align: center;
+        }
+
+        .mission-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .mission-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-container {
+            margin-top: 1rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 24px;
+            background: var(--bg-hover);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            min-width: fit-content;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .status-on-track { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+        .status-warning { background: rgba(210, 153, 34, 0.2); color: var(--accent-yellow); }
+        .status-behind { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .metric-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .metric-trend {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .trend-up { color: var(--accent-green); }
+        .trend-down { color: var(--accent-red); }
+        .trend-flat { color: var(--text-muted); }
+
+        /* Section Cards */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .section-badge {
+            background: var(--bg-hover);
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .section-content {
+            padding: 1rem 1.25rem;
+        }
+
+        /* Active Builds */
+        .build-item {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .build-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .build-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .build-model {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: var(--bg-hover);
+            color: var(--text-secondary);
+        }
+
+        .build-model.opus { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+        .build-model.sonnet { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+
+        .build-progress {
+            margin: 0.75rem 0;
+        }
+
+        .build-progress-bar {
+            height: 8px;
+            background: var(--bg-hover);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .build-progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .build-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Task Queue */
+        .queue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.85rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .queue-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .queue-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .queue-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .queue-priority {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .priority-high { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+        .priority-medium { background: rgba(210, 153, 34, 0.2); color: var(--accent-yellow); }
+        .priority-low { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+
+        .queue-info {
+            flex: 1;
+        }
+
+        .queue-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .queue-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .spawn-btn {
+            background: var(--gradient-green);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .spawn-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(63, 185, 80, 0.3);
+        }
+
+        /* Recent Wins */
+        .win-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .win-item:last-child {
+            border-bottom: none;
+        }
+
+        .win-icon {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .win-content {
+            flex: 1;
+        }
+
+        .win-title {
+            font-weight: 500;
+        }
+
+        .win-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .velocity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+        }
+
+        /* Alerts */
+        .alert-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid;
+        }
+
+        .alert-item.warning {
+            border-color: var(--accent-yellow);
+            background: rgba(210, 153, 34, 0.1);
+        }
+
+        .alert-item.error {
+            border-color: var(--accent-red);
+            background: rgba(248, 81, 73, 0.1);
+        }
+
+        .alert-item.info {
+            border-color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .alert-icon {
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .alert-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quick Actions */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.primary {
+            background: var(--gradient-green);
+            border: none;
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            box-shadow: 0 4px 12px rgba(63, 185, 80, 0.3);
+        }
+
+        /* Agent Status */
+        .agent-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .agent-item:last-child {
+            border-bottom: none;
+        }
+
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .agent-status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .agent-status-dot.active {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        .agent-status-dot.building {
+            background: var(--accent-yellow);
+            box-shadow: 0 0 8px var(--accent-yellow);
+            animation: pulse 1s infinite;
+        }
+
+        .agent-status-dot.idle {
+            background: var(--text-muted);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .agent-name {
+            font-weight: 500;
+        }
+
+        .agent-task {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .refresh-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .mission-goal {
+                font-size: 1.4rem;
+            }
+
+            .mission-stats {
+                gap: 0.5rem;
+            }
+
+            .mission-stat-value {
+                font-size: 1.5rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .metric-card {
+                padding: 0.75rem;
+            }
+
+            .metric-value {
+                font-size: 1.4rem;
+            }
+
+            .metric-icon {
+                font-size: 1.2rem;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .queue-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .spawn-btn {
+                width: 100%;
+            }
+        }
+
+        /* Collapsible sections */
+        .section-content.collapsed {
+            display: none;
+        }
+
+        .collapse-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Chart container */
+        .chart-container {
+            height: 150px;
+            margin-top: 1rem;
+        }
+
+        /* No builds state */
+        .no-builds {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .no-builds-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Mission Header -->
+        <div class="mission-header">
+            <div class="mission-title">
+                <span>🚀</span>
+                <span>MISSION</span>
+            </div>
+            <div class="mission-goal">$500 MRR by March 31, 2026</div>
+            
+            <div class="mission-stats">
+                <div class="mission-stat">
+                    <div class="mission-stat-value" id="current-mrr">$0</div>
+                    <div class="mission-stat-label">Current MRR</div>
+                </div>
+                <div class="mission-stat">
+                    <div class="mission-stat-value" id="days-left">--</div>
+                    <div class="mission-stat-label">Days Left</div>
+                </div>
+                <div class="mission-stat">
+                    <div class="mission-stat-value" id="required-pace">$--</div>
+                    <div class="mission-stat-label">$/day needed</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progress</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="mission-progress" style="width: 0%; background: var(--gradient-purple);"></div>
+                </div>
+            </div>
+
+            <div id="status-container">
+                <span class="status-badge status-warning" id="mission-status">
+                    <span>⚠️</span>
+                    <span>NEED REVENUE</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon">💰</div>
+                <div class="metric-value" id="revenue-month">$0</div>
+                <div class="metric-label">Revenue This Month</div>
+                <div class="metric-trend trend-flat" id="revenue-trend">—</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">🏗️</div>
+                <div class="metric-value" id="builds-count">0/0</div>
+                <div class="metric-label">Active / Queued</div>
+                <div class="metric-trend trend-up" id="builds-trend">Building</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">⚡</div>
+                <div class="metric-value" id="cost-month">$0</div>
+                <div class="metric-label">API Cost Today</div>
+                <div class="metric-trend trend-flat" id="cost-trend">Opus + Sonnet</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions (Mobile Priority) -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('actions')">
+                <span class="section-title">
+                    <span>⚡</span>
+                    Quick Actions
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content" id="actions-content">
+                <div class="actions-grid">
+                    <button class="action-btn primary" onclick="spawnNextBuild()">
+                        <span>🚀</span>
+                        <span>Spawn Next Build</span>
+                    </button>
+                    <button class="action-btn" onclick="viewQueue()">
+                        <span>📋</span>
+                        <span>View Full Queue</span>
+                    </button>
+                    <button class="action-btn" onclick="approveContent()">
+                        <span>✅</span>
+                        <span>Approve Content</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleAutonomy()">
+                        <span id="autonomy-icon">⏸️</span>
+                        <span id="autonomy-text">Pause Autonomy</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts & Blockers -->
+        <div class="section" id="alerts-section" style="display: none;">
+            <div class="section-header" onclick="toggleSection('alerts')">
+                <span class="section-title">
+                    <span>🚨</span>
+                    Alerts & Blockers
+                    <span class="section-badge" id="alerts-count">0</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content" id="alerts-content">
+                <div id="alerts-list"></div>
+            </div>
+        </div>
+
+        <!-- Active Builds -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('builds')">
+                <span class="section-title">
+                    <span>🔨</span>
+                    Building Now
+                    <span class="section-badge" id="active-builds-count">0</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content" id="builds-content">
+                <div id="builds-list">
+                    <div class="no-builds">
+                        <div class="no-builds-icon">🌙</div>
+                        <div>No active builds</div>
+                        <div style="font-size: 0.85rem; margin-top: 0.5rem;">Spawn one from the queue below!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Queue -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('queue')">
+                <span class="section-title">
+                    <span>📋</span>
+                    Task Queue
+                    <span class="section-badge" id="queue-count">0</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content" id="queue-content">
+                <div id="queue-list"></div>
+            </div>
+        </div>
+
+        <!-- Recent Wins -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('wins')">
+                <span class="section-title">
+                    <span>🏆</span>
+                    Recent Wins (7 days)
+                    <span class="section-badge" id="wins-count">0</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content" id="wins-content">
+                <div id="wins-list"></div>
+                <div class="velocity-badge" id="velocity-badge">
+                    <span>📈</span>
+                    <span id="velocity-text">Calculating velocity...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Status (Collapsed by default on mobile) -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('agents')">
+                <span class="section-title">
+                    <span>🤖</span>
+                    Agent Status
+                    <span class="section-badge" id="agents-count">0</span>
+                </span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div class="section-content collapsed" id="agents-content">
+                <div id="agents-list"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="refresh-indicator">
+                <div class="refresh-dot"></div>
+                <span>Auto-refresh: <span id="refresh-countdown">30</span>s</span>
+            </div>
+            <div>
+                Last updated: <span id="last-updated">--</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // MISSION CONTROL V2 - Configuration
+        // ============================================
+        
+        const CONFIG = {
+            missionDeadline: new Date('2026-03-31T23:59:59'),
+            missionTarget: 500,
+            refreshInterval: 30000, // 30 seconds
+            dataPath: './' // Relative path to data files
+        };
+
+        // ============================================
+        // Data State
+        // ============================================
+        
+        let state = {
+            mrr: 0,
+            revenueThisMonth: 0,
+            costToday: 0,
+            activeBuilds: [],
+            queue: [],
+            wins: [],
+            agents: [],
+            alerts: [],
+            autonomyPaused: false
+        };
+
+        // ============================================
+        // Data Loading (from markdown/json files)
+        // ============================================
+
+        async function loadData() {
+            try {
+                // Try to load dashboard-data.json for live metrics
+                const dashboardData = await fetchJSON('dashboard-data.json');
+                if (dashboardData) {
+                    state.agents = dashboardData.agents || [];
+                    state.activeBuilds = dashboardData.agents?.filter(a => 
+                        a.status === 'Building' || a.status?.toLowerCase() === 'building'
+                    ).map(a => ({
+                        name: a.task || a.name,
+                        model: a.model,
+                        progress: 50,
+                        eta: a.runtime || 'In progress',
+                        cost: a.model?.includes('opus') ? '$5' : '$1'
+                    })) || [];
+                    state.queue = dashboardData.queue || [];
+                    state.costToday = dashboardData.costs?.today || 0;
+                    state.mrr = dashboardData.mission?.currentMRR || 0;
+                    state.revenueThisMonth = dashboardData.mission?.revenueThisMonth || 0;
+                }
+
+                // Parse BUILD_STATUS.md for current build
+                const buildStatus = await fetchText('BUILD_STATUS.md');
+                if (buildStatus) {
+                    parseActiveBuild(buildStatus);
+                }
+
+                // Parse BUILD_QUEUE.md for queue
+                const buildQueue = await fetchText('BUILD_QUEUE.md');
+                if (buildQueue) {
+                    parseQueue(buildQueue);
+                }
+
+                // Parse DONE.md for wins
+                const done = await fetchText('DONE.md');
+                if (done) {
+                    parseWins(done);
+                }
+
+                // Check for pause file
+                state.autonomyPaused = await checkFile('.pause_autonomy');
+
+                // Update UI
+                updateUI();
+            } catch (e) {
+                console.error('Error loading data:', e);
+                // Use embedded demo data if files aren't available
+                loadDemoData();
+            }
+        }
+
+        async function fetchJSON(filename) {
+            try {
+                const response = await fetch(CONFIG.dataPath + filename + '?t=' + Date.now());
+                if (!response.ok) return null;
+                return await response.json();
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function fetchText(filename) {
+            try {
+                const response = await fetch(CONFIG.dataPath + filename + '?t=' + Date.now());
+                if (!response.ok) return null;
+                return await response.text();
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function checkFile(filename) {
+            try {
+                const response = await fetch(CONFIG.dataPath + filename + '?t=' + Date.now());
+                return response.ok;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // ============================================
+        // Markdown Parsers
+        // ============================================
+
+        function parseActiveBuild(markdown) {
+            const builds = [];
+            
+            // Extract task name
+            const taskMatch = markdown.match(/\*\*Task:\*\*\s*(.+)/);
+            const statusMatch = markdown.match(/\*\*Status:\*\*\s*(.+)/);
+            const etaMatch = markdown.match(/\*\*ETA:\*\*\s*(.+)/);
+            const costMatch = markdown.match(/\*\*Est\. Cost:\*\*\s*(.+)/);
+            const startedMatch = markdown.match(/\*\*Started at:\*\*\s*(.+)/);
+            const labelMatch = markdown.match(/\*\*Label:\*\*\s*(.+)/);
+
+            if (taskMatch && statusMatch?.includes?.('Building')) {
+                builds.push({
+                    name: taskMatch[1].trim(),
+                    label: labelMatch ? labelMatch[1].trim() : '',
+                    eta: etaMatch ? etaMatch[1].trim() : 'Unknown',
+                    cost: costMatch ? costMatch[1].trim() : '$0',
+                    startedAt: startedMatch ? startedMatch[1].trim() : '',
+                    model: 'opus',
+                    progress: calculateProgress(startedMatch?.[1], etaMatch?.[1])
+                });
+            }
+
+            if (builds.length > 0) {
+                state.activeBuilds = builds;
+            }
+        }
+
+        function calculateProgress(startedAt, etaMinutes) {
+            if (!startedAt || !etaMinutes) return 50; // Default
+            
+            try {
+                const started = new Date(startedAt);
+                const now = new Date();
+                const etaNum = parseInt(etaMinutes) || 60;
+                const elapsedMinutes = (now - started) / 1000 / 60;
+                const progress = Math.min(95, Math.round((elapsedMinutes / etaNum) * 100));
+                return Math.max(5, progress);
+            } catch (e) {
+                return 50;
+            }
+        }
+
+        function parseQueue(markdown) {
+            const queue = [];
+            const lines = markdown.split('\n');
+            
+            // Find items in Active Queue section
+            let inActiveQueue = false;
+            for (const line of lines) {
+                if (line.includes('Active Queue') || line.includes('Next Up')) {
+                    inActiveQueue = true;
+                    continue;
+                }
+                if (line.includes('Completed') || line.includes('##')) {
+                    inActiveQueue = false;
+                }
+
+                if (inActiveQueue && line.startsWith('- [ ]')) {
+                    const match = line.match(/- \[ \] (.+?) - Added: (.+?) - Priority: (\w+)/);
+                    if (match) {
+                        queue.push({
+                            name: match[1].trim(),
+                            added: match[2].trim(),
+                            priority: match[3].trim().toLowerCase(),
+                            eta: '1h', // Default estimate
+                            cost: '$2'
+                        });
+                    }
+                }
+            }
+
+            // Parse task details for more info
+            const detailsSection = markdown.split('## 📋 Task Details')[1];
+            if (detailsSection) {
+                for (const item of queue) {
+                    const detailMatch = detailsSection.match(new RegExp(`### ${item.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?(?=###|$)`));
+                    if (detailMatch) {
+                        const timeMatch = detailMatch[0].match(/\*\*Estimated Time:\*\*\s*(.+)/);
+                        const modelMatch = detailMatch[0].match(/\*\*Model:\*\*\s*(.+)/);
+                        if (timeMatch) item.eta = timeMatch[1].trim();
+                        if (modelMatch) {
+                            const model = modelMatch[1].toLowerCase();
+                            item.cost = model.includes('opus') ? '$5' : '$1';
+                        }
+                    }
+                }
+            }
+
+            state.queue = queue;
+        }
+
+        function parseWins(markdown) {
+            const wins = [];
+            const lines = markdown.split('\n');
+            
+            let currentDate = '';
+            const today = new Date();
+            const sevenDaysAgo = new Date(today - 7 * 24 * 60 * 60 * 1000);
+
+            for (const line of lines) {
+                // Match date headers
+                const dateMatch = line.match(/^## (\d{4}-\d{2}-\d{2})/);
+                if (dateMatch) {
+                    currentDate = dateMatch[1];
+                    continue;
+                }
+
+                // Match completed items
+                if (line.startsWith('### ✅')) {
+                    const name = line.replace('### ✅', '').trim();
+                    const itemDate = new Date(currentDate);
+                    
+                    if (itemDate >= sevenDaysAgo) {
+                        wins.push({
+                            name: name,
+                            date: formatRelativeDate(currentDate)
+                        });
+                    }
+                }
+            }
+
+            state.wins = wins.slice(0, 10); // Limit to 10
+        }
+
+        function formatRelativeDate(dateStr) {
+            const date = new Date(dateStr);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (date.toDateString() === today.toDateString()) {
+                return 'Today';
+            } else if (date.toDateString() === yesterday.toDateString()) {
+                return 'Yesterday';
+            } else {
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }
+        }
+
+        // ============================================
+        // Demo Data (fallback)
+        // ============================================
+
+        function loadDemoData() {
+            state = {
+                mrr: 0,
+                revenueThisMonth: 0,
+                costToday: 12,
+                activeBuilds: [
+                    {
+                        name: 'Mission Control V2',
+                        model: 'opus',
+                        progress: 75,
+                        eta: '30 min left',
+                        cost: '$4.50'
+                    }
+                ],
+                queue: [
+                    { name: 'Stripe Integration', priority: 'high', eta: '45min', cost: '$5' },
+                    { name: 'Golf Landing Page', priority: 'high', eta: '30min', cost: '$3' },
+                    { name: 'Tweet Generator', priority: 'medium', eta: '20min', cost: '$1' }
+                ],
+                wins: [
+                    { name: 'Hybrid Model Strategy', date: 'Today' },
+                    { name: 'Autonomous Build System Fix', date: 'Today' },
+                    { name: 'Florida Freedom Dashboard', date: 'Yesterday' },
+                    { name: 'Calendar Integration', date: 'Feb 2-3' }
+                ],
+                agents: [
+                    { name: 'Jarvis (Main)', status: 'Active', task: 'Coordinating', model: 'sonnet' },
+                    { name: 'Build Agent #1', status: 'Building', task: 'Mission Control V2', model: 'opus' }
+                ],
+                alerts: [],
+                autonomyPaused: false
+            };
+            updateUI();
+        }
+
+        // ============================================
+        // UI Updates
+        // ============================================
+
+        function updateUI() {
+            updateMissionHeader();
+            updateMetrics();
+            updateBuilds();
+            updateQueue();
+            updateWins();
+            updateAgents();
+            updateAlerts();
+            updateAutonomyButton();
+            document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+        }
+
+        function updateMissionHeader() {
+            const now = new Date();
+            const daysLeft = Math.ceil((CONFIG.missionDeadline - now) / (1000 * 60 * 60 * 24));
+            const progress = Math.min(100, (state.mrr / CONFIG.missionTarget) * 100);
+            const requiredPace = daysLeft > 0 ? ((CONFIG.missionTarget - state.mrr) / daysLeft).toFixed(2) : 0;
+
+            document.getElementById('current-mrr').textContent = '$' + state.mrr;
+            document.getElementById('days-left').textContent = daysLeft;
+            document.getElementById('required-pace').textContent = '$' + requiredPace;
+            document.getElementById('progress-percent').textContent = progress.toFixed(1) + '%';
+            document.getElementById('mission-progress').style.width = Math.max(progress, 2) + '%';
+
+            // Update status badge
+            const statusEl = document.getElementById('mission-status');
+            if (state.mrr === 0) {
+                statusEl.className = 'status-badge status-warning';
+                statusEl.innerHTML = '<span>⚠️</span><span>NEED REVENUE</span>';
+            } else if (state.mrr >= requiredPace * (52 - daysLeft)) {
+                statusEl.className = 'status-badge status-on-track';
+                statusEl.innerHTML = '<span>🟢</span><span>ON TRACK</span>';
+            } else {
+                statusEl.className = 'status-badge status-behind';
+                statusEl.innerHTML = '<span>🔴</span><span>BEHIND PACE</span>';
+            }
+        }
+
+        function updateMetrics() {
+            document.getElementById('revenue-month').textContent = '$' + state.revenueThisMonth;
+            document.getElementById('builds-count').textContent = state.activeBuilds.length + '/' + state.queue.length;
+            document.getElementById('cost-month').textContent = '$' + state.costToday;
+        }
+
+        function updateBuilds() {
+            const container = document.getElementById('builds-list');
+            const countEl = document.getElementById('active-builds-count');
+            countEl.textContent = state.activeBuilds.length;
+
+            if (state.activeBuilds.length === 0) {
+                container.innerHTML = `
+                    <div class="no-builds">
+                        <div class="no-builds-icon">🌙</div>
+                        <div>No active builds</div>
+                        <div style="font-size: 0.85rem; margin-top: 0.5rem;">Spawn one from the queue!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.activeBuilds.map(build => {
+                const modelClass = build.model?.toLowerCase()?.includes('opus') ? 'opus' : 'sonnet';
+                const gradient = modelClass === 'opus' ? 'var(--gradient-purple)' : 'var(--gradient-blue)';
+                const progress = build.progress || 50;
+                const eta = build.eta || build.runtime || 'In progress';
+                const cost = build.cost || '$2';
+                const name = build.name || build.task || 'Building...';
+                
+                return `
+                    <div class="build-item">
+                        <div class="build-header">
+                            <span class="build-name">${escapeHtml(name)}</span>
+                            <span class="build-model ${modelClass}">${modelClass.toUpperCase()}</span>
+                        </div>
+                        <div class="build-progress">
+                            <div class="build-progress-bar">
+                                <div class="build-progress-fill" style="width: ${progress}%; background: ${gradient};"></div>
+                            </div>
+                        </div>
+                        <div class="build-meta">
+                            <span>${progress}% • ${eta}</span>
+                            <span>~${cost}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateQueue() {
+            const container = document.getElementById('queue-list');
+            const countEl = document.getElementById('queue-count');
+            countEl.textContent = state.queue.length;
+
+            if (state.queue.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">✨</div>
+                        <div>Queue is empty!</div>
+                        <div style="font-size: 0.85rem;">Add tasks to BUILD_QUEUE.md</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.queue.slice(0, 5).map((task, i) => `
+                <div class="queue-item">
+                    <div class="queue-left">
+                        <span class="queue-priority priority-${task.priority}">${task.priority.toUpperCase()}</span>
+                        <div class="queue-info">
+                            <div class="queue-name">${escapeHtml(task.name)}</div>
+                            <div class="queue-meta">${task.eta} • ${task.cost}</div>
+                        </div>
+                    </div>
+                    <button class="spawn-btn" onclick="spawnTask('${escapeHtml(task.name)}')">
+                        🚀 Spawn
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function updateWins() {
+            const container = document.getElementById('wins-list');
+            const countEl = document.getElementById('wins-count');
+            countEl.textContent = state.wins.length;
+
+            if (state.wins.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🎯</div>
+                        <div>No wins yet this week</div>
+                        <div style="font-size: 0.85rem;">Ship something!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.wins.map(win => `
+                <div class="win-item">
+                    <span class="win-icon">✅</span>
+                    <div class="win-content">
+                        <div class="win-title">${escapeHtml(win.name)}</div>
+                        <div class="win-date">${win.date}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update velocity
+            const velocity = state.wins.length;
+            document.getElementById('velocity-text').textContent = `Velocity: ${velocity} builds/week ${velocity >= 4 ? '↗️' : velocity >= 2 ? '→' : '↘️'}`;
+        }
+
+        function updateAgents() {
+            const container = document.getElementById('agents-list');
+            const countEl = document.getElementById('agents-count');
+            countEl.textContent = state.agents.length;
+
+            if (state.agents.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🤖</div>
+                        <div>No agents active</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.agents.map(agent => {
+                const statusClass = agent.status?.toLowerCase() === 'building' ? 'building' : 
+                                   agent.status?.toLowerCase() === 'active' ? 'active' : 'idle';
+                const modelBadge = agent.model?.toLowerCase().includes('opus') ? 'OPUS' : 
+                                  agent.model?.toLowerCase().includes('sonnet') ? 'SONNET' : agent.model;
+                
+                return `
+                    <div class="agent-item">
+                        <div class="agent-info">
+                            <div class="agent-status-dot ${statusClass}"></div>
+                            <div>
+                                <div class="agent-name">${escapeHtml(agent.name || 'Unknown')}</div>
+                                <div class="agent-task">${escapeHtml(agent.task || agent.description || 'Idle')}</div>
+                            </div>
+                        </div>
+                        <span class="build-model ${agent.model?.toLowerCase().includes('opus') ? 'opus' : 'sonnet'}">${modelBadge}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateAlerts() {
+            const section = document.getElementById('alerts-section');
+            const container = document.getElementById('alerts-list');
+            const countEl = document.getElementById('alerts-count');
+
+            if (state.alerts.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            countEl.textContent = state.alerts.length;
+
+            container.innerHTML = state.alerts.map(alert => `
+                <div class="alert-item ${alert.type}">
+                    <span class="alert-icon">${alert.type === 'error' ? '🔴' : alert.type === 'warning' ? '⚠️' : 'ℹ️'}</span>
+                    <div class="alert-content">
+                        <div class="alert-title">${escapeHtml(alert.title)}</div>
+                        <div class="alert-desc">${escapeHtml(alert.desc)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateAutonomyButton() {
+            const icon = document.getElementById('autonomy-icon');
+            const text = document.getElementById('autonomy-text');
+            
+            if (state.autonomyPaused) {
+                icon.textContent = '▶️';
+                text.textContent = 'Resume Autonomy';
+            } else {
+                icon.textContent = '⏸️';
+                text.textContent = 'Pause Autonomy';
+            }
+        }
+
+        // ============================================
+        // Actions
+        // ============================================
+
+        function spawnNextBuild() {
+            if (state.queue.length === 0) {
+                alert('Queue is empty! Add tasks to BUILD_QUEUE.md');
+                return;
+            }
+            spawnTask(state.queue[0].name);
+        }
+
+        function spawnTask(taskName) {
+            // Create spawn signal file
+            const signal = {
+                task: taskName,
+                timestamp: new Date().toISOString(),
+                source: 'mission-control'
+            };
+            
+            // Since we can't write files from browser, show instructions
+            const cmd = `echo '${JSON.stringify(signal)}' > ~/clawd/memory/spawn-signal.json`;
+            
+            alert(`To spawn "${taskName}":\n\nRun in terminal:\n${cmd}\n\nOr tell Jarvis: "spawn ${taskName}"`);
+            
+            // Copy to clipboard if available
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(`spawn ${taskName}`);
+            }
+        }
+
+        function viewQueue() {
+            window.open('BUILD_QUEUE.md', '_blank');
+        }
+
+        function approveContent() {
+            alert('Open in terminal:\nls ~/clawd/content/tweets-pending/');
+        }
+
+        function toggleAutonomy() {
+            state.autonomyPaused = !state.autonomyPaused;
+            const action = state.autonomyPaused ? 'touch' : 'rm -f';
+            alert(`Run in terminal:\n${action} ~/clawd/.pause_autonomy`);
+            updateAutonomyButton();
+        }
+
+        // ============================================
+        // Section Toggle
+        // ============================================
+
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            content.classList.toggle('collapsed');
+        }
+
+        // ============================================
+        // Utilities
+        // ============================================
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // Auto-refresh
+        // ============================================
+
+        let countdown = 30;
+
+        function startRefreshCountdown() {
+            setInterval(() => {
+                countdown--;
+                document.getElementById('refresh-countdown').textContent = countdown;
+                
+                if (countdown <= 0) {
+                    countdown = 30;
+                    loadData();
+                }
+            }, 1000);
+        }
+
+        // ============================================
+        // Keyboard Shortcuts
+        // ============================================
+
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger if typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            switch(e.key.toLowerCase()) {
+                case 's':
+                    spawnNextBuild();
+                    break;
+                case 'p':
+                    toggleAutonomy();
+                    break;
+                case 'q':
+                    viewQueue();
+                    break;
+                case 'r':
+                    countdown = 30;
+                    loadData();
+                    break;
+            }
+        });
+
+        // ============================================
+        // Initialize
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            startRefreshCountdown();
+            
+            // Collapse agents section on mobile by default
+            if (window.innerWidth < 768) {
+                // Already collapsed via HTML class
+            }
+        });
+    </script>
+</body>
+</html>

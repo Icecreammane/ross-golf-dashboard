@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cold Email AI - Personalized Outreach at Scale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #2d3748;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .feature p {
+            color: #4a5568;
+            font-size: 1.1em;
+        }
+        
+        .demo-section {
+            background: #f7fafc;
+            padding: 80px 20px;
+        }
+        
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-screenshot {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            padding: 100px;
+            text-align: center;
+            color: #4a5568;
+            font-size: 1.5em;
+        }
+        
+        .pricing {
+            background: white;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border-color: #667eea;
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .price {
+            font-size: 3em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .price-period {
+            color: #718096;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .pricing-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .pricing-btn:hover {
+            background: #5568d3;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>⚡ Cold Email AI</h1>
+        <p>Generate Personalized Cold Emails in Seconds<br>No More Generic Templates</p>
+        <a href="/" class="cta-btn">🚀 Try It Now - Free</a>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="container">
+        <h2 class="section-title">Why Cold Email AI?</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Hyper-Personalized</h3>
+                <p>AI analyzes each company's website and crafts emails tailored to their business, not generic templates.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Generate a personalized cold email in 10 seconds. What used to take 20 minutes now takes seconds.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Higher Response Rates</h3>
+                <p>Personalized emails get 3-5x more responses than generic outreach. Stop being ignored.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h3>AI-Powered Research</h3>
+                <p>Automatically researches each company from their website. No manual research required.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">✍️</div>
+                <h3>Professional Copy</h3>
+                <p>Trained on thousands of successful cold emails. Compelling subject lines and CTAs every time.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📋</div>
+                <h3>One-Click Copy</h3>
+                <p>Copy to clipboard and paste into your email client. Simple workflow, powerful results.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="demo-container">
+            <h2 class="section-title">See It In Action</h2>
+            <div class="demo-screenshot">
+                📸 [App Screenshot Placeholder]<br>
+                <small>Clean UI • Fast Generation • Professional Results</small>
+            </div>
+            <p style="text-align: center; color: #4a5568; font-size: 1.1em;">
+                Simply paste a company URL, add optional context about your offering, and get a personalized cold email in seconds.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing container">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">$29</div>
+                <div class="price-period">per month</div>
+                <ul class="pricing-features">
+                    <li>100 emails/month</li>
+                    <li>Basic personalization</li>
+                    <li>Copy to clipboard</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="/" class="pricing-btn">Get Started</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3>Professional</h3>
+                <div class="price">$79</div>
+                <div class="price-period">per month</div>
+                <ul class="pricing-features">
+                    <li>500 emails/month</li>
+                    <li>Advanced personalization</li>
+                    <li>Bulk processing</li>
+                    <li>A/B testing</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="/" class="pricing-btn">Get Started</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$199</div>
+                <div class="price-period">per month</div>
+                <ul class="pricing-features">
+                    <li>Unlimited emails</li>
+                    <li>Custom AI training</li>
+                    <li>API access</li>
+                    <li>Team collaboration</li>
+                    <li>White-label option</li>
+                    <li>Dedicated support</li>
+                </ul>
+                <a href="/" class="pricing-btn">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to 10x Your Outreach?</h2>
+        <p>Stop wasting hours on cold email research and writing.<br>Start generating personalized emails in seconds.</p>
+        <a href="/" class="cta-btn">🚀 Start Free Trial</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Cold Email AI. Built with ❤️ and AI.</p>
+        <p style="margin-top: 10px; opacity: 0.7;">Made for founders, marketers, and sales teams who value their time.</p>
+    </footer>
+</body>
+</html>

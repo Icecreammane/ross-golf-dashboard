@@ -1,0 +1,34 @@
+{
+  "projects": {
+    "fittrack-pro": {
+      "name": "FitTrack Pro",
+      "built_date": "2026-02-05",
+      "launched": false,
+      "days_sitting": 1,
+      "revenue": 0,
+      "launch_date": null
+    },
+    "golf-coaching": {
+      "name": "Golf Coaching",
+      "built_date": "2026-02-05",
+      "launched": false,
+      "days_sitting": 1,
+      "revenue": 0,
+      "launch_date": null
+    }
+  },
+  "goal": {
+    "target_mrr": 3000,
+    "current_mrr": 0,
+    "deadline": "2026-03-31",
+    "days_remaining": 53
+  },
+  "pressure_history": [
+    {
+      "date": "2026-02-06",
+      "max_days_sitting": 1,
+      "unlaunched_count": 2,
+      "current_mrr": 0
+    }
+  ]
+}

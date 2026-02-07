@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔨 Live Build Dashboard - Jarvis</title>
+    <link rel="stylesheet" href="../styles/jarvis-design-system.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .status-badge {
+            font-size: 0.875rem;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-weight: 500;
+        }
+
+        .status-badge.live {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .status-badge.paused {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Build Cards */
+        .builds-grid {
+            display: grid;
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .build-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            transition: all var(--transition-base);
+        }
+
+        .build-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-4);
+        }
+
+        .build-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+
+        .build-meta {
+            display: flex;
+            gap: var(--space-4);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-4);
+        }
+
+        .priority-badge {
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .priority-low {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--info);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: var(--space-4) 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-2);
+            font-size: 0.875rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+        }
+
+        /* Tasks List */
+        .tasks-list {
+            margin-top: var(--space-5);
+            border-top: 1px solid var(--border);
+            padding-top: var(--space-4);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3);
+            margin-bottom: var(--space-2);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .task-item:hover {
+            background: var(--bg-elevated);
+        }
+
+        .task-status-icon {
+            font-size: 1.25rem;
+        }
+
+        .task-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .task-progress {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .task-deliverable {
+            margin-top: var(--space-1);
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .task-deliverable a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .task-deliverable a:hover {
+            text-decoration: underline;
+        }
+
+        /* ETA Section */
+        .eta-section {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+            padding: var(--space-4);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+        }
+
+        .eta-item {
+            flex: 1;
+        }
+
+        .eta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .eta-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-8);
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-4);
+            opacity: 0.5;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Auto-refresh indicator */
+        .refresh-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--text-tertiary);
+            font-size: 0.75rem;
+        }
+
+        .refresh-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-4);
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-3);
+            }
+
+            .build-header {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+
+            .eta-section {
+                flex-direction: column;
+            }
+
+            .task-item {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>
+                    🔨 Live Build Dashboard
+                    <span class="status-badge live" id="statusBadge">● LIVE</span>
+                </h1>
+                <div class="last-updated">
+                    Last updated: <span id="lastUpdated">Loading...</span>
+                </div>
+            </div>
+            <div class="refresh-indicator">
+                <span class="refresh-dot"></span>
+                Auto-refreshes every 30s
+            </div>
+        </div>
+
+        <!-- Active Builds -->
+        <div class="section-header">Active Builds</div>
+        <div class="builds-grid" id="activeBuilds">
+            <div class="empty-state">
+                <div class="empty-state-icon">⚙️</div>
+                <p>Loading build status...</p>
+            </div>
+        </div>
+
+        <!-- Queued Builds -->
+        <div class="section-header">Queued</div>
+        <div class="builds-grid" id="queuedBuilds">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Completed Builds -->
+        <div class="section-header">Recently Completed</div>
+        <div class="builds-grid" id="completedBuilds">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const STATUS_FILE = '../logs/build-status.json';
+        const REFRESH_INTERVAL = 30000; // 30 seconds
+
+        // Load and render builds
+        async function loadBuilds() {
+            try {
+                const response = await fetch(STATUS_FILE + '?t=' + Date.now());
+                const data = await response.json();
+                
+                renderBuilds(data);
+                updateLastUpdated(data.last_updated);
+            } catch (error) {
+                console.error('Failed to load builds:', error);
+                showError();
+            }
+        }
+
+        function renderBuilds(data) {
+            renderBuildSection('activeBuilds', data.active_builds, 'active');
+            renderBuildSection('queuedBuilds', data.queued_builds, 'queued');
+            renderBuildSection('completedBuilds', data.completed_builds, 'completed');
+        }
+
+        function renderBuildSection(elementId, builds, type) {
+            const container = document.getElementById(elementId);
+            
+            if (!builds || builds.length === 0) {
+                if (type === 'active') {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">✨</div>
+                            <p>No active builds right now</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = '';
+                }
+                return;
+            }
+
+            container.innerHTML = builds.map(build => createBuildCard(build, type)).join('');
+        }
+
+        function createBuildCard(build, type) {
+            const statusIcons = {
+                'in_progress': '🔨',
+                'complete': '✅',
+                'queued': '⏳',
+                'paused': '⏸️',
+                'failed': '❌'
+            };
+
+            const priorityClass = `priority-${build.priority || 'medium'}`;
+            const statusIcon = statusIcons[build.status] || '⚙️';
+
+            const tasksHTML = build.tasks ? `
+                <div class="tasks-list">
+                    ${build.tasks.map(task => createTaskItem(task)).join('')}
+                </div>
+            ` : '';
+
+            const etaHTML = type === 'active' && build.eta ? createEtaSection(build) : '';
+
+            return `
+                <div class="build-card">
+                    <div class="build-header">
+                        <div>
+                            <div class="build-title">${statusIcon} ${build.title}</div>
+                            <div class="build-meta">
+                                <span>👤 ${build.assigned_to || 'Jarvis'}</span>
+                                ${build.priority ? `<span class="priority-badge ${priorityClass}">${build.priority}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${build.notes ? `<p style="color: var(--text-secondary); margin-bottom: var(--space-4);">${build.notes}</p>` : ''}
+                    
+                    ${build.progress !== undefined ? `
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span>Overall Progress</span>
+                                <span>${build.progress}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${build.progress}%"></div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${tasksHTML}
+                    ${etaHTML}
+                </div>
+            `;
+        }
+
+        function createTaskItem(task) {
+            const statusIcons = {
+                'complete': '✅',
+                'in_progress': '🔄',
+                'pending': '⏳',
+                'failed': '❌'
+            };
+
+            const icon = statusIcons[task.status] || '◯';
+            const deliverableHTML = task.deliverable ? `
+                <div class="task-deliverable">
+                    📄 <a href="${task.deliverable}" target="_blank">${task.deliverable.split('/').pop()}</a>
+                </div>
+            ` : '';
+
+            return `
+                <div class="task-item">
+                    <span class="task-status-icon">${icon}</span>
+                    <div style="flex: 1;">
+                        <div class="task-name">${task.name}</div>
+                        ${deliverableHTML}
+                    </div>
+                    ${task.progress !== undefined ? `<span class="task-progress">${task.progress}%</span>` : ''}
+                </div>
+            `;
+        }
+
+        function createEtaSection(build) {
+            const started = new Date(build.started);
+            const eta = new Date(build.eta);
+            const now = new Date();
+            
+            const elapsed = formatDuration(now - started);
+            const remaining = formatDuration(eta - now);
+            
+            return `
+                <div class="eta-section">
+                    <div class="eta-item">
+                        <div class="eta-label">Started</div>
+                        <div class="eta-value">${formatTime(started)}</div>
+                    </div>
+                    <div class="eta-item">
+                        <div class="eta-label">Elapsed</div>
+                        <div class="eta-value">${elapsed}</div>
+                    </div>
+                    <div class="eta-item">
+                        <div class="eta-label">ETA</div>
+                        <div class="eta-value">${remaining}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+        }
+
+        function formatDuration(ms) {
+            if (ms < 0) return 'Overdue';
+            
+            const minutes = Math.floor(ms / 60000);
+            const hours = Math.floor(minutes / 60);
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes % 60}m`;
+            }
+            return `${minutes}m`;
+        }
+
+        function updateLastUpdated(timestamp) {
+            const date = new Date(timestamp);
+            document.getElementById('lastUpdated').textContent = date.toLocaleString();
+        }
+
+        function showError() {
+            document.getElementById('activeBuilds').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚠️</div>
+                    <p>Failed to load build status</p>
+                </div>
+            `;
+        }
+
+        // Auto-refresh
+        loadBuilds();
+        setInterval(loadBuilds, REFRESH_INTERVAL);
+    </script>
+</body>
+</html>

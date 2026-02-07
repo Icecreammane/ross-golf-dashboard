@@ -1,0 +1,47 @@
+{
+  "corrections_log": [
+    {
+      "date": "2026-02-02",
+      "time": "20:05-20:15",
+      "topic": "food_portion_estimation",
+      "what_i_got_wrong": "Estimated dinner at 650 cal, then 1250, then 1000, finally 1040",
+      "what_ross_corrected": "1 lb ground beef (not 8oz), 8 oz cottage cheese (not 16oz)",
+      "lesson": "Always ask portion size for ground beef and cottage cheese. Ross uses ~1lb beef in bowls.",
+      "pattern": "I consistently underestimate his portions",
+      "times_corrected_on_this": 4,
+      "action_taken": "Added portion preferences to frequent-meals.json"
+    },
+    {
+      "date": "2026-02-02",
+      "time": "12:20",
+      "topic": "food_identification",
+      "what_i_got_wrong": "Said mashed potatoes might be cauliflower",
+      "what_ross_corrected": "Definitely mashed potatoes, not cauliflower",
+      "lesson": "Ross eats real mashed potatoes. Don't assume lower-calorie alternatives.",
+      "times_corrected_on_this": 1,
+      "action_taken": "Noted in frequent-meals.json"
+    }
+  ],
+  "patterns_identified": [
+    {
+      "pattern": "portion_underestimation",
+      "frequency": "high",
+      "correction_count": 4,
+      "solution": "Ask before estimating, default to larger portions",
+      "status": "active"
+    },
+    {
+      "pattern": "meal_corrections_create_duplicates",
+      "frequency": "medium",
+      "correction_count": 1,
+      "solution": "Update entries instead of creating new ones, or build UI edit system",
+      "status": "planning"
+    }
+  ],
+  "action_items": [
+    "Build food entry edit/delete UI",
+    "Implement ask-first-estimate-second for portions",
+    "Review this file before food logging",
+    "Track correction frequency to identify weak areas"
+  ]
+}

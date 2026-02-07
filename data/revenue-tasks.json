@@ -1,0 +1,51 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "task": "Post FitTrack Pro on r/SideProject",
+      "revenue_potential": 200,
+      "time_required": 1,
+      "ease": "easy",
+      "status": "pending",
+      "created": "2026-02-06",
+      "actual_revenue": null
+    },
+    {
+      "id": 2,
+      "task": "Post golf coaching offer on r/golf",
+      "revenue_potential": 100,
+      "time_required": 2,
+      "ease": "easy",
+      "status": "pending",
+      "created": "2026-02-06",
+      "actual_revenue": null
+    },
+    {
+      "id": 3,
+      "task": "Set up Stripe payment for FitTrack Pro",
+      "revenue_potential": 500,
+      "time_required": 1,
+      "ease": "medium",
+      "status": "pending",
+      "created": "2026-02-06",
+      "actual_revenue": null
+    },
+    {
+      "id": 4,
+      "task": "Launch golf coaching landing page",
+      "revenue_potential": 300,
+      "time_required": 3,
+      "ease": "easy",
+      "status": "pending",
+      "created": "2026-02-06",
+      "actual_revenue": null
+    }
+  ],
+  "completed": [],
+  "stats": {
+    "total_revenue_potential": 1100,
+    "total_actual_revenue": 0,
+    "tasks_completed": 0,
+    "avg_completion_time": 0
+  }
+}

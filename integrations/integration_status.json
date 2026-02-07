@@ -1,0 +1,108 @@
+{
+  "last_updated": "2024-01-30T00:00:00Z",
+  "integrations": {
+    "stripe": {
+      "name": "Stripe API Integration",
+      "active": false,
+      "setup_time_minutes": 2,
+      "dependencies": ["stripe", "python-dotenv", "requests"],
+      "required_env_vars": ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET"],
+      "optional_env_vars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+      "test_command": "python integrations/stripe/test_integration.py",
+      "documentation": "integrations/stripe/STRIPE_SETUP.md"
+    },
+    "dashboard": {
+      "name": "Revenue Dashboard",
+      "active": false,
+      "setup_time_minutes": 0,
+      "dependencies": ["stripe integration", "revenue API running"],
+      "required_env_vars": [],
+      "optional_env_vars": [],
+      "test_command": "open revenue-dashboard.html",
+      "documentation": "README in revenue-dashboard.html"
+    },
+    "gmail": {
+      "name": "Gmail Support System",
+      "active": false,
+      "setup_time_minutes": 10,
+      "dependencies": ["google-auth-oauthlib", "google-auth-httplib2", "google-api-python-client"],
+      "required_files": ["credentials.json"],
+      "optional_env_vars": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+      "test_command": "python integrations/gmail/gmail_monitor.py",
+      "documentation": "integrations/gmail/GMAIL_SETUP.md"
+    },
+    "deployment": {
+      "name": "Deployment Automation",
+      "active": false,
+      "setup_time_minutes": 5,
+      "dependencies": ["Railway CLI", "GitHub Actions"],
+      "required_github_secrets": ["RAILWAY_TOKEN", "PRODUCTION_URL"],
+      "optional_github_secrets": ["STAGING_URL", "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"],
+      "test_command": "bash scripts/deploy.sh --help",
+      "documentation": "integrations/deployment/DEPLOYMENT_SETUP.md"
+    },
+    "twitter": {
+      "name": "Twitter Automation",
+      "active": false,
+      "setup_time_minutes": 5,
+      "dependencies": ["tweepy", "python-dotenv"],
+      "required_env_vars": [
+        "TWITTER_API_KEY",
+        "TWITTER_API_SECRET",
+        "TWITTER_BEARER_TOKEN",
+        "TWITTER_ACCESS_TOKEN",
+        "TWITTER_ACCESS_SECRET"
+      ],
+      "optional_env_vars": [],
+      "test_command": "python integrations/twitter/twitter_bot.py",
+      "documentation": "integrations/twitter/TWITTER_SETUP.md"
+    }
+  },
+  "automation_schedule": {
+    "daily": [
+      {
+        "time": "09:00",
+        "task": "Stripe daily summary",
+        "command": "python integrations/stripe/stripe_alerts.py daily_summary"
+      },
+      {
+        "time": "10:00",
+        "task": "Post Twitter content",
+        "command": "python integrations/twitter/twitter_bot.py post_from_queue"
+      }
+    ],
+    "hourly": [
+      {
+        "task": "Gmail inbox scan",
+        "command": "python integrations/gmail/gmail_monitor.py scan_inbox",
+        "frequency": "every_5_minutes"
+      },
+      {
+        "task": "Twitter engagement",
+        "command": "python integrations/twitter/auto_engage.py",
+        "frequency": "twice_daily"
+      }
+    ],
+    "continuous": [
+      {
+        "task": "GitHub auto-deploy",
+        "trigger": "push_to_main",
+        "workflow": ".github/workflows/deploy-production.yml"
+      },
+      {
+        "task": "Stripe webhooks",
+        "trigger": "subscription_events",
+        "handler": "integrations/stripe/webhook_handler.py"
+      }
+    ]
+  },
+  "setup_order": [
+    "stripe",
+    "dashboard",
+    "deployment",
+    "twitter",
+    "gmail"
+  ],
+  "total_setup_time_minutes": 22,
+  "estimated_time_saved_per_week_hours": "13-25"
+}

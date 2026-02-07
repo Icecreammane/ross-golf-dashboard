@@ -1,276 +1,184 @@
-# 🤖 Cold Email AI Platform
+# Cold Email AI Platform - MVP
 
-**Generate personalized cold emails from company URLs in seconds.**
+> Generate personalized cold emails from company URLs using AI. Built with Flask + OpenAI.
 
-Built as MVP for AI Concierge Service business demonstration.
+## 🚀 Quick Start
 
----
-
-## Features
-
-✅ **Simple Input**: Paste any company URL
-✅ **AI Analysis**: Scrapes website to understand the company
-✅ **Smart Generation**: Creates personalized cold emails using OpenAI
-✅ **Beautiful UI**: Landing page + app interface
-✅ **Copy & Use**: One-click copy to clipboard
-✅ **Mock Mode**: Works without API key for demo purposes
-
----
-
-## Quick Start
-
-### 1. Install Dependencies
+### 1. Set OpenAI API Key
 
 ```bash
-cd /Users/clawdbot/clawd/cold-email-ai
-pip3 install -r requirements.txt
+export OPENAI_API_KEY='your-openai-api-key-here'
 ```
 
-### 2. Set OpenAI API Key (Optional)
+Add to `~/.zshrc` or `~/.bashrc` to persist:
+```bash
+echo "export OPENAI_API_KEY='your-key'" >> ~/.zshrc
+source ~/.zshrc
+```
 
-For AI-powered emails (otherwise uses mock mode):
+### 2. Start the App
 
 ```bash
-export OPENAI_API_KEY=your_openai_api_key_here
+cd ~/clawd/cold-email-ai
+chmod +x start.sh
+./start.sh
 ```
 
-### 3. Run the App
+The script will:
+- Create a Python virtual environment (if needed)
+- Install dependencies
+- Kill any existing process on port 3001
+- Start the Flask app
 
-```bash
-python3 app.py
-```
+### 3. Access the App
 
-Or with custom port:
+- **Main App:** http://localhost:3001
+- **Landing Page:** http://localhost:3001/landing
+- **Health Check:** http://localhost:3001/health
 
-```bash
-PORT=3001 python3 app.py
-```
+## 📋 Features
 
-### 4. Open in Browser
+- ✅ **Simple UI** - Paste company URL, get personalized email
+- ✅ **AI-Powered** - Uses GPT-4 for intelligent email generation
+- ✅ **Company Research** - Automatically scrapes and analyzes company websites
+- ✅ **Copy to Clipboard** - One-click copy functionality
+- ✅ **Professional Design** - Clean, modern UI
+- ✅ **Fast** - Generates emails in ~10 seconds
 
-- **Landing Page:** http://localhost:3001
-- **App Interface:** http://localhost:3001/app
+## 🛠 Tech Stack
 
----
-
-## Usage
-
-1. Go to http://localhost:3001
-2. Click "Try It Free"
-3. Paste a company URL (e.g., `https://stripe.com`)
-4. Click "Generate Email"
-5. Get personalized cold email with subject + body
-6. Copy and use!
-
----
-
-## Architecture
-
-### Tech Stack
 - **Backend:** Flask (Python)
-- **Frontend:** HTML/CSS/JavaScript (no framework, pure vanilla)
-- **AI:** OpenAI GPT-4 API
-- **Web Scraping:** BeautifulSoup + Requests
+- **AI:** OpenAI GPT-4
+- **Web Scraping:** BeautifulSoup4 + requests
+- **Frontend:** Vanilla HTML/CSS/JS (no frameworks)
+- **Port:** 3001
 
-### Project Structure
+## 📁 Project Structure
+
 ```
 cold-email-ai/
-├── app.py                  # Flask backend
-├── requirements.txt        # Python dependencies
+├── app.py                 # Flask backend + OpenAI integration
+├── requirements.txt       # Python dependencies
+├── start.sh              # Easy restart script
+├── README.md             # This file
 ├── templates/
-│   ├── index.html         # Landing page
-│   └── app.html           # Main app interface
-└── README.md              # This file
+│   ├── index.html        # Main app UI
+│   └── landing.html      # Marketing landing page
+└── examples/             # Generated email samples
 ```
 
-### API Endpoints
+## 🎯 How It Works
 
-**`POST /api/generate`**
-- Input: `{ "url": "https://company.com" }`
-- Output: `{ "success": true, "company": {...}, "email": {...} }`
+1. **User Input:** Paste company website URL (e.g., `stripe.com`)
+2. **Research:** App scrapes the website for company info (title, description, content)
+3. **AI Generation:** OpenAI GPT-4 analyzes company data and generates personalized cold email
+4. **Output:** Display email with subject line + body, ready to copy
 
-**`GET /health`**
-- Health check + OpenAI status
+## 🧪 Testing
 
----
-
-## How It Works
-
-1. **Web Scraping**: Fetches company website and extracts:
-   - Page title
-   - Meta description
-   - Key headings (H1, H2)
-   - Paragraph content samples
-
-2. **AI Prompt Engineering**: Sends company context to OpenAI with instructions:
-   - Show research understanding
-   - Identify pain points
-   - Offer clear value
-   - Soft CTA
-   - Under 150 words
-
-3. **Email Formatting**: Parses AI response into:
-   - Subject line
-   - Email body
-
-4. **Mock Mode**: If no OpenAI API key, generates template-based email for demo
-
----
-
-## Examples
-
-### Input
-```
-https://stripe.com
-```
-
-### Output
-```
-Subject: Quick question about Stripe's payment infrastructure
-
-Hi there,
-
-I was just browsing Stripe's website and noticed you're focused on 
-helping businesses accept payments online seamlessly.
-
-I work with companies like yours to help them streamline their 
-outreach and close more enterprise deals using AI-powered 
-personalization.
-
-Would love to show you a quick 10-minute demo of how we've helped 
-similar fintech companies increase response rates by 3x.
-
-Worth a quick call?
-
-Best,
-[Your Name]
-```
-
----
-
-## Customization
-
-### Modify Email Style
-Edit the prompt in `app.py` function `generate_email_with_openai()`:
-
-```python
-prompt = f"""You are an expert cold email writer...
-[customize instructions here]
-"""
-```
-
-### Change Port
+Generate test emails:
 ```bash
-PORT=5000 python3 app.py
+# Examples saved in examples/ directory
+curl -X POST http://localhost:3001/api/generate \
+  -H "Content-Type: application/json" \
+  -d '{"url": "stripe.com", "context": "AI automation services"}'
 ```
 
-### Adjust AI Model
-In `app.py`, change:
-```python
-'model': 'gpt-4'  # or 'gpt-3.5-turbo' for cheaper/faster
-```
+## 🔧 Manual Setup (if start.sh doesn't work)
 
----
-
-## Deployment
-
-### Local (Development)
 ```bash
-python3 app.py
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set API key
+export OPENAI_API_KEY='your-key'
+
+# Run app
+python app.py
 ```
 
-### Production (Docker)
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["python", "app.py"]
+## 🚨 Troubleshooting
+
+**Port 3001 already in use:**
+```bash
+lsof -ti:3001 | xargs kill -9
+./start.sh
 ```
 
-### Environment Variables
-- `OPENAI_API_KEY`: OpenAI API key (optional, uses mock mode without)
-- `PORT`: Server port (default: 3001)
+**OpenAI API errors:**
+- Check API key is set: `echo $OPENAI_API_KEY`
+- Verify API key is valid at https://platform.openai.com/api-keys
+- Check account has credits
 
----
+**Module not found:**
+```bash
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-## Limitations
+## 📊 API Endpoints
 
-1. **Rate Limits**: OpenAI API has rate limits
-2. **Website Access**: Some sites block scraping (403/Cloudflare)
-3. **Email Quality**: Depends on website content quality
-4. **Mock Mode**: Template-based when no API key
+### `POST /api/generate`
+Generate cold email from company URL.
 
----
+**Request:**
+```json
+{
+  "url": "example.com",
+  "context": "Your offering (optional)"
+}
+```
 
-## Future Enhancements
+**Response:**
+```json
+{
+  "email": "Subject: ...\n\n[email body]",
+  "company_info": {
+    "domain": "example.com",
+    "title": "Example Company",
+    "description": "...",
+    "content": "..."
+  }
+}
+```
 
-**V2 Ideas:**
-- [ ] Save generated emails history
-- [ ] A/B test subject lines
-- [ ] Bulk URL processing
-- [ ] Email template library
-- [ ] Chrome extension
-- [ ] CRM integrations
-- [ ] Analytics dashboard
-- [ ] User accounts & auth
+### `GET /health`
+Health check endpoint.
 
----
+## 🎨 Customization
 
-## Cost Analysis
+**Change AI Model:**
+Edit `app.py`, line ~85:
+```python
+model="gpt-4"  # Change to "gpt-3.5-turbo" for cheaper/faster
+```
 
-**Per Email (with OpenAI):**
-- ~400 tokens (prompt + completion)
-- GPT-4: $0.03/1K tokens input + $0.06/1K tokens output
-- **Cost: ~$0.02-0.04 per email**
+**Adjust Email Length:**
+Edit prompt in `app.py`, line ~68:
+```python
+- Keeps it under 150 words  # Increase/decrease as needed
+```
 
-**At Scale:**
-- 100 emails/day = $2-4/day
-- 1,000 emails/day = $20-40/day
+**Customize UI:**
+Edit `templates/index.html` and `templates/landing.html`
 
----
+## 📝 License
 
-## Business Model Ideas
+MIT - Do whatever you want with it.
 
-1. **Freemium**: 10 free emails, then $20/month unlimited
-2. **Pay-per-email**: $0.10 per email (5x markup on cost)
-3. **API Access**: $100/month for API integration
-4. **White Label**: $500/month for agencies
-5. **Enterprise**: Custom pricing for bulk users
+## 🚢 Shipping Checklist
 
----
+- [x] Flask backend with OpenAI integration
+- [x] Web scraping for company research
+- [x] Clean, professional UI
+- [x] Copy to clipboard functionality
+- [x] Landing page with pricing
+- [x] Health check endpoint
+- [x] Easy restart script
+- [x] Documentation
 
-## Contributing
-
-This is an MVP. Improvements welcome:
-- Better error handling
-- More AI models (Anthropic, etc)
-- Email validation
-- A/B testing
-- Template variations
-
----
-
-## License
-
-MIT License - Do whatever you want with this code.
-
----
-
-## Built By
-
-Builder Agent (AI subagent)
-Part of AI Concierge Service ecosystem
-Built: Feb 5-6, 2026
-
----
-
-## Questions?
-
-This is a working MVP meant to demonstrate:
-1. AI can generate quality cold emails
-2. Simple UX = high conversion
-3. Value is immediate and obvious
-
-Ship it, test it, iterate. 🚀
+**Status:** ✅ MVP COMPLETE - Ready to ship!

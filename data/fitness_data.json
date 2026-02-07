@@ -1,0 +1,18 @@
+{
+  "workouts": [
+    {
+      "timestamp": "2026-02-06T19:44:03.123732",
+      "raw_text": "shoulder press machine, 90, 140, 180 pounds, 10 reps each",
+      "type": "workout",
+      "parsed": true
+    }
+  ],
+  "nutrition": [
+    {
+      "timestamp": "2026-02-06T19:43:58.996828",
+      "raw_text": "i just ate chili",
+      "type": "food",
+      "parsed": true
+    }
+  ]
+}

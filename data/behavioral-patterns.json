@@ -1,0 +1,36 @@
+{
+  "patterns": [
+    {
+      "type": "workout_day_preference",
+      "pattern": "Ross works out most on Mondays",
+      "confidence": 0.1,
+      "data": {
+        "Monday": 1
+      }
+    },
+    {
+      "type": "logging_weakness",
+      "pattern": "Food logging drops off on Mondays",
+      "confidence": 0.75,
+      "data": {
+        "Monday": 5,
+        "Tuesday": 6
+      },
+      "actionable": "Proactive reminder on Monday mornings"
+    },
+    {
+      "type": "logging_consistency",
+      "pattern": "Ross logs food 10% of days",
+      "confidence": 0.85,
+      "data": {
+        "days_logged": 2,
+        "days_tracked": 21,
+        "rate": 0.09523809523809523
+      }
+    }
+  ],
+  "correlations": {},
+  "predictions": {},
+  "confidence_scores": {},
+  "last_analysis": "2026-02-03T23:00:42.419459"
+}

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Integration Hub - Jarvis Command Center</title>
+    <link rel="stylesheet" href="/styles/jarvis-design-system.css">
+    <style>
+        /* Mobile-first grid layout */
+        .hub-grid {
+            display: grid;
+            gap: var(--space-4);
+            grid-template-columns: 1fr;
+        }
+        
+        @media (min-width: 768px) {
+            .hub-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hub-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Section cards */
+        .hub-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            transition: all var(--transition-base);
+        }
+        
+        .hub-section:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .hub-section-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+        
+        .hub-icon {
+            font-size: 2rem;
+        }
+        
+        .hub-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .hub-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        /* Quick stats */
+        .quick-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .quick-stat:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .stat-value {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        /* Action buttons grid */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+        }
+        
+        .action-btn {
+            padding: var(--space-3);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .action-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Loading states */
+        .loading {
+            text-align: center;
+            padding: var(--space-4);
+            color: var(--text-tertiary);
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-tertiary) 0%, var(--bg-elevated) 50%, var(--bg-tertiary) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+            height: 20px;
+            margin: var(--space-2) 0;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: var(--space-2);
+        }
+        
+        .status-healthy { background: var(--success); }
+        .status-warning { background: var(--warning); }
+        .status-error { background: var(--danger); }
+        
+        /* Mini chart (simple progress bars) */
+        .mini-chart {
+            margin-top: var(--space-3);
+        }
+        
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin: var(--space-2) 0;
+        }
+        
+        .chart-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            min-width: 60px;
+        }
+        
+        .chart-progress {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+            transition: width var(--transition-slow);
+        }
+        
+        .chart-value {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        /* Top players list */
+        .top-list {
+            list-style: none;
+            margin-top: var(--space-3);
+        }
+        
+        .top-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+        
+        .top-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .rank {
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: var(--space-2);
+            min-width: 20px;
+        }
+        
+        .player-name {
+            flex: 1;
+            color: var(--text-primary);
+        }
+        
+        .player-team {
+            color: var(--text-tertiary);
+            font-size: 0.75rem;
+        }
+        
+        .player-points {
+            color: var(--success);
+            font-weight: 600;
+            margin-left: var(--space-2);
+        }
+        
+        /* Last updated footer */
+        .last-updated {
+            text-align: center;
+            margin-top: var(--space-6);
+            padding: var(--space-4);
+            color: var(--text-tertiary);
+            font-size: 0.75rem;
+        }
+        
+        /* Error state */
+        .error-message {
+            padding: var(--space-3);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: var(--radius-md);
+            color: var(--danger);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    🎯 Integration Hub
+                </h1>
+                <p class="page-subtitle">Your unified command center for all systems</p>
+                
+                <div class="quick-actions">
+                    <a href="http://10.0.0.18:8000" class="action-btn">🏀 NBA Dashboard</a>
+                    <a href="/revenue/deal-flow/dashboard.html" class="action-btn">💰 Deal Flow</a>
+                    <a href="http://10.0.0.18:3000" class="action-btn">💪 Fitness</a>
+                    <a href="/dashboard/builds.html" class="action-btn">🔨 Builds</a>
+                    <a href="/revenue/escape-velocity/calculator.html" class="action-btn">🚀 Escape Velocity</a>
+                    <a href="/dashboard/status.html" class="action-btn">📊 System Status</a>
+                </div>
+            </div>
+            
+            <!-- Main Grid -->
+            <div class="hub-grid">
+                <!-- Build Status Section -->
+                <div class="hub-section" id="build-status-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">🔨</span>
+                        <div>
+                            <div class="hub-title">Build Status</div>
+                            <div class="hub-subtitle">Active projects</div>
+                        </div>
+                    </div>
+                    <div id="build-status-content" class="loading">Loading...</div>
+                </div>
+                
+                <!-- Revenue Systems Section -->
+                <div class="hub-section" id="revenue-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">💰</span>
+                        <div>
+                            <div class="hub-title">Revenue Systems</div>
+                            <div class="hub-subtitle">Deal Flow + Escape Velocity</div>
+                        </div>
+                    </div>
+                    <div id="revenue-content" class="loading">Loading...</div>
+                </div>
+                
+                <!-- NBA Rankings Section -->
+                <div class="hub-section" id="nba-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">🏀</span>
+                        <div>
+                            <div class="hub-title">NBA Rankings</div>
+                            <div class="hub-subtitle">Thursday slate preview</div>
+                        </div>
+                    </div>
+                    <div id="nba-content" class="loading">Loading...</div>
+                </div>
+                
+                <!-- Memory Stats Section -->
+                <div class="hub-section" id="memory-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">🧠</span>
+                        <div>
+                            <div class="hub-title">Memory System</div>
+                            <div class="hub-subtitle">Smart context detection</div>
+                        </div>
+                    </div>
+                    <div id="memory-content" class="loading">Loading...</div>
+                </div>
+                
+                <!-- Daily Progress Section -->
+                <div class="hub-section" id="fitness-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">📈</span>
+                        <div>
+                            <div class="hub-title">Daily Progress</div>
+                            <div class="hub-subtitle">Fitness & nutrition</div>
+                        </div>
+                    </div>
+                    <div id="fitness-content" class="loading">Loading...</div>
+                </div>
+                
+                <!-- System Health Section -->
+                <div class="hub-section" id="health-section">
+                    <div class="hub-section-header">
+                        <span class="hub-icon">⚡</span>
+                        <div>
+                            <div class="hub-title">System Health</div>
+                            <div class="hub-subtitle">All services status</div>
+                        </div>
+                    </div>
+                    <div id="health-content" class="loading">Loading...</div>
+                </div>
+            </div>
+            
+            <div class="last-updated" id="last-updated">
+                Last updated: <span id="update-time">--</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://10.0.0.16:8080/api/hub';
+        
+        // Fetch all data
+        async function fetchHubData() {
+            try {
+                const [builds, revenue, nba, memory, fitness, health] = await Promise.all([
+                    fetch(`${API_BASE}/builds`).then(r => r.json()),
+                    fetch(`${API_BASE}/revenue`).then(r => r.json()),
+                    fetch(`${API_BASE}/nba`).then(r => r.json()),
+                    fetch(`${API_BASE}/memory`).then(r => r.json()),
+                    fetch(`${API_BASE}/fitness`).then(r => r.json()),
+                    fetch(`${API_BASE}/status`).then(r => r.json())
+                ]);
+                
+                renderBuilds(builds);
+                renderRevenue(revenue);
+                renderNBA(nba);
+                renderMemory(memory);
+                renderFitness(fitness);
+                renderHealth(health);
+                
+                document.getElementById('update-time').textContent = new Date().toLocaleTimeString();
+            } catch (error) {
+                console.error('Error fetching hub data:', error);
+                showError();
+            }
+        }
+        
+        function renderBuilds(data) {
+            const content = document.getElementById('build-status-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading builds</div>`;
+                return;
+            }
+            
+            let html = '';
+            html += `<div class="quick-stat">
+                <span class="stat-label">Active Builds</span>
+                <span class="stat-value">${data.active_count}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Completed</span>
+                <span class="stat-value">${data.completed_count}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Queued</span>
+                <span class="stat-value">${data.queued_count}</span>
+            </div>`;
+            
+            if (data.active_builds && data.active_builds.length > 0) {
+                html += '<div class="mini-chart">';
+                data.active_builds.forEach(build => {
+                    html += `<div class="chart-bar">
+                        <span class="chart-label">${build.title.substring(0, 15)}...</span>
+                        <div class="chart-progress">
+                            <div class="chart-fill" style="width: ${build.progress}%"></div>
+                        </div>
+                        <span class="chart-value">${build.progress}%</span>
+                    </div>`;
+                });
+                html += '</div>';
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        function renderRevenue(data) {
+            const content = document.getElementById('revenue-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading revenue data</div>`;
+                return;
+            }
+            
+            const summary = data.summary || {};
+            let html = '';
+            html += `<div class="quick-stat">
+                <span class="stat-label">Active Opportunities</span>
+                <span class="stat-value">${summary.active_opportunities || 0}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Potential Revenue</span>
+                <span class="stat-value">$${(summary.total_potential_revenue || 0).toLocaleString()}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">High Viral</span>
+                <span class="stat-value">${summary.high_viral_count || 0}</span>
+            </div>`;
+            
+            content.innerHTML = html;
+        }
+        
+        function renderNBA(data) {
+            const content = document.getElementById('nba-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading NBA data</div>`;
+                return;
+            }
+            
+            let html = `<div class="quick-stat">
+                <span class="stat-label">Slate Date</span>
+                <span class="stat-value">${data.slate_date ? new Date(data.slate_date).toLocaleDateString() : 'N/A'}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Games</span>
+                <span class="stat-value">${data.num_games || 0}</span>
+            </div>`;
+            
+            if (data.top_5 && data.top_5.length > 0) {
+                html += '<ul class="top-list">';
+                data.top_5.forEach(player => {
+                    html += `<li class="top-list-item">
+                        <span class="rank">#${player.rank}</span>
+                        <div class="player-name">${player.name}</div>
+                        <span class="player-points">${player.projected_points.toFixed(1)}</span>
+                    </li>`;
+                });
+                html += '</ul>';
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        function renderMemory(data) {
+            const content = document.getElementById('memory-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading memory stats</div>`;
+                return;
+            }
+            
+            let html = '';
+            html += `<div class="quick-stat">
+                <span class="stat-label">Daily Logs</span>
+                <span class="stat-value">${data.daily_logs || 0}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Total Searches</span>
+                <span class="stat-value">${data.search_performance?.total_searches || 0}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Avg Search Time</span>
+                <span class="stat-value">${data.search_performance?.avg_time_ms || 0}ms</span>
+            </div>`;
+            
+            content.innerHTML = html;
+        }
+        
+        function renderFitness(data) {
+            const content = document.getElementById('fitness-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading fitness data</div>`;
+                return;
+            }
+            
+            const today = data.today || {};
+            const targets = data.targets || {};
+            const progress = data.progress || {};
+            
+            let html = '';
+            html += `<div class="quick-stat">
+                <span class="stat-label">Calories</span>
+                <span class="stat-value">${today.calories || 0} / ${targets.calories || 0}</span>
+            </div>`;
+            html += `<div class="quick-stat">
+                <span class="stat-label">Protein</span>
+                <span class="stat-value">${today.protein || 0}g / ${targets.protein || 0}g</span>
+            </div>`;
+            
+            html += '<div class="mini-chart">';
+            html += `<div class="chart-bar">
+                <span class="chart-label">Calories</span>
+                <div class="chart-progress">
+                    <div class="chart-fill" style="width: ${Math.min(progress.calories_percent || 0, 100)}%"></div>
+                </div>
+                <span class="chart-value">${progress.calories_percent || 0}%</span>
+            </div>`;
+            html += `<div class="chart-bar">
+                <span class="chart-label">Protein</span>
+                <div class="chart-progress">
+                    <div class="chart-fill" style="width: ${Math.min(progress.protein_percent || 0, 100)}%"></div>
+                </div>
+                <span class="chart-value">${progress.protein_percent || 0}%</span>
+            </div>`;
+            html += '</div>';
+            
+            content.innerHTML = html;
+        }
+        
+        function renderHealth(data) {
+            const content = document.getElementById('health-content');
+            if (data.error) {
+                content.innerHTML = `<div class="error-message">Error loading health data</div>`;
+                return;
+            }
+            
+            const services = data.services || {};
+            let html = '';
+            
+            Object.entries(services).forEach(([key, status]) => {
+                const indicator = status ? 'status-healthy' : 'status-error';
+                const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                html += `<div class="quick-stat">
+                    <span class="stat-label">
+                        <span class="status-indicator ${indicator}"></span>
+                        ${label}
+                    </span>
+                    <span class="stat-value">${status ? '✅' : '❌'}</span>
+                </div>`;
+            });
+            
+            content.innerHTML = html;
+        }
+        
+        function showError() {
+            document.querySelectorAll('.loading').forEach(el => {
+                el.innerHTML = '<div class="error-message">Failed to load data. Is the API running?</div>';
+            });
+        }
+        
+        // Initial load
+        fetchHubData();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(fetchHubData, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "last_updated": "2026-02-04T08:00:00",
+  "injuries": [
+    {
+      "player": "Example Player",
+      "team": "Example Team",
+      "status": "OUT",
+      "injury": "Knee soreness",
+      "notes": "Will miss Thursday's game"
+    }
+  ],
+  "notes": "Manually update this file with injury reports from RotoWire, ESPN, or team announcements. Status values: OUT, DOUBTFUL, QUESTIONABLE, GTD (game-time decision), PROBABLE"
+}

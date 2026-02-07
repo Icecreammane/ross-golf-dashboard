@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Club Spec Matcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 32px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .results {
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .result-card.best-match {
+            border-left-color: #10b981;
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        
+        .club-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .match-score {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .match-score.perfect {
+            background: #10b981;
+        }
+        
+        .club-details {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .why-match {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #444;
+            margin-top: 12px;
+        }
+        
+        .why-match strong {
+            color: #667eea;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #e0e0e0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 6px;
+            margin-top: 6px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+            
+            .header h1 {
+                font-size: 26px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏌️ Golf Club Matcher</h1>
+            <p>Find the perfect irons for your swing</p>
+        </div>
+        
+        <div class="card">
+            <form id="clubForm">
+                <div class="form-group">
+                    <label for="swingSpeed">7-Iron Swing Speed (mph)</label>
+                    <input type="number" id="swingSpeed" min="60" max="110" value="85" required>
+                    <div class="help-text">Average: 80-90 mph | Fast: 90+ mph | Slow: <80 mph</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="handicap">Current Handicap</label>
+                    <input type="number" id="handicap" min="0" max="40" value="15" required>
+                    <div class="help-text">Estimate if you don't have an official handicap</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ballFlight">Typical Ball Flight</label>
+                    <select id="ballFlight" required>
+                        <option value="low">Low (need more launch)</option>
+                        <option value="mid" selected>Mid (optimal)</option>
+                        <option value="high">High (too much spin)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="missPattern">Common Miss</label>
+                    <select id="missPattern" required>
+                        <option value="left">Left (hooks/pulls)</option>
+                        <option value="right" selected>Right (slices/pushes)</option>
+                        <option value="both">Inconsistent (both directions)</option>
+                        <option value="none">Pretty straight</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="priority">Primary Goal</label>
+                    <select id="priority" required>
+                        <option value="distance">Distance (maximize yards)</option>
+                        <option value="accuracy" selected>Accuracy (tighten dispersion)</option>
+                        <option value="feel">Feel (workability & feedback)</option>
+                        <option value="forgiveness">Forgiveness (minimize bad shots)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget">Budget (USD)</label>
+                    <select id="budget" required>
+                        <option value="1500">Under $1,500</option>
+                        <option value="2000" selected>$1,500 - $2,000</option>
+                        <option value="3000">$2,000 - $3,000</option>
+                        <option value="5000">$3,000+ (premium custom)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn">Find My Perfect Clubs</button>
+            </form>
+        </div>
+        
+        <div id="results" class="results"></div>
+    </div>
+    
+    <script>
+        const clubDatabase = [
+            {
+                name: "Titleist T150 (2025)",
+                category: "players-distance",
+                price: 2200,
+                priceCustom: 4700,
+                handicapRange: [5, 15],
+                swingSpeedRange: [80, 100],
+                ballFlight: "mid-high",
+                forgiveness: 7,
+                feel: 9,
+                distance: 8,
+                workability: 8,
+                description: "Forged players distance iron with muscle channel technology. Premium feel with added forgiveness.",
+                pros: ["Excellent feel", "Tour-level performance", "Strong resale value"],
+                cons: ["Premium price", "Less forgiving than game improvement"]
+            },
+            {
+                name: "TaylorMade P790 (2025)",
+                category: "players-distance",
+                price: 1800,
+                priceCustom: 2200,
+                handicapRange: [5, 18],
+                swingSpeedRange: [75, 105],
+                ballFlight: "mid-high",
+                forgiveness: 8,
+                feel: 7,
+                distance: 9,
+                workability: 7,
+                description: "Hollow body construction with SpeedFoam. Maximum distance in a player's profile.",
+                pros: ["Great distance", "Widely available", "Popular/proven"],
+                cons: ["Less refined feel", "Clicky at impact"]
+            },
+            {
+                name: "Srixon ZXi5",
+                category: "players-distance",
+                price: 1600,
+                priceCustom: 2000,
+                handicapRange: [5, 15],
+                swingSpeedRange: [80, 100],
+                ballFlight: "mid",
+                forgiveness: 7,
+                feel: 10,
+                distance: 7,
+                workability: 9,
+                description: "Forged iron with legendary feel. Best feel-to-price ratio in the category.",
+                pros: ["Incredible feel", "Best value", "Tour-quality"],
+                cons: ["Less brand recognition", "Harder to find"]
+            },
+            {
+                name: "Ping i230",
+                category: "players-distance",
+                price: 1700,
+                priceCustom: 2100,
+                handicapRange: [5, 18],
+                swingSpeedRange: [75, 100],
+                ballFlight: "mid",
+                forgiveness: 8,
+                feel: 7,
+                distance: 7,
+                workability: 7,
+                description: "Clean player's iron with proven forgiveness. Reliable all-arounder.",
+                pros: ["Consistent performance", "Good fitting network", "Reliable"],
+                cons: ["Less exciting/sexy", "Mid-tier feel"]
+            },
+            {
+                name: "Mizuno JPX 925 Forged",
+                category: "players-distance",
+                price: 1700,
+                priceCustom: 2100,
+                handicapRange: [5, 18],
+                swingSpeedRange: [75, 100],
+                ballFlight: "mid",
+                forgiveness: 7,
+                feel: 10,
+                distance: 6,
+                workability: 8,
+                description: "Legendary Mizuno feel in a forgiving package. Best feedback in class.",
+                pros: ["Best feel available", "Better accuracy", "Mizuno reputation"],
+                cons: ["Shorter than competitors", "Lower ball flight"]
+            },
+            {
+                name: "Callaway Apex Ai200",
+                category: "players-distance",
+                price: 1800,
+                priceCustom: 2200,
+                handicapRange: [5, 18],
+                swingSpeedRange: [75, 105],
+                ballFlight: "mid-high",
+                forgiveness: 8,
+                feel: 7,
+                distance: 8,
+                workability: 7,
+                description: "AI-optimized faces for consistent performance. Modern tech meets classic shape.",
+                pros: ["Consistent ball speed", "Good forgiveness", "AI optimization"],
+                cons: ["Heavy marketing", "Less proven than P790/T150"]
+            },
+            {
+                name: "PXG 0311 P GEN7",
+                category: "players-distance",
+                price: 1900,
+                priceCustom: 2400,
+                handicapRange: [5, 18],
+                swingSpeedRange: [75, 105],
+                ballFlight: "mid-high",
+                forgiveness: 8,
+                feel: 7,
+                distance: 8,
+                workability: 7,
+                description: "Premium construction with aggressive pricing. Excellent forgiveness for a player's iron.",
+                pros: ["Good value for quality", "Very forgiving", "Clean looks"],
+                cons: ["Brand perception", "Less tour presence"]
+            },
+            {
+                name: "Titleist T200",
+                category: "players-distance",
+                price: 2000,
+                priceCustom: 2400,
+                handicapRange: [8, 20],
+                swingSpeedRange: [70, 95],
+                ballFlight: "high",
+                forgiveness: 9,
+                feel: 7,
+                distance: 8,
+                workability: 6,
+                description: "More forgiving than T150 with added distance technology. Bridge to game improvement.",
+                pros: ["Very forgiving", "Easy launch", "Titleist quality"],
+                cons: ["Less workability", "Larger profile"]
+            },
+            {
+                name: "Titleist T100",
+                category: "players",
+                price: 2000,
+                priceCustom: 2400,
+                handicapRange: [0, 10],
+                swingSpeedRange: [85, 105],
+                ballFlight: "mid",
+                forgiveness: 5,
+                feel: 10,
+                distance: 6,
+                workability: 10,
+                description: "Pure player's iron for accomplished golfers. Maximum control and feedback.",
+                pros: ["Best workability", "Tour-level feel", "Classic looks"],
+                cons: ["Unforgiving", "Less distance", "Requires consistent striking"]
+            }
+        ];
+        
+        function calculateFitScore(club, formData) {
+            let score = 0;
+            const maxScore = 100;
+            
+            // Handicap fit (30 points)
+            const handicap = parseInt(formData.handicap);
+            if (handicap >= club.handicapRange[0] && handicap <= club.handicapRange[1]) {
+                score += 30;
+            } else {
+                const distance = Math.min(
+                    Math.abs(handicap - club.handicapRange[0]),
+                    Math.abs(handicap - club.handicapRange[1])
+                );
+                score += Math.max(0, 30 - (distance * 3));
+            }
+            
+            // Swing speed fit (25 points)
+            const speed = parseInt(formData.swingSpeed);
+            if (speed >= club.swingSpeedRange[0] && speed <= club.swingSpeedRange[1]) {
+                score += 25;
+            } else {
+                const distance = Math.min(
+                    Math.abs(speed - club.swingSpeedRange[0]),
+                    Math.abs(speed - club.swingSpeedRange[1])
+                );
+                score += Math.max(0, 25 - distance);
+            }
+            
+            // Priority match (25 points)
+            const priority = formData.priority;
+            if (priority === 'feel' && club.feel >= 9) score += 25;
+            else if (priority === 'distance' && club.distance >= 8) score += 25;
+            else if (priority === 'forgiveness' && club.forgiveness >= 8) score += 25;
+            else if (priority === 'accuracy' && club.workability >= 7) score += 25;
+            else score += 15; // Partial credit
+            
+            // Budget fit (20 points)
+            const budget = parseInt(formData.budget);
+            if (club.price <= budget) {
+                score += 20;
+            } else if (club.priceCustom <= budget) {
+                score += 15;
+            } else {
+                score += Math.max(0, 20 - ((club.price - budget) / 100));
+            }
+            
+            return Math.round(score);
+        }
+        
+        function getMatchReasons(club, formData, score) {
+            const reasons = [];
+            
+            if (score >= 90) {
+                reasons.push("Near-perfect match for your specs");
+            }
+            
+            const handicap = parseInt(formData.handicap);
+            if (handicap >= club.handicapRange[0] && handicap <= club.handicapRange[1]) {
+                reasons.push(`Designed for ${club.handicapRange[0]}-${club.handicapRange[1]} handicaps`);
+            }
+            
+            if (formData.priority === 'feel' && club.feel >= 9) {
+                reasons.push("Exceptional feel and feedback");
+            } else if (formData.priority === 'distance' && club.distance >= 8) {
+                reasons.push("Maximizes distance potential");
+            } else if (formData.priority === 'forgiveness' && club.forgiveness >= 8) {
+                reasons.push("Very forgiving on mis-hits");
+            }
+            
+            const budget = parseInt(formData.budget);
+            if (club.price <= budget * 0.8) {
+                reasons.push("Great value under budget");
+            }
+            
+            return reasons;
+        }
+        
+        document.getElementById('clubForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                swingSpeed: document.getElementById('swingSpeed').value,
+                handicap: document.getElementById('handicap').value,
+                ballFlight: document.getElementById('ballFlight').value,
+                missPattern: document.getElementById('missPattern').value,
+                priority: document.getElementById('priority').value,
+                budget: document.getElementById('budget').value
+            };
+            
+            // Calculate fit scores
+            const results = clubDatabase.map(club => ({
+                ...club,
+                fitScore: calculateFitScore(club, formData),
+                reasons: getMatchReasons(club, formData, calculateFitScore(club, formData))
+            }));
+            
+            // Sort by fit score
+            results.sort((a, b) => b.fitScore - a.fitScore);
+            
+            // Display results
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            
+            results.forEach((club, index) => {
+                const isTopMatch = index === 0;
+                const cardClass = isTopMatch ? 'result-card best-match' : 'result-card';
+                const scoreClass = club.fitScore >= 90 ? 'match-score perfect' : 'match-score';
+                
+                const card = `
+                    <div class="${cardClass}">
+                        <div class="result-header">
+                            <div class="club-name">
+                                ${isTopMatch ? '🏆 ' : ''}${club.name}
+                            </div>
+                            <div class="${scoreClass}">${club.fitScore}% Match</div>
+                        </div>
+                        <div class="club-details">${club.description}</div>
+                        <div class="price">
+                            Stock: $${club.price.toLocaleString()} | Custom: $${club.priceCustom.toLocaleString()}
+                        </div>
+                        <div>
+                            <span class="badge">Feel: ${club.feel}/10</span>
+                            <span class="badge">Distance: ${club.distance}/10</span>
+                            <span class="badge">Forgiveness: ${club.forgiveness}/10</span>
+                        </div>
+                        ${club.reasons.length > 0 ? `
+                            <div class="why-match">
+                                <strong>Why this fits:</strong><br>
+                                ${club.reasons.map(r => `• ${r}`).join('<br>')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                resultsDiv.innerHTML += card;
+            });
+            
+            resultsDiv.classList.add('show');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

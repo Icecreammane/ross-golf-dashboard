@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker V2</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f0f; color: #fff; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { font-size: 32px; margin-bottom: 10px; }
+        .subtitle { color: #888; font-size: 14px; margin-bottom: 40px; }
+        
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; }
+        .card h2 { font-size: 12px; color: #888; text-transform: uppercase; margin-bottom: 10px; }
+        .card-value { font-size: 32px; font-weight: 700; color: #00d084; }
+        .card-sub { font-size: 13px; color: #666; margin-top: 5px; }
+        .card-progress { width: 100%; height: 4px; background: #333; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+        .card-progress-bar { height: 100%; background: linear-gradient(90deg, #00d084, #00a86b); transition: width 0.3s; }
+        
+        .section { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .section h3 { font-size: 18px; font-weight: 600; margin-bottom: 15px; }
+        
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .chart-container { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; min-height: 300px; }
+        .chart-container h4 { font-size: 14px; color: #888; text-transform: uppercase; margin-bottom: 15px; }
+        
+        input, textarea { background: #0f0f0f; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #fff; margin-bottom: 10px; width: 100%; font-family: monospace; }
+        input:focus, textarea:focus { outline: none; border-color: #00d084; }
+        button { background: #00d084; color: #000; border: none; border-radius: 6px; padding: 10px 20px; font-weight: 600; cursor: pointer; }
+        button:hover { opacity: 0.9; }
+        
+        .weekly-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .summary-item { text-align: center; padding: 15px; background: #0f0f0f; border: 1px solid #333; border-radius: 6px; }
+        .summary-item-label { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .summary-item-value { font-size: 24px; font-weight: 700; color: #00d084; }
+        
+        .tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tab { padding: 8px 16px; background: #0f0f0f; border: 1px solid #333; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        .tab.active { background: #00d084; color: #000; border-color: #00d084; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fitness Tracker V2</h1>
+        <p class="subtitle">May 24 goal • 210 lbs • Visible 6-pack</p>
+        
+        <!-- Current Stats Dashboard -->
+        <div class="dashboard" id="dashboard">
+            <div class="card">
+                <h2>Current Weight</h2>
+                <div class="card-value" id="weight">--</div>
+                <div class="card-sub" id="weightStatus">-- lbs to go</div>
+                <div class="card-progress">
+                    <div class="card-progress-bar" id="weightProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Today's Calories</h2>
+                <div class="card-value" id="calories">--</div>
+                <div class="card-sub">/ <span id="calorieTarget">--</span> target</div>
+                <div class="card-progress">
+                    <div class="card-progress-bar" id="calorieProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Best Bench 1RM</h2>
+                <div class="card-value" id="benchRM">--</div>
+                <div class="card-sub" id="benchDate">--</div>
+            </div>
+            <div class="card">
+                <h2>Best Squat 1RM</h2>
+                <div class="card-value" id="squatRM">--</div>
+                <div class="card-sub" id="squatDate">--</div>
+            </div>
+        </div>
+        
+        <!-- Weekly Summary -->
+        <div class="section">
+            <h3>This Week's Summary</h3>
+            <div class="weekly-summary">
+                <div class="summary-item">
+                    <div class="summary-item-label">Avg Weight</div>
+                    <div class="summary-item-value" id="avgWeight">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-item-label">Avg Calories</div>
+                    <div class="summary-item-value" id="avgCalories">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-item-label">Workout Days</div>
+                    <div class="summary-item-value" id="workoutDays">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-item-label">Total Sets</div>
+                    <div class="summary-item-value" id="totalSets">--</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h4>Weight Progress</h4>
+                <div class="tabs">
+                    <div class="tab active" onclick="updateWeightChart(7)">7 Days</div>
+                    <div class="tab" onclick="updateWeightChart(30)">30 Days</div>
+                    <div class="tab" onclick="updateWeightChart(90)">90 Days</div>
+                </div>
+                <canvas id="weightChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h4>Daily Calories (30 Days)</h4>
+                <canvas id="calorieChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h4>Lift Progress (90 Days)</h4>
+            <canvas id="liftChart" style="max-height: 400px;"></canvas>
+        </div>
+        
+        <!-- Input Forms -->
+        <div class="section">
+            <h3>Log Workout</h3>
+            <textarea id="workout" placeholder="Format: Lift: weight x reps, Lift2: weight x reps&#10;Example: Bench: 225 x 5, Squat: 315 x 3" rows="3"></textarea>
+            <button onclick="logWorkout()">Log Workout</button>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="section">
+                <h3>Log Food</h3>
+                <input type="text" id="foodDesc" placeholder="Food description">
+                <input type="number" id="foodCals" placeholder="Calories">
+                <button onclick="logFood()">Log Food</button>
+            </div>
+            
+            <div class="section">
+                <h3>Log Weight</h3>
+                <input type="number" id="weightInput" placeholder="Weight (lbs)" step="0.1">
+                <button onclick="logWeight()">Log Weight</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let chartData = null;
+        let weightChart = null;
+        let calorieChart = null;
+        let liftChart = null;
+        
+        // Chart.js default config
+        Chart.defaults.color = '#888';
+        Chart.defaults.borderColor = '#333';
+        
+        async function loadData() {
+            // Dashboard data
+            const dash = await fetch('/api/dashboard').then(r => r.json());
+            document.getElementById('weight').textContent = dash.current_weight;
+            document.getElementById('weightStatus').textContent = (dash.current_weight - dash.target_weight) + ' lbs to go';
+            const weightPct = Math.min(100, ((225 - dash.current_weight) / (225 - 210)) * 100);
+            document.getElementById('weightProgress').style.width = weightPct + '%';
+            
+            document.getElementById('calories').textContent = dash.today_calories;
+            document.getElementById('calorieTarget').textContent = dash.calorie_target;
+            const calPct = Math.min(100, (dash.today_calories / dash.calorie_target) * 100);
+            document.getElementById('calorieProgress').style.width = calPct + '%';
+            
+            if (dash.latest_lifts.Bench) {
+                document.getElementById('benchRM').textContent = dash.latest_lifts.Bench.estimated_1rm + ' lbs';
+                document.getElementById('benchDate').textContent = dash.latest_lifts.Bench.date;
+            }
+            if (dash.latest_lifts.Squat) {
+                document.getElementById('squatRM').textContent = dash.latest_lifts.Squat.estimated_1rm + ' lbs';
+                document.getElementById('squatDate').textContent = dash.latest_lifts.Squat.date;
+            }
+            
+            // Weekly summary
+            const summary = await fetch('/api/weekly-summary').then(r => r.json());
+            document.getElementById('avgWeight').textContent = summary.avg_weight || '--';
+            document.getElementById('avgCalories').textContent = summary.avg_calories || '--';
+            document.getElementById('workoutDays').textContent = summary.workout_days + '/7';
+            document.getElementById('totalSets').textContent = summary.total_sets;
+            
+            // Chart data
+            chartData = await fetch('/api/chart-data').then(r => r.json());
+            initCharts();
+        }
+        
+        function initCharts() {
+            // Weight chart
+            const weightCtx = document.getElementById('weightChart').getContext('2d');
+            const weightData = chartData.weight.slice(-7);
+            weightChart = new Chart(weightCtx, {
+                type: 'line',
+                data: {
+                    labels: weightData.map(d => d.date),
+                    datasets: [{
+                        label: 'Weight (lbs)',
+                        data: weightData.map(d => d.weight),
+                        borderColor: '#00d084',
+                        backgroundColor: 'rgba(0, 208, 132, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: false, grid: { color: '#222' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+            
+            // Calorie chart
+            const calCtx = document.getElementById('calorieChart').getContext('2d');
+            calorieChart = new Chart(calCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.calories.map(d => d.date),
+                    datasets: [{
+                        label: 'Calories',
+                        data: chartData.calories.map(d => d.calories),
+                        backgroundColor: '#00d084',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#222' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+            
+            // Lift progress chart
+            const liftCtx = document.getElementById('liftChart').getContext('2d');
+            const datasets = [];
+            const colors = ['#00d084', '#ff6b6b', '#4ecdc4', '#ffe66d'];
+            let colorIdx = 0;
+            
+            for (const [lift, data] of Object.entries(chartData.lifts)) {
+                datasets.push({
+                    label: lift,
+                    data: data.map(d => ({ x: d.date, y: d['1rm'] })),
+                    borderColor: colors[colorIdx % colors.length],
+                    backgroundColor: colors[colorIdx % colors.length],
+                    tension: 0.4
+                });
+                colorIdx++;
+            }
+            
+            liftChart = new Chart(liftCtx, {
+                type: 'line',
+                data: { datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true } },
+                    scales: {
+                        y: { beginAtZero: false, title: { display: true, text: '1RM (lbs)' }, grid: { color: '#222' } },
+                        x: { type: 'time', time: { unit: 'day' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+        
+        function updateWeightChart(days) {
+            document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const data = chartData.weight.slice(-days);
+            weightChart.data.labels = data.map(d => d.date);
+            weightChart.data.datasets[0].data = data.map(d => d.weight);
+            weightChart.update();
+        }
+        
+        async function logWorkout() {
+            const input = document.getElementById('workout').value;
+            const lifts = [];
+            input.split(',').forEach(line => {
+                const parts = line.trim().split(':');
+                if (parts.length === 2) {
+                    const wr = parts[1].trim().split('x');
+                    if (wr.length === 2) {
+                        lifts.push({
+                            name: parts[0].trim(),
+                            weight: parseFloat(wr[0].trim()),
+                            reps: parseInt(wr[1].trim())
+                        });
+                    }
+                }
+            });
+            
+            if (lifts.length > 0) {
+                await fetch('/api/log-workout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lifts })
+                });
+                document.getElementById('workout').value = '';
+                loadData();
+            }
+        }
+        
+        async function logFood() {
+            const desc = document.getElementById('foodDesc').value;
+            const cals = parseInt(document.getElementById('foodCals').value);
+            
+            if (desc && cals) {
+                await fetch('/api/log-food', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ description: desc, calories: cals })
+                });
+                document.getElementById('foodDesc').value = '';
+                document.getElementById('foodCals').value = '';
+                loadData();
+            }
+        }
+        
+        async function logWeight() {
+            const weight = parseFloat(document.getElementById('weightInput').value);
+            
+            if (weight) {
+                await fetch('/api/log-weight', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ weight })
+                });
+                document.getElementById('weightInput').value = '';
+                loadData();
+            }
+        }
+        
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>

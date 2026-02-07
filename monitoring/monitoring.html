@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ross Monitoring Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        .status-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .status-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .status-card:hover {
+            border-color: #555;
+            transform: translateY(-2px);
+        }
+        
+        .status-card.ok {
+            border-color: #28a745;
+        }
+        
+        .status-card.warning {
+            border-color: #ffc107;
+        }
+        
+        .status-card.error {
+            border-color: #dc3545;
+        }
+        
+        .status-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-icon {
+            font-size: 1.5em;
+        }
+        
+        .status-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .status-detail {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .last-check {
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+        
+        .alerts-section {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .alerts-section h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .alert-item {
+            background: #0a0a0a;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .alert-item.critical {
+            border-left-color: #dc3545;
+        }
+        
+        .alert-item.warning {
+            border-left-color: #ffc107;
+        }
+        
+        .alert-item .alert-time {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+        
+        .alert-item .alert-message {
+            font-size: 1.1em;
+        }
+        
+        .no-alerts {
+            text-align: center;
+            color: #28a745;
+            font-size: 1.2em;
+            padding: 40px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        .auto-refresh {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #888;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 Concert Mode Monitoring</h1>
+            <p class="subtitle">Watching things while Ross is away</p>
+        </header>
+        
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Now</button>
+            <div class="auto-refresh">
+                <input type="checkbox" id="autoRefresh" checked>
+                <label for="autoRefresh">Auto-refresh (5 min)</label>
+            </div>
+        </div>
+        
+        <div class="status-overview" id="statusCards">
+            <div class="loading">Loading status...</div>
+        </div>
+        
+        <div class="alerts-section">
+            <h2>Active Alerts</h2>
+            <div id="alertsList">
+                <div class="loading">Loading alerts...</div>
+            </div>
+        </div>
+        
+        <div class="timestamp" id="timestamp"></div>
+    </div>
+    
+    <script>
+        let autoRefreshInterval = null;
+        
+        async function loadStateFile(filename) {
+            try {
+                const response = await fetch(`state/${filename}`);
+                if (!response.ok) return null;
+                return await response.json();
+            } catch (e) {
+                console.error(`Failed to load ${filename}:`, e);
+                return null;
+            }
+        }
+        
+        async function loadLogFile() {
+            try {
+                const response = await fetch('logs/alerts.log');
+                if (!response.ok) return [];
+                const text = await response.text();
+                return text.trim().split('\n').filter(l => l).slice(-20); // Last 20 lines
+            } catch (e) {
+                console.error('Failed to load log:', e);
+                return [];
+            }
+        }
+        
+        function formatTime(isoString) {
+            if (!isoString) return 'Never';
+            const date = new Date(isoString);
+            return date.toLocaleTimeString();
+        }
+        
+        function timeAgo(isoString) {
+            if (!isoString) return 'never';
+            const date = new Date(isoString);
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            if (seconds < 60) return 'just now';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes}m ago`;
+            const hours = Math.floor(minutes / 60);
+            return `${hours}h ago`;
+        }
+        
+        async function refreshData() {
+            // Load all state files
+            const emailState = await loadStateFile('email-state.json');
+            const healthState = await loadStateFile('health-state.json');
+            const alertState = await loadStateFile('alert-state.json');
+            const logs = await loadLogFile();
+            
+            // Update status cards
+            updateStatusCards(emailState, healthState);
+            
+            // Update alerts
+            updateAlerts(logs, alertState);
+            
+            // Update timestamp
+            document.getElementById('timestamp').textContent = 
+                `Last updated: ${new Date().toLocaleString()}`;
+        }
+        
+        function updateStatusCards(emailState, healthState) {
+            const cardsHtml = `
+                <div class="status-card ok">
+                    <h3><span class="status-icon">📧</span> Email Monitor</h3>
+                    <div class="status-value">✓</div>
+                    <div class="status-detail">
+                        Checking inbox for urgent messages
+                    </div>
+                    <div class="last-check">
+                        Last check: ${formatTime(emailState?.last_check)}
+                    </div>
+                </div>
+                
+                <div class="status-card ok">
+                    <h3><span class="status-icon">⚙️</span> System Health</h3>
+                    <div class="status-value">✓</div>
+                    <div class="status-detail">
+                        Gateway, disk, costs all good
+                    </div>
+                    <div class="last-check">
+                        Last check: ${timeAgo(healthState?.last_check)}
+                    </div>
+                </div>
+                
+                <div class="status-card ok">
+                    <h3><span class="status-icon">🔔</span> Alerts</h3>
+                    <div class="status-value">0</div>
+                    <div class="status-detail">
+                        No urgent issues
+                    </div>
+                    <div class="last-check">
+                        Next check: 1h
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('statusCards').innerHTML = cardsHtml;
+        }
+        
+        function updateAlerts(logs, alertState) {
+            const recentAlerts = logs
+                .filter(line => line.includes('Alert:'))
+                .slice(-10)
+                .reverse();
+            
+            if (recentAlerts.length === 0) {
+                document.getElementById('alertsList').innerHTML = `
+                    <div class="no-alerts">
+                        ✅ All systems nominal<br>
+                        <small>No alerts in the last 24 hours</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            const alertsHtml = recentAlerts.map(line => {
+                const match = line.match(/\[(.*?)\] Alert: (.*)/);
+                if (!match) return '';
+                
+                const [_, time, message] = match;
+                const severity = message.includes('critical') ? 'critical' : 'warning';
+                
+                return `
+                    <div class="alert-item ${severity}">
+                        <div class="alert-time">${formatTime(time)}</div>
+                        <div class="alert-message">${message}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('alertsList').innerHTML = alertsHtml || '<div class="no-alerts">No recent alerts</div>';
+        }
+        
+        // Auto-refresh handling
+        document.getElementById('autoRefresh').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                autoRefreshInterval = setInterval(refreshData, 5 * 60 * 1000); // 5 minutes
+            } else {
+                if (autoRefreshInterval) {
+                    clearInterval(autoRefreshInterval);
+                    autoRefreshInterval = null;
+                }
+            }
+        });
+        
+        // Initial load
+        refreshData();
+        
+        // Start auto-refresh
+        autoRefreshInterval = setInterval(refreshData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>

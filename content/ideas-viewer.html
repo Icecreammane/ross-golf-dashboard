@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Content Ideas | Ross Revenue Systems</title>
+    <link rel="stylesheet" href="../styles/jarvis-design-system.css">
+    <style>
+        .idea-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .idea-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .idea-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .idea-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-2);
+        }
+
+        .cat-fitness { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .cat-sports { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .cat-nostalgia { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .cat-finance { background: rgba(139, 92, 246, 0.15); color: var(--secondary); }
+        .cat-lifestyle { background: rgba(236, 72, 153, 0.15); color: var(--accent); }
+
+        .idea-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .idea-hook {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: var(--space-3);
+            padding: var(--space-3);
+            background: rgba(99, 102, 241, 0.05);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--radius-sm);
+        }
+
+        .idea-section {
+            margin-bottom: var(--space-3);
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .section-content {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .idea-metrics {
+            display: flex;
+            gap: var(--space-3);
+            margin-top: var(--space-3);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--border);
+        }
+
+        .metric-pill {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-primary);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+        }
+
+        .viral-score {
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        .effort-score {
+            font-weight: 700;
+            color: var(--warning);
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-1);
+            margin-top: var(--space-2);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: var(--space-1) var(--space-2);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .sort-select {
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .platforms-list {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-2);
+        }
+
+        .platform-icon {
+            font-size: 0.875rem;
+            padding: var(--space-1) var(--space-2);
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+        }
+
+        @media (max-width: 768px) {
+            .idea-metrics {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    🎬 Viral Content Ideas
+                </div>
+                <div class="page-subtitle">
+                    30 battle-tested content ideas ready to execute
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-4 mb-6">
+                <div class="stat-card">
+                    <div class="stat-label">Total Ideas</div>
+                    <div class="stat-value" id="totalIdeas">30</div>
+                    <div class="stat-change neutral">Ready to create</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Viral Score</div>
+                    <div class="stat-value" id="avgViral">7.6</div>
+                    <div class="stat-change positive">Out of 10</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Effort</div>
+                    <div class="stat-value" id="avgEffort">4.8</div>
+                    <div class="stat-change positive">Low to medium</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">High Viral (8+)</div>
+                    <div class="stat-value" id="highViral">12</div>
+                    <div class="stat-change positive">🔥 Ready to blow up</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+                <button class="filter-btn" onclick="filterCategory('fitness')">💪 Fitness</button>
+                <button class="filter-btn" onclick="filterCategory('sports')">🏐 Sports</button>
+                <button class="filter-btn" onclick="filterCategory('nostalgia')">⏰ Nostalgia</button>
+                <button class="filter-btn" onclick="filterCategory('finance')">💰 Finance</button>
+                <button class="filter-btn" onclick="filterCategory('lifestyle')">✨ Lifestyle</button>
+                
+                <select class="sort-select" onchange="sortIdeas(this.value)">
+                    <option value="viral">Sort by Viral Potential</option>
+                    <option value="effort">Sort by Effort (Low to High)</option>
+                    <option value="category">Sort by Category</option>
+                </select>
+            </div>
+
+            <!-- Ideas Grid -->
+            <div class="grid grid-auto" id="ideasGrid">
+                <!-- Ideas will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allIdeas = [];
+        let currentFilter = 'all';
+        let currentSort = 'viral';
+
+        async function loadIdeas() {
+            try {
+                const response = await fetch('viral-ideas.json');
+                const data = await response.json();
+                allIdeas = data.ideas;
+                
+                // Update stats
+                const avgViral = (allIdeas.reduce((sum, idea) => sum + idea.viralPotential, 0) / allIdeas.length).toFixed(1);
+                const avgEffort = (allIdeas.reduce((sum, idea) => sum + idea.effort, 0) / allIdeas.length).toFixed(1);
+                const highViral = allIdeas.filter(idea => idea.viralPotential >= 8).length;
+                
+                document.getElementById('avgViral').textContent = avgViral;
+                document.getElementById('avgEffort').textContent = avgEffort;
+                document.getElementById('highViral').textContent = highViral;
+                
+                displayIdeas(allIdeas);
+            } catch (error) {
+                console.error('Error loading ideas:', error);
+            }
+        }
+
+        function displayIdeas(ideas) {
+            const grid = document.getElementById('ideasGrid');
+            grid.innerHTML = '';
+
+            ideas.forEach(idea => {
+                const card = createIdeaCard(idea);
+                grid.appendChild(card);
+            });
+        }
+
+        function createIdeaCard(idea) {
+            const card = document.createElement('div');
+            card.className = 'idea-card';
+            card.dataset.category = idea.category;
+
+            // Viral emoji
+            let viralEmoji = '🔥';
+            if (idea.viralPotential >= 9) viralEmoji = '🔥🔥🔥';
+            else if (idea.viralPotential >= 8) viralEmoji = '🔥🔥';
+            else if (idea.viralPotential < 7) viralEmoji = '📊';
+
+            // Effort color
+            let effortColor = 'var(--warning)';
+            if (idea.effort <= 4) effortColor = 'var(--success)';
+            if (idea.effort >= 7) effortColor = 'var(--danger)';
+
+            card.innerHTML = `
+                <div class="idea-category cat-${idea.category}">${idea.category} • ${idea.type}</div>
+                <div class="idea-title">${idea.title}</div>
+                <div class="idea-hook">💡 "${idea.hook}"</div>
+                
+                <div class="idea-section">
+                    <div class="section-label">Script</div>
+                    <div class="section-content">${idea.script}</div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Visual Style</div>
+                    <div class="section-content">${idea.visualStyle}</div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Why It Works</div>
+                    <div class="section-content">${idea.whyItWorks}</div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Trending Audio Ideas</div>
+                    <div class="tag-list">
+                        ${idea.trendingAudio.map(audio => `<span class="tag">🎵 ${audio}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Affiliate Opportunity</div>
+                    <div class="section-content">${idea.affiliateOpportunity}</div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Platforms</div>
+                    <div class="platforms-list">
+                        ${idea.platforms.map(platform => `<span class="platform-icon">${platform}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="idea-section">
+                    <div class="section-label">Hashtags</div>
+                    <div class="tag-list">
+                        ${idea.hashtags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="idea-metrics">
+                    <div class="metric-pill">
+                        <span>${viralEmoji}</span>
+                        <span class="viral-score">${idea.viralPotential}/10</span>
+                        <span style="color: var(--text-tertiary);">Viral</span>
+                    </div>
+                    <div class="metric-pill">
+                        <span>⚡</span>
+                        <span class="effort-score" style="color: ${effortColor}">${idea.effort}/10</span>
+                        <span style="color: var(--text-tertiary);">Effort</span>
+                    </div>
+                    <div class="metric-pill">
+                        <span>⏱️</span>
+                        <span style="color: var(--text-secondary);">${idea.contentLength}</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border);">
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary);">
+                        📅 Best time to post: ${idea.postingTime}
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function filterCategory(category) {
+            currentFilter = category;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            applyFiltersAndSort();
+        }
+
+        function sortIdeas(sortType) {
+            currentSort = sortType;
+            applyFiltersAndSort();
+        }
+
+        function applyFiltersAndSort() {
+            let filtered = allIdeas;
+
+            // Apply filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(idea => idea.category === currentFilter);
+            }
+
+            // Apply sort
+            if (currentSort === 'viral') {
+                filtered.sort((a, b) => b.viralPotential - a.viralPotential);
+            } else if (currentSort === 'effort') {
+                filtered.sort((a, b) => a.effort - b.effort);
+            } else if (currentSort === 'category') {
+                filtered.sort((a, b) => a.category.localeCompare(b.category));
+            }
+
+            displayIdeas(filtered);
+        }
+
+        // Load on page load
+        loadIdeas();
+    </script>
+</body>
+</html>

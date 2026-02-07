@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Golf Coaching | Lower Your Handicap in 30 Days</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --primary: #1a5f2a;
+            --primary-dark: #134620;
+            --accent: #d4af37;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --bg: #ffffff;
+            --bg-alt: #f8faf8;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 16px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f7f1 0%, #e8f5e9 50%, #f5f5dc 100%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(26,95,42,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 48px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-placeholder {
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image-placeholder svg {
+            width: 200px;
+            height: 200px;
+            opacity: 0.9;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26,95,42,0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(26,95,42,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--accent), #c9a227);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(212,175,55,0.5);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 120px 0;
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(26,95,42,0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .benefit-card {
+            background: var(--bg);
+            border: 1px solid #e8e8e8;
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(26,95,42,0.1), rgba(26,95,42,0.05));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .benefit-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--primary);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 120px 0;
+            background: var(--bg-alt);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -12px;
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            opacity: 0.3;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 0;
+            background: var(--bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-alt);
+            border-radius: var(--radius);
+            padding: 32px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .author-info span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .handicap-drop {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+        }
+
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 24px;
+            right: -35px;
+            background: var(--accent);
+            color: #1a1a1a;
+            padding: 8px 48px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .price-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .price-amount {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .pricing-cta {
+            text-align: center;
+        }
+
+        .pricing-cta .btn {
+            width: 100%;
+            justify-content: center;
+            font-size: 1.2rem;
+            padding: 18px;
+        }
+
+        .guarantee {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .guarantee svg {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.75rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 48px 0 24px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .footer-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .benefits-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .step::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                padding: 32px 24px;
+            }
+
+            .price-amount {
+                font-size: 3rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            nav .container {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .cta-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading state for checkout button */
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn.loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="8" r="3"/>
+                    <path d="M12 14c-4 0-6 2-6 4v2h12v-2c0-2-2-4-6-4z"/>
+                    <path d="M19 8l-3 12M5 8l3 12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                </svg>
+                ProGolf Coach
+            </a>
+            <a href="#pricing" class="nav-cta">Start Today</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Lower Your Handicap <span>in 30 Days</span></h1>
+                <p>Get personalized coaching from PGA professionals without leaving home. Video analysis, weekly check-ins, and custom practice plans designed for your game.</p>
+                <div class="cta-group">
+                    <a href="#pricing" class="btn btn-primary">
+                        Start Your Transformation
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#benefits" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5,000+</div>
+                        <div class="stat-label">Golfers Coached</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4.2</div>
+                        <div class="stat-label">Avg. Strokes Dropped</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="100" cy="180" r="8" fill="white"/>
+                        <path d="M100 180 L100 60" stroke-width="3"/>
+                        <ellipse cx="100" cy="50" rx="35" ry="15" stroke-width="2"/>
+                        <path d="M65 50 Q100 20 135 50" stroke-width="2"/>
+                        <path d="M30 180 C50 140 80 100 100 60" stroke="rgba(255,255,255,0.3)" stroke-dasharray="5,5"/>
+                    </svg>
+                    <p style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;">Perfect Your Swing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">What You Get</span>
+                <h2>Everything You Need to Improve</h2>
+                <p>Our comprehensive coaching program covers all aspects of your game</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>Personalized Video Analysis</h3>
+                    <p>Upload your swing videos and receive detailed frame-by-frame analysis with specific, actionable feedback tailored to your unique mechanics.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                            <path d="M9 16l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Weekly Check-ins</h3>
+                    <p>Stay accountable with scheduled video calls. Review your progress, adjust your practice plan, and get real-time answers to your questions.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                        </svg>
+                    </div>
+                    <h3>Custom Practice Plans</h3>
+                    <p>Receive a personalized practice routine designed around your schedule, goals, and the specific areas of your game that need the most attention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2>Simple Process, Real Results</h2>
+                <p>Get started in minutes and see improvement in your first week</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Create your account and complete your golf profile</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Submit Videos</h3>
+                    <p>Record and upload your swing from multiple angles</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Feedback</h3>
+                    <p>Receive detailed analysis within 48 hours</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Improve</h3>
+                    <p>Follow your custom plan and track progress</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Success Stories</span>
+                <h2>Real Golfers, Real Results</h2>
+                <p>Join thousands who have transformed their game</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The video analysis completely changed how I understand my swing. My coach spotted issues I never knew I had. Best investment I've made in my golf game.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <span class="handicap-drop">Handicap: 18 → 12</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The weekly check-ins keep me accountable. Having a coach who knows my game and adjusts my practice plan makes all the difference. Down 5 strokes in 2 months!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div class="author-info">
+                            <h4>Sarah Kim</h4>
+                            <span class="handicap-drop">Handicap: 24 → 19</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I was skeptical about online coaching but the quality of feedback blew me away. The custom practice plans fit perfectly into my busy schedule. Highly recommend.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DP</div>
+                        <div class="author-info">
+                            <h4>David Park</h4>
+                            <span class="handicap-drop">Handicap: 15 → 10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pricing</span>
+                <h2>Invest in Your Game</h2>
+                <p>Less than the cost of a single in-person lesson</p>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-badge">Best Value</div>
+                <div class="pricing-header">
+                    <h3>Complete Coaching Program</h3>
+                    <div class="price">
+                        <span class="price-currency">$</span>
+                        <span class="price-amount">29</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                </div>
+                <ul class="pricing-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Unlimited video analysis submissions</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Weekly 1-on-1 video check-ins</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Custom practice plans updated monthly</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Direct messaging with your coach</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Access to drill library & training videos</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <span>Progress tracking dashboard</span>
+                    </li>
+                </ul>
+                <div class="pricing-cta">
+                    <button id="checkout-btn" class="btn btn-gold">
+                        Start Your 30-Day Transformation
+                    </button>
+                    <p class="guarantee">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        30-day money-back guarantee • Cancel anytime
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Game?</h2>
+            <p>Join thousands of golfers who have lowered their handicap with personalized coaching. Your best golf is waiting.</p>
+            <a href="#pricing" class="btn btn-gold">
+                Get Started Now
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">ProGolf Coach</div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ProGolf Coach. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stripe Integration Script -->
+    <script>
+        // ===========================================
+        // STRIPE CONFIGURATION
+        // ===========================================
+        // Replace with your actual Stripe publishable key
+        const STRIPE_PUBLISHABLE_KEY = 'pk_test_YOUR_PUBLISHABLE_KEY_HERE';
+        
+        // Replace with your actual Price ID from Stripe Dashboard
+        // Create a product with $29/month recurring price in Stripe
+        const STRIPE_PRICE_ID = 'price_YOUR_PRICE_ID_HERE';
+        
+        // Your success and cancel URLs
+        const SUCCESS_URL = window.location.origin + '/success.html';
+        const CANCEL_URL = window.location.href;
+
+        // ===========================================
+        // CHECKOUT IMPLEMENTATION
+        // ===========================================
+        
+        // Initialize Stripe (only if key is configured)
+        let stripe = null;
+        if (STRIPE_PUBLISHABLE_KEY && !STRIPE_PUBLISHABLE_KEY.includes('YOUR_')) {
+            stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+        }
+
+        // Checkout button click handler
+        document.getElementById('checkout-btn').addEventListener('click', async function() {
+            const btn = this;
+            
+            // Check if Stripe is configured
+            if (!stripe) {
+                alert('Stripe is not configured yet. Please add your Stripe keys to enable checkout.');
+                console.log('To enable Stripe checkout:');
+                console.log('1. Get your publishable key from https://dashboard.stripe.com/apikeys');
+                console.log('2. Create a product with $29/month price at https://dashboard.stripe.com/products');
+                console.log('3. Replace STRIPE_PUBLISHABLE_KEY and STRIPE_PRICE_ID in this file');
+                return;
+            }
+
+            // Add loading state
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            try {
+                // Option 1: Client-side only (Stripe Checkout)
+                // This redirects to Stripe's hosted checkout page
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+                    mode: 'subscription',
+                    successUrl: SUCCESS_URL,
+                    cancelUrl: CANCEL_URL,
+                });
+
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (err) {
+                console.error('Checkout error:', err);
+                alert('Something went wrong. Please try again.');
+            } finally {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+
+            // ===========================================
+            // ALTERNATIVE: Server-side checkout session
+            // ===========================================
+            // For production, you may want to create checkout sessions server-side.
+            // Uncomment and modify the code below:
+            /*
+            try {
+                const response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        priceId: STRIPE_PRICE_ID,
+                    }),
+                });
+                
+                const { sessionId } = await response.json();
+                const { error } = await stripe.redirectToCheckout({ sessionId });
+                
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (err) {
+                console.error('Checkout error:', err);
+                alert('Something went wrong. Please try again.');
+            }
+            */
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

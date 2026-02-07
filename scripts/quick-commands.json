@@ -1,0 +1,19 @@
+{
+  "food_shortcuts": {
+    "usual lunch": {
+      "description": "Chicken, Mashed Potatoes, Brussels Sprouts",
+      "calories": 440,
+      "protein": 42,
+      "carbs": 43,
+      "fat": 8,
+      "notes": "Ross's typical work lunch"
+    },
+    "banana": {
+      "description": "Medium Banana",
+      "calories": 105,
+      "protein": 1,
+      "carbs": 27,
+      "fat": 0
+    }
+  }
+}

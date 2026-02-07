@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Command Center - UPGRADED</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-stat {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .header-stat-value {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            color: #b0b0b0;
+        }
+
+        .connection-status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .connection-status.connected {
+            background: #4caf50;
+        }
+
+        .connection-status.disconnected {
+            background: #f44336;
+            animation: none;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            color: #b0b0b0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Org Chart */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .agent-node {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px;
+            min-width: 280px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .agent-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .agent-node.main {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-color: #667eea;
+            min-width: 320px;
+        }
+
+        .agent-node.building {
+            border-color: #4a9eff;
+            animation: pulse 2s infinite;
+        }
+
+        .agent-node.completed {
+            border-color: #4caf50;
+        }
+
+        .agent-node.failed {
+            border-color: #f44336;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(74, 158, 255, 0); }
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .node-name {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #fff;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.building {
+            background: #4a9eff;
+            color: #fff;
+        }
+
+        .status-badge.completed {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        .status-badge.failed {
+            background: #f44336;
+            color: #fff;
+        }
+
+        .status-badge.active {
+            background: #667eea;
+            color: #fff;
+        }
+
+        .node-task {
+            color: #b0b0b0;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .node-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .node-eta {
+            color: #4a9eff;
+            font-weight: 600;
+        }
+
+        .children-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .children-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, #667eea, transparent);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* Budget Display */
+        .budget-display {
+            margin-top: 15px;
+        }
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .budget-label {
+            color: #b0b0b0;
+            font-size: 0.9em;
+        }
+
+        .budget-amount {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .budget-over {
+            color: #f44336;
+        }
+
+        .budget-warning {
+            color: #ff9800;
+        }
+
+        /* Queue */
+        .queue-list {
+            list-style: none;
+        }
+
+        .queue-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.2s ease;
+        }
+
+        .queue-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .queue-item.high-priority {
+            border-left-color: #f44336;
+        }
+
+        .queue-item.medium-priority {
+            border-left-color: #ff9800;
+        }
+
+        .queue-item.low-priority {
+            border-left-color: #4caf50;
+        }
+
+        .queue-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .queue-item-name {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .queue-item-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .priority-badge {
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .priority-badge.high {
+            background: rgba(244, 67, 54, 0.3);
+            color: #f44336;
+        }
+
+        .priority-badge.medium {
+            background: rgba(255, 152, 0, 0.3);
+            color: #ff9800;
+        }
+
+        .priority-badge.low {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .error-banner {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-banner.show {
+            display: block;
+        }
+
+        .error-banner-title {
+            font-weight: 600;
+            color: #f44336;
+            margin-bottom: 5px;
+        }
+
+        .error-banner-message {
+            color: #e0e0e0;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(102, 126, 234, 0.1);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Jarvis Command Center</h1>
+            <p class="subtitle">Real-time Sub-Agent Dashboard - UPGRADED</p>
+            
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div><span class="connection-status connected" id="connection-indicator"></span>Status</div>
+                    <div class="header-stat-value" id="header-mode">--</div>
+                </div>
+                <div class="header-stat">
+                    <div>Today's Cost</div>
+                    <div class="header-stat-value" id="header-cost">$0.00</div>
+                </div>
+                <div class="header-stat">
+                    <div>Active Builds</div>
+                    <div class="header-stat-value" id="header-active">0</div>
+                </div>
+            </div>
+            
+            <div class="last-updated">
+                Last updated: <span id="last-update">--</span>
+            </div>
+        </header>
+
+        <div id="error-banner" class="error-banner">
+            <div class="error-banner-title">⚠️ Connection Error</div>
+            <div class="error-banner-message" id="error-message">Unable to load data. Retrying...</div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Main Org Chart Panel -->
+            <div class="panel">
+                <h2>Organization Structure</h2>
+                <div id="org-chart" class="org-chart">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <div>Loading agents...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar with Queue and Stats -->
+            <div>
+                <!-- Cost/Budget Panel -->
+                <div class="panel" style="margin-bottom: 30px;">
+                    <h2>Budget Tracking</h2>
+                    <div class="budget-display" id="budget-display">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Queue Panel -->
+                <div class="panel">
+                    <h2>Build Queue</h2>
+                    <ul id="queue-list" class="queue-list">
+                        <li class="loading">
+                            <div class="spinner"></div>
+                            <div>Loading queue...</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let refreshInterval;
+        let retryCount = 0;
+        let maxRetries = 5;
+        let isConnected = true;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            refreshInterval = setInterval(loadData, 5000); // Refresh every 5 seconds (upgraded from 10s)
+        });
+
+        async function loadData() {
+            try {
+                // Fetch progress data
+                const progressResponse = await fetch('./progress-data.json?' + Date.now());
+                const progressData = progressResponse.ok ? await progressResponse.json() : null;
+
+                // Fetch cost data
+                const costResponse = await fetch('./cost-report.json?' + Date.now());
+                const costData = costResponse.ok ? await costResponse.json() : null;
+
+                // Fetch queue data (from BUILD_QUEUE.md parsing - would need backend)
+                // For now, show empty or mock data
+                
+                updateConnectionStatus(true);
+                updateLastUpdated();
+                renderProgressData(progressData);
+                renderCostData(costData);
+                retryCount = 0;
+            } catch (error) {
+                console.error('Error loading data:', error);
+                updateConnectionStatus(false);
+                
+                retryCount++;
+                if (retryCount >= maxRetries) {
+                    showError('Unable to connect to data source. Please check if files exist.');
+                } else {
+                    showError(`Connection error. Retrying... (${retryCount}/${maxRetries})`);
+                }
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            isConnected = connected;
+            const indicator = document.getElementById('connection-indicator');
+            
+            if (connected) {
+                indicator.className = 'connection-status connected';
+                hideError();
+            } else {
+                indicator.className = 'connection-status disconnected';
+            }
+        }
+
+        function showError(message) {
+            const banner = document.getElementById('error-banner');
+            const messageEl = document.getElementById('error-message');
+            
+            messageEl.textContent = message;
+            banner.classList.add('show');
+        }
+
+        function hideError() {
+            const banner = document.getElementById('error-banner');
+            banner.classList.remove('show');
+        }
+
+        function updateLastUpdated() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('last-update').textContent = timeString;
+        }
+
+        function renderProgressData(data) {
+            const container = document.getElementById('org-chart');
+            
+            if (!data || !data.agents || Object.keys(data.agents).length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🤖</div>
+                        <div>No active agents</div>
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                            Waiting for builds to start...
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('header-active').textContent = '0';
+                document.getElementById('header-mode').textContent = 'Idle';
+                return;
+            }
+
+            const agents = Object.values(data.agents);
+            const activeCount = agents.filter(a => a.state !== 'Complete' && a.state !== 'Failed').length;
+            
+            document.getElementById('header-active').textContent = activeCount;
+            document.getElementById('header-mode').textContent = activeCount > 1 ? 'Parallel' : 'Sequential';
+            
+            let html = '';
+            
+            agents.forEach(agent => {
+                html += createAgentNode(agent);
+            });
+
+            container.innerHTML = html;
+        }
+
+        function createAgentNode(agent) {
+            const statusClass = agent.state === 'Complete' ? 'completed' :
+                               agent.state === 'Failed' ? 'failed' :
+                               'building';
+            
+            const statusIcon = {
+                'Starting': '🔵',
+                '25%': '🔵',
+                '50%': '🔵',
+                '75%': '🔵',
+                'Testing': '🧪',
+                'Complete': '🟢',
+                'Failed': '🔴'
+            }[agent.state] || '🔵';
+
+            const progressBar = agent.state !== 'Complete' && agent.state !== 'Failed' ? `
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>${agent.state}</span>
+                        <span>${agent.percent}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${agent.percent}%"></div>
+                    </div>
+                </div>
+            ` : '';
+
+            return `
+                <div class="agent-node ${statusClass}">
+                    <div class="node-header">
+                        <div class="node-name">${agent.task_name}</div>
+                        <div class="status-badge ${statusClass}">${statusIcon} ${agent.state}</div>
+                    </div>
+                    <div class="node-task">${agent.message || 'Working...'}</div>
+                    ${progressBar}
+                    <div class="node-meta">
+                        <span>Started: ${formatTime(agent.started_at)}</span>
+                        <span class="node-eta">${calculateRuntime(agent.started_at)}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCostData(data) {
+            const budgetContainer = document.getElementById('budget-display');
+            
+            if (!data) {
+                budgetContainer.innerHTML = `
+                    <div class="empty-state" style="padding: 20px;">
+                        <div>No cost data yet</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const today = data.today || {};
+            const dailyBudget = data.budgets?.daily || 20.00;
+            const todayCost = today.total_cost || 0;
+            const todayPercent = (todayCost / dailyBudget) * 100;
+            
+            const costClass = todayCost > dailyBudget ? 'budget-over' :
+                             todayPercent > 80 ? 'budget-warning' : '';
+
+            document.getElementById('header-cost').textContent = `$${todayCost.toFixed(2)}`;
+            document.getElementById('header-cost').className = 'header-stat-value ' + costClass;
+
+            budgetContainer.innerHTML = `
+                <div class="budget-row">
+                    <span class="budget-label">Today</span>
+                    <span class="budget-amount ${costClass}">$${todayCost.toFixed(2)} / $${dailyBudget.toFixed(2)}</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${Math.min(todayPercent, 100)}%"></div>
+                </div>
+                
+                <div class="budget-row" style="margin-top: 15px;">
+                    <span class="budget-label">Builds Today</span>
+                    <span class="budget-amount">${today.builds || 0}</span>
+                </div>
+                
+                <div class="budget-row">
+                    <span class="budget-label">Tokens Used</span>
+                    <span class="budget-amount">${(today.total_tokens || 0).toLocaleString()}</span>
+                </div>
+                
+                ${todayCost > dailyBudget ? `
+                    <div style="margin-top: 15px; color: #f44336; font-size: 0.9em;">
+                        🚨 Over budget by $${(todayCost - dailyBudget).toFixed(2)}
+                    </div>
+                ` : todayPercent > 80 ? `
+                    <div style="margin-top: 15px; color: #ff9800; font-size: 0.9em;">
+                        ⚠️ $${(dailyBudget - todayCost).toFixed(2)} remaining today
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function formatTime(isoString) {
+            if (!isoString) return '--';
+            const date = new Date(isoString);
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function calculateRuntime(startedAt) {
+            if (!startedAt) return '--';
+            
+            const start = new Date(startedAt);
+            const now = new Date();
+            const diffMs = now - start;
+            const diffMins = Math.floor(diffMs / 60000);
+            
+            if (diffMins < 60) {
+                return `${diffMins}min`;
+            } else {
+                const hours = Math.floor(diffMins / 60);
+                const mins = diffMins % 60;
+                return `${hours}h ${mins}m`;
+            }
+        }
+
+        // Auto-reconnect on tab visibility change
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && !isConnected) {
+                console.log('Tab became visible, attempting reconnect...');
+                retryCount = 0;
+                loadData();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                console.log('Manual refresh triggered');
+                retryCount = 0;
+                loadData();
+            }
+        });
+    </script>
+</body>
+</html>

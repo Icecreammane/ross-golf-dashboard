@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-02-06T04:34:20.519959",
+  "games_today": 8,
+  "rankings": [
+    {
+      "name": "Giannis Antetokounmpo",
+      "team": "MIL",
+      "position": "PF",
+      "projection": "55.2",
+      "hot": true
+    },
+    {
+      "name": "Luka Doncic",
+      "team": "DAL",
+      "position": "PG",
+      "projection": "54.8",
+      "hot": true
+    },
+    {
+      "name": "Joel Embiid",
+      "team": "PHI",
+      "position": "C",
+      "projection": "52.3",
+      "hot": false
+    }
+  ],
+  "injuries": [
+    {
+      "player": "Stephen Curry",
+      "status": "OUT (knee)",
+      "impact": "Warriors lose top scorer"
+    }
+  ],
+  "hot_picks": [],
+  "record": "0-0"
+}

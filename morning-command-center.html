@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>Morning Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-card: rgba(30, 30, 50, 0.8);
+      --bg-card-hover: rgba(40, 40, 70, 0.9);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --accent-orange: #ff6b35;
+      --accent-gold: #ffd700;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-red: #ef4444;
+      --gradient-sunrise: linear-gradient(135deg, #ff6b35 0%, #ff8c42 25%, #ffd700 50%, #ffb347 75%, #ff6b35 100%);
+      --gradient-ocean: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --shadow-glow: 0 0 40px rgba(255, 107, 53, 0.3);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .light-mode {
+      --bg-primary: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: rgba(255, 255, 255, 1);
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-gradient {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+      animation: bgFloat 30s ease-in-out infinite;
+    }
+
+    @keyframes bgFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-5%, -5%) rotate(5deg); }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px;
+      padding-bottom: 100px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .greeting {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .greeting .name {
+      background: var(--gradient-sunrise);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .date-time {
+      text-align: right;
+      color: var(--text-secondary);
+    }
+
+    .current-time {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .current-date {
+      font-size: 0.9rem;
+    }
+
+    /* Hero Stats */
+    .hero-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+      border-color: rgba(255, 107, 53, 0.3);
+    }
+
+    .hero-card.florida {
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+    }
+
+    .hero-card.mrr {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.1) 100%);
+    }
+
+    .hero-card.weather {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+    }
+
+    .hero-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .hero-value {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .hero-value.countdown {
+      background: var(--gradient-sunrise);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-value.mrr {
+      color: var(--accent-green);
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .progress-bar-wrapper {
+      margin-top: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 1s ease-out;
+      background: var(--gradient-sunrise);
+    }
+
+    .progress-bar.green {
+      background: var(--gradient-success);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Mission Card */
+    .priority-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .priority-item:hover {
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .priority-item.completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+
+    .priority-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--accent-orange);
+      border-radius: 50%;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .priority-item.completed .priority-checkbox {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .priority-checkbox::after {
+      content: '✓';
+      color: white;
+      font-size: 14px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .priority-item.completed .priority-checkbox::after {
+      opacity: 1;
+    }
+
+    .priority-number {
+      width: 28px;
+      height: 28px;
+      background: var(--gradient-sunrise);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .priority-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    /* Streak Counter */
+    .streak-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .streak-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .streak-value {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--gradient-sunrise);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .streak-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Wins Section */
+    .wins-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .win-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .win-item::before {
+      content: '🏆';
+    }
+
+    /* Revenue Grid */
+    .revenue-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .revenue-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+
+    .revenue-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .revenue-icon {
+      font-size: 1.3rem;
+    }
+
+    .revenue-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-green);
+    }
+
+    /* Macros */
+    .macros-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .macro-item {
+      text-align: center;
+      padding: 12px 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+
+    .macro-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .macro-value.calories { color: var(--accent-orange); }
+    .macro-value.protein { color: var(--accent-blue); }
+    .macro-value.carbs { color: var(--accent-gold); }
+    .macro-value.fat { color: var(--accent-purple); }
+
+    .macro-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .macro-target {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Anti-Scroll */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .toggle-label {
+      font-size: 0.95rem;
+    }
+
+    .toggle {
+      width: 56px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toggle.active {
+      background: var(--accent-red);
+    }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: var(--transition);
+    }
+
+    .toggle.active::after {
+      left: 29px;
+    }
+
+    .shame-counter {
+      text-align: center;
+      padding: 20px;
+      background: rgba(239, 68, 68, 0.1);
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+
+    .shame-counter.clean {
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .shame-value {
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+
+    .shame-value.bad { color: var(--accent-red); }
+    .shame-value.good { color: var(--accent-green); }
+
+    /* Quote Section */
+    .quote-card {
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+      text-align: center;
+      padding: 30px 24px;
+    }
+
+    .quote-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .why-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .why-label {
+      font-size: 0.8rem;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .why-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .quick-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .quick-btn:hover {
+      background: rgba(255, 107, 53, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .quick-btn-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .quick-btn-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      backdrop-filter: blur(20px);
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .modal-input:focus {
+      outline: none;
+      border-color: var(--accent-orange);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-btn.primary {
+      background: var(--gradient-sunrise);
+      color: white;
+    }
+
+    .modal-btn.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    /* Time Warning */
+    .time-warning {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(239, 68, 68, 0.95), rgba(239, 68, 68, 0.8));
+      padding: 20px;
+      text-align: center;
+      transform: translateY(100%);
+      transition: transform 0.5s ease;
+      z-index: 999;
+    }
+
+    .time-warning.active {
+      transform: translateY(0);
+    }
+
+    .time-warning-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .time-warning-btn {
+      padding: 12px 32px;
+      background: white;
+      color: var(--accent-red);
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Refresh indicator */
+    .refresh-indicator {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      padding: 8px 12px;
+      border-radius: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero-value {
+        font-size: 2.5rem;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .macros-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .streak-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .greeting {
+        font-size: 1.2rem;
+      }
+      
+      .current-time {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent-orange);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse animation for streaks */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .streak-item:hover {
+      animation: pulse 0.5s ease;
+    }
+
+    /* Calendar Events */
+    .event-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      border-left: 3px solid var(--accent-blue);
+    }
+
+    .event-time {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      min-width: 60px;
+    }
+
+    .event-name {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    .no-events {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Goal Progress */
+    .goal-item {
+      margin-bottom: 16px;
+    }
+
+    .goal-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .goal-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .goal-percent {
+      font-size: 0.85rem;
+      color: var(--accent-orange);
+      font-weight: 700;
+    }
+
+    .goal-bar {
+      height: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .goal-fill {
+      height: 100%;
+      background: var(--gradient-sunrise);
+      border-radius: 4px;
+      transition: width 1s ease-out;
+    }
+
+    .goal-deadline {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Florida Fund */
+    .fund-display {
+      text-align: center;
+      padding: 16px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+
+    .fund-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+    }
+
+    .fund-goal {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* Last Workout */
+    .workout-summary {
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .workout-date {
+      font-size: 0.8rem;
+      color: var(--accent-purple);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .workout-lifts {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-wrapper">
+    <div class="bg-gradient"></div>
+  </div>
+
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="greeting">
+        Good <span id="timeOfDay">morning</span>, <span class="name" id="userName">Ross</span> 💪
+      </div>
+      <div class="date-time">
+        <div class="current-time" id="currentTime">--:--</div>
+        <div class="current-date" id="currentDate">Loading...</div>
+      </div>
+    </header>
+
+    <!-- Hero Stats -->
+    <section class="hero-section">
+      <div class="hero-card florida">
+        <div class="hero-label">🌴 Days Until Florida Freedom</div>
+        <div class="hero-value countdown" id="daysUntilFlorida">--</div>
+        <div class="hero-sub" id="floridaDate">Target: Loading...</div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar" id="floridaProgress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="hero-card mrr">
+        <div class="hero-label">💰 Monthly Recurring Revenue</div>
+        <div class="hero-value mrr">$<span id="currentMRR">0</span></div>
+        <div class="hero-sub">Goal: $<span id="targetMRR">3,000</span>/mo</div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar green" id="mrrProgress" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="hero-card weather">
+        <div class="hero-label">🌤️ Weather</div>
+        <div class="hero-value" id="weatherTemp">--°</div>
+        <div class="hero-sub" id="weatherDesc">Loading...</div>
+      </div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="card-grid">
+      <!-- Today's Mission -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">🎯</span>
+            Today's Mission
+          </div>
+          <button class="quick-btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="openAddPriority()">+ Add</button>
+        </div>
+        <div id="prioritiesList">
+          <div class="priority-item">
+            <div class="priority-number">1</div>
+            <div class="priority-text">Loading priorities...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Momentum Tracker -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">🔥</span>
+            Momentum Tracker
+          </div>
+        </div>
+        <div class="streak-grid" id="streakGrid">
+          <div class="streak-item">
+            <div class="streak-value">-</div>
+            <div class="streak-label">Workout Days</div>
+          </div>
+          <div class="streak-item">
+            <div class="streak-value">-</div>
+            <div class="streak-label">Wins Logged</div>
+          </div>
+          <div class="streak-item">
+            <div class="streak-value">-</div>
+            <div class="streak-label">Productive Days</div>
+          </div>
+          <div class="streak-item">
+            <div class="streak-value">-</div>
+            <div class="streak-label">No-Scroll Days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- This Week's Wins -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">🏆</span>
+            Recent Wins
+          </div>
+        </div>
+        <div class="wins-list" id="winsList">
+          <div class="win-item">Loading wins...</div>
+        </div>
+      </div>
+
+      <!-- Goals Progress -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">📈</span>
+            Goal Progress
+          </div>
+        </div>
+        <div id="goalsList">
+          <div class="goal-item">
+            <div class="goal-header">
+              <span class="goal-name">Loading...</span>
+              <span class="goal-percent">0%</span>
+            </div>
+            <div class="goal-bar">
+              <div class="goal-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue Dashboard -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">💵</span>
+            Revenue Sources
+          </div>
+        </div>
+        <div class="revenue-grid" id="revenueGrid">
+          <div class="revenue-item">
+            <div class="revenue-name">
+              <span class="revenue-icon">💪</span>
+              <span>Loading...</span>
+            </div>
+            <span class="revenue-value">$0</span>
+          </div>
+        </div>
+        <div class="fund-display">
+          <div class="fund-value">$<span id="floridaFund">0</span></div>
+          <div class="fund-goal">Florida Fund / $<span id="floridaFundGoal">50,000</span></div>
+        </div>
+      </div>
+
+      <!-- Fitness Snapshot -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">🏋️</span>
+            Today's Fuel
+          </div>
+        </div>
+        <div class="macros-grid">
+          <div class="macro-item">
+            <div class="macro-value calories" id="todayCals">0</div>
+            <div class="macro-label">Calories</div>
+            <div class="macro-target">/ <span id="targetCals">2200</span></div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-value protein" id="todayProtein">0</div>
+            <div class="macro-label">Protein</div>
+            <div class="macro-target">/ <span id="targetProtein">200</span>g</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-value carbs" id="todayCarbs">0</div>
+            <div class="macro-label">Carbs</div>
+            <div class="macro-target">/ <span id="targetCarbs">250</span>g</div>
+          </div>
+          <div class="macro-item">
+            <div class="macro-value fat" id="todayFat">0</div>
+            <div class="macro-label">Fat</div>
+            <div class="macro-target">/ <span id="targetFat">70</span>g</div>
+          </div>
+        </div>
+        <div class="workout-summary" id="lastWorkout">
+          <div class="workout-date">Last Workout</div>
+          <div class="workout-lifts">Loading...</div>
+        </div>
+      </div>
+
+      <!-- Anti-Distraction -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="card-icon">🛡️</span>
+            Focus Shield
+          </div>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Checked social media today?</span>
+          <div class="toggle" id="socialToggle" onclick="toggleSocial()"></div>
+        </div>
+        <div class="shame-counter clean" id="shameCounter">
+          <div class="shame-value good" id="noScrollDays">0</div>
+          <div style="font-size: 0.9rem; margin-top: 4px;">days without doomscrolling</div>
+        </div>
+      </div>
+
+      <!-- Motivation -->
+      <div class="card quote-card">
+        <div class="quote-text" id="dailyQuote">"Loading inspiration..."</div>
+        <button onclick="newQuote()" style="background: rgba(255,255,255,0.1); border: none; padding: 8px 16px; border-radius: 20px; color: var(--text-secondary); cursor: pointer; font-size: 0.8rem;">↻ New Quote</button>
+        <div class="why-section">
+          <div class="why-label">🌴 Why You're Doing This</div>
+          <div class="why-text" id="whyText">Loading your why...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="card-icon">⚡</span>
+          Quick Actions
+        </div>
+      </div>
+      <div class="quick-actions" id="quickActions">
+        <button class="quick-btn" onclick="openLogWin()">
+          <span class="quick-btn-icon">🏆</span>
+          <span class="quick-btn-label">Log Win</span>
+        </button>
+        <button class="quick-btn" onclick="openAddPriority()">
+          <span class="quick-btn-icon">🎯</span>
+          <span class="quick-btn-label">Add Priority</span>
+        </button>
+        <a class="quick-btn" href="florida-freedom-dashboard.html">
+          <span class="quick-btn-icon">🌴</span>
+          <span class="quick-btn-label">Florida Dashboard</span>
+        </a>
+        <a class="quick-btn" href="fitness-tracker/index.html">
+          <span class="quick-btn-icon">🏋️</span>
+          <span class="quick-btn-label">Log Food</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-title" id="modalTitle">Add Item</div>
+      <input type="text" class="modal-input" id="modalInput" placeholder="Enter text...">
+      <div class="modal-actions">
+        <button class="modal-btn secondary" onclick="closeModal()">Cancel</button>
+        <button class="modal-btn primary" id="modalSubmit" onclick="submitModal()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Warning -->
+  <div class="time-warning" id="timeWarning">
+    <div class="time-warning-text">⏰ You've been here <span id="timeSpent">5</span> minutes. Time to crush the day!</div>
+    <button class="time-warning-btn" onclick="dismissWarning()">Got it, let's go! 💪</button>
+  </div>
+
+  <div class="refresh-indicator" id="refreshIndicator">
+    Last updated: <span id="lastUpdate">--:--</span>
+  </div>
+
+  <script>
+    // State
+    let config = null;
+    let freedomConfig = null;
+    let fitnessData = null;
+    let winsData = null;
+    let modalMode = null;
+    let sessionStart = Date.now();
+    let warningShown = false;
+
+    // Initialize
+    async function init() {
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+      
+      await loadAllData();
+      renderDashboard();
+      
+      // Auto-refresh every 60 seconds
+      setInterval(async () => {
+        await loadAllData();
+        renderDashboard();
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      }, 60000);
+      
+      // Time warning check
+      setInterval(checkTimeWarning, 30000);
+      
+      // Fetch weather
+      fetchWeather();
+      
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function loadAllData() {
+      try {
+        // Load config
+        const configResp = await fetch('morning-config.json?' + Date.now());
+        config = await configResp.json();
+      } catch (e) {
+        console.log('Using default config');
+        config = getDefaultConfig();
+      }
+
+      try {
+        // Load freedom config
+        const freedomResp = await fetch('freedom-config.json?' + Date.now());
+        freedomConfig = await freedomResp.json();
+      } catch (e) {
+        freedomConfig = { target_date: '2026-06-15', current_mrr: 0, target_mrr: 3000, florida_fund: 0, florida_fund_goal: 50000 };
+      }
+
+      try {
+        // Load fitness data
+        const fitnessResp = await fetch('fitness-tracker/fitness_data.json?' + Date.now());
+        fitnessData = await fitnessResp.json();
+      } catch (e) {
+        fitnessData = { workouts: [], food_logs: [], settings: {} };
+      }
+
+      try {
+        // Load wins
+        const winsResp = await fetch('memory/daily-wins.json?' + Date.now());
+        winsData = await winsResp.json();
+      } catch (e) {
+        winsData = { wins: [] };
+      }
+    }
+
+    function getDefaultConfig() {
+      return {
+        user: { name: 'Ross' },
+        florida_freedom: { target_date: '2026-06-15', target_mrr: 3000, florida_fund_goal: 50000, why: 'Beach volleyball, freedom, living life on your terms.' },
+        revenue_sources: [
+          { name: 'FitTrack AI', mrr: 0, icon: '💪' },
+          { name: 'Golf Coaching', mrr: 0, icon: '⛳' },
+          { name: 'Fantasy Sports', mrr: 0, icon: '🏀' },
+          { name: 'Cold Email AI', mrr: 0, icon: '📧' }
+        ],
+        streaks: { workout_days: 0, wins_logged: 0, productive_days: 0, no_scroll_days: 0 },
+        goals: [],
+        priorities: { today: ['Set your priorities!'] },
+        fitness: { daily_calories: 2200, daily_protein: 200, daily_carbs: 250, daily_fat: 70 },
+        quotes: ['The best time to start is now.']
+      };
+    }
+
+    function updateDateTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      
+      // Time of day greeting
+      let timeOfDay = 'morning';
+      if (hours >= 12 && hours < 17) timeOfDay = 'afternoon';
+      else if (hours >= 17) timeOfDay = 'evening';
+      document.getElementById('timeOfDay').textContent = timeOfDay;
+      
+      // Current time
+      document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true 
+      });
+      
+      // Current date
+      document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    }
+
+    function renderDashboard() {
+      // User name
+      document.getElementById('userName').textContent = config.user?.name || 'Ross';
+      
+      // Florida countdown
+      const targetDate = new Date(freedomConfig?.target_date || config.florida_freedom?.target_date || '2026-06-15');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const daysLeft = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+      document.getElementById('daysUntilFlorida').textContent = daysLeft;
+      document.getElementById('floridaDate').textContent = `Target: ${targetDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+      
+      // Florida progress (assuming started Jan 1, 2026)
+      const startDate = new Date('2026-01-01');
+      const totalDays = Math.ceil((targetDate - startDate) / (1000 * 60 * 60 * 24));
+      const daysPassed = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
+      const floridaProgress = Math.min(100, Math.max(0, (daysPassed / totalDays) * 100));
+      document.getElementById('floridaProgress').style.width = floridaProgress + '%';
+      
+      // MRR
+      const currentMRR = freedomConfig?.current_mrr || 0;
+      const targetMRR = freedomConfig?.target_mrr || config.florida_freedom?.target_mrr || 3000;
+      document.getElementById('currentMRR').textContent = currentMRR.toLocaleString();
+      document.getElementById('targetMRR').textContent = targetMRR.toLocaleString();
+      const mrrProgress = Math.min(100, (currentMRR / targetMRR) * 100);
+      document.getElementById('mrrProgress').style.width = mrrProgress + '%';
+      
+      // Florida Fund
+      document.getElementById('floridaFund').textContent = (freedomConfig?.florida_fund || 0).toLocaleString();
+      document.getElementById('floridaFundGoal').textContent = (freedomConfig?.florida_fund_goal || 50000).toLocaleString();
+      
+      // Priorities
+      renderPriorities();
+      
+      // Streaks
+      renderStreaks();
+      
+      // Wins
+      renderWins();
+      
+      // Goals
+      renderGoals();
+      
+      // Revenue
+      renderRevenue();
+      
+      // Fitness
+      renderFitness();
+      
+      // Quote
+      renderQuote();
+      
+      // Why
+      document.getElementById('whyText').textContent = config.florida_freedom?.why || 'Define your why in morning-config.json';
+      
+      // Quick links
+      renderQuickLinks();
+    }
+
+    function renderPriorities() {
+      const priorities = config.priorities?.today || ['Add your priorities!'];
+      const container = document.getElementById('prioritiesList');
+      
+      // Load completed state from localStorage
+      const completed = JSON.parse(localStorage.getItem('completedPriorities') || '{}');
+      const today = new Date().toDateString();
+      const todayCompleted = completed[today] || [];
+      
+      container.innerHTML = priorities.map((p, i) => `
+        <div class="priority-item ${todayCompleted.includes(i) ? 'completed' : ''}" onclick="togglePriority(${i})">
+          <div class="priority-checkbox"></div>
+          <div class="priority-number">${i + 1}</div>
+          <div class="priority-text">${p}</div>
+        </div>
+      `).join('');
+    }
+
+    function togglePriority(index) {
+      const completed = JSON.parse(localStorage.getItem('completedPriorities') || '{}');
+      const today = new Date().toDateString();
+      if (!completed[today]) completed[today] = [];
+      
+      const idx = completed[today].indexOf(index);
+      if (idx > -1) {
+        completed[today].splice(idx, 1);
+      } else {
+        completed[today].push(index);
+      }
+      
+      localStorage.setItem('completedPriorities', JSON.stringify(completed));
+      renderPriorities();
+    }
+
+    function renderStreaks() {
+      const streaks = config.streaks || {};
+      const container = document.getElementById('streakGrid');
+      
+      container.innerHTML = `
+        <div class="streak-item">
+          <div class="streak-value">${streaks.workout_days || 0}</div>
+          <div class="streak-label">🏋️ Workout Days</div>
+        </div>
+        <div class="streak-item">
+          <div class="streak-value">${streaks.wins_logged || 0}</div>
+          <div class="streak-label">🏆 Wins Logged</div>
+        </div>
+        <div class="streak-item">
+          <div class="streak-value">${streaks.productive_days || 0}</div>
+          <div class="streak-label">⚡ Productive Days</div>
+        </div>
+        <div class="streak-item">
+          <div class="streak-value">${streaks.no_scroll_days || 0}</div>
+          <div class="streak-label">🛡️ No-Scroll Days</div>
+        </div>
+      `;
+      
+      document.getElementById('noScrollDays').textContent = streaks.no_scroll_days || 0;
+    }
+
+    function renderWins() {
+      const wins = winsData?.wins || [];
+      const container = document.getElementById('winsList');
+      
+      if (wins.length === 0) {
+        container.innerHTML = '<div class="no-events">No wins logged yet. Time to change that!</div>';
+        return;
+      }
+      
+      container.innerHTML = wins.slice(-5).reverse().map(w => `
+        <div class="win-item">${w}</div>
+      `).join('');
+    }
+
+    function renderGoals() {
+      const goals = config.goals || [];
+      const container = document.getElementById('goalsList');
+      
+      if (goals.length === 0) {
+        container.innerHTML = '<div class="no-events">Set your goals in morning-config.json</div>';
+        return;
+      }
+      
+      container.innerHTML = goals.map(g => {
+        const deadline = g.deadline ? new Date(g.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+        return `
+          <div class="goal-item">
+            <div class="goal-header">
+              <span class="goal-name">${g.name}</span>
+              <span class="goal-percent">${g.progress}%</span>
+            </div>
+            <div class="goal-bar">
+              <div class="goal-fill" style="width: ${g.progress}%"></div>
+            </div>
+            ${deadline ? `<div class="goal-deadline">Due: ${deadline}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderRevenue() {
+      const sources = config.revenue_sources || [];
+      const container = document.getElementById('revenueGrid');
+      
+      container.innerHTML = sources.map(s => `
+        <div class="revenue-item">
+          <div class="revenue-name">
+            <span class="revenue-icon">${s.icon}</span>
+            <span>${s.name}</span>
+          </div>
+          <span class="revenue-value">$${s.mrr}/mo</span>
+        </div>
+      `).join('');
+    }
+
+    function renderFitness() {
+      const settings = fitnessData?.settings || config.fitness || {};
+      const today = new Date().toISOString().split('T')[0];
+      const todayLogs = (fitnessData?.food_logs || []).filter(l => l.date === today);
+      
+      const totals = todayLogs.reduce((acc, l) => ({
+        calories: acc.calories + (l.calories || 0),
+        protein: acc.protein + (l.protein || 0),
+        carbs: acc.carbs + (l.carbs || 0),
+        fat: acc.fat + (l.fat || 0)
+      }), { calories: 0, protein: 0, carbs: 0, fat: 0 });
+      
+      document.getElementById('todayCals').textContent = Math.round(totals.calories);
+      document.getElementById('todayProtein').textContent = Math.round(totals.protein);
+      document.getElementById('todayCarbs').textContent = Math.round(totals.carbs);
+      document.getElementById('todayFat').textContent = Math.round(totals.fat);
+      
+      document.getElementById('targetCals').textContent = settings.daily_calories || 2200;
+      document.getElementById('targetProtein').textContent = settings.daily_protein || 200;
+      document.getElementById('targetCarbs').textContent = settings.daily_carbs || 250;
+      document.getElementById('targetFat').textContent = settings.daily_fat || 70;
+      
+      // Last workout
+      const workouts = fitnessData?.workouts || [];
+      const lastWorkout = workouts.filter(w => w.lifts && w.lifts.length > 0).slice(-1)[0];
+      const workoutContainer = document.getElementById('lastWorkout');
+      
+      if (lastWorkout) {
+        const workoutDate = new Date(lastWorkout.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        const liftNames = [...new Set(lastWorkout.lifts.map(l => l.name))].slice(0, 4).join(', ');
+        workoutContainer.innerHTML = `
+          <div class="workout-date">Last Workout: ${workoutDate}</div>
+          <div class="workout-lifts">${liftNames}</div>
+        `;
+      } else {
+        workoutContainer.innerHTML = `
+          <div class="workout-date">No workouts logged</div>
+          <div class="workout-lifts">Time to hit the gym! 💪</div>
+        `;
+      }
+    }
+
+    function renderQuote() {
+      const quotes = config.quotes || ["You've got this."];
+      const today = new Date().getDate();
+      const quote = quotes[today % quotes.length];
+      document.getElementById('dailyQuote').textContent = `"${quote}"`;
+    }
+
+    function newQuote() {
+      const quotes = config.quotes || ["You've got this."];
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('dailyQuote').textContent = `"${randomQuote}"`;
+    }
+
+    function renderQuickLinks() {
+      const links = config.quick_links || [];
+      const container = document.getElementById('quickActions');
+      
+      // Keep the default buttons but add custom links
+      const defaultButtons = `
+        <button class="quick-btn" onclick="openLogWin()">
+          <span class="quick-btn-icon">🏆</span>
+          <span class="quick-btn-label">Log Win</span>
+        </button>
+        <button class="quick-btn" onclick="openAddPriority()">
+          <span class="quick-btn-icon">🎯</span>
+          <span class="quick-btn-label">Add Priority</span>
+        </button>
+      `;
+      
+      const customLinks = links.slice(0, 4).map(l => `
+        <a class="quick-btn" href="${l.url}">
+          <span class="quick-btn-icon">${l.icon}</span>
+          <span class="quick-btn-label">${l.name}</span>
+        </a>
+      `).join('');
+      
+      container.innerHTML = defaultButtons + customLinks;
+    }
+
+    async function fetchWeather() {
+      try {
+        const location = config?.weather?.location || 'Nashville';
+        const resp = await fetch(`https://wttr.in/${location}?format=%t|%C`);
+        const data = await resp.text();
+        const [temp, condition] = data.split('|');
+        document.getElementById('weatherTemp').textContent = temp.trim();
+        document.getElementById('weatherDesc').textContent = condition.trim();
+      } catch (e) {
+        document.getElementById('weatherTemp').textContent = '--°';
+        document.getElementById('weatherDesc').textContent = 'Weather unavailable';
+      }
+    }
+
+    // Modal functions
+    function openModal(title, placeholder, mode) {
+      modalMode = mode;
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalInput').placeholder = placeholder;
+      document.getElementById('modalInput').value = '';
+      document.getElementById('modalOverlay').classList.add('active');
+      document.getElementById('modalInput').focus();
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      modalMode = null;
+    }
+
+    function openLogWin() {
+      openModal('🏆 Log a Win', 'What did you accomplish?', 'win');
+    }
+
+    function openAddPriority() {
+      openModal('🎯 Add Priority', 'What needs to get done?', 'priority');
+    }
+
+    function submitModal() {
+      const value = document.getElementById('modalInput').value.trim();
+      if (!value) return;
+      
+      if (modalMode === 'win') {
+        // Add to wins (would need server-side support for persistence)
+        alert('Win logged! 🏆\\n\\nNote: For permanent storage, add this to memory/daily-wins.json:\\n"' + value + '"');
+      } else if (modalMode === 'priority') {
+        // Add to priorities
+        alert('Priority added! 🎯\\n\\nNote: For permanent storage, add this to morning-config.json priorities.');
+      }
+      
+      closeModal();
+    }
+
+    // Social media toggle
+    function toggleSocial() {
+      const toggle = document.getElementById('socialToggle');
+      toggle.classList.toggle('active');
+      
+      const counter = document.getElementById('shameCounter');
+      const value = document.getElementById('noScrollDays');
+      
+      if (toggle.classList.contains('active')) {
+        counter.classList.remove('clean');
+        value.classList.remove('good');
+        value.classList.add('bad');
+        value.textContent = '😬';
+      } else {
+        counter.classList.add('clean');
+        value.classList.remove('bad');
+        value.classList.add('good');
+        value.textContent = config.streaks?.no_scroll_days || 0;
+      }
+    }
+
+    // Time warning
+    function checkTimeWarning() {
+      if (!config?.anti_scroll?.enabled) return;
+      
+      const minutesSpent = Math.floor((Date.now() - sessionStart) / 60000);
+      const warningThreshold = config.anti_scroll?.warning_after_minutes || 5;
+      
+      if (minutesSpent >= warningThreshold && !warningShown) {
+        document.getElementById('timeSpent').textContent = minutesSpent;
+        document.getElementById('timeWarning').classList.add('active');
+        warningShown = true;
+      }
+    }
+
+    function dismissWarning() {
+      document.getElementById('timeWarning').classList.remove('active');
+      sessionStart = Date.now(); // Reset timer
+      warningShown = false;
+    }
+
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const toggle = document.querySelector('.theme-toggle');
+      toggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Enter' && document.getElementById('modalOverlay').classList.contains('active')) {
+        submitModal();
+      }
+    });
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalOverlay')) {
+        closeModal();
+      }
+    });
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

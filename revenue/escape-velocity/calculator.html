@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Velocity Calculator | Ross Financial Freedom</title>
+    <link rel="stylesheet" href="../../styles/jarvis-design-system.css">
+    <style>
+        body {
+            padding: var(--space-4);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .calculator-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: var(--space-3);
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all var(--transition-base);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-prefix {
+            position: relative;
+        }
+
+        .input-prefix::before {
+            content: '$';
+            position: absolute;
+            left: var(--space-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 1rem;
+        }
+
+        .input-prefix input {
+            padding-left: var(--space-5);
+        }
+
+        .results-container {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-top: var(--space-6);
+        }
+
+        .result-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            text-align: center;
+        }
+
+        .result-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .result-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar-container {
+            margin-top: var(--space-3);
+            background: var(--bg-primary);
+            border-radius: var(--radius-full);
+            height: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .scenario-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-top: var(--space-4);
+        }
+
+        .scenario-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-4);
+        }
+
+        .scenario-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-3);
+        }
+
+        .scenario-btn {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: left;
+        }
+
+        .scenario-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .scenario-btn-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .scenario-btn-impact {
+            font-size: 0.75rem;
+            color: var(--success);
+        }
+
+        .milestones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-3);
+            margin-top: var(--space-4);
+        }
+
+        .milestone {
+            background: var(--bg-primary);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
+        }
+
+        .milestone.achieved {
+            border-left-color: var(--success);
+            opacity: 0.7;
+        }
+
+        .milestone-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-1);
+        }
+
+        .milestone-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container, .scenario-section {
+                padding: var(--space-4);
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .scenario-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Escape Velocity Calculator</h1>
+        <p>Track your journey to financial freedom and the Florida lifestyle</p>
+    </div>
+
+    <div class="calculator-container">
+        <div class="input-group">
+            <label class="input-label">Current Salary (Annual)</label>
+            <div class="input-prefix">
+                <input type="number" id="salary" class="input-field" value="75000" step="1000">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Current Side Income (Monthly)</label>
+            <div class="input-prefix">
+                <input type="number" id="sideIncome" class="input-field" value="0" step="50">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Monthly Savings Rate (%)</label>
+            <input type="number" id="savingsRate" class="input-field" value="20" min="0" max="100" step="5">
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Monthly Expenses</label>
+            <div class="input-prefix">
+                <input type="number" id="expenses" class="input-field" value="3500" step="100">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Current Savings</label>
+            <div class="input-prefix">
+                <input type="number" id="currentSavings" class="input-field" value="10000" step="1000">
+            </div>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <div class="result-card">
+            <div class="result-label">Days Until $500 MRR</div>
+            <div class="result-value" id="daysToMRR">-</div>
+            <div class="result-subtitle" id="mrrDate">-</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="mrrProgress">
+                    <span id="mrrProgressText">$0 / $500</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-label">Florida Fund Progress</div>
+            <div class="result-value" id="floridaProgress">-</div>
+            <div class="result-subtitle" id="floridaDate">Target: $50,000</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="floridaBar">
+                    <span id="floridaProgressText">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-label">Financial Freedom Date</div>
+            <div class="result-value" id="freedomDate">-</div>
+            <div class="result-subtitle">When side income = expenses (25x multiplier)</div>
+        </div>
+
+        <div class="milestones" id="milestones"></div>
+    </div>
+
+    <div class="scenario-section">
+        <div class="scenario-title">💡 What-If Scenarios</div>
+        <div class="scenario-buttons">
+            <button class="scenario-btn" onclick="applyScenario('affiliate')">
+                <div class="scenario-btn-title">Launch Affiliate Program</div>
+                <div class="scenario-btn-impact">+$300/month MRR</div>
+            </button>
+            <button class="scenario-btn" onclick="applyScenario('consulting')">
+                <div class="scenario-btn-title">Pet Food Consulting</div>
+                <div class="scenario-btn-impact">+$500/month</div>
+            </button>
+            <button class="scenario-btn" onclick="applyScenario('viral')">
+                <div class="scenario-btn-title">Viral Content Success</div>
+                <div class="scenario-btn-impact">+$800/month MRR</div>
+            </button>
+            <button class="scenario-btn" onclick="applyScenario('arbitrage')">
+                <div class="scenario-btn-title">Arbitrage Hustle</div>
+                <div class="scenario-btn-impact">+$400/month</div>
+            </button>
+            <button class="scenario-btn" onclick="applyScenario('coaching')">
+                <div class="scenario-btn-title">Beach Volleyball Coaching</div>
+                <div class="scenario-btn-impact">+$600/month</div>
+            </button>
+            <button class="scenario-btn" onclick="applyScenario('increase-savings')">
+                <div class="scenario-btn-title">Increase Savings 10%</div>
+                <div class="scenario-btn-impact">Accelerate timeline</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        const inputs = ['salary', 'sideIncome', 'savingsRate', 'expenses', 'currentSavings'];
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', calculate);
+        });
+
+        calculate();
+
+        function calculate() {
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const sideIncome = parseFloat(document.getElementById('sideIncome').value) || 0;
+            const savingsRate = parseFloat(document.getElementById('savingsRate').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+
+            const monthlyIncome = (salary / 12) + sideIncome;
+            const monthlySavings = monthlyIncome * (savingsRate / 100);
+
+            // Days until $500 MRR
+            const mrrTarget = 500;
+            const monthsToMRR = Math.max(0, Math.ceil((mrrTarget - sideIncome) / 50)); // Assume $50/month growth
+            const daysToMRR = monthsToMRR * 30;
+            const mrrDate = new Date();
+            mrrDate.setDate(mrrDate.getDate() + daysToMRR);
+
+            document.getElementById('daysToMRR').textContent = daysToMRR;
+            document.getElementById('mrrDate').textContent = mrrDate.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+
+            const mrrPercentage = Math.min(100, (sideIncome / mrrTarget) * 100);
+            document.getElementById('mrrProgress').style.width = mrrPercentage + '%';
+            document.getElementById('mrrProgressText').textContent = `$${sideIncome.toFixed(0)} / $${mrrTarget}`;
+
+            // Florida Fund Progress
+            const floridaTarget = 50000;
+            const monthsToFlorida = Math.ceil((floridaTarget - currentSavings) / monthlySavings);
+            const daysToFlorida = monthsToFlorida * 30;
+            const floridaDate = new Date();
+            floridaDate.setDate(floridaDate.getDate() + daysToFlorida);
+
+            const floridaPercentage = Math.min(100, (currentSavings / floridaTarget) * 100);
+            document.getElementById('floridaProgress').textContent = `$${currentSavings.toLocaleString()}`;
+            document.getElementById('floridaDate').textContent = `${monthsToFlorida} months (${floridaDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })})`;
+            document.getElementById('floridaBar').style.width = floridaPercentage + '%';
+            document.getElementById('floridaProgressText').textContent = `${floridaPercentage.toFixed(0)}%`;
+
+            // Financial Freedom Date (when side income can cover expenses with 25x safety)
+            const freedomTarget = expenses * 0.8; // 80% of expenses covered by side income
+            const monthsToFreedom = Math.ceil((freedomTarget - sideIncome) / 100); // Assume $100/month growth
+            const freedomDate = new Date();
+            freedomDate.setDate(freedomDate.getDate() + (monthsToFreedom * 30));
+
+            document.getElementById('freedomDate').textContent = freedomDate.toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            });
+
+            // Milestones
+            const milestones = [
+                { title: 'First $100 MRR', value: sideIncome >= 100, amount: '$100' },
+                { title: 'Quit-Ready ($500)', value: sideIncome >= 500, amount: '$500' },
+                { title: 'Florida Fund 50%', value: currentSavings >= 25000, amount: '$25k' },
+                { title: 'Expenses Covered', value: sideIncome >= expenses, amount: `$${expenses}` }
+            ];
+
+            const milestonesHTML = milestones.map(m => `
+                <div class="milestone ${m.value ? 'achieved' : ''}">
+                    <div class="milestone-title">${m.title}</div>
+                    <div class="milestone-value">${m.value ? '✅ ' : ''}${m.amount}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('milestones').innerHTML = milestonesHTML;
+        }
+
+        function applyScenario(scenario) {
+            const sideIncomeInput = document.getElementById('sideIncome');
+            const savingsRateInput = document.getElementById('savingsRate');
+            const currentSideIncome = parseFloat(sideIncomeInput.value) || 0;
+            const currentSavingsRate = parseFloat(savingsRateInput.value) || 0;
+
+            const scenarios = {
+                'affiliate': { sideIncome: currentSideIncome + 300 },
+                'consulting': { sideIncome: currentSideIncome + 500 },
+                'viral': { sideIncome: currentSideIncome + 800 },
+                'arbitrage': { sideIncome: currentSideIncome + 400 },
+                'coaching': { sideIncome: currentSideIncome + 600 },
+                'increase-savings': { savingsRate: Math.min(100, currentSavingsRate + 10) }
+            };
+
+            const changes = scenarios[scenario];
+            if (changes.sideIncome !== undefined) {
+                sideIncomeInput.value = changes.sideIncome;
+            }
+            if (changes.savingsRate !== undefined) {
+                savingsRateInput.value = changes.savingsRate;
+            }
+
+            calculate();
+        }
+
+        // Auto-save to localStorage
+        setInterval(() => {
+            const data = {};
+            inputs.forEach(id => {
+                data[id] = document.getElementById(id).value;
+            });
+            localStorage.setItem('escapeVelocityData', JSON.stringify(data));
+        }, 2000);
+
+        // Load from localStorage
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('escapeVelocityData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(id => {
+                    if (document.getElementById(id)) {
+                        document.getElementById(id).value = data[id];
+                    }
+                });
+                calculate();
+            }
+        });
+    </script>
+</body>
+</html>

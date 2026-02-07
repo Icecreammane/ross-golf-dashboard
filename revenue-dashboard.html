@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Dashboard - FitTrack</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .metric-change.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .metric-change.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .metric-change.neutral {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .chart-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .goal-progress {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .goal-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .goal-text strong {
+            color: #667eea;
+            font-size: 1.3em;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-indicator.online {
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.offline {
+            background: #dc3545;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .metric-value {
+                font-size: 2em;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Revenue Dashboard</h1>
+            <div class="last-updated">
+                <span class="status-indicator online"></span>
+                Last updated: <span id="lastUpdate">Loading...</span>
+            </div>
+        </header>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+        <div id="loading" class="loading">Loading revenue data...</div>
+
+        <div id="dashboard" style="display: none;">
+            <!-- Hero Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">💵 Monthly Recurring Revenue</div>
+                    <div class="metric-value" id="mrr">$0</div>
+                    <span class="metric-change neutral" id="mrrChange">--</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">📈 Annual Recurring Revenue</div>
+                    <div class="metric-value" id="arr">$0</div>
+                    <span class="metric-change neutral">ARR = MRR × 12</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">👥 Active Customers</div>
+                    <div class="metric-value" id="customers">0</div>
+                    <span class="metric-change neutral" id="customerChange">--</span>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">📊 7-Day Growth</div>
+                    <div class="metric-value" id="growth">0%</div>
+                    <span class="metric-change neutral" id="growthChange">--</span>
+                </div>
+            </div>
+
+            <!-- Goal Progress -->
+            <div class="chart-section">
+                <h2>🎯 Progress to $3K MRR Goal</h2>
+                <div class="goal-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar">0%</div>
+                    </div>
+                    <div class="goal-text" id="goalText">
+                        <strong id="remainingAmount">$3,000</strong> remaining to reach goal
+                    </div>
+                    <div class="goal-text" id="projectionText" style="margin-top: 5px; font-size: 0.95em;">
+                        Calculating projection...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Chart -->
+            <div class="chart-section">
+                <h2>💰 Revenue Trend (Last 30 Days)</h2>
+                <canvas id="revenueChart"></canvas>
+            </div>
+
+            <!-- Customer Chart -->
+            <div class="chart-section">
+                <h2>👥 Active Subscriptions</h2>
+                <canvas id="customerChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5001/api';
+        let revenueChart = null;
+        let customerChart = null;
+
+        // Fetch all dashboard data
+        async function fetchDashboardData() {
+            try {
+                const response = await fetch(`${API_BASE}/revenue/dashboard`);
+                if (!response.ok) throw new Error('API not responding');
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                return null;
+            }
+        }
+
+        // Fetch projections
+        async function fetchProjections() {
+            try {
+                const response = await fetch(`${API_BASE}/revenue/projections`);
+                if (!response.ok) throw new Error('API not responding');
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching projections:', error);
+                return null;
+            }
+        }
+
+        // Update hero metrics
+        function updateMetrics(data) {
+            const { mrr, customers, growth } = data;
+
+            // MRR & ARR
+            document.getElementById('mrr').textContent = `$${mrr.mrr.toFixed(2)}`;
+            document.getElementById('arr').textContent = `$${mrr.arr.toFixed(2)}`;
+
+            // Customers
+            document.getElementById('customers').textContent = customers.active_customers;
+
+            // Growth
+            const growthPct = growth.growth_percentage || 0;
+            document.getElementById('growth').textContent = `${growthPct > 0 ? '+' : ''}${growthPct.toFixed(1)}%`;
+            
+            const growthElement = document.getElementById('growthChange');
+            growthElement.textContent = growthPct > 0 ? '🚀 Growing!' : growthPct < 0 ? '📉 Declining' : '➡️ Stable';
+            growthElement.className = `metric-change ${growthPct > 0 ? 'positive' : growthPct < 0 ? 'negative' : 'neutral'}`;
+        }
+
+        // Update goal progress
+        async function updateGoalProgress() {
+            const projections = await fetchProjections();
+            if (!projections) return;
+
+            const { current_mrr, goal, remaining, progress_percentage, days_to_goal, projected_date } = projections;
+
+            // Progress bar
+            const progressBar = document.getElementById('progressBar');
+            const percentage = Math.min(progress_percentage, 100);
+            progressBar.style.width = `${percentage}%`;
+            progressBar.textContent = `${percentage.toFixed(1)}%`;
+
+            // Remaining amount
+            document.getElementById('remainingAmount').textContent = `$${remaining.toFixed(2)}`;
+
+            // Projection
+            const projectionText = document.getElementById('projectionText');
+            if (current_mrr >= goal) {
+                projectionText.innerHTML = '🎉 <strong>GOAL ACHIEVED!</strong> 🎉';
+                projectionText.style.color = '#28a745';
+            } else if (days_to_goal && projected_date) {
+                const date = new Date(projected_date);
+                const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                projectionText.innerHTML = `Projected to reach $3K on <strong>${dateStr}</strong> (${days_to_goal} days)`;
+            } else {
+                projectionText.innerHTML = 'Keep growing to see projection! 💪';
+            }
+        }
+
+        // Create revenue chart
+        function createRevenueChart(growthData) {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            const dailyRevenue = growthData.daily_revenue || {};
+            const dates = Object.keys(dailyRevenue).sort();
+            const revenues = dates.map(date => dailyRevenue[date]);
+
+            if (revenueChart) {
+                revenueChart.destroy();
+            }
+
+            revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates.map(date => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
+                    datasets: [{
+                        label: 'Daily Revenue',
+                        data: revenues,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Revenue: $${context.parsed.y.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Create customer chart (placeholder - would need historical data)
+        function createCustomerChart(customerData) {
+            const ctx = document.getElementById('customerChart').getContext('2d');
+            
+            // For now, show current count
+            // In production, you'd track this over time
+            const currentCount = customerData.active_customers;
+
+            if (customerChart) {
+                customerChart.destroy();
+            }
+
+            customerChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Active Subscriptions'],
+                    datasets: [{
+                        label: 'Count',
+                        data: [currentCount],
+                        backgroundColor: '#764ba2',
+                        borderColor: '#667eea',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Load and display all data
+        async function loadDashboard() {
+            const data = await fetchDashboardData();
+            
+            if (!data) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('errorMessage').textContent = 
+                    '⚠️ Unable to connect to Revenue API. Make sure the API is running on port 5001.';
+                
+                document.querySelector('.status-indicator').classList.remove('online');
+                document.querySelector('.status-indicator').classList.add('offline');
+                return;
+            }
+
+            // Hide loading, show dashboard
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+
+            // Update all sections
+            updateMetrics(data);
+            await updateGoalProgress();
+            createRevenueChart(data.growth);
+            createCustomerChart(data.customers);
+
+            // Update timestamp
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+
+        // Auto-refresh every 60 seconds
+        function startAutoRefresh() {
+            setInterval(loadDashboard, 60000);
+        }
+
+        // Initialize dashboard
+        window.addEventListener('load', () => {
+            loadDashboard();
+            startAutoRefresh();
+        });
+    </script>
+</body>
+</html>

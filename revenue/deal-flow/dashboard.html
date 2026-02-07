@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Flow Pipeline | Ross Revenue Systems</title>
+    <link rel="stylesheet" href="../../styles/jarvis-design-system.css">
+    <style>
+        .deal-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deal-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .deal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .deal-type {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-2);
+        }
+
+        .type-arbitrage { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .type-affiliate { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .type-real-estate { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .type-side-hustle { background: rgba(139, 92, 246, 0.15); color: var(--secondary); }
+
+        .deal-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .deal-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: var(--space-3);
+        }
+
+        .deal-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+            padding: var(--space-3);
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .effort-low { color: var(--success); }
+        .effort-medium { color: var(--warning); }
+        .effort-high { color: var(--danger); }
+
+        .return-value { color: var(--success); }
+
+        .deal-requirements {
+            margin-bottom: var(--space-3);
+        }
+
+        .requirements-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .requirement-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: var(--space-1) var(--space-2);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            margin-right: var(--space-1);
+            margin-bottom: var(--space-1);
+            color: var(--text-secondary);
+        }
+
+        .deal-actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .viral-indicator {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .viral-high { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .viral-medium { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .viral-low { background: rgba(82, 82, 82, 0.15); color: var(--text-tertiary); }
+
+        .filter-bar {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .roi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: var(--space-2);
+        }
+
+        .roi-excellent { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .roi-good { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .roi-fair { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+        @media (max-width: 768px) {
+            .deal-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .viral-indicator {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="page-title">
+                    💰 Deal Flow Pipeline
+                </div>
+                <div class="page-subtitle">
+                    Your personal money-making opportunity scanner
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="refreshData()">🔄 Refresh Data</button>
+                    <button class="btn btn-secondary" onclick="sortByROI()">📊 Sort by ROI</button>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-4 mb-6">
+                <div class="stat-card">
+                    <div class="stat-label">Total Opportunities</div>
+                    <div class="stat-value" id="totalOpps">0</div>
+                    <div class="stat-change neutral">Active tracking</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg Effort Score</div>
+                    <div class="stat-value" id="avgEffort">0</div>
+                    <div class="stat-change neutral">1-10 scale</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Return Potential</div>
+                    <div class="stat-value" id="totalReturn">$0</div>
+                    <div class="stat-change positive">Combined monthly</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Deals</div>
+                    <div class="stat-value" id="activeDeals">0</div>
+                    <div class="stat-change positive">Ready to execute</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="section-header">
+                <div>
+                    <div class="section-title">Opportunities</div>
+                    <div class="section-subtitle">Filter by type or status</div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterType('all')">All</button>
+                <button class="filter-btn" onclick="filterType('arbitrage')">🔄 Arbitrage</button>
+                <button class="filter-btn" onclick="filterType('affiliate')">🤝 Affiliate</button>
+                <button class="filter-btn" onclick="filterType('real-estate')">🏠 Real Estate</button>
+                <button class="filter-btn" onclick="filterType('side-hustle')">💼 Side Hustle</button>
+            </div>
+
+            <!-- Deals Grid -->
+            <div class="grid grid-auto" id="dealsGrid">
+                <!-- Deals will be loaded here -->
+            </div>
+
+            <!-- Last Updated -->
+            <div class="text-center mt-6 text-secondary">
+                <small>Last updated: <span id="lastUpdated">-</span></small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allDeals = [];
+        let currentFilter = 'all';
+
+        // Load and display opportunities
+        async function loadOpportunities() {
+            try {
+                const response = await fetch('opportunities.json');
+                const data = await response.json();
+                allDeals = data.opportunities;
+                
+                // Update stats
+                document.getElementById('totalOpps').textContent = data.stats.totalOpportunities;
+                document.getElementById('avgEffort').textContent = data.stats.avgEffortScore.toFixed(1);
+                document.getElementById('totalReturn').textContent = '$' + data.stats.totalReturnPotential.toLocaleString();
+                document.getElementById('activeDeals').textContent = data.stats.activeOpportunities;
+                document.getElementById('lastUpdated').textContent = new Date(data.lastUpdated).toLocaleString();
+
+                // Display deals
+                displayDeals(allDeals);
+            } catch (error) {
+                console.error('Error loading opportunities:', error);
+                document.getElementById('dealsGrid').innerHTML = '<p class="text-secondary">Error loading opportunities. Please refresh.</p>';
+            }
+        }
+
+        function displayDeals(deals) {
+            const grid = document.getElementById('dealsGrid');
+            grid.innerHTML = '';
+
+            deals.forEach(deal => {
+                const card = createDealCard(deal);
+                grid.appendChild(card);
+            });
+        }
+
+        function createDealCard(deal) {
+            const card = document.createElement('div');
+            card.className = 'deal-card';
+            card.dataset.type = deal.type;
+
+            // Calculate ROI score (return / effort)
+            const roiScore = deal.returnPotential / deal.effortScore;
+            let roiClass = 'roi-fair';
+            let roiLabel = 'Fair ROI';
+            if (roiScore > 200) {
+                roiClass = 'roi-excellent';
+                roiLabel = '⭐ Excellent ROI';
+            } else if (roiScore > 100) {
+                roiClass = 'roi-good';
+                roiLabel = '✓ Good ROI';
+            }
+
+            // Effort class
+            let effortClass = 'effort-medium';
+            if (deal.effortScore <= 4) effortClass = 'effort-low';
+            if (deal.effortScore >= 7) effortClass = 'effort-high';
+
+            // Viral class
+            let viralClass = 'viral-low';
+            let viralEmoji = '📊';
+            if (deal.viralPotential >= 7) {
+                viralClass = 'viral-high';
+                viralEmoji = '🔥';
+            } else if (deal.viralPotential >= 5) {
+                viralClass = 'viral-medium';
+                viralEmoji = '⚡';
+            }
+
+            card.innerHTML = `
+                <div class="viral-indicator ${viralClass}" title="Viral Potential: ${deal.viralPotential}/10">
+                    ${viralEmoji}
+                </div>
+                <div class="deal-type type-${deal.type}">${deal.type.replace('-', ' ')}</div>
+                <div class="deal-title">${deal.title}</div>
+                <div class="deal-description">${deal.description}</div>
+                
+                <div class="deal-metrics">
+                    <div class="metric">
+                        <div class="metric-label">Effort</div>
+                        <div class="metric-value ${effortClass}">${deal.effortScore}/10</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Return</div>
+                        <div class="metric-value return-value">$${deal.returnPotential.toLocaleString()}</div>
+                    </div>
+                </div>
+
+                <div class="deal-requirements">
+                    <div class="requirements-title">Requirements</div>
+                    ${deal.requirements.map(req => `<span class="requirement-tag">${req}</span>`).join('')}
+                </div>
+
+                <div class="roi-badge ${roiClass}">${roiLabel}</div>
+
+                <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border);">
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: var(--space-2);">
+                        ⏱️ ${deal.timeframe} | 📍 ${deal.source}
+                    </div>
+                    <details style="margin-top: var(--space-2);">
+                        <summary style="cursor: pointer; color: var(--primary); font-size: 0.875rem; font-weight: 600;">
+                            View Next Steps →
+                        </summary>
+                        <ul style="margin-top: var(--space-2); padding-left: var(--space-4); color: var(--text-secondary); font-size: 0.875rem;">
+                            ${deal.nextSteps.map(step => `<li style="margin-bottom: var(--space-1);">${step}</li>`).join('')}
+                        </ul>
+                    </details>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function filterType(type) {
+            currentFilter = type;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter and display
+            if (type === 'all') {
+                displayDeals(allDeals);
+            } else {
+                const filtered = allDeals.filter(deal => deal.type === type);
+                displayDeals(filtered);
+            }
+        }
+
+        function sortByROI() {
+            const sorted = [...allDeals].sort((a, b) => {
+                const roiA = a.returnPotential / a.effortScore;
+                const roiB = b.returnPotential / b.effortScore;
+                return roiB - roiA;
+            });
+            displayDeals(sorted);
+        }
+
+        function refreshData() {
+            loadOpportunities();
+            // Show feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ Refreshed';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+
+        // Load on page load
+        loadOpportunities();
+    </script>
+</body>
+</html>

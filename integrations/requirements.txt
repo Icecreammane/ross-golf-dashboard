@@ -1,0 +1,22 @@
+# Integration Framework Dependencies
+# Install all: pip install -r integrations/requirements.txt
+
+# Core
+python-dotenv==1.0.0
+
+# Stripe Integration
+stripe==7.7.0
+flask==3.0.0
+flask-cors==4.0.0
+requests==2.31.0
+
+# Gmail Integration
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.111.0
+
+# Twitter Integration
+tweepy==4.14.0
+
+# Optional but recommended
+schedule==1.2.0  # For scheduling tasks

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Progress - 2026-02-03</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 16px;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; color: white; margin-bottom: 8px; }
+        .header .week { font-size: 14px; opacity: 0.9; }
+        .section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .stat {
+            background: #2a2a2a;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4ade80;
+            margin-bottom: 4px;
+        }
+        .stat .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        .insight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .swot-box {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+        .swot-box.strengths { border-color: #4ade80; }
+        .swot-box.weaknesses { border-color: #f59e0b; }
+        .swot-box.opportunities { border-color: #3b82f6; }
+        .swot-box.threats { border-color: #ef4444; }
+        .swot-box h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #e0e0e0;
+        }
+        .swot-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .swot-box li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #a3a3a3;
+        }
+        .swot-box li::before {
+            content: '• ';
+            color: inherit;
+        }
+        .actions {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .actions h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #667eea;
+        }
+        .actions ol {
+            padding-left: 20px;
+            color: #a3a3a3;
+        }
+        .actions li {
+            padding: 4px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Weekly Progress Report</h1>
+            <div class="week">Week ending 2026-02-03</div>
+        </div>
+        
+        <div class="section">
+            <h2>💪 Fitness</h2>
+            <div class="stat-grid">
+                <div class="stat">
+                    <div class="value">1</div>
+                    <div class="label">Workouts</div>
+                </div>
+                <div class="stat">
+                    <div class="value">2</div>
+                    <div class="label">Days Tracked</div>
+                </div>
+                <div class="stat">
+                    <div class="value">N/A</div>
+                    <div class="label">Weight Change (lbs)</div>
+                </div>
+                <div class="stat">
+                    <div class="value">38g</div>
+                    <div class="label">Avg Protein</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🛠️ Builds Completed</h2>
+            <p>This week: 3 major projects shipped</p>
+        </div>
+        
+        <div class="insight">
+            <strong>💡 Insight</strong><br>
+            Consistent tracking builds momentum. Keep logging daily.
+        </div>
+        <div class="section">
+            <h2>🤖 Jarvis SWOT Analysis</h2>
+            
+            <div class="swot-grid">
+                <div class="swot-box strengths">
+                    <h3>💪 Strengths</h3>
+                    <ul>
+                        <li>Execution speed - can build and ship quickly</li><li>Systems thinking - connect fitness → goals → outcomes</li><li>Technical breadth - handle diverse tasks</li><li>Proactive initiative - don't wait for instructions</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-box weaknesses">
+                    <h3>⚠️ Weaknesses</h3>
+                    <ul>
+                        <li>No tool usage being tracked - need better monitoring</li><li>Not being proactive enough - no messages sent today</li><li>Not logging daily memories - context will be lost</li><li>Session amnesia - fresh start each time limits continuity</li><li>Can't initiate conversations outside heartbeats</li><li>No behavioral pattern detection yet</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-box opportunities">
+                    <h3>🚀 Opportunities</h3>
+                    <ul>
+                        <li>Implement semantic memory search (vector DB)</li><li>Add real-time data integrations (Calendar, Health, Bank)</li><li>Build behavioral analytics engine</li><li>Create workout auto-logger from text</li><li>Develop progress photo timeline</li>
+                    </ul>
+                </div>
+                
+                <div class="swot-box threats">
+                    <h3>🛡️ Threats</h3>
+                    <ul>
+                        <li>Memory loss during restarts causing frustration</li><li>Over-automation leading to dependence</li><li>Inaccurate suggestions eroding trust</li><li>System complexity making maintenance difficult</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <h3>📊 Recommended Actions This Week:</h3>
+                <ol>
+                    <li>Prioritize semantic memory implementation</li>
+                    <li>Increase proactive check-ins (if underutilized)</li>
+                    <li>Gather more feedback on suggestions</li>
+                    <li>Log daily memories consistently</li>
+                    <li>Build next priority tool from opportunities list</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

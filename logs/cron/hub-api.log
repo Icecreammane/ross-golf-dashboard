@@ -1,0 +1,68 @@
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Serving Flask app 'hub-api'
+ * Debug mode: on
+Address already in use
+Port 8080 is in use by another program. Either identify and stop that program, or start the server with a different port.
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Serving Flask app 'hub-api'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.0.0.16:8080
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+10.0.0.16 - - [04/Feb/2026 12:43:56] "GET /api/hub/health HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:43:56] "GET /api/hub/fitness HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:43:59] "GET /api/hub/status HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:43:59] "GET /api/hub/nba HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:44:24] "GET /api/hub/health HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:45:23] "GET /dashboard/hub.html HTTP/1.1" 200 -
+10.0.0.16 - - [04/Feb/2026 12:46:04] "GET /api/hub/revenue HTTP/1.1" 200 -
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-reader.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-reader.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-reader.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-integration.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-integration.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+ * Detected change in '/Users/clawdbot/clawd/systems/youtube-integration.py', reloading
+🚀 Hub API starting on http://10.0.0.18:8080
+📊 Serving data from: /Users/clawdbot/clawd
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 124-954-264
+10.0.0.14 - - [06/Feb/2026 16:36:41] "[33mGET /org-chart-dashboard.html HTTP/1.1[0m" 404 -
+10.0.0.14 - - [06/Feb/2026 16:36:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+10.0.0.16 - - [06/Feb/2026 16:37:11] "[33mGET /org-chart-dashboard.html HTTP/1.1[0m" 404 -
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-2ib6v5kw'}
+  warnings.warn(
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/resource_tracker.py:396: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-jqpci605'}
+  warnings.warn(

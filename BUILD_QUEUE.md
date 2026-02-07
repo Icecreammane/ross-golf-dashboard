@@ -10,35 +10,57 @@
 ## 🟡 Active Queue (Next Up)
 *Ready to start*
 
-- [ ] Mission Control V2 - Real Command Center - Added: 2026-02-07 10:15 - Priority: High - Category: Revenue
-- [ ] Test Build - Simple Echo - Added: 2026-02-06 14:40 - Priority: High
+- [ ] Stripe Integration - Added: 2026-02-07 - Priority: High - Category: Revenue
+- [ ] Golf Coaching Landing Page - Added: 2026-02-07 - Priority: High - Category: Revenue
+- [ ] Tweet Content Pipeline - Added: 2026-02-07 - Priority: Medium - Category: Automation
 
 ## 🟢 Completed (Last 7 Days)
 
+- [x] Mission Control V2 - Completed: 2026-02-07 10:30 - Duration: ~30 minutes
 - [x] Autonomous Build System - Completed: 2026-02-06 14:40 - Duration: 45 minutes
 
 ## 📋 Task Details
 
-### Mission Control V2 - Real Command Center
-- **Description:** Rebuild Mission Control as the actual command center for the $500 MRR mission. Not an org chart - a live dashboard showing mission status, active builds, revenue tracking, task queue, and quick actions. Single source of truth for "what's happening" and "what's next."
+### Stripe Integration
+- **Description:** Connect Stripe API for payment processing and MRR tracking. Enable the dashboard to show real revenue data.
 - **Completion Criteria:**
-  - Live integration with BUILD_STATUS.md, BUILD_QUEUE.md, DONE.md
-  - Real-time metrics: MRR, revenue this month, days to goal, velocity
-  - Active builds view with progress and ETA
-  - Task router: assign tasks to right agent/model
-  - Quick actions: spawn build, approve content, check status
-  - Mobile-responsive design (check on phone)
-  - Auto-refresh every 30 seconds
-  - Cost tracking per agent/model
-  - Alert system for blockers
-- **Tech Stack:** HTML/CSS/JavaScript, live data from markdown files, Chart.js for visualizations
-- **Estimated Time:** 2-3 hours
+  - Stripe API integration working
+  - Real MRR data displayed in Mission Control
+  - Payment webhook handling
+- **Tech Stack:** Python, Stripe API
+- **Estimated Time:** 45 minutes
 - **Priority:** High
-- **Category:** Revenue (affects all revenue-generating work)
-- **Model:** Opus (complex, strategic build)
-- **Added:** 2026-02-07 10:15
+- **Category:** Revenue
+- **Model:** Opus (revenue-critical)
+- **Added:** 2026-02-07
 
-## 📋 Task Details
+### Golf Coaching Landing Page
+- **Description:** Sales page for golf coaching service with Stripe checkout integration.
+- **Completion Criteria:**
+  - Landing page with compelling copy
+  - Stripe checkout embedded
+  - Mobile responsive
+- **Tech Stack:** HTML/CSS/JavaScript, Stripe
+- **Estimated Time:** 30 minutes
+- **Priority:** High
+- **Category:** Revenue
+- **Model:** Opus (revenue-critical)
+- **Added:** 2026-02-07
+
+### Tweet Content Pipeline
+- **Description:** Automated system for generating, reviewing, and scheduling tweets.
+- **Completion Criteria:**
+  - Tweet generation from templates
+  - Approval queue in content/tweets-pending/
+  - Scheduling integration
+- **Tech Stack:** Python
+- **Estimated Time:** 20 minutes
+- **Priority:** Medium
+- **Category:** Automation
+- **Model:** Sonnet (automation task)
+- **Added:** 2026-02-07
+
+## 📋 Task Details (Archived)
 
 ### Test Build - Simple Echo
 - **Description:** Test task for the autonomous build system. Creates a simple script that echoes "Hello from autonomous build!" and verifies the system can spawn, track, and complete builds automatically.

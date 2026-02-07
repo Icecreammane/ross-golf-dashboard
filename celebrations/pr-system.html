@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Celebration - Ross</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 24px;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .tagline {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .log-pr {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 2px solid #2a2a2a;
+        }
+        
+        .log-pr h2 {
+            font-size: 20px;
+            color: #f59e0b;
+            margin-bottom: 16px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        input, select {
+            background: #0a0a0a;
+            border: 2px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 14px;
+            color: #e0e0e0;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f59e0b;
+        }
+        
+        .log-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+            margin-top: 12px;
+        }
+        
+        .log-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .celebration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .celebration-content {
+            text-align: center;
+            padding: 40px;
+            animation: celebrate 0.5s ease;
+        }
+        
+        @keyframes celebrate {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .celebration-content .trophy {
+            font-size: 120px;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .celebration-content h2 {
+            font-size: 48px;
+            color: #f59e0b;
+            margin-bottom: 16px;
+        }
+        
+        .celebration-content .stats {
+            font-size: 24px;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+        }
+        
+        .celebration-content .comparison {
+            font-size: 18px;
+            color: #10b981;
+            margin-top: 20px;
+        }
+        
+        .close-btn {
+            background: #2a2a2a;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+        
+        .pr-history {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .pr-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 4px solid #f59e0b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pr-info {
+            flex: 1;
+        }
+        
+        .pr-exercise {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .pr-date {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .pr-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        
+        .pr-unit {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 PR Celebration</h1>
+            <div class="tagline">Gamify your gains • Celebrate every win</div>
+        </div>
+        
+        <div class="log-pr">
+            <h2>Log a New PR</h2>
+            <div class="form-row">
+                <select id="exercise">
+                    <option value="">Select Exercise</option>
+                    <option value="bench">Bench Press</option>
+                    <option value="squat">Squat</option>
+                    <option value="deadlift">Deadlift</option>
+                    <option value="ohp">Overhead Press</option>
+                    <option value="row">Barbell Row</option>
+                    <option value="pullup">Pull-ups</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="text" id="customExercise" placeholder="Custom exercise name" style="display: none;">
+            </div>
+            <div class="form-row">
+                <input type="number" id="weight" placeholder="Weight (lbs)">
+                <input type="number" id="reps" placeholder="Reps">
+            </div>
+            <button class="log-btn" onclick="logPR()">Log PR 🎉</button>
+        </div>
+        
+        <h2 style="color: #f59e0b; margin-bottom: 16px; font-size: 22px;">📊 Your PRs</h2>
+        <div class="pr-history" id="prHistory"></div>
+    </div>
+    
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-content">
+            <div class="trophy">🏆</div>
+            <h2>NEW PR!</h2>
+            <div class="stats" id="celebrationStats"></div>
+            <div class="comparison" id="celebrationComparison"></div>
+            <button class="close-btn" onclick="closeCelebration()">Awesome! ✨</button>
+        </div>
+    </div>
+    
+    <script>
+        let prs = JSON.parse(localStorage.getItem('prs') || '{}');
+        
+        // Exercise selector
+        document.getElementById('exercise').addEventListener('change', (e) => {
+            const custom = document.getElementById('customExercise');
+            if (e.target.value === 'other') {
+                custom.style.display = 'block';
+            } else {
+                custom.style.display = 'none';
+            }
+        });
+        
+        function logPR() {
+            const exerciseSelect = document.getElementById('exercise');
+            const customExercise = document.getElementById('customExercise');
+            const weight = parseFloat(document.getElementById('weight').value);
+            const reps = parseInt(document.getElementById('reps').value);
+            
+            let exercise = exerciseSelect.value === 'other' ? 
+                customExercise.value : 
+                exerciseSelect.options[exerciseSelect.selectedIndex].text;
+            
+            if (!exercise || !weight || !reps) {
+                alert('Please fill in all fields!');
+                return;
+            }
+            
+            const exerciseKey = exercise.toLowerCase().replace(/\s+/g, '_');
+            const estimated1RM = reps === 1 ? weight : weight * (1 + reps / 30);
+            
+            const oldPR = prs[exerciseKey];
+            const isNewPR = !oldPR || estimated1RM > oldPR.estimated1RM;
+            
+            const pr = {
+                exercise: exercise,
+                weight: weight,
+                reps: reps,
+                estimated1RM: Math.round(estimated1RM),
+                date: new Date().toISOString(),
+                dateFormatted: new Date().toLocaleDateString()
+            };
+            
+            if (isNewPR) {
+                prs[exerciseKey] = pr;
+                localStorage.setItem('prs', JSON.stringify(prs));
+                celebrate(pr, oldPR);
+            } else {
+                alert(`Not a PR. Your current best is ${oldPR.weight}lbs x ${oldPR.reps} (Est. 1RM: ${oldPR.estimated1RM}lbs)`);
+            }
+            
+            // Clear form
+            document.getElementById('weight').value = '';
+            document.getElementById('reps').value = '';
+            
+            renderPRs();
+        }
+        
+        function celebrate(pr, oldPR) {
+            // Confetti!
+            const duration = 3000;
+            const end = Date.now() + duration;
+            
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#f59e0b', '#dc2626', '#10b981']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#f59e0b', '#dc2626', '#10b981']
+                });
+                
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+            
+            // Show modal
+            const modal = document.getElementById('celebrationModal');
+            const stats = document.getElementById('celebrationStats');
+            const comparison = document.getElementById('celebrationComparison');
+            
+            stats.textContent = `${pr.exercise}: ${pr.weight}lbs × ${pr.reps} reps`;
+            
+            if (oldPR) {
+                const improvement = pr.estimated1RM - oldPR.estimated1RM;
+                const daysSince = Math.floor((new Date(pr.date) - new Date(oldPR.date)) / (1000 * 60 * 60 * 24));
+                comparison.textContent = `+${improvement}lbs since ${daysSince} days ago! 💪`;
+            } else {
+                comparison.textContent = `First ${pr.exercise} PR logged! 🚀`;
+            }
+            
+            modal.style.display = 'flex';
+            
+            // Voice announcement
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(`New PR! ${pr.exercise}, ${pr.weight} pounds for ${pr.reps} reps!`);
+                utterance.rate = 1.1;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
+        
+        function closeCelebration() {
+            document.getElementById('celebrationModal').style.display = 'none';
+        }
+        
+        function renderPRs() {
+            const history = document.getElementById('prHistory');
+            const sortedPRs = Object.values(prs).sort((a, b) => 
+                new Date(b.date) - new Date(a.date)
+            );
+            
+            if (sortedPRs.length === 0) {
+                history.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">No PRs logged yet. Time to get started! 💪</div>';
+                return;
+            }
+            
+            history.innerHTML = sortedPRs.map(pr => `
+                <div class="pr-card">
+                    <div class="pr-info">
+                        <div class="pr-exercise">${pr.exercise}</div>
+                        <div class="pr-date">${pr.dateFormatted}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="pr-value">${pr.weight} <span class="pr-unit">lbs × ${pr.reps}</span></div>
+                        <div class="pr-unit">Est. 1RM: ${pr.estimated1RM}lbs</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Initial render
+        renderPRs();
+    </script>
+</body>
+</html>

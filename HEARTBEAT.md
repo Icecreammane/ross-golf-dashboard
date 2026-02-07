@@ -1,9 +1,13 @@
 # HEARTBEAT.md - Jarvis Periodic Tasks
 
 ## 🧠 Before Every Heartbeat
-1. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
-2. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
-3. **Check Proactive State:** Review any pending actions
+1. **Check for Escalations (NEW):** Run `python3 ~/clawd/scripts/check_escalations.py`
+   - Local daemon signals when it needs Sonnet's help
+   - Handle spawns, alerts, morning briefs, evening check-ins
+   - This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
+2. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
+3. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
+4. **Check Proactive State:** Review any pending actions
 
 ## Evening Check-In (8:00pm CST)
 If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happened today:
@@ -33,58 +37,32 @@ If current day is Sunday and time is between 5:55pm-6:05pm CST:
 4. Include link: "Full report: http://10.0.0.18:8080/reports/weekly_progress.html"
 5. Log "weekly_report_sent" in memory/heartbeat-state.json
 
-## Autonomous Task Generation (Every Heartbeat)
-**CRITICAL:** Run autonomous check on every heartbeat:
-1. Run: `python3 ~/clawd/scripts/autonomous_check.py`
-   - Reads GOALS.md (Ross's north star)
-   - Checks BUILD_QUEUE.md for tasks
-   - If queue empty → generates 1-3 tasks from GOALS.md aligned with primary mission
-   - If nothing building → writes spawn signal to memory/spawn-signal.json
-   - Updates BUILD_STATUS.md with progress
-2. **Check for spawn signal:** If `memory/spawn-signal.json` exists and has `"ready": true`:
-   - Read the signal file
-   - Spawn build via `sessions_spawn` tool using task, label, and model from signal
-   - Use Opus for revenue builds, Sonnet for everything else (auto-detected)
-   - Delete the spawn signal file after spawning
-   - Update BUILD_STATUS.md with spawn confirmation
-3. Log any new builds spawned to memory/jarvis-journal.md
-4. Only escalate to Ross if blocked or need decision
+## Autonomous Task Generation (Handled by Daemon)
+**Now automated!** The local daemon (Tier 1) handles task generation every 5 minutes:
+- Runs `autonomous_check.py` automatically
+- Generates tasks from GOALS.md when queue is empty
+- Writes spawn signals when builds are ready
+- Escalates to Sonnet via `escalation-pending.json` when spawn is needed
 
-**Task Generation Logic:**
-- Primary mission: $500 MRR by March 31
-- High priority: Revenue in 7 days, automation saves 1+ hr/week, daily use
-- Medium priority: Content, research, dashboard improvements
-- Low priority: Only on explicit request
+**Sonnet's role:** Check for escalations (see above) and spawn builds when daemon signals
 
-**When to auto-spawn:**
-- High priority revenue tasks: Anytime (8am-11pm)
-- Automation tasks: During off-hours (10pm-6am preferred)
-- Medium/low priority: Only if Ross hasn't touched computer in 4+ hours
-
-**Safety checks before spawning:**
-- No other builds currently active
-- Not late night (11pm-8am = wait unless urgent)
-- Task passes decision framework (see AUTONOMOUS_AGENT.md)
-- No blockers listed
-
-**See:** `AUTONOMOUS_AGENT.md` for full autonomous protocol
+**See:** `ARCHITECTURE.md` for how the three-tier system works
 
 ## Task Queue Maintenance
 - Review TASK_QUEUE.md
 - Update completed items
 - Flag any blocked tasks
 
-## System Health Check
-- **Check for Auto-Recovery Alerts:** Review `~/clawd/monitoring/alert-pending.json` for critical failures
-  - If alerts exist: Send to Ross via Telegram and clear the file
-  - Format: Send each alert's message field directly
-- Verify Flask fitness tracker is running (port 3000)
-- Check gateway process is alive
-- Check disk space (alert if >90%)
-- Review /Users/clawdbot/clawd/monitoring/health.log for issues
-- If any alerts found, notify Ross immediately
+## System Health Check (Handled by Daemon)
+**Now automated!** The local daemon runs health checks every 5 minutes:
+- Disk space monitoring (alerts if >90%)
+- Gateway process check
+- Fitness tracker status (port 3000)
+- Auto-recovery alert detection
 
-**Note:** The auto-recovery system handles most failures automatically. Only alerts that persist after 3+ recovery attempts will appear in alert-pending.json.
+**Sonnet's role:** Daemon escalates critical alerts via `escalation-pending.json` → Sonnet notifies Ross
+
+**Note:** The auto-recovery system handles most failures automatically. Only alerts that persist after 3+ recovery attempts will be escalated.
 
 ## Pending Integrations Check (Weekly)
 If it's been 7+ days since last check:

@@ -1,0 +1,14 @@
+{
+  "topic": {
+    "id": "underdog_nba_rankings",
+    "query": "Underdog Fantasy NBA daily draft rankings today",
+    "frequency": "daily",
+    "last_run": null
+  },
+  "results": {
+    "query": "Underdog Fantasy NBA daily draft rankings today",
+    "timestamp": "2026-02-07T04:02:04.975826",
+    "results": "Would fetch real results via Brave API"
+  },
+  "timestamp": "2026-02-07T04:02:04.975829"
+}

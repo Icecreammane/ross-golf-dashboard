@@ -1,0 +1,11 @@
+[2026-02-07 14:15:39] 🤖 Jarvis Local Daemon starting...
+[2026-02-07 14:15:39] Using model: local-brain (qwen2.5:14b)
+[2026-02-07 14:15:39] Heartbeat interval: 5 minutes
+[2026-02-07 14:15:39] === Heartbeat Check ===
+[2026-02-07 14:15:39] Running: Autonomous task generation
+[2026-02-07 14:15:39] ✓ Autonomous task generation completed
+[2026-02-07 14:15:39] Running: System health check
+[2026-02-07 14:15:39] ✓ System health check completed
+[2026-02-07 14:15:39] ⚠️ 3 critical alerts pending
+[2026-02-07 14:15:39] === Heartbeat Complete ===
+

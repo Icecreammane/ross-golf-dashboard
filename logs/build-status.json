@@ -1,0 +1,114 @@
+{
+  "last_updated": "2026-02-04T12:33:54.557552",
+  "active_builds": [
+    {
+      "id": "5095be2c",
+      "title": "Demo Build System",
+      "status": "in_progress",
+      "priority": "medium",
+      "started": "2026-02-04T12:48:50.803296-06:00",
+      "eta": "2026-02-04T14:48:50.803296-06:00",
+      "progress": 37,
+      "tasks": [
+        {
+          "name": "Setup",
+          "status": "complete",
+          "progress": 100,
+          "deliverable": null
+        },
+        {
+          "name": "Build Core",
+          "status": "in_progress",
+          "progress": 50,
+          "deliverable": null
+        },
+        {
+          "name": "Test",
+          "status": "pending",
+          "progress": 0,
+          "deliverable": null
+        },
+        {
+          "name": "Deploy",
+          "status": "pending",
+          "progress": 0,
+          "deliverable": null
+        }
+      ],
+      "assigned_to": "Demo Agent",
+      "notes": "Testing the build status system"
+    },
+    {
+      "id": "d569ca7c",
+      "title": "Demo Build System",
+      "status": "in_progress",
+      "priority": "high",
+      "started": "2026-02-04T12:33:54.557104",
+      "eta": "2026-02-04T14:33:54.557104",
+      "progress": 37,
+      "tasks": [
+        {
+          "name": "Setup",
+          "status": "complete",
+          "progress": 100,
+          "deliverable": null
+        },
+        {
+          "name": "Build Core",
+          "status": "in_progress",
+          "progress": 50,
+          "deliverable": null
+        },
+        {
+          "name": "Test",
+          "status": "pending",
+          "progress": 0,
+          "deliverable": null
+        },
+        {
+          "name": "Deploy",
+          "status": "pending",
+          "progress": 0,
+          "deliverable": null
+        }
+      ],
+      "assigned_to": "Demo Agent",
+      "notes": "Testing the build status system"
+    }
+  ],
+  "completed_builds": [
+    {
+      "id": "workflow-systems",
+      "title": "Workflow Infrastructure Build",
+      "status": "complete",
+      "priority": "high",
+      "started": "2026-02-04T12:30:00-06:00",
+      "eta": "2026-02-04T16:00:00-06:00",
+      "progress": 100,
+      "completed": "2026-02-04T12:50:00-06:00",
+      "tasks": [
+        {
+          "name": "Smart Context Detection",
+          "status": "complete",
+          "progress": 100,
+          "deliverable": "/Users/clawdbot/clawd/systems/smart-context.py"
+        },
+        {
+          "name": "Memory-First Auto-Context",
+          "status": "complete",
+          "progress": 100,
+          "deliverable": "/Users/clawdbot/clawd/systems/memory-auto-context.py"
+        },
+        {
+          "name": "Live Build Dashboard",
+          "status": "complete",
+          "progress": 100,
+          "deliverable": "/Users/clawdbot/clawd/dashboard/builds.html"
+        }
+      ],
+      "assigned_to": "Subagent (Workflow Engineer)",
+      "notes": "Building 3 workflow systems to make Jarvis fundamentally better"
+    }
+  ],
+  "queued_builds": []
+}

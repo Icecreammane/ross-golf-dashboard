@@ -1,0 +1,210 @@
+<!-- 
+  FitTrack Email Capture Form
+  
+  Purpose: Capture early-access email signups before launch
+  Location: Add to landing page (index.html or similar)
+  Backend: Requires /api/early-access endpoint (see backend-early-access.py)
+  
+  Features:
+  - Clean, gradient design
+  - Inline form (email + submit button)
+  - Success/error messages
+  - Mobile responsive
+  - Works without page reload (AJAX)
+-->
+
+<section id="early-access" style="
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+    margin: 40px 0;
+">
+    <h2 style="
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        font-weight: 700;
+    ">
+        Launching Friday Feb 13!
+    </h2>
+    
+    <p style="
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        opacity: 0.95;
+    ">
+        Get early access + exclusive launch discount
+    </p>
+    
+    <form id="early-access-form" style="
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        gap: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+    ">
+        <input 
+            type="email" 
+            id="email-input" 
+            placeholder="Your email" 
+            required
+            style="
+                flex: 1;
+                min-width: 250px;
+                padding: 15px 20px;
+                font-size: 1.1em;
+                border: none;
+                border-radius: 5px 0 0 5px;
+                outline: none;
+            "
+        >
+        <button 
+            type="submit"
+            id="submit-button"
+            style="
+                padding: 15px 30px;
+                font-size: 1.1em;
+                background: #10b981;
+                color: white;
+                border: none;
+                border-radius: 0 5px 5px 0;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background 0.2s;
+            "
+            onmouseover="this.style.background='#059669'"
+            onmouseout="this.style.background='#10b981'"
+        >
+            Notify Me
+        </button>
+    </form>
+    
+    <p id="form-message" style="
+        margin-top: 20px;
+        font-size: 0.95em;
+        min-height: 24px;
+        opacity: 0.9;
+    "></p>
+</section>
+
+<script>
+document.getElementById('early-access-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const emailInput = document.getElementById('email-input');
+    const submitButton = document.getElementById('submit-button');
+    const messageEl = document.getElementById('form-message');
+    const email = emailInput.value.trim();
+    
+    // Disable button during submission
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
+    messageEl.textContent = '';
+    
+    try {
+        // Send to backend API
+        const response = await fetch('/api/early-access', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Success
+            messageEl.textContent = '✅ You're on the list! Launch day is Feb 13 at 7pm.';
+            messageEl.style.color = '#d4edda';
+            emailInput.value = '';
+            
+            // Optional: Track conversion (Google Analytics, etc.)
+            // gtag('event', 'early_access_signup', { email });
+            
+        } else {
+            // Error from server
+            messageEl.textContent = `❌ ${data.error || 'Oops, something went wrong. Try again?'}`;
+            messageEl.style.color = '#f8d7da';
+        }
+        
+    } catch (error) {
+        // Network error
+        messageEl.textContent = '❌ Network error. Please check your connection and try again.';
+        messageEl.style.color = '#f8d7da';
+        console.error('Early access signup error:', error);
+    } finally {
+        // Re-enable button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Notify Me';
+    }
+});
+
+// Optional: Basic email validation styling
+document.getElementById('email-input').addEventListener('input', (e) => {
+    const email = e.target.value;
+    const isValid = email.includes('@') && email.includes('.');
+    e.target.style.borderBottom = isValid ? '3px solid #10b981' : '3px solid transparent';
+});
+</script>
+
+<!-- 
+  Mobile Responsive Adjustments
+  Add this to your CSS file or in a <style> tag
+-->
+<style>
+@media (max-width: 600px) {
+    #early-access h2 {
+        font-size: 2em !important;
+    }
+    
+    #early-access p {
+        font-size: 1em !important;
+    }
+    
+    #early-access-form {
+        flex-direction: column !important;
+    }
+    
+    #email-input,
+    #submit-button {
+        border-radius: 5px !important;
+        width: 100% !important;
+        min-width: unset !important;
+    }
+    
+    #submit-button {
+        margin-top: 10px;
+    }
+}
+</style>
+
+<!--
+  Integration Instructions:
+  
+  1. Copy this entire section into your landing page
+  2. Place it strategically (suggestions):
+     - Above footer
+     - After feature list
+     - In hero section
+  
+  3. Ensure backend endpoint exists: /api/early-access
+     (See: fittrack-launch/backend-early-access.py)
+  
+  4. Test locally:
+     - Submit test email
+     - Check console for errors
+     - Verify email saved in data/early-access-emails.txt
+  
+  5. Deploy to Railway:
+     - Push changes to GitHub
+     - Railway auto-deploys
+     - Test on production URL
+  
+  Customization:
+  - Change gradient colors (line 10)
+  - Change button color (line 42)
+  - Change text/copy as needed
+  - Add your branding
+-->

@@ -1,0 +1,472 @@
+{
+  "lastUpdated": "2026-02-04T18:36:27.818073Z",
+  "opportunities": [
+    {
+      "id": "df001",
+      "type": "arbitrage",
+      "title": "PS5 Console Flipping - Local Marketplace",
+      "description": "Buy underpriced PS5s from Facebook Marketplace/OfferUp, resell on eBay or locally. Current margin: $50-150 per unit.",
+      "source": "Facebook Marketplace, OfferUp",
+      "effortScore": 5,
+      "returnPotential": 500,
+      "timeframe": "1-3 days per flip",
+      "requirements": [
+        "$400-500 capital per unit",
+        "Transportation",
+        "PayPal/Venmo"
+      ],
+      "status": "active",
+      "viralPotential": 4,
+      "nextSteps": [
+        "Set up alerts on Facebook Marketplace",
+        "Research current eBay sold listings",
+        "Calculate shipping costs"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df002",
+      "type": "affiliate",
+      "title": "Fitness Affiliate Stack - Amazon Associates + Supplements",
+      "description": "Create fitness content (TikTok/Instagram) linking to workout gear and supplements. Your fitness background = authority.",
+      "source": "Amazon Associates, Transparent Labs, MyProtein",
+      "effortScore": 6,
+      "returnPotential": 800,
+      "timeframe": "2-3 months to scale",
+      "requirements": [
+        "TikTok account",
+        "Amazon Associates approval",
+        "Content creation"
+      ],
+      "status": "active",
+      "viralPotential": 8,
+      "nextSteps": [
+        "Apply for Amazon Associates",
+        "Research top fitness affiliate products",
+        "Create first 10 TikTok videos"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df003",
+      "type": "real-estate",
+      "title": "Tampa Bay Area - 2BR Condo Under $250k",
+      "description": "Pinellas County condo near beach, needs cosmetic work. Rent potential: $1,800/mo. Within Florida target zone.",
+      "source": "Zillow",
+      "effortScore": 8,
+      "returnPotential": 15000,
+      "timeframe": "6-12 months",
+      "requirements": [
+        "$50k down payment",
+        "Mortgage approval",
+        "Property inspection"
+      ],
+      "status": "research",
+      "viralPotential": 2,
+      "nextSteps": [
+        "Get pre-approved for mortgage",
+        "Schedule property viewing",
+        "Research rental comps in area"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df004",
+      "type": "side-hustle",
+      "title": "Fantasy Sports Consulting - Draft Strategy Services",
+      "description": "Leverage your fantasy sports expertise. Offer draft prep, roster consulting on Fiverr/Upwork. $50-200 per client.",
+      "source": "Fiverr, Upwork, Reddit r/fantasyfootball",
+      "effortScore": 4,
+      "returnPotential": 1200,
+      "timeframe": "Ongoing",
+      "requirements": [
+        "Fiverr account",
+        "Portfolio of past wins",
+        "1-2 hours per week"
+      ],
+      "status": "active",
+      "viralPotential": 5,
+      "nextSteps": [
+        "Create Fiverr gig",
+        "Write case studies of fantasy wins",
+        "Post in fantasy sports subreddits"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df005",
+      "type": "arbitrage",
+      "title": "Sneaker Flipping - Limited Releases",
+      "description": "Buy hyped sneaker drops (Nike Dunk, Jordan 1), resell on StockX/GOAT. Margin: $80-300 per pair.",
+      "source": "SNKRS App, StockX",
+      "effortScore": 6,
+      "returnPotential": 400,
+      "timeframe": "Release days (2-4x per month)",
+      "requirements": [
+        "$150-180 per pair",
+        "SNKRS app setup",
+        "StockX seller account"
+      ],
+      "status": "active",
+      "viralPotential": 6,
+      "nextSteps": [
+        "Download SNKRS app",
+        "Research upcoming releases",
+        "Set up StockX seller account"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df006",
+      "type": "affiliate",
+      "title": "DraftKings Affiliate Program - Sports Betting Content",
+      "description": "Create sports betting content around fantasy lineups. DraftKings pays $100-300 per referred user who deposits.",
+      "source": "DraftKings Affiliate",
+      "effortScore": 7,
+      "returnPotential": 2000,
+      "timeframe": "3-6 months",
+      "requirements": [
+        "Blog or YouTube channel",
+        "Sports betting knowledge",
+        "Compliance with regulations"
+      ],
+      "status": "research",
+      "viralPotential": 7,
+      "nextSteps": [
+        "Research affiliate terms",
+        "Create content calendar",
+        "Apply for affiliate program"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df007",
+      "type": "side-hustle",
+      "title": "Pet Food Industry Consulting - LinkedIn",
+      "description": "Your corporate pet food experience = consulting value. Help startups with product development, distribution.",
+      "source": "LinkedIn, Upwork",
+      "effortScore": 5,
+      "returnPotential": 3000,
+      "timeframe": "Per project (10-20 hours)",
+      "requirements": [
+        "LinkedIn optimization",
+        "Case studies",
+        "Portfolio"
+      ],
+      "status": "active",
+      "viralPotential": 3,
+      "nextSteps": [
+        "Update LinkedIn with consulting focus",
+        "Reach out to 10 pet food startups",
+        "Create service offering document"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df008",
+      "type": "arbitrage",
+      "title": "Walmart Clearance to Amazon FBA",
+      "description": "Buy clearance items at Walmart (toys, home goods), resell via Amazon FBA. Margin: 40-100% per item.",
+      "source": "Walmart, Amazon FBA",
+      "effortScore": 7,
+      "returnPotential": 600,
+      "timeframe": "Ongoing weekly",
+      "requirements": [
+        "Amazon FBA account ($40/mo)",
+        "Scanning app",
+        "Storage space"
+      ],
+      "status": "active",
+      "viralPotential": 4,
+      "nextSteps": [
+        "Download Amazon Seller app",
+        "Visit local Walmart clearance",
+        "Research FBA fees"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df009",
+      "type": "real-estate",
+      "title": "Clearwater Beach - Studio Condo $220k",
+      "description": "800 sq ft studio, ocean view, high rental demand. Airbnb potential: $2,500-3,500/mo. Prime Florida location.",
+      "source": "Realtor.com",
+      "effortScore": 9,
+      "returnPotential": 18000,
+      "timeframe": "6-12 months",
+      "requirements": [
+        "$44k down payment",
+        "Mortgage",
+        "Airbnb management"
+      ],
+      "status": "dream",
+      "viralPotential": 3,
+      "nextSteps": [
+        "Research Clearwater Airbnb regulations",
+        "Calculate HOA + insurance costs",
+        "Visit area for volleyball scene"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df010",
+      "type": "affiliate",
+      "title": "Faceless Fitness Content + Affiliate Links",
+      "description": "Create 'no face' workout transformation content on TikTok/IG with equipment affiliate links. Low effort, high viral potential.",
+      "source": "TikTok, Instagram, Amazon Associates",
+      "effortScore": 5,
+      "returnPotential": 1000,
+      "timeframe": "1-2 months to traction",
+      "requirements": [
+        "Phone camera",
+        "Basic editing skills",
+        "Consistency"
+      ],
+      "status": "active",
+      "viralPotential": 9,
+      "nextSteps": [
+        "Watch top faceless fitness accounts",
+        "Film 20 workout clips",
+        "Research trending fitness products"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df011",
+      "type": "side-hustle",
+      "title": "Beach Volleyball Coaching - Local Parks",
+      "description": "Offer private/group coaching at local beach volleyball courts. $40-80/hour. Test market before Florida move.",
+      "source": "Local parks, Craigslist, Facebook",
+      "effortScore": 3,
+      "returnPotential": 800,
+      "timeframe": "Weekly ongoing",
+      "requirements": [
+        "Volleyball skills",
+        "Liability insurance",
+        "Marketing"
+      ],
+      "status": "active",
+      "viralPotential": 4,
+      "nextSteps": [
+        "Post on local Facebook groups",
+        "Create simple flyer",
+        "Scout local sand courts"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df012",
+      "type": "arbitrage",
+      "title": "Storage Unit Auctions - Flip Finds",
+      "description": "Buy storage unit lots at auction, resell valuable items on eBay/Facebook. High risk, high reward.",
+      "source": "StorageTreasures.com, Local auctions",
+      "effortScore": 8,
+      "returnPotential": 1500,
+      "timeframe": "2-4 weeks per unit",
+      "requirements": [
+        "$300-1000 per unit",
+        "Truck/storage",
+        "Time to sort"
+      ],
+      "status": "research",
+      "viralPotential": 5,
+      "nextSteps": [
+        "Research local auction laws",
+        "Attend one auction as observer",
+        "Calculate ROI on past auctions"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df013",
+      "type": "affiliate",
+      "title": "ClickBank Fitness Products - Email List",
+      "description": "Build email list through lead magnets (free workout plans), promote ClickBank fitness offers. 50-75% commissions.",
+      "source": "ClickBank",
+      "effortScore": 7,
+      "returnPotential": 1500,
+      "timeframe": "3-6 months",
+      "requirements": [
+        "Email service (MailChimp free tier)",
+        "Lead magnet creation",
+        "Landing page"
+      ],
+      "status": "active",
+      "viralPotential": 6,
+      "nextSteps": [
+        "Browse ClickBank marketplace",
+        "Create free workout PDF",
+        "Set up landing page"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df014",
+      "type": "side-hustle",
+      "title": "AI-Generated Sports Betting Picks Newsletter",
+      "description": "Use AI to analyze sports data, create weekly betting newsletter. Charge $20-50/month subscribers.",
+      "source": "Substack, Patreon",
+      "effortScore": 6,
+      "returnPotential": 2000,
+      "timeframe": "2-4 months to scale",
+      "requirements": [
+        "AI tools",
+        "Sports data sources",
+        "Newsletter platform"
+      ],
+      "status": "active",
+      "viralPotential": 7,
+      "nextSteps": [
+        "Research sports data APIs",
+        "Create sample picks for proof",
+        "Launch free Substack"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "id": "df015",
+      "type": "real-estate",
+      "title": "St. Petersburg - Duplex House Hack $285k",
+      "description": "Live in one unit, rent the other. Cash flow: $800-1000/mo after mortgage. Build equity while saving for beach spot.",
+      "source": "Zillow",
+      "effortScore": 8,
+      "returnPotential": 12000,
+      "timeframe": "12+ months",
+      "requirements": [
+        "$57k down payment",
+        "FHA loan",
+        "Property management"
+      ],
+      "status": "research",
+      "viralPotential": 2,
+      "nextSteps": [
+        "Research FHA loan requirements",
+        "Calculate net cash flow",
+        "Visit St. Pete neighborhoods"
+      ],
+      "dateAdded": "2026-01-30"
+    },
+    {
+      "type": "affiliate",
+      "title": "Shopify Affiliate - E-commerce Tools",
+      "description": "Promote Shopify for people starting online stores. Earn $58-2000 per referral depending on plan.",
+      "source": "Shopify Affiliate Program",
+      "effortScore": 6,
+      "returnPotential": 1200,
+      "timeframe": "Per referral",
+      "requirements": [
+        "Active blog or social media",
+        "E-commerce content",
+        "Affiliate approval"
+      ],
+      "status": "research",
+      "viralPotential": 5,
+      "nextSteps": [
+        "Apply to Shopify affiliate program",
+        "Create e-commerce content strategy",
+        "Build audience interested in online business"
+      ],
+      "id": "df016",
+      "dateAdded": "2026-02-04"
+    },
+    {
+      "type": "affiliate",
+      "title": "Kinsta Hosting Affiliate - Web Hosting",
+      "description": "Premium WordPress hosting affiliate. $50-500 per referral, recurring commissions.",
+      "source": "Kinsta",
+      "effortScore": 7,
+      "returnPotential": 800,
+      "timeframe": "Per referral + recurring",
+      "requirements": [
+        "Tech audience",
+        "Content creation",
+        "Approval"
+      ],
+      "status": "research",
+      "viralPotential": 4,
+      "nextSteps": [
+        "Apply to Kinsta affiliate",
+        "Research hosting comparison content",
+        "Build tech blog or YouTube"
+      ],
+      "id": "df017",
+      "dateAdded": "2026-02-04"
+    },
+    {
+      "type": "arbitrage",
+      "title": "Nintendo Switch Games - Retail to Resale",
+      "description": "Buy discounted Switch games at Target/Walmart during sales, resell on eBay. Margin: $10-30 per game.",
+      "source": "Target, Walmart, eBay",
+      "effortScore": 4,
+      "returnPotential": 300,
+      "timeframe": "During sales",
+      "requirements": [
+        "$30-50 per game",
+        "eBay seller account",
+        "Research sold listings"
+      ],
+      "status": "active",
+      "viralPotential": 3,
+      "nextSteps": [
+        "Set up eBay seller account",
+        "Track Target/Walmart game sales",
+        "Research best-selling titles"
+      ],
+      "id": "df018",
+      "dateAdded": "2026-02-04"
+    },
+    {
+      "type": "real-estate",
+      "title": "Sarasota - 2BR Condo Near Beach $265k",
+      "description": "Sarasota area condo, walking distance to beach. Rental potential: $1,600-1,900/mo.",
+      "source": "Zillow (manual research needed)",
+      "effortScore": 8,
+      "returnPotential": 13000,
+      "timeframe": "6-12 months",
+      "requirements": [
+        "$53k down payment",
+        "Mortgage approval",
+        "Inspection"
+      ],
+      "status": "research",
+      "viralPotential": 2,
+      "nextSteps": [
+        "Search Zillow for Sarasota condos",
+        "Calculate total monthly costs",
+        "Visit area and scout volleyball courts"
+      ],
+      "id": "df019",
+      "dateAdded": "2026-02-04"
+    }
+  ],
+  "categories": {
+    "arbitrage": {
+      "count": 5,
+      "avgEffort": 6.0,
+      "avgReturn": 660
+    },
+    "affiliate": {
+      "count": 6,
+      "avgEffort": 6.3,
+      "avgReturn": 1217
+    },
+    "real-estate": {
+      "count": 4,
+      "avgEffort": 8.2,
+      "avgReturn": 14500
+    },
+    "side-hustle": {
+      "count": 4,
+      "avgEffort": 4.5,
+      "avgReturn": 1750
+    }
+  },
+  "stats": {
+    "totalOpportunities": 19,
+    "activeOpportunities": 11,
+    "researchOpportunities": 7,
+    "dreamOpportunities": 1,
+    "avgEffortScore": 6.2631578947368425,
+    "totalReturnPotential": 75600
+  }
+}

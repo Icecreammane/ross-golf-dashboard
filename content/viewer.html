@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Content Ideas | Ross Content Database</title>
+    <link rel="stylesheet" href="../styles/jarvis-design-system.css">
+    <style>
+        body {
+            padding: var(--space-4);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-top: var(--space-1);
+        }
+
+        .filters {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-size: 0.875rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .idea-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            transition: all var(--transition-base);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .idea-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-3);
+        }
+
+        .category-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+        }
+
+        .cat-fitness { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .cat-sports { background: rgba(99, 102, 241, 0.15); color: var(--primary); }
+        .cat-nostalgia { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .cat-finance { background: rgba(139, 92, 246, 0.15); color: var(--secondary); }
+        .cat-lifestyle { background: rgba(236, 72, 153, 0.15); color: #ec4899; }
+
+        .viral-score {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .score-high { color: var(--success); }
+        .score-medium { color: var(--warning); }
+        .score-low { color: var(--text-secondary); }
+
+        .idea-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .idea-hook {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: var(--space-3);
+            padding: var(--space-2);
+            background: var(--bg-primary);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--radius-sm);
+        }
+
+        .idea-script {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-3);
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
+        .idea-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+            font-size: 0.75rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .meta-label {
+            color: var(--text-tertiary);
+        }
+
+        .meta-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .trending-audio {
+            font-size: 0.75rem;
+            margin-bottom: var(--space-2);
+        }
+
+        .audio-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            margin-right: var(--space-1);
+            margin-top: var(--space-1);
+        }
+
+        .affiliate-note {
+            font-size: 0.75rem;
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            padding: var(--space-2);
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-2);
+        }
+
+        @media (max-width: 768px) {
+            .ideas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎬 Viral Content Ideas Database</h1>
+        <p>30 battle-tested ideas for making money with content</p>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterCategory('all')">All Ideas</button>
+        <button class="filter-btn" onclick="filterCategory('fitness')">Fitness</button>
+        <button class="filter-btn" onclick="filterCategory('sports')">Sports</button>
+        <button class="filter-btn" onclick="filterCategory('finance')">Finance</button>
+        <button class="filter-btn" onclick="filterCategory('nostalgia')">Nostalgia</button>
+        <button class="filter-btn" onclick="filterCategory('lifestyle')">Lifestyle</button>
+    </div>
+
+    <div class="ideas-grid" id="ideasGrid"></div>
+
+    <script>
+        let allIdeas = [];
+        let currentFilter = 'all';
+
+        async function loadIdeas() {
+            try {
+                const response = await fetch('viral-ideas.json');
+                const data = await response.json();
+                allIdeas = data.ideas;
+                
+                renderStats(data);
+                renderIdeas();
+            } catch (error) {
+                console.error('Error loading ideas:', error);
+            }
+        }
+
+        function renderStats(data) {
+            const avgViral = (data.ideas.reduce((sum, idea) => sum + idea.viralPotential, 0) / data.ideas.length).toFixed(1);
+            const highPotential = data.ideas.filter(i => i.viralPotential >= 8).length;
+            const faceless = data.ideas.filter(i => i.type === 'faceless').length;
+
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${data.totalIdeas}</div>
+                    <div class="stat-label">Total Ideas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${avgViral}/10</div>
+                    <div class="stat-label">Avg Viral Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${highPotential}</div>
+                    <div class="stat-label">High Potential</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${faceless}</div>
+                    <div class="stat-label">Faceless Content</div>
+                </div>
+            `;
+
+            document.getElementById('stats').innerHTML = statsHTML;
+        }
+
+        function renderIdeas() {
+            const filtered = currentFilter === 'all' 
+                ? allIdeas 
+                : allIdeas.filter(idea => idea.category === currentFilter);
+
+            const ideasHTML = filtered.map(idea => {
+                const viralClass = idea.viralPotential >= 8 ? 'score-high' : 
+                                   idea.viralPotential >= 6 ? 'score-medium' : 'score-low';
+
+                return `
+                    <div class="idea-card" data-category="${idea.category}">
+                        <div class="idea-header">
+                            <span class="category-badge cat-${idea.category}">${idea.category}</span>
+                            <span class="viral-score ${viralClass}">${idea.viralPotential}/10</span>
+                        </div>
+                        
+                        <div class="idea-title">${idea.title}</div>
+                        
+                        <div class="idea-hook">"${idea.hook}"</div>
+                        
+                        <div class="idea-script">${idea.scriptTemplate}</div>
+                        
+                        <div class="idea-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Reach:</span>
+                                <span class="meta-value">${idea.estimatedReach}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Effort:</span>
+                                <span class="meta-value">${idea.effort}/10</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trending-audio">
+                            <strong>🎵 Audio:</strong>
+                            ${idea.trendingAudio.map(audio => `<span class="audio-tag">${audio}</span>`).join('')}
+                        </div>
+                        
+                        ${idea.affiliateOpportunity ? `
+                            <div class="affiliate-note">
+                                💰 Affiliate: ${idea.affiliateOpportunity}
+                            </div>
+                        ` : ''}
+                        
+                        <div style="margin-top: var(--space-2); font-size: 0.75rem; color: var(--text-tertiary); font-style: italic;">
+                            ${idea.notes}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('ideasGrid').innerHTML = ideasHTML;
+        }
+
+        function filterCategory(category) {
+            currentFilter = category;
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderIdeas();
+        }
+
+        // Load ideas on page load
+        loadIdeas();
+    </script>
+</body>
+</html>

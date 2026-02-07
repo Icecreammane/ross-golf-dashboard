@@ -1,0 +1,88 @@
+{
+  "morning_brief": {
+    "intro": "Good morning, Ross. Here's your morning brief for {date}.",
+    "outro": "That's your brief for today. Have a great day!",
+    "empty_calendar": "Your calendar is clear today—no scheduled events.",
+    "empty_tasks": "You're all caught up on tasks. Nothing urgent on the queue.",
+    "empty_builds": "No overnight builds completed. Everything's quiet on the engineering front."
+  },
+  
+  "build_updates": {
+    "started": "Build update: {system_name} build has started. Estimated completion: {eta}.",
+    "progress": "{system_name} is {progress}% complete. Currently working on: {current_task}.",
+    "completed": "Build complete! {system_name} is ready. {key_features}. You can find it at {location}.",
+    "failed": "Build alert: {system_name} encountered an error during {failed_stage}. Details in the build log.",
+    "milestone": "{system_name} just hit a major milestone: {milestone_description}. {progress}% complete overall."
+  },
+  
+  "evening_checkin": {
+    "greeting": "Good evening, Ross. Here's your end-of-day summary.",
+    "wrap_up": "That's your evening wrap-up. Anything else you need before calling it a day?",
+    "tasks_completed": "You completed {count} tasks today. Nice work!",
+    "tasks_remaining": "You have {count} tasks still on your queue for tomorrow.",
+    "builds_active": "{count} builds are currently in progress. I'll notify you when they're done."
+  },
+  
+  "alerts": {
+    "urgent": "Urgent notification: {message}",
+    "reminder": "Quick reminder: {message}",
+    "fyi": "Heads up: {message}",
+    "question": "Ross, I have a question for you: {message}"
+  },
+  
+  "progress_updates": {
+    "milestone_reached": "Progress update: {project_name} just reached {milestone}. {details}.",
+    "deadline_approaching": "Heads up: {project_name} deadline is approaching. Due in {time_remaining}.",
+    "blocked": "Alert: {project_name} is blocked waiting on {blocker}. Need your input to proceed."
+  },
+  
+  "system_status": {
+    "all_good": "All systems operational. No issues to report.",
+    "degraded": "System notice: {system_name} is experiencing some slowdown. Still functional, but monitoring closely.",
+    "error": "System alert: {system_name} encountered an error. {details}. I'm investigating.",
+    "maintenance": "Scheduled maintenance: {system_name} will be unavailable from {start_time} to {end_time}."
+  },
+  
+  "personality": {
+    "acknowledgment": [
+      "Got it.",
+      "Understood.",
+      "On it.",
+      "Consider it done.",
+      "I'll take care of that."
+    ],
+    "thinking": [
+      "Let me think about that for a moment.",
+      "Give me a second to check on that.",
+      "Looking into it now.",
+      "Checking..."
+    ],
+    "success": [
+      "Done.",
+      "Complete.",
+      "Finished.",
+      "All set.",
+      "That's handled."
+    ],
+    "error": [
+      "I ran into an issue.",
+      "Something went wrong.",
+      "I couldn't complete that.",
+      "There was a problem."
+    ],
+    "clarification": [
+      "Just to clarify:",
+      "To make sure I understand:",
+      "Quick question:",
+      "Before I proceed:"
+    ]
+  },
+  
+  "context_aware": {
+    "work_hours_greeting": "Quick update:",
+    "morning_greeting": "Good morning, Ross.",
+    "evening_greeting": "Good evening.",
+    "weekend_greeting": "Hey Ross,",
+    "late_night_greeting": "Evening, Ross."
+  }
+}

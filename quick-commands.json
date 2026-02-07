@@ -1,0 +1,79 @@
+{
+  "food_shortcuts": {
+    "usual lunch": {
+      "description": "Grilled Chicken + Brussels Sprouts + Mashed Potatoes",
+      "calories": 500,
+      "protein": 42,
+      "carbs": 40,
+      "fat": 18,
+      "notes": "Ross's work lunch"
+    },
+    "beef bowl": {
+      "description": "Ground Beef Hash Brown Bowl (1 lb Publix 93% beef, 8 oz cottage cheese, hash browns)",
+      "calories": 1040,
+      "protein": 118,
+      "carbs": 43,
+      "fat": 42,
+      "notes": "Post-workout dinner"
+    },
+    "banana": {
+      "description": "Medium Banana",
+      "calories": 105,
+      "protein": 1,
+      "carbs": 27,
+      "fat": 0
+    },
+    "beef sticks": {
+      "description": "Long Live Real Meat Beef Sticks (3 sticks)",
+      "calories": 135,
+      "protein": 12,
+      "carbs": 0,
+      "fat": 9
+    },
+    "kombucha": {
+      "description": "GT's Organic Kombucha",
+      "calories": 60,
+      "protein": 0,
+      "carbs": 16,
+      "fat": 0
+    }
+  },
+  "workout_templates": {
+    "leg day": {
+      "name": "Leg Day",
+      "exercises": [
+        {"name": "Lunges", "sets": 3, "reps": 10, "weight": 0, "notes": "Bodyweight"},
+        {"name": "Hack Squat", "sets": 3, "reps": "8-10", "weight": "progressive"},
+        {"name": "Leg Press", "sets": 4, "reps": "6-10", "weight": "progressive"},
+        {"name": "Hip Thrust Machine", "sets": 3, "reps": 10, "weight": "progressive"},
+        {"name": "Leg Extension", "sets": 3, "reps": 10, "weight": 150},
+        {"name": "Leg Curl", "sets": 3, "reps": 10, "weight": 110},
+        {"name": "Standing Calf Raise", "sets": 4, "reps": 10, "weight": 180}
+      ]
+    },
+    "chest day": {
+      "name": "Chest Day",
+      "exercises": [
+        {"name": "Bench Press", "sets": 4, "reps": "6-8", "weight": "progressive"},
+        {"name": "Incline Dumbbell Press", "sets": 3, "reps": "8-10", "weight": "progressive"},
+        {"name": "Chest Fly", "sets": 3, "reps": 12, "weight": "moderate"},
+        {"name": "Cable Crossover", "sets": 3, "reps": 12, "weight": "moderate"}
+      ]
+    },
+    "back day": {
+      "name": "Back Day",
+      "exercises": [
+        {"name": "Deadlift", "sets": 3, "reps": "5-8", "weight": "progressive"},
+        {"name": "Barbell Row", "sets": 4, "reps": "8-10", "weight": "progressive"},
+        {"name": "Pull-ups", "sets": 3, "reps": "max", "weight": "bodyweight"},
+        {"name": "Lat Pulldown", "sets": 3, "reps": 10, "weight": "moderate"}
+      ]
+    }
+  },
+  "quick_responses": {
+    "status": "Show today's macros",
+    "wins": "Show today's wins",
+    "progress": "Show week's progress",
+    "dashboard": "http://10.0.0.18:3000/"
+  }
+}

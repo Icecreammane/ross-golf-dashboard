@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Command Center</title>
+    <link rel="stylesheet" href="styles/jarvis-design-system.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <span>🤖</span>
+                <span>Jarvis</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link active">
+                    <span class="nav-link-icon">🏠</span>
+                    <span>Hub</span>
+                </a></li>
+                <li><a href="http://10.0.0.18:3000/" class="nav-link">
+                    <span class="nav-link-icon">💪</span>
+                    <span>Fitness</span>
+                </a></li>
+                <li><a href="http://10.0.0.18:8080/goals/progress.html" class="nav-link">
+                    <span class="nav-link-icon">🎯</span>
+                    <span>Goals</span>
+                </a></li>
+                <li><a href="florida-fund.html" class="nav-link">
+                    <span class="nav-link-icon">🌴</span>
+                    <span>Florida</span>
+                </a></li>
+                <li><a href="morning-brief.html" class="nav-link">
+                    <span class="nav-link-icon">☀️</span>
+                    <span>Brief</span>
+                </a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-icon btn-ghost" onclick="location.reload()" title="Refresh">
+                    <span>🔄</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header animate-in">
+                <h1 class="page-title">Command Center</h1>
+                <p class="page-subtitle">Your autonomous AI assistant managing all systems</p>
+            </div>
+
+            <!-- Key Metrics (Top Row) -->
+            <div class="grid grid-4 animate-in" style="margin-bottom: 48px;">
+                <div class="metric-card">
+                    <div class="metric-label">Active Dashboards</div>
+                    <div class="metric-value">8</div>
+                    <div class="metric-change">
+                        <span>✨</span>
+                        <span>All operational</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">System Status</div>
+                    <div class="metric-value">100%</div>
+                    <div class="metric-change positive">
+                        <span>✓</span>
+                        <span>Healthy</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Projects Built</div>
+                    <div class="metric-value">14</div>
+                    <div class="metric-change">
+                        <span>🛠️</span>
+                        <span>Total count</span>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-label">Current Time</div>
+                    <div class="metric-value" id="currentTime" style="font-size: 2rem;">--:--</div>
+                    <div class="metric-change">
+                        <span>🕐</span>
+                        <span id="timeZone">CST</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primary Dashboards -->
+            <div class="section animate-in">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Primary Dashboards</h2>
+                        <p class="section-subtitle">Your main tracking tools</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-auto">
+                    <a href="http://10.0.0.18:3000/" class="card card-interactive" style="text-decoration: none; color: inherit;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">💪</div>
+                        <h3 class="card-title">Fitness Tracker</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Real-time macro tracking, weight trends, and workout logs with charts
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-success">Live</span>
+                            <span class="badge badge-gray">Flask App</span>
+                        </div>
+                    </a>
+
+                    <a href="http://10.0.0.18:8080/goals/progress.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">🎯</div>
+                        <h3 class="card-title">Goal Progress</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Q1 2026 goals with progress tracking and timeline milestones
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-warning">In Progress</span>
+                            <span class="badge badge-gray">6 Goals</span>
+                        </div>
+                    </a>
+
+                    <a href="florida-fund.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">🌴</div>
+                        <h3 class="card-title">Florida Fund</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Track your $50k freedom fund with milestones and income projections
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-warning">$0 / $50k</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Daily Tools -->
+            <div class="section animate-in">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Daily Tools</h2>
+                        <p class="section-subtitle">Automated reports and quick actions</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-auto">
+                    <a href="morning-brief.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">☀️</div>
+                        <h3 class="card-title">Morning Brief</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Daily digest with overnight work, priorities, and insights
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-primary">Auto 7:30am</span>
+                        </div>
+                    </a>
+
+                    <a href="http://10.0.0.18:8080/reports/weekly_progress.html" class="card card-interactive" style="text-decoration: none; color: inherit;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">📈</div>
+                        <h3 class="card-title">Weekly Report</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Auto-generated progress summary every Sunday at 6pm
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-primary">Auto Sunday</span>
+                        </div>
+                    </a>
+
+                    <div class="card" style="opacity: 0.9;">
+                        <div style="font-size: 2.5rem; margin-bottom: 16px;">📸</div>
+                        <h3 class="card-title">Photo Food Logger</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.5; margin-bottom: 16px;">
+                            Send food photos → AI analyzes → auto-logs to tracker
+                        </p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="badge badge-success">Active</span>
+                            <span class="badge badge-gray">GPT-4o</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="card animate-in" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 8px; height: 8px; background: var(--success); border-radius: 50%;"></div>
+                    <span style="color: var(--text-secondary); font-size: 0.9375rem;">All systems operational</span>
+                </div>
+                <div style="display: flex; gap: 16px; color: var(--text-tertiary); font-size: 0.875rem;">
+                    <span>Ross at work</span>
+                    <span>•</span>
+                    <span>Jarvis active</span>
+                    <span>•</span>
+                    <span>Last updated: <span id="lastUpdate">Just now</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('currentTime').textContent = timeStr;
+            
+            // Update last update time
+            const seconds = Math.floor((Date.now() - pageLoadTime) / 1000);
+            if (seconds < 60) {
+                document.getElementById('lastUpdate').textContent = 'Just now';
+            } else if (seconds < 3600) {
+                document.getElementById('lastUpdate').textContent = Math.floor(seconds / 60) + 'm ago';
+            } else {
+                document.getElementById('lastUpdate').textContent = Math.floor(seconds / 3600) + 'h ago';
+            }
+        }
+        
+        const pageLoadTime = Date.now();
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

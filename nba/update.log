@@ -1,0 +1,69 @@
+========================================
+🏀 NBA Top 50 Rankings Update
+Started: 2026-02-04 12:42:14 PM CST
+========================================
+
+📊 Generating rankings...
+🏀 NBA Rankings Generator v3.0 - Hybrid ESPN Approach
+======================================================================
+
+📥 Fetching Thursday 2/6/26 games...
+✓ Found 6 games
+
+📊 Extracting player data from ESPN...
+✓ Extracted 30 players from ESPN
+
+📥 Loading supplemental rotation players...
+✓ Added 30 supplemental players
+✓ Total players: 60
+
+🧮 Calculating projections for 60 players...
+
+🔄 Applying trade deadline adjustments...
+✓ Trade impacts applied:
+  • 0 HIGH impact players
+  • 1 MED impact players
+  • 4 LOW impact players
+✅ Generated Top 50 rankings
+
+💾 Saving JSON...
+✓ JSON saved
+
+💾 Exporting to CSV: /Users/clawdbot/clawd/nba/rankings.csv
+✓ CSV exported
+
+📝 Generating report...
+✓ Report generated
+
+======================================================================
+✅ Generated Top 50 Rankings!
+
+Top 10:
+  1. Giannis Antetokounmpo (MIL) - 60.33 FP
+  2. De'Aaron Fox (SAC) - 46.49 FP
+  3. Damian Lillard (MIL) - 44.57 FP
+  4. Zion Williamson (NO) - 43.31 FP
+  5. Ja Morant (MEM) - 40.82 FP
+  6. Deni Avdija (POR) - 40.26 FP
+  7. Jalen Brunson (NY) - 39.02 FP
+  8. Cade Cunningham (DET) - 38.51 FP
+  9. Tyler Herro (MIA) - 36.92 FP
+  10. Tyrese Haliburton (IND) - 36.3 FP
+
+✅ Update successful!
+   rankings.json: 27K
+   rankings.csv: 2.8K
+
+Top 5 Players:
+  1. Giannis Antetokounmpo (MIL) - 60.33 FP
+  2. De'Aaron Fox (SAC) - 46.49 FP
+  3. Damian Lillard (MIL) - 44.57 FP
+  4. Zion Williamson (NO) - 43.31 FP
+  5. Ja Morant (MEM) - 40.82 FP
+
+Trade-impacted players: 5
+
+========================================
+Completed: 2026-02-04 12:42:15 PM CST
+========================================
+

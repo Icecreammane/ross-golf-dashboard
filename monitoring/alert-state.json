@@ -1,0 +1,25 @@
+{
+  "last_alerts": {
+    "gateway": "2026-02-07T13:29:27.126392"
+  },
+  "alert_history": [
+    {
+      "timestamp": "2026-02-07T11:29:22.145690",
+      "service": "gateway",
+      "failure_count": 3,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 3 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-07T12:29:24.643043",
+      "service": "gateway",
+      "failure_count": 15,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 15 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-07T13:29:27.126394",
+      "service": "gateway",
+      "failure_count": 27,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 27 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    }
+  ]
+}

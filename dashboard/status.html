@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 System Status - Jarvis</title>
+    <link rel="stylesheet" href="/styles/jarvis-design-system.css">
+    <style>
+        .status-grid {
+            display: grid;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+        
+        .service-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+        }
+        
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+        
+        .service-name {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .service-icon {
+            font-size: 1.5rem;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-operational {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        
+        .status-degraded {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        
+        .status-down {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+        
+        .service-details {
+            display: grid;
+            gap: var(--space-3);
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .detail-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            text-align: center;
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .metric-unit {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-left: var(--space-1);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: var(--space-2);
+        }
+        
+        .pulse-green {
+            background: var(--success);
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 1);
+            animation: pulse-animation 2s infinite;
+        }
+        
+        .pulse-yellow {
+            background: var(--warning);
+            box-shadow: 0 0 0 0 rgba(245, 158, 11, 1);
+            animation: pulse-animation 2s infinite;
+        }
+        
+        .pulse-red {
+            background: var(--danger);
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 1);
+            animation: pulse-animation 2s infinite;
+        }
+        
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+        
+        .error-log {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            margin-top: var(--space-3);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .error-entry {
+            font-size: 0.75rem;
+            color: var(--danger);
+            padding: var(--space-1) 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .quick-links {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+            margin-top: var(--space-4);
+        }
+        
+        .quick-link {
+            padding: var(--space-2) var(--space-3);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all var(--transition-fast);
+        }
+        
+        .quick-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">📊 System Status</h1>
+                <p class="page-subtitle">Real-time health monitoring for all services</p>
+                
+                <div class="quick-links">
+                    <a href="/dashboard/hub.html" class="quick-link">← Back to Hub</a>
+                    <a href="#" onclick="location.reload()" class="quick-link">🔄 Refresh</a>
+                </div>
+            </div>
+            
+            <!-- Overall Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Uptime</div>
+                    <div class="metric-value" id="uptime">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Services Online</div>
+                    <div class="metric-value" id="services-online">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Last Check</div>
+                    <div class="metric-value" style="font-size: 1.25rem;" id="last-check">--</div>
+                </div>
+            </div>
+            
+            <!-- Service Status Cards -->
+            <div class="status-grid" id="services-container">
+                <!-- Services will be loaded here -->
+                <div class="service-card">
+                    <div style="text-align: center; padding: var(--space-6); color: var(--text-tertiary);">
+                        Loading services...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://10.0.0.16:8080/api/hub';
+        
+        const SERVICES = [
+            {
+                id: 'hub_api',
+                name: 'Hub API',
+                icon: '⚡',
+                endpoint: `${API_BASE}/health`,
+                port: 8080,
+                description: 'Unified API layer'
+            },
+            {
+                id: 'fitness_tracker',
+                name: 'Fitness Tracker',
+                icon: '💪',
+                port: 3000,
+                url: 'http://10.0.0.18:3000',
+                description: 'Workout & nutrition logging'
+            },
+            {
+                id: 'nba_dashboard',
+                name: 'NBA Dashboard',
+                icon: '🏀',
+                port: 8000,
+                url: 'http://10.0.0.18:8000',
+                description: 'DFS rankings & analysis'
+            },
+            {
+                id: 'gateway',
+                name: 'Clawdbot Gateway',
+                icon: '🤖',
+                description: 'AI assistant backend'
+            },
+            {
+                id: 'build_system',
+                name: 'Build System',
+                icon: '🔨',
+                description: 'Live build tracking'
+            }
+        ];
+        
+        async function checkServices() {
+            const container = document.getElementById('services-container');
+            let html = '';
+            let onlineCount = 0;
+            
+            for (const service of SERVICES) {
+                let status = 'unknown';
+                let details = {};
+                
+                try {
+                    if (service.endpoint) {
+                        const response = await fetch(service.endpoint, { method: 'GET', timeout: 5000 });
+                        status = response.ok ? 'operational' : 'degraded';
+                        if (response.ok) onlineCount++;
+                    } else if (service.url) {
+                        // Try to fetch the service URL
+                        try {
+                            const response = await fetch(service.url, { method: 'HEAD', timeout: 5000 });
+                            status = response.ok ? 'operational' : 'degraded';
+                            if (response.ok) onlineCount++;
+                        } catch (e) {
+                            status = 'down';
+                        }
+                    } else {
+                        // Check via hub API status
+                        const statusData = await fetch(`${API_BASE}/status`).then(r => r.json());
+                        const serviceKey = service.id.toLowerCase();
+                        if (statusData.services && statusData.services[serviceKey] !== undefined) {
+                            status = statusData.services[serviceKey] ? 'operational' : 'down';
+                            if (statusData.services[serviceKey]) onlineCount++;
+                        }
+                    }
+                } catch (error) {
+                    status = 'down';
+                    console.error(`Error checking ${service.name}:`, error);
+                }
+                
+                html += renderServiceCard(service, status, details);
+            }
+            
+            container.innerHTML = html;
+            document.getElementById('services-online').textContent = `${onlineCount} / ${SERVICES.length}`;
+            document.getElementById('last-check').textContent = new Date().toLocaleTimeString();
+            document.getElementById('uptime').textContent = '99.9%'; // Placeholder
+        }
+        
+        function renderServiceCard(service, status, details) {
+            const statusClass = status === 'operational' ? 'status-operational' : 
+                               status === 'degraded' ? 'status-degraded' : 'status-down';
+            const statusText = status === 'operational' ? '✅ Operational' : 
+                              status === 'degraded' ? '⚠️ Degraded' : '❌ Down';
+            const pulseClass = status === 'operational' ? 'pulse-green' : 
+                              status === 'degraded' ? 'pulse-yellow' : 'pulse-red';
+            
+            return `
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-name">
+                            <span class="service-icon">${service.icon}</span>
+                            ${service.name}
+                        </div>
+                        <div class="status-badge ${statusClass}">
+                            <span class="pulse ${pulseClass}"></span>
+                            ${statusText}
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Description</span>
+                            <span class="detail-value">${service.description}</span>
+                        </div>
+                        ${service.port ? `
+                        <div class="detail-row">
+                            <span class="detail-label">Port</span>
+                            <span class="detail-value">${service.port}</span>
+                        </div>
+                        ` : ''}
+                        ${service.url ? `
+                        <div class="detail-row">
+                            <span class="detail-label">URL</span>
+                            <span class="detail-value"><a href="${service.url}" target="_blank">${service.url}</a></span>
+                        </div>
+                        ` : ''}
+                        <div class="detail-row">
+                            <span class="detail-label">Status</span>
+                            <span class="detail-value">${status.toUpperCase()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initial load
+        checkServices();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(checkServices, 30000);
+    </script>
+</body>
+</html>

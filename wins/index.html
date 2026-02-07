@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Wins - Ross</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 24px;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .date {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header .streak {
+            font-size: 48px;
+            margin-top: 16px;
+        }
+        
+        .header .streak-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        .add-win {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 2px solid #2a2a2a;
+        }
+        
+        .add-win h2 {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        input, textarea {
+            background: #0a0a0a;
+            border: 2px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 14px;
+            color: #e0e0e0;
+            font-size: 16px;
+            width: 100%;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+        
+        .category-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        
+        .category-pill {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid #2a2a2a;
+            background: transparent;
+            color: #888;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .category-pill:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .category-pill.active {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .add-btn:active {
+            transform: translateY(0);
+        }
+        
+        .wins-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .win-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .win-card.fitness {
+            border-left-color: #10b981;
+        }
+        
+        .win-card.revenue {
+            border-left-color: #f59e0b;
+        }
+        
+        .win-card.personal {
+            border-left-color: #8b5cf6;
+        }
+        
+        .win-card.work {
+            border-left-color: #3b82f6;
+        }
+        
+        .win-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .win-category {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .win-category.fitness {
+            background: #10b981;
+            color: #000;
+        }
+        
+        .win-category.revenue {
+            background: #f59e0b;
+            color: #000;
+        }
+        
+        .win-category.personal {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        .win-category.work {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .win-time {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .win-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .empty-state p {
+            font-size: 18px;
+        }
+        
+        .stats-bar {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            text-align: center;
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Daily Wins</h1>
+            <div class="date" id="currentDate"></div>
+            <div class="streak" id="streakEmoji">🔥</div>
+            <div class="streak-label" id="streakText">Start your streak today!</div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-number" id="todayCount">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="weekCount">0</div>
+                <div class="stat-label">This Week</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">All Time</div>
+            </div>
+        </div>
+        
+        <div class="add-win">
+            <h2>Log a Win</h2>
+            <div class="category-pills">
+                <button class="category-pill active" data-category="fitness">💪 Fitness</button>
+                <button class="category-pill" data-category="revenue">💰 Revenue</button>
+                <button class="category-pill" data-category="personal">🎯 Personal</button>
+                <button class="category-pill" data-category="work">💼 Work</button>
+            </div>
+            <textarea id="winInput" placeholder="What did you accomplish today?"></textarea>
+            <button class="add-btn" onclick="addWin()">Add Win 🎉</button>
+        </div>
+        
+        <div class="wins-list" id="winsList">
+            <div class="empty-state">
+                <div class="icon">🌟</div>
+                <p>Log your first win of the day!</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedCategory = 'fitness';
+        let wins = JSON.parse(localStorage.getItem('dailyWins') || '[]');
+        
+        // Update date
+        const now = new Date();
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Category selection
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                selectedCategory = pill.dataset.category;
+            });
+        });
+        
+        function addWin() {
+            const input = document.getElementById('winInput');
+            const text = input.value.trim();
+            
+            if (!text) return;
+            
+            const win = {
+                id: Date.now(),
+                text: text,
+                category: selectedCategory,
+                timestamp: Date.now(),
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            wins.unshift(win);
+            localStorage.setItem('dailyWins', JSON.stringify(wins));
+            
+            input.value = '';
+            renderWins();
+            updateStats();
+            
+            // Celebration animation
+            const btn = document.querySelector('.add-btn');
+            btn.textContent = '🎉 Win Added!';
+            setTimeout(() => {
+                btn.textContent = 'Add Win 🎉';
+            }, 1500);
+        }
+        
+        function renderWins() {
+            const list = document.getElementById('winsList');
+            const today = new Date().toISOString().split('T')[0];
+            const todayWins = wins.filter(w => w.date === today);
+            
+            if (todayWins.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🌟</div>
+                        <p>Log your first win of the day!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = todayWins.map(win => {
+                const time = new Date(win.timestamp).toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                return `
+                    <div class="win-card ${win.category}">
+                        <div class="win-header">
+                            <span class="win-category ${win.category}">${getCategoryIcon(win.category)} ${win.category}</span>
+                            <span class="win-time">${time}</span>
+                        </div>
+                        <div class="win-text">${win.text}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getCategoryIcon(category) {
+            const icons = {
+                fitness: '💪',
+                revenue: '💰',
+                personal: '🎯',
+                work: '💼'
+            };
+            return icons[category] || '⭐';
+        }
+        
+        function updateStats() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayWins = wins.filter(w => w.date === today);
+            
+            // Week calculation
+            const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+            const weekWins = wins.filter(w => w.date >= weekAgo);
+            
+            document.getElementById('todayCount').textContent = todayWins.length;
+            document.getElementById('weekCount').textContent = weekWins.length;
+            document.getElementById('totalCount').textContent = wins.length;
+            
+            // Streak calculation
+            const dates = [...new Set(wins.map(w => w.date))].sort().reverse();
+            let streak = 0;
+            let checkDate = new Date();
+            
+            for (let date of dates) {
+                const winsDate = new Date(date + 'T00:00:00');
+                const daysDiff = Math.floor((checkDate - winsDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff === streak) {
+                    streak++;
+                } else {
+                    break;
+                }
+            }
+            
+            if (streak > 0) {
+                document.getElementById('streakText').textContent = `${streak} day streak!`;
+            }
+        }
+        
+        // Enter key to add win
+        document.getElementById('winInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addWin();
+            }
+        });
+        
+        // Initial render
+        renderWins();
+        updateStats();
+    </script>
+</body>
+</html>

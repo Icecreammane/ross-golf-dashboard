@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Reddit Response Helper</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .template {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .template:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        
+        .template-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .template-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 16px;
+        }
+        
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .copy-btn.copied {
+            background: #48bb78;
+        }
+        
+        .template-body {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+        }
+        
+        .instructions {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .instructions h3 {
+            color: #c53030;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .instructions p {
+            color: #742a2a;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 FitTrack Reddit Response Helper</h1>
+        <p class="subtitle">Quick-copy responses for launch day. Click to copy, paste on Reddit, customize.</p>
+        
+        <div class="instructions">
+            <h3>📋 How to Use:</h3>
+            <p>1. Click "Copy" on any template below<br>
+            2. Paste into Reddit comment box<br>
+            3. Replace [placeholders] with specific details<br>
+            4. Post!<br><br>
+            <strong>Pro tip:</strong> Personalization = engagement. Don't paste generic responses.</p>
+        </div>
+        
+        <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search templates..." />
+        
+        <div id="templates"></div>
+    </div>
+    
+    <script>
+        const templates = [
+            {
+                title: '"What makes this different from MyFitnessPal?"',
+                body: `MFP has 47 features. You use 3. FitTrack has 3 features. You'll use 3.
+
+Specifically: MFP tries to be everything - recipes, social network, fitness challenges. They also removed the barcode scanner from free and now charge $80/year for features that used to be included. 
+
+FitTrack does one thing: track macros fast. No ads, no clutter, no bait-and-switch pricing. Built for lifters who know their shit.`
+            },
+            {
+                title: '"Why should I pay $10 when MFP is free?"',
+                body: `Fair question! MFP is "free" because they sell your data and show ads. FitTrack costs $10 because that's how I keep it ad-free and privacy-focused.
+
+If you value your time (faster search, no bloat) and your data, it's worth it. Try the free trial and see if you agree.`
+            },
+            {
+                title: '"Can I see screenshots?"',
+                body: `Absolutely! Check the landing page [link] - there's a full gallery showing the dashboard, food search, and daily log.
+
+TLDR: clean interface, macros front and center, no clutter.`
+            },
+            {
+                title: '"Does it have [feature X]?"',
+                body: `Not yet! Right now it's intentionally minimal: food logging, macro tracking, weight tracking. 
+
+If there's something specific you need, let me know - I'm building based on what actual users want, not what I think they want.`
+            },
+            {
+                title: '"This sounds like an ad"',
+                body: `I get it - I'm launching a product on Reddit, so of course I'm promoting it. But I'm also a lifter who genuinely built this for myself. Check my post history if you want proof I'm a real person, not a marketing team.
+
+Just trying to share something I think others will find useful.`
+            },
+            {
+                title: '"I\'m interested! How do I sign up?"',
+                body: `Hell yeah! Head to [link] and start your 7-day free trial. No credit card required upfront.
+
+Let me know if you hit any issues or have feedback - I'm actively building based on user input.`
+            },
+            {
+                title: '"Just signed up! Love it so far!"',
+                body: `That's awesome, thanks for giving it a shot! Let me know if you have any feedback or feature requests as you use it.
+
+Really appreciate the support!`
+            },
+            {
+                title: '"I tried it, here\'s a bug..."',
+                body: `Thanks for the heads up! Can you DM me details (what happened, what browser/device you're on)? I'll get it fixed ASAP.
+
+Appreciate you trying it out!`
+            },
+            {
+                title: '"What about mobile app?"',
+                body: `Not a native app yet, but the web version is mobile-responsive and works great on phones. You can add it to your home screen and it behaves like an app.
+
+Native iOS/Android apps are on the roadmap if there's demand.`
+            },
+            {
+                title: '"Why not Cronometer?"',
+                body: `Cronometer is great if you need to track 84 nutrients for medical reasons. FitTrack is for athletes who just need protein/carbs/fat.
+
+Different tools for different needs. Most lifters prefer FitTrack's simplicity.`
+            },
+            {
+                title: '"Generic positive comment"',
+                body: `Thanks! [Reference something specific from their comment]. Really appreciate you checking it out!`
+            },
+            {
+                title: '"Generic question"',
+                body: `Good question! [Answer their specific question]. Let me know if that makes sense or if you have other questions!`
+            }
+        ];
+        
+        function renderTemplates(filter = '') {
+            const container = document.getElementById('templates');
+            container.innerHTML = '';
+            
+            const filtered = templates.filter(t => 
+                t.title.toLowerCase().includes(filter.toLowerCase()) ||
+                t.body.toLowerCase().includes(filter.toLowerCase())
+            );
+            
+            filtered.forEach((template, index) => {
+                const div = document.createElement('div');
+                div.className = 'template';
+                div.innerHTML = `
+                    <div class="template-header">
+                        <div class="template-title">${template.title}</div>
+                        <button class="copy-btn" onclick="copyTemplate(${index})">Copy</button>
+                    </div>
+                    <div class="template-body">${template.body}</div>
+                `;
+                container.appendChild(div);
+            });
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096; padding: 40px;">No templates found.</p>';
+            }
+        }
+        
+        function copyTemplate(index) {
+            const template = templates[index];
+            const text = template.body;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(text).then(() => {
+                const buttons = document.querySelectorAll('.copy-btn');
+                const button = buttons[index];
+                
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            renderTemplates(e.target.value);
+        });
+        
+        // Initial render
+        renderTemplates();
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "active": [],
+  "completed": [
+    {
+      "label": "build-system-agent",
+      "sessionKey": "agent:main:subagent:b97579dc-b567-4a98-9b28-4882043b5d89",
+      "started": "2026-02-05T21:00:00Z",
+      "completed": "2026-02-05T21:30:00Z",
+      "duration": "30 minutes",
+      "status": "completed",
+      "deliverables": [
+        "build-queue.md - Priority task list with template",
+        "progress.html - Real-time dashboard with auto-refresh",
+        "generate-build-report.py - Nightly report generator (tested)",
+        "SUBAGENT-FRAMEWORK.md - Decision framework added",
+        "active.json - Build tracking database",
+        "BUILD-SYSTEM.md - Complete system documentation",
+        "build-system-progress.md - Progress log",
+        "HANDOFF-build-system.md - Main agent handoff"
+      ],
+      "links": [
+        {
+          "label": "Build Queue",
+          "url": "file:///Users/clawdbot/clawd/build-queue.md"
+        },
+        {
+          "label": "Dashboard",
+          "url": "file:///Users/clawdbot/clawd/progress.html"
+        },
+        {
+          "label": "System Guide",
+          "url": "file:///Users/clawdbot/clawd/BUILD-SYSTEM.md"
+        },
+        {
+          "label": "Completion Report",
+          "url": "file:///Users/clawdbot/clawd/subagents/build-system-complete.md"
+        },
+        {
+          "label": "Handoff Document",
+          "url": "file:///Users/clawdbot/clawd/subagents/HANDOFF-build-system.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "overall": {
+    "total_suggestions": 28,
+    "tracked": 28,
+    "untracked": 0,
+    "implemented": 16,
+    "ignored": 4,
+    "rejected": 4,
+    "successes": 13,
+    "failures": 0,
+    "implementation_rate": 57.1,
+    "success_rate": 81.2
+  },
+  "by_category": {
+    "productivity": {
+      "total": 8,
+      "implemented": 5,
+      "ignored": 1,
+      "rejected": 1,
+      "deferred": 1,
+      "implementation_rate": 62.5,
+      "success_rate": 80.0,
+      "failures": 0
+    },
+    "revenue": {
+      "total": 5,
+      "implemented": 4,
+      "ignored": 0,
+      "rejected": 0,
+      "deferred": 1,
+      "implementation_rate": 80.0,
+      "success_rate": 100.0,
+      "failures": 0
+    },
+    "learning": {
+      "total": 4,
+      "implemented": 3,
+      "ignored": 1,
+      "rejected": 0,
+      "deferred": 0,
+      "implementation_rate": 75.0,
+      "success_rate": 66.7,
+      "failures": 0
+    },
+    "fun": {
+      "total": 5,
+      "implemented": 2,
+      "ignored": 1,
+      "rejected": 1,
+      "deferred": 1,
+      "implementation_rate": 40.0,
+      "success_rate": 50.0,
+      "failures": 0
+    },
+    "infrastructure": {
+      "total": 6,
+      "implemented": 2,
+      "ignored": 1,
+      "rejected": 2,
+      "deferred": 1,
+      "implementation_rate": 33.3,
+      "success_rate": 100.0,
+      "failures": 0
+    }
+  },
+  "by_confidence": {
+    "high": {
+      "total": 8,
+      "implemented": 8,
+      "implementation_rate": 100.0,
+      "success_rate": 100.0
+    },
+    "low": {
+      "total": 8,
+      "implemented": 1,
+      "implementation_rate": 12.5,
+      "success_rate": 0.0
+    },
+    "medium": {
+      "total": 12,
+      "implemented": 7,
+      "implementation_rate": 58.3,
+      "success_rate": 71.4
+    }
+  },
+  "timing": {
+    "by_hour": {
+      "21": {
+        "total": 28,
+        "implemented": 16,
+        "rate": 57.1
+      }
+    },
+    "by_day": {
+      "Sunday": {
+        "total": 3,
+        "implemented": 2,
+        "rate": 66.7
+      },
+      "Monday": {
+        "total": 4,
+        "implemented": 3,
+        "rate": 75.0
+      },
+      "Tuesday": {
+        "total": 1,
+        "implemented": 0,
+        "rate": 0.0
+      },
+      "Wednesday": {
+        "total": 4,
+        "implemented": 2,
+        "rate": 50.0
+      },
+      "Thursday": {
+        "total": 4,
+        "implemented": 3,
+        "rate": 75.0
+      },
+      "Friday": {
+        "total": 6,
+        "implemented": 4,
+        "rate": 66.7
+      },
+      "Saturday": {
+        "total": 6,
+        "implemented": 2,
+        "rate": 33.3
+      }
+    }
+  },
+  "insights": [
+    "\ud83d\udcca Overall: 57.1% implementation rate across 28 tracked suggestions",
+    "\u2705 Success rate: 81.2% of implemented suggestions succeeded",
+    "\ud83c\udfaf Best category: revenue (80.0% implemented)",
+    "\u26a0\ufe0f  Lowest category: infrastructure (33.3% implemented)",
+    "\ud83d\udcaa High confidence accuracy: 100.0% implemented"
+  ]
+}

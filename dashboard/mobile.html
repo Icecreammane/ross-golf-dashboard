@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>🎯 Hub - Quick Access</title>
+    <link rel="stylesheet" href="/styles/jarvis-design-system.css">
+    <style>
+        /* Mobile-first ultra-fast loading */
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-primary);
+            overflow-x: hidden;
+        }
+        
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: var(--space-4);
+        }
+        
+        .mobile-header {
+            text-align: center;
+            padding: var(--space-5) 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: var(--space-5);
+        }
+        
+        .mobile-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+        }
+        
+        .mobile-subtitle {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+        
+        /* Big touch-friendly buttons */
+        .big-button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+        
+        .big-button {
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            padding: var(--space-4);
+            min-height: 120px;
+        }
+        
+        .big-button:active {
+            transform: scale(0.95);
+            background: var(--bg-tertiary);
+        }
+        
+        .big-button-icon {
+            font-size: 3rem;
+        }
+        
+        .big-button-label {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-align: center;
+        }
+        
+        .big-button-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--danger);
+            color: white;
+            border-radius: var(--radius-full);
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        /* Quick stats section */
+        .quick-stats {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+        
+        .stats-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .stat-value {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-ok {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        
+        .status-warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: var(--space-6);
+            color: var(--text-tertiary);
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--bg-tertiary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .mobile-footer {
+            text-align: center;
+            padding: var(--space-6) 0;
+            color: var(--text-tertiary);
+            font-size: 0.75rem;
+        }
+        
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="mobile-header">
+            <div class="mobile-title">🎯 Quick Access</div>
+            <div class="mobile-subtitle">Tap to navigate</div>
+        </div>
+        
+        <!-- Big button grid -->
+        <div class="big-button-grid">
+            <a href="http://10.0.0.18:3000" class="big-button">
+                <div class="big-button-icon">💪</div>
+                <div class="big-button-label">Fitness Tracker</div>
+            </a>
+            
+            <a href="http://10.0.0.18:8000" class="big-button">
+                <div class="big-button-icon">🏀</div>
+                <div class="big-button-label">NBA Rankings</div>
+            </a>
+            
+            <a href="/revenue/deal-flow/dashboard.html" class="big-button">
+                <div class="big-button-icon">💰</div>
+                <div class="big-button-label">Deal Flow</div>
+            </a>
+            
+            <a href="/revenue/escape-velocity/calculator.html" class="big-button">
+                <div class="big-button-icon">🚀</div>
+                <div class="big-button-label">Escape Velocity</div>
+            </a>
+            
+            <a href="/dashboard/builds.html" class="big-button">
+                <div class="big-button-icon">🔨</div>
+                <div class="big-button-label">Build Status</div>
+            </a>
+            
+            <a href="/dashboard/hub.html" class="big-button">
+                <div class="big-button-icon">📊</div>
+                <div class="big-button-label">Full Dashboard</div>
+            </a>
+        </div>
+        
+        <!-- Quick stats -->
+        <div class="quick-stats">
+            <div class="stats-title">Today's Progress</div>
+            <div id="quick-stats-content" class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        
+        <!-- System status -->
+        <div class="quick-stats">
+            <div class="stats-title">System Status</div>
+            <div id="system-status-content" class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        
+        <div class="mobile-footer">
+            Last updated: <span id="update-time">--</span>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://10.0.0.16:8080/api/hub';
+        
+        async function loadQuickStats() {
+            try {
+                const [fitness, status] = await Promise.all([
+                    fetch(`${API_BASE}/fitness`).then(r => r.json()),
+                    fetch(`${API_BASE}/status`).then(r => r.json())
+                ]);
+                
+                renderQuickStats(fitness);
+                renderSystemStatus(status);
+                
+                document.getElementById('update-time').textContent = new Date().toLocaleTimeString();
+            } catch (error) {
+                console.error('Error loading stats:', error);
+                document.getElementById('quick-stats-content').innerHTML = 
+                    '<div style="color: var(--danger); text-align: center;">Failed to load</div>';
+                document.getElementById('system-status-content').innerHTML = 
+                    '<div style="color: var(--danger); text-align: center;">Failed to load</div>';
+            }
+        }
+        
+        function renderQuickStats(data) {
+            const content = document.getElementById('quick-stats-content');
+            const today = data.today || {};
+            const targets = data.targets || {};
+            
+            const html = `
+                <div class="stat-row">
+                    <span class="stat-label">Calories</span>
+                    <span class="stat-value">${today.calories || 0} / ${targets.calories || 0}</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Protein</span>
+                    <span class="stat-value">${today.protein || 0}g / ${targets.protein || 0}g</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Meals Logged</span>
+                    <span class="stat-value">${today.meals_logged || 0}</span>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function renderSystemStatus(data) {
+            const content = document.getElementById('system-status-content');
+            const services = data.services || {};
+            
+            const allHealthy = Object.values(services).every(v => v === true);
+            const statusClass = allHealthy ? 'status-ok' : 'status-warning';
+            const statusText = allHealthy ? '✅ All Systems Operational' : '⚠️ Some Services Down';
+            
+            const html = `
+                <div class="stat-row">
+                    <span class="stat-label">Status</span>
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        // Load on page load
+        loadQuickStats();
+        
+        // Auto-refresh every 60 seconds (less frequent for mobile)
+        setInterval(loadQuickStats, 60000);
+    </script>
+</body>
+</html>

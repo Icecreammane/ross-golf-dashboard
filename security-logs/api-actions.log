@@ -1,0 +1,2 @@
+{"timestamp": "2026-02-02 22:03:44", "service": "test_service", "action": "test_action", "trigger_source": "manual_test", "details": {"message": "Security logger initialized"}, "status": "success"}
+{"timestamp": "2026-02-02 22:06:06", "service": "test_service", "action": "test_action", "trigger_source": "manual_test", "details": {"message": "Security logger initialized"}, "status": "success"}
