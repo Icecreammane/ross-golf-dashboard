@@ -13,6 +13,20 @@
       "raw_text": "i just ate chili",
       "type": "food",
       "parsed": true
+    },
+    {
+      "timestamp": "2026-02-07T14:38:56.887028",
+      "raw_text": "Chipotle: Steak burrito (2x steak, white rice, pinto beans, fresh tomato salsa, roasted chili-corn salsa) + chips & salsa",
+      "type": "food",
+      "parsed": true,
+      "details": {
+        "restaurant": "Chipotle",
+        "items": [
+          "Steak Burrito (double steak)",
+          "Chips & Salsa"
+        ],
+        "meal": "lunch"
+      }
     }
   ]
 }

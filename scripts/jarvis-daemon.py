@@ -171,19 +171,23 @@ def night_shift():
     """Run autonomous night tasks"""
     log("=== Night Shift Starting ===")
     
-    # Proactive research
+    # NEW: Run all 5 night shift features
+    run_command(
+        "python3 ~/clawd/scripts/run_night_shift.py",
+        "Full night shift (content, intel, code, deals, insights)"
+    )
+    
+    # Legacy scripts (keeping for now)
     run_command(
         "python3 ~/clawd/scripts/proactive_research.py",
         "Proactive research"
     )
     
-    # NBA intel pull
     run_command(
         "python3 ~/clawd/scripts/pull_nba_intel.py",
         "NBA rankings pull"
     )
     
-    # Social post generation
     run_command(
         "python3 ~/clawd/scripts/generate_social_posts.py",
         "Social post generation"
