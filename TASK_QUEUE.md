@@ -103,3 +103,11 @@ Jarvis reviews this queue during:
 - Evening Summary (6pm) - what got done
 
 Ross can check status anytime: "What's on the list?"
+
+
+## Generated 2026-02-07 06:38PM
+- [ ] Create MVP for Notion templates and launch initial marketing push (estimated time: 3h)
+- [ ] Develop and test subscription sign-up process for golf coaching service (estimated time: 2h)
+- [ ] Implement basic automation to track daily protein intake and caloric consumption (estimated time: 1h)
+- [ ] Research and identify potential investment opportunities for Florida Fund (estimated time: 2h)
+- [ ] Improve fitness tracker SaaS features based on personal usage feedback (estimated time: 3h)

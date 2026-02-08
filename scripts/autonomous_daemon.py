@@ -76,8 +76,31 @@ def file_hash(filepath):
     with open(filepath, 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()
 
+def try_local_analysis(signal_type, data):
+    """Try to handle signal with local model before escalating"""
+    try:
+        import subprocess
+        result = subprocess.run(
+            ['python3', str(WORKSPACE / 'scripts' / 'local_analyzer.py'), signal_type],
+            input=json.dumps({"type": signal_type, "data": data}),
+            capture_output=True,
+            text=True,
+            timeout=120  # 2 min max for local model
+        )
+        
+        if result.returncode == 0 and result.stdout:
+            response = json.loads(result.stdout)
+            if response.get("handled"):
+                log(f"Local model handled: {signal_type} - {response.get('action_taken')}")
+                return True
+        
+        return False
+    except Exception as e:
+        log(f"Local analysis failed: {e}", "WARN")
+        return False
+
 def write_signal(signal_type, data, priority="medium"):
-    """Write an escalation signal for Sonnet to handle"""
+    """Write an escalation signal for Sonnet to handle (after local analysis fails)"""
     signal_id = f"{int(time.time())}_{signal_type}"
     signal_file = ESCALATIONS / f"{signal_id}.json"
     
@@ -91,7 +114,7 @@ def write_signal(signal_type, data, priority="medium"):
     with open(signal_file, 'w') as f:
         json.dump(signal, f, indent=2)
     
-    log(f"Signal written: {signal_type} (priority: {priority})")
+    log(f"Signal written for Sonnet: {signal_type} (priority: {priority})")
 
 def check_goals_md(state):
     """Monitor GOALS.md for changes"""
@@ -109,15 +132,17 @@ def check_goals_md(state):
         with open(goals_file) as f:
             content = f.read()
         
-        # Simple check: look for "URGENT" or "HIGH PRIORITY"
-        if "URGENT" in content.upper() or "HIGH PRIORITY" in content.upper():
-            write_signal(
-                "goals_updated",
-                {"message": "High-priority goals detected in GOALS.md"},
-                priority="high"
-            )
-        else:
-            log("Goals updated but no urgent items detected")
+        # Try local model analysis first
+        if not try_local_analysis("goals_updated", {"goals_content": content}):
+            # Local model escalated or failed, write signal
+            if "URGENT" in content.upper() or "HIGH PRIORITY" in content.upper():
+                write_signal(
+                    "goals_updated",
+                    {"message": "High-priority goals detected in GOALS.md"},
+                    priority="high"
+                )
+            else:
+                log("Goals updated, local model handled it")
     
     state.set_file_hash(goals_file, current_hash)
 
@@ -140,11 +165,13 @@ def check_task_queue(state):
         pending = content.count("- [ ]")
         
         if pending > 10:
-            write_signal(
-                "task_queue_growing",
-                {"pending_tasks": pending, "message": "Task backlog growing, may need attention"},
-                priority="medium"
-            )
+            # Try local analysis first
+            if not try_local_analysis("task_queue_growing", {"pending_tasks": pending, "queue_content": content}):
+                write_signal(
+                    "task_queue_growing",
+                    {"pending_tasks": pending, "message": "Task backlog growing, may need attention"},
+                    priority="medium"
+                )
     
     state.set_file_hash(queue_file, current_hash)
 
@@ -209,14 +236,16 @@ def check_for_empty_task_queue():
     # Count pending tasks
     pending = content.count("- [ ]")
     
-    # If less than 3 pending tasks, signal for task generation
+    # If less than 3 pending tasks, try local generation first
     if pending < 3:
-        log(f"Task queue low ({pending} tasks) - signaling for generation")
-        write_signal(
-            "generate_tasks",
-            {"current_tasks": pending, "message": "Task queue needs replenishment"},
-            priority="low"
-        )
+        log(f"Task queue low ({pending} tasks) - trying local generation")
+        if not try_local_analysis("generate_tasks", {"current_tasks": pending}):
+            # Local model couldn't generate, escalate
+            write_signal(
+                "generate_tasks",
+                {"current_tasks": pending, "message": "Task queue needs replenishment"},
+                priority="low"
+            )
 
 def run_check_cycle(state):
     """Run one complete check cycle"""
