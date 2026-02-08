@@ -1,13 +1,17 @@
 # HEARTBEAT.md - Jarvis Periodic Tasks
 
 ## 🧠 Before Every Heartbeat
-1. **Check for Escalations (NEW):** Run `python3 ~/clawd/scripts/check_escalations.py`
+1. **Check for Escalations:** Run `python3 ~/clawd/scripts/check_escalations.py`
    - Local daemon signals when it needs Sonnet's help
    - Handle spawns, alerts, morning briefs, evening check-ins
    - This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
-2. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
-3. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
-4. **Check Proactive State:** Review any pending actions
+2. **Run Orchestrator (Every 3rd heartbeat):** `python3 ~/clawd/scripts/orchestrator.py full`
+   - Scans for opportunities (Twitter, Email)
+   - Drafts responses with local AI
+   - Executes simple tasks
+   - Checks system health
+3. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
+4. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
 
 ## Evening Check-In (8:00pm CST)
 If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happened today:
