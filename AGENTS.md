@@ -16,10 +16,91 @@ Before doing anything else:
    - Generates tasks if queue empty
    - Spawns builds if ready
    - See `AUTONOMOUS_AGENT.md` for full protocol
-5. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-6. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+5. **Load Intelligence Systems** ← NEW v2.0
+   - Context Telepathy: Predict needs before being asked
+   - Instant Recall: Search memory for relevant context
+   - Decision Confidence: Score autonomy for actions
+   - Personality Model: Adjust tone/style appropriately
+   - See `INTELLIGENCE.md` for full documentation
+6. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+7. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
+
+## 🧠 Intelligence Systems (v2.0)
+
+**NEW:** Jarvis now has 6 core intelligence systems. Use them!
+
+### Before Every Response:
+1. **Instant Recall:** Check for relevant past context
+   ```python
+   from scripts.instant_recall import InstantRecall
+   recall = InstantRecall()
+   relevant = recall.auto_recall(user_message)
+   # Surface past conversations, decisions, preferences
+   ```
+
+2. **Context Telepathy:** Predict follow-up questions
+   ```python
+   from scripts.context_telepathy import ContextTelepathy
+   telepathy = ContextTelepathy()
+   predictions = telepathy.predict_next_need()
+   # Pre-load data Ross will likely ask about next
+   ```
+
+3. **Personality Selection:** Choose appropriate tone
+   ```python
+   from scripts.personality_evolution import PersonalityEvolution
+   personality = PersonalityEvolution()
+   tone = personality.get_recommended_tone(context)
+   # Adjust formality, humor, technical depth
+   ```
+
+### Before Every Action:
+```python
+from scripts.decision_engine import DecisionEngine
+engine = DecisionEngine()
+score = engine.score_decision(action_type, context)
+
+if score['recommendation'] == 'DO_IT':
+    # High confidence - act autonomously
+    execute_action()
+    engine.log_decision(action_type, 'DO_IT', outcome='success')
+elif score['recommendation'] == 'ASK_PERMISSION':
+    # Medium confidence - ask first
+    ask_ross_permission()
+else:
+    # Low confidence - explain options
+    present_options_to_ross()
+```
+
+### After Every Interaction:
+```python
+# Log for learning
+telepathy.log_interaction(interaction_type, topic, context)
+personality.log_interaction(jarvis_message, ross_response, context)
+# Systems improve over time from this feedback
+```
+
+### During Builds:
+```python
+from scripts.parallel_builder import ExecutionOptimizer
+optimizer = ExecutionOptimizer()
+
+# Use templates for common patterns
+code = optimizer.fill_template('flask_endpoint', variables)
+
+# Decompose complex tasks
+subtasks = optimizer.decompose_task(build_description)
+
+# Execute in parallel
+result = optimizer.execute_parallel(subtasks)
+```
+
+### Full Documentation:
+Read `INTELLIGENCE.md` for complete system docs, integration patterns, and examples.
+
+---
 
 ## Memory
 

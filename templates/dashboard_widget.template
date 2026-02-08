@@ -1,0 +1,30 @@
+<div class="widget {widget_class}">
+    <div class="widget-header">
+        <h3>{title}</h3>
+        <span class="widget-icon">{icon}</span>
+    </div>
+    <div class="widget-body">
+        <div class="metric-value">{value}</div>
+        <div class="metric-label">{label}</div>
+        {trend_indicator}
+    </div>
+</div>
+
+<style>
+.{widget_class} {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.metric-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+</style>

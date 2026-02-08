@@ -119,3 +119,16 @@ While Ross sleeps (11pm-7am):
 - Generate social posts (~/clawd/scripts/generate_social_posts.py)
 - Update dashboards with latest data
 - Prepare morning intel summary
+
+## 🌙 Night Shift Intelligence (11pm-7am)
+**PRIORITY:** Run Proactive Intelligence Agent during off-hours
+- Execute: `python3 ~/clawd/scripts/proactive_intel.py run`
+- Frequency: 3 cycles per night (11pm, 2am, 5am)
+- Targets: Golf coaching, Notion templates, Fitness apps, Florida real estate
+- Output: `reports/daily_intel_YYYY-MM-DD.md`
+- Morning delivery: Surface key findings in first interaction after 7am
+
+**Integration with Morning Brief:**
+- Include top 2-3 overnight opportunities in morning brief
+- Alert if high-confidence opportunity detected (>80%)
+- Pre-load relevant context for Ross's morning priorities

@@ -1,0 +1,21 @@
+@app.route('/api/{endpoint}', methods=['{method}'])
+def {function_name}():
+    """
+    {description}
+    """
+    try:
+        # Get request data
+        data = request.get_json()
+        
+        # TODO: Implement logic here
+        
+        return jsonify({
+            'success': True,
+            'data': {}
+        }), 200
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
