@@ -26,7 +26,7 @@ from pathlib import Path
 import hashlib
 from decision_log import DecisionLog
 from opportunity_scorer import OpportunityScorer
-from decision_summary import DecisionSummaryGenerator
+from decision_summary import DecisionSummaryGenerator, REPORTS_DIR
 
 # Sample data templates
 SAMPLE_OPPORTUNITIES = {
@@ -392,9 +392,9 @@ def main():
     print("✅ ALL TESTS COMPLETED")
     print("=" * 80)
     print("\nDatabase location:", decision_log.db_path)
-    print("Reports location:", generator.REPORTS_DIR)
+    print("Reports location:", REPORTS_DIR)
     print("\nNext steps:")
-    print("1. Review generated reports in", generator.REPORTS_DIR)
+    print("1. Review generated reports in", REPORTS_DIR)
     print("2. Run: python3 scripts/decision_summary.py")
     print("3. Check conversion rates: python3 scripts/decision_log.py conversions")
     print("4. Generate insights: python3 scripts/decision_log.py insights")
