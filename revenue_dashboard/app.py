@@ -357,10 +357,10 @@ if __name__ == '__main__':
     try:
         stripe_data = fetch_stripe_data()
         data = load_data()
-        data['stripe_sales'] = stripe_data['payments']
-        data['subscriptions'] = stripe_data['subscriptions']
-        data['mrr'] = stripe_data['mrr']
-        data['total_revenue'] = stripe_data['total_revenue']
+        data['stripe_sales'] = stripe_data.get('payments', [])
+        data['subscriptions'] = stripe_data.get('subscriptions', [])
+        data['mrr'] = stripe_data.get('mrr', 0)
+        data['total_revenue'] = stripe_data.get('total_revenue', 0)
         data['last_updated'] = datetime.now().isoformat()
         save_data(data)
         logger.info("Initial data loaded")
