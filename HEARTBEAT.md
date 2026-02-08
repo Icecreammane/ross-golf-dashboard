@@ -57,6 +57,13 @@ If current day is Sunday and time is between 5:55pm-6:05pm CST:
 - Update completed items
 - Flag any blocked tasks
 
+## Daily Cost Check (End of Day)
+If current time is between 10:00pm-11:00pm CST:
+1. Run: `python3 ~/clawd/scripts/cost_tracker.py daily`
+2. If daily cost > $40: Alert Ross with breakdown
+3. If weekly trend > $250: Flag for review
+4. Log summary to memory/cost-summary.json
+
 ## System Health Check (Handled by Daemon)
 **Now automated!** The local daemon runs health checks every 5 minutes:
 - Disk space monitoring (alerts if >90%)

@@ -1,0 +1,123 @@
+{
+  "mrr": {
+    "current": 0,
+    "goal": 500,
+    "lastUpdated": "2026-02-08"
+  },
+  "floridaFund": {
+    "current": 0,
+    "goal": 50000,
+    "monthlyContribution": 0,
+    "lastUpdated": "2026-02-08"
+  },
+  "incomeStreams": [
+    {
+      "id": "fitness-tracker",
+      "name": "Fitness Tracker SaaS",
+      "type": "recurring",
+      "mrr": 0,
+      "users": 0,
+      "pricePerMonth": 10,
+      "status": "not_launched",
+      "launchDate": null,
+      "color": "#6366f1"
+    },
+    {
+      "id": "notion-templates",
+      "name": "Notion Templates",
+      "type": "one-time",
+      "totalRevenue": 0,
+      "sales": 0,
+      "averagePrice": 20,
+      "status": "not_launched",
+      "launchDate": null,
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "future-saas",
+      "name": "Future SaaS Products",
+      "type": "recurring",
+      "mrr": 0,
+      "users": 0,
+      "status": "planned",
+      "launchDate": null,
+      "color": "#ec4899"
+    }
+  ],
+  "thisWeek": {
+    "revenue": 0,
+    "newCustomers": 0,
+    "conversionRate": 0,
+    "traffic": 0,
+    "weekStart": "2026-02-03"
+  },
+  "recentActivity": [
+    {
+      "date": "2026-02-08",
+      "type": "milestone",
+      "description": "Revenue dashboard launched",
+      "amount": 0
+    }
+  ],
+  "milestones": [
+    {
+      "name": "First Dollar",
+      "target": 1,
+      "achieved": false,
+      "estimatedDate": "2026-02-15",
+      "confidence": "medium"
+    },
+    {
+      "name": "First $100",
+      "target": 100,
+      "achieved": false,
+      "estimatedDate": "2026-03-01",
+      "confidence": "medium"
+    },
+    {
+      "name": "First $500 MRR",
+      "target": 500,
+      "achieved": false,
+      "estimatedDate": "2026-08-01",
+      "confidence": "low"
+    },
+    {
+      "name": "Florida Move",
+      "target": 50000,
+      "achieved": false,
+      "estimatedDate": "2030-01-01",
+      "confidence": "low"
+    }
+  ],
+  "pathScenarios": [
+    {
+      "name": "Scenario A: Pure SaaS",
+      "description": "50 users × $10/mo = $500 MRR",
+      "users": 50,
+      "pricePerUser": 10,
+      "totalMRR": 500,
+      "realistic": "medium",
+      "timeframe": "6-12 months"
+    },
+    {
+      "name": "Scenario B: Pure Templates",
+      "description": "25 templates × $20 = $500 one-time",
+      "sales": 25,
+      "pricePerSale": 20,
+      "totalRevenue": 500,
+      "realistic": "medium",
+      "timeframe": "3-6 months",
+      "note": "One-time revenue, not recurring"
+    },
+    {
+      "name": "Scenario C: Mixed Model",
+      "description": "30 SaaS users ($300) + 10 templates ($200) = $500",
+      "saasMRR": 300,
+      "oneTimeRevenue": 200,
+      "totalMRR": 300,
+      "realistic": "high",
+      "timeframe": "4-8 months",
+      "note": "Most realistic path"
+    }
+  ]
+}

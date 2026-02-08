@@ -1,6 +1,6 @@
 # Research Report: underdog_nba_rankings
 **Query:** Underdog Fantasy NBA daily draft rankings today
-**Date:** 2026-02-07 04:02
+**Date:** 2026-02-08 02:00
 
 ## Key Findings:
 (AI-generated summary would go here based on search results)

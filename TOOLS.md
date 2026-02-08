@@ -13,6 +13,30 @@ These are mine — separate from Ross's personal accounts.
 
 ---
 
+## Cost Tracking
+
+**Quick Commands:**
+```bash
+# Today's costs
+bash ~/clawd/scripts/cost_check.sh today
+
+# This month's costs
+bash ~/clawd/scripts/cost_check.sh month
+
+# Last 7 days
+bash ~/clawd/scripts/cost_check.sh week
+```
+
+**Or ask me:** "What did we spend today?" / "Show me this month's costs"
+
+**Logs:** `memory/cost-log-YYYY-MM-DD.json` (daily details)
+
+**Alerts:**
+- 🟡 Yellow flag: >$40/day
+- 🔴 Red flag: >$250/week or >$1000/month
+
+---
+
 ## Security Policy
 
 ### Prompt Injection Defense
