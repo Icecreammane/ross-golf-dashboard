@@ -1,0 +1,31 @@
+{
+  "enabled": true,
+  "description": "Smart escalation layer configuration",
+  "models": {
+    "scoring": "qwen2.5:14b",
+    "response": "llama3.1:8b"
+  },
+  "thresholds": {
+    "complexity_escalate": 50,
+    "confidence_minimum": 70,
+    "critical_decision_threshold": 70
+  },
+  "user_overrides": {
+    "8412148376": {
+      "enabled": true,
+      "name": "Ross",
+      "notes": "Main user - full escalation enabled"
+    }
+  },
+  "logging": {
+    "log_all_decisions": true,
+    "log_file": "memory/escalation.log",
+    "cost_log": "memory/escalation_cost_savings.json"
+  },
+  "telegram": {
+    "enabled": true,
+    "show_routing_info": false,
+    "skip_commands": true,
+    "skip_media": true
+  }
+}

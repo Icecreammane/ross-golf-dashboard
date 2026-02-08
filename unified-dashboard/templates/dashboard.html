@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Dashboard | Ross's Command Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-line"></i> Command Center</h1>
+                <div class="header-meta">
+                    <span id="current-time"></span>
+                    <span class="status-dot" id="status-indicator"></span>
+                    <span id="last-updated">Loading...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-button active" data-tab="revenue">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Revenue</span>
+            </button>
+            <button class="tab-button" data-tab="opportunities">
+                <i class="fas fa-lightbulb"></i>
+                <span>Opportunities</span>
+                <span class="badge" id="opp-badge">0</span>
+            </button>
+            <button class="tab-button" data-tab="morning-brief">
+                <i class="fas fa-newspaper"></i>
+                <span>Morning Brief</span>
+            </button>
+            <button class="tab-button" data-tab="fitness">
+                <i class="fas fa-dumbbell"></i>
+                <span>Fitness</span>
+            </button>
+            <button class="tab-button" data-tab="golf">
+                <i class="fas fa-golf-ball"></i>
+                <span>Golf</span>
+            </button>
+            <button class="tab-button" data-tab="nba" id="nba-tab" style="display: none;">
+                <i class="fas fa-basketball-ball"></i>
+                <span>NBA Slate</span>
+            </button>
+        </nav>
+
+        <!-- Tab Content -->
+        <main class="tab-content">
+            <!-- Revenue Tab -->
+            <section id="revenue" class="tab-pane active">
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <h3>MRR Progress</h3>
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value">$<span id="mrr-value">0</span></div>
+                        <div class="stat-label">of $<span id="mrr-goal">500</span> goal</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="mrr-progress"></div>
+                        </div>
+                        <div class="stat-meta"><span id="mrr-percent">0</span>% complete</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Daily Revenue</h3>
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-value">$<span id="daily-revenue">0</span></div>
+                        <div class="stat-label">Today</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Weekly Revenue</h3>
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="stat-value">$<span id="weekly-revenue">0</span></div>
+                        <div class="stat-label">Last 7 days</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Monthly Revenue</h3>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-value">$<span id="monthly-revenue">0</span></div>
+                        <div class="stat-label">This month</div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h2><i class="fas fa-receipt"></i> Recent Sales</h2>
+                    <div id="recent-sales" class="list-container">
+                        <p class="empty-state">No recent sales</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Opportunities Tab -->
+            <section id="opportunities" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-trophy"></i> Top Opportunities</h2>
+                        <div class="section-stats">
+                            <span class="stat-badge">Total: <strong id="total-opps">0</strong></span>
+                            <span class="stat-badge high-priority">High Priority: <strong id="high-priority-opps">0</strong></span>
+                        </div>
+                    </div>
+                    <div id="opportunities-list" class="opportunities-container">
+                        <p class="empty-state">No opportunities found</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Morning Brief Tab -->
+            <section id="morning-brief" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-sun"></i> NBA Morning Brief</h2>
+                        <span class="status-badge" id="brief-status">Loading...</span>
+                    </div>
+                    <div id="brief-content" class="brief-container">
+                        <p class="loading-text">Loading brief...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fitness Tab -->
+            <section id="fitness" class="tab-pane">
+                <div class="stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <h3>Current Weight</h3>
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <div class="stat-value"><span id="current-weight">0</span> lbs</div>
+                        <div class="stat-label">Target: <span id="target-weight">210</span> lbs</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="weight-progress"></div>
+                        </div>
+                        <div class="stat-meta"><span id="weight-lost">0</span> lbs lost (<span id="weight-percent">0</span>%)</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Workouts This Week</h3>
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-value"><span id="workouts-week">0</span></div>
+                        <div class="stat-label">Training sessions</div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h2><i class="fas fa-history"></i> Last Workout</h2>
+                    <div id="last-workout" class="workout-detail">
+                        <p class="empty-state">No workouts logged</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Golf Tab -->
+            <section id="golf" class="tab-pane">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Total Rounds</h3>
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="stat-value"><span id="total-rounds">0</span></div>
+                        <div class="stat-label">Rounds played</div>
+                    </div>
+
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <h3>Average Score</h3>
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-value"><span id="avg-score">0</span></div>
+                        <div class="stat-label">18 holes</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Best Score</h3>
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-value"><span id="best-score">0</span></div>
+                        <div class="stat-label">Personal best</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3>Handicap</h3>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-value"><span id="handicap">0</span></div>
+                        <div class="stat-label">Estimated</div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h2><i class="fas fa-list"></i> Recent Rounds</h2>
+                    <div id="recent-rounds" class="rounds-container">
+                        <p class="empty-state">No rounds played</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NBA Tab -->
+            <section id="nba" class="tab-pane">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-basketball-ball"></i> Today's Slate</h2>
+                        <span class="status-badge" id="nba-status">Loading...</span>
+                    </div>
+                    
+                    <div id="nba-content">
+                        <!-- Top Stars -->
+                        <div class="nba-section">
+                            <h3>🌟 Top Stars</h3>
+                            <div id="nba-stars" class="player-list">
+                                <p class="empty-state">No data available</p>
+                            </div>
+                        </div>
+
+                        <!-- Value Plays -->
+                        <div class="nba-section">
+                            <h3>💰 Value Plays</h3>
+                            <div id="nba-value" class="player-list">
+                                <p class="empty-state">No data available</p>
+                            </div>
+                        </div>
+
+                        <!-- Stacks -->
+                        <div class="nba-section">
+                            <h3>🔥 Recommended Stacks</h3>
+                            <div id="nba-stacks" class="stacks-list">
+                                <p class="empty-state">No data available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Unified Dashboard v1.0 | Last updated: <span id="footer-timestamp">--</span></p>
+            <div class="footer-links">
+                <a href="/api/health" target="_blank">API Health</a>
+                <a href="http://localhost:3003/docs" target="_blank">Central API Docs</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

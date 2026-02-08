@@ -1,0 +1,668 @@
+{
+  "decisions": [
+    {
+      "timestamp": "2026-02-08T17:15:21.668308",
+      "question": "Which of these 3 opportunities should I pursue?",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal with uncertain terms",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request for dark mode (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.678196",
+      "question": "What should I focus on?",
+      "recommendation": "B",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "B",
+          "description": "Consulting gig worth $450",
+          "type": "consulting",
+          "score": 1145.0,
+          "conversion_rate": 0.5,
+          "expected_revenue": 225.0,
+          "effort_hours": 6,
+          "roi": 37.5
+        },
+        {
+          "label": "C",
+          "description": "Product idea that could generate $1000/mo",
+          "type": "product_idea",
+          "score": 506.0,
+          "conversion_rate": 0.2,
+          "expected_revenue": 200.0,
+          "effort_hours": 20,
+          "roi": 10.0
+        },
+        {
+          "label": "A",
+          "description": "Small feature request worth $50",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.688427",
+      "question": "Which is most likely to succeed?",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Email inquiry from interested customer",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Cold partnership outreach",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Random feature idea",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.697585",
+      "question": "Best time investment?",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Quick 2-hour consulting call for $300",
+          "type": "consulting",
+          "score": 1145.0,
+          "conversion_rate": 0.5,
+          "expected_revenue": 225.0,
+          "effort_hours": 6,
+          "roi": 37.5
+        },
+        {
+          "label": "C",
+          "description": "8-hour partnership setup for $500",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "B",
+          "description": "20-hour product build for $1000",
+          "type": "product_idea",
+          "score": 506.0,
+          "conversion_rate": 0.2,
+          "expected_revenue": 200.0,
+          "effort_hours": 20,
+          "roi": 10.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.706791",
+      "question": "Test question for logging",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Option A",
+          "type": "cold_outreach",
+          "score": 669.5,
+          "conversion_rate": 0.15,
+          "expected_revenue": 52.5,
+          "effort_hours": 3,
+          "roi": 17.5
+        },
+        {
+          "label": "B",
+          "description": "Option B",
+          "type": "cold_outreach",
+          "score": 669.5,
+          "conversion_rate": 0.15,
+          "expected_revenue": 52.5,
+          "effort_hours": 3,
+          "roi": 17.5
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.715908",
+      "question": "Test run 1",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Email inquiry about golf coaching",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership with local gym",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request for app",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.725265",
+      "question": "Test run 2",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Email inquiry about golf coaching",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership with local gym",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request for app",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.734171",
+      "question": "Test run 3",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Email inquiry about golf coaching",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership with local gym",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request for app",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:21.743246",
+      "question": "Should I focus on quick wins or long-term projects?",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Quick consulting call ($300, 2 hours)",
+          "type": "consulting",
+          "score": 1145.0,
+          "conversion_rate": 0.5,
+          "expected_revenue": 225.0,
+          "effort_hours": 6,
+          "roi": 37.5
+        },
+        {
+          "label": "B",
+          "description": "Build SaaS product ($1000/mo potential, 40 hours)",
+          "type": "product_idea",
+          "score": 506.0,
+          "conversion_rate": 0.2,
+          "expected_revenue": 200.0,
+          "effort_hours": 20,
+          "roi": 10.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:26.738105",
+      "question": "Which opportunity should I pursue first?",
+      "recommendation": "A",
+      "response_time": 0.01,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.525969",
+      "question": "Which opportunity should I pursue?",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.574445",
+      "question": "Should I focus on quick wins or long-term projects?",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Quick consulting call for $300 (2 hours)",
+          "type": "consulting",
+          "score": 1145.0,
+          "conversion_rate": 0.5,
+          "expected_revenue": 225.0,
+          "effort_hours": 6,
+          "roi": 37.5
+        },
+        {
+          "label": "C",
+          "description": "Partnership opportunity with local gym ($500, 8 hours)",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "B",
+          "description": "Build SaaS product with $1000/mo potential (40 hours)",
+          "type": "product_idea",
+          "score": 506.0,
+          "conversion_rate": 0.2,
+          "expected_revenue": 200.0,
+          "effort_hours": 20,
+          "roi": 10.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.616068",
+      "question": "Test run 1",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.656417",
+      "question": "Test run 2",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.696389",
+      "question": "Test run 3",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.736421",
+      "question": "Test run 4",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:15:50.776126",
+      "question": "Test run 5",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-08T17:17:28.509138",
+      "question": "Which opportunity has the best ROI?",
+      "recommendation": "A",
+      "response_time": 0.02,
+      "opportunities": [
+        {
+          "label": "A",
+          "description": "Golf swing analysis inquiry via email from potential client",
+          "type": "email_inquiry",
+          "score": 2681.35,
+          "conversion_rate": 0.67,
+          "expected_revenue": 194.3,
+          "effort_hours": 2,
+          "roi": 97.15
+        },
+        {
+          "label": "B",
+          "description": "Partnership proposal for fitness app integration",
+          "type": "partnership",
+          "score": 642.75,
+          "conversion_rate": 0.3,
+          "expected_revenue": 150.0,
+          "effort_hours": 8,
+          "roi": 18.75
+        },
+        {
+          "label": "C",
+          "description": "Feature request: Add dark mode to existing app (no revenue)",
+          "type": "feature_request",
+          "score": 123.0,
+          "conversion_rate": 0.1,
+          "expected_revenue": 0.0,
+          "effort_hours": 4,
+          "roi": 0.0
+        }
+      ]
+    }
+  ]
+}

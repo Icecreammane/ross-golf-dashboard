@@ -18,11 +18,11 @@
 | **Financial Tracker** | ✅ DONE | 100% | — | Projects: $50K Florida Fund + FI date |
 | **Weather Daemon** | ✅ DONE | 100% | — | Nolensville + Orlando + Miami |
 | **Fitness Aggregator** | ✅ DONE | 100% | — | Daily insights @ 11pm |
-| **Golf Collector** | 📅 QUEUED | — | — | Week 1, Day 2 |
+| **Golf Collector** | ✅ DONE | 100% | 5050 | Web + CLI interface |
 | **Morning Brief** | ✅ DONE | 100% | — | Live: 7:30am daily |
 | **Opportunity Aggregator** | ✅ DONE | 100% | — | Ranked by revenue potential |
 | **Weekly Reporter** | 📅 QUEUED | — | — | Week 2, Day 1 |
-| **Central API** | 📅 QUEUED | 3003 | — | Week 2, Day 2 |
+| **Central API** | ✅ DONE | 100% | 3003 | Unified hub for all daemons |
 | **Dashboard Hub** | 📅 QUEUED | 3004 | — | Week 2, Day 2 |
 | **Stripe Webhooks** | 📅 QUEUED | — | — | Week 2, Day 2 |
 

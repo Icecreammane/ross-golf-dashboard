@@ -1,0 +1,10 @@
+{
+  "total_queries": 1,
+  "local_queries": 1,
+  "cloud_queries": 0,
+  "tokens_saved": 14,
+  "cost_saved": 0.000162,
+  "started": "2026-02-08T17:00:29.129692",
+  "last_updated": "2026-02-08T17:00:29.129708",
+  "local_percentage": 100.0
+}

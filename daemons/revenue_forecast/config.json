@@ -1,0 +1,34 @@
+{
+  "target_mrr": 500,
+  "database_path": "data/revenue_forecast.db",
+  "update_interval_hours": 24,
+  "stripe_enabled": false,
+  "mock_mode": true,
+  "scenarios": [
+    {
+      "name": "1 Golf Student",
+      "monthly_value": 29,
+      "description": "Add 1 more golf student"
+    },
+    {
+      "name": "2 Golf Students",
+      "monthly_value": 58,
+      "description": "Add 2 more golf students"
+    },
+    {
+      "name": "Enterprise Client",
+      "monthly_value": 199,
+      "description": "Land 1 enterprise client"
+    },
+    {
+      "name": "3 SaaS Subs",
+      "monthly_value": 87,
+      "description": "Add 3 SaaS subscriptions at $29/mo"
+    }
+  ],
+  "morning_brief_integration": true,
+  "alert_thresholds": {
+    "negative_growth_days": 7,
+    "milestone_percentages": [25, 50, 75, 90, 100]
+  }
+}

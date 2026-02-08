@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Revenue Forecast Widget</title>
+    <style>
+        .revenue-widget {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        
+        .revenue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .revenue-title {
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        .revenue-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .revenue-target {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #48ff48, #00d084);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .metric-value.positive {
+            color: #48ff48;
+        }
+        
+        .metric-value.negative {
+            color: #ff6b6b;
+        }
+        
+        .forecast-message {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .chart-mini {
+            height: 60px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+        
+        .chart-bar:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.7;
+        }
+        
+        .error {
+            background: #ff6b6b;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="revenue-widget" id="revenueWidget">
+        <div class="loading">Loading revenue data...</div>
+    </div>
+
+    <script>
+        const DATA_PATH = '../../data/revenue_forecast_widget.json';
+        
+        async function loadRevenueData() {
+            try {
+                const response = await fetch(DATA_PATH);
+                const data = await response.json();
+                
+                if (data.status === 'ok') {
+                    renderWidget(data);
+                } else {
+                    showError('No revenue data available yet');
+                }
+            } catch (error) {
+                showError('Failed to load revenue data');
+                console.error(error);
+            }
+        }
+        
+        function renderWidget(data) {
+            const widget = document.getElementById('revenueWidget');
+            
+            const currentMRR = data.current_mrr;
+            const targetMRR = data.target_mrr;
+            const pctComplete = data.pct_complete;
+            const daysToTarget = data.days_to_target;
+            const dailyRate = data.daily_growth_rate;
+            const weeklyRate = data.weekly_growth_rate;
+            
+            // Build chart
+            const trendData = data.trend_data || [];
+            const maxMRR = Math.max(...trendData.map(d => d.mrr), targetMRR);
+            const chartBars = trendData.slice(-14).map(d => {
+                const height = (d.mrr / maxMRR * 100);
+                return `<div class="chart-bar" style="height: ${height}%" title="${d.date}: $${d.mrr}"></div>`;
+            }).join('');
+            
+            // Forecast message
+            let forecastMsg = '';
+            if (currentMRR >= targetMRR) {
+                forecastMsg = '🎉 Target achieved!';
+            } else if (daysToTarget > 0) {
+                const targetDate = new Date(Date.now() + daysToTarget * 86400000);
+                const dateStr = targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                forecastMsg = `🎯 On track to hit $${targetMRR} on ${dateStr}`;
+            } else if (weeklyRate > 0) {
+                forecastMsg = `📈 Growing at +${weeklyRate.toFixed(1)}% weekly`;
+            } else {
+                forecastMsg = '⚠️ Need growth momentum';
+            }
+            
+            widget.innerHTML = `
+                <div class="revenue-header">
+                    <div class="revenue-title">💰 MRR Forecast</div>
+                    <div>${new Date(data.updated_at).toLocaleDateString()}</div>
+                </div>
+                
+                <div class="revenue-amount">$${currentMRR.toFixed(0)}</div>
+                <div class="revenue-target">of $${targetMRR} target</div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${Math.min(100, pctComplete)}%">
+                        ${pctComplete.toFixed(0)}%
+                    </div>
+                </div>
+                
+                <div class="chart-mini">${chartBars}</div>
+                
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-label">Daily Growth</div>
+                        <div class="metric-value ${dailyRate >= 0 ? 'positive' : 'negative'}">
+                            ${dailyRate >= 0 ? '+' : ''}${dailyRate.toFixed(2)}%
+                        </div>
+                    </div>
+                    
+                    <div class="metric">
+                        <div class="metric-label">Weekly Growth</div>
+                        <div class="metric-value ${weeklyRate >= 0 ? 'positive' : 'negative'}">
+                            ${weeklyRate >= 0 ? '+' : ''}${weeklyRate.toFixed(1)}%
+                        </div>
+                    </div>
+                    
+                    <div class="metric">
+                        <div class="metric-label">30-Day Projection</div>
+                        <div class="metric-value">$${data.monthly_projection.toFixed(0)}</div>
+                    </div>
+                    
+                    <div class="metric">
+                        <div class="metric-label">Customers Needed</div>
+                        <div class="metric-value">${data.customers_needed}</div>
+                    </div>
+                </div>
+                
+                <div class="forecast-message">${forecastMsg}</div>
+            `;
+        }
+        
+        function showError(message) {
+            const widget = document.getElementById('revenueWidget');
+            widget.innerHTML = `<div class="error">${message}</div>`;
+        }
+        
+        // Load data on page load
+        loadRevenueData();
+        
+        // Refresh every 5 minutes
+        setInterval(loadRevenueData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
