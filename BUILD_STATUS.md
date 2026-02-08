@@ -12,11 +12,11 @@
 |--------|--------|-----------|------|-------|
 | **Email** | ✅ DONE | 100% | — | Deployed, needs Gmail password |
 | **Twitter** | 🔨 BUILDING | 0% | — | 2h build time, spawned 15:20 |
-| **Task Queue** | 🔨 BUILDING | 0% | — | 1.5h build time, spawned 15:20 |
+| **Task Queue** | ✅ DONE | 100% | — | Auto-generates from GOALS.md |
 | **Social Scheduler** | 🔨 BUILDING | 0% | — | 2.5h build time, spawned 15:20 |
 | **Revenue Dashboard** | 🔨 BUILDING | 0% | 3002 | 3h build time, spawned 15:20 |
 | **Financial Tracker** | 🔨 BUILDING | 0% | — | 1.5h build time, spawned 15:20 |
-| **Weather Daemon** | 🔨 BUILDING | 0% | — | 1h build time, spawned 15:20 |
+| **Weather Daemon** | ✅ DONE | 100% | — | Nolensville + Orlando + Miami |
 | **Fitness Aggregator** | 📅 QUEUED | — | — | Week 1, Day 2 |
 | **Golf Collector** | 📅 QUEUED | — | — | Week 1, Day 2 |
 | **Morning Brief** | 📅 QUEUED | — | — | Week 2, Day 1 |

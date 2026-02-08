@@ -88,20 +88,11 @@ def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
 def generate_post(theme: str, prompt_template: str) -> dict:
     """Generate a single social media post"""
     
-    system_prompt = f"""You are a concise social media content creator for a golf coach and fitness expert who is building digital products.
+    # Simplified, more direct prompt for faster local LLM response
+    system_prompt = f"""Write a short Twitter post (under 280 chars) about: {prompt_template}
 
-Generate a Twitter/X post (max 280 characters) based on this guidance:
-{prompt_template}
-
-Requirements:
-- ONE powerful idea only
-- Conversational, direct tone
-- No fluff or generic advice
-- Include 2-3 relevant hashtags at the end
-- Optionally suggest [IMAGE: description] if a visual would add value
-- Be specific and actionable
-
-Output ONLY the post text, nothing else."""
+Style: Direct, conversational, actionable. For a golf coach/fitness expert.
+Include 2-3 hashtags. Output only the post text."""
 
     generated = call_ollama(system_prompt)
     
