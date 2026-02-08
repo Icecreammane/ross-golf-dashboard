@@ -1,0 +1,12 @@
+{
+  "content_generation": {
+    "fitness": true,
+    "golf": false,
+    "volleyball": true,
+    "general_motivation": true
+  },
+  "posts_per_category": 10,
+  "exclude_topics": ["golf coaching", "golf tips"],
+  "updated": "2026-02-08 01:00 CST",
+  "reason": "Ross removed golf from tonight's queue"
+}
