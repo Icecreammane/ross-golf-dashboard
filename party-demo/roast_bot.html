@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Roast Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f8f8f8;
+        }
+        
+        .upload-area input {
+            display: none;
+        }
+        
+        .upload-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+        
+        .upload-text {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .preview {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .preview img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .style-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .style-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .style-btn:hover {
+            border-color: #667eea;
+        }
+        
+        .style-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .roast-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .roast-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .roast-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .result-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .loading-spinner {
+            font-size: 32px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥</h1>
+        <div class="subtitle">Roast Bot</div>
+        
+        <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">Click to upload a photo</div>
+            <input type="file" id="photoInput" accept="image/*" capture="environment">
+        </div>
+        
+        <div class="preview" id="preview">
+            <img id="previewImg" src="" alt="Preview">
+            
+            <div class="style-selector">
+                <button class="style-btn active" data-style="friendly">😊 Friendly</button>
+                <button class="style-btn" data-style="savage">💀 Savage</button>
+                <button class="style-btn" data-style="clever">🧠 Clever</button>
+            </div>
+            
+            <button class="roast-btn" id="roastBtn">🔥 Roast This Person</button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner">🔥</div>
+            <div>Generating roast...</div>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="result-label">🔥 THE ROAST</div>
+            <div class="result-text" id="roastText"></div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedStyle = 'friendly';
+        let currentImage = null;
+        
+        // Handle file selection
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentImage = e.target.result;
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('preview').style.display = 'block';
+                    document.getElementById('result').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Handle style selection
+        document.querySelectorAll('.style-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedStyle = this.dataset.style;
+            });
+        });
+        
+        // Handle roast button
+        document.getElementById('roastBtn').addEventListener('click', async function() {
+            if (!currentImage) return;
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            this.disabled = true;
+            
+            // Simulate API call (replace with actual backend call)
+            setTimeout(() => {
+                const roasts = {
+                    friendly: "My man really thought that backwards hat was gonna make him look 10 years younger. Spoiler alert: it didn't. Still out here looking like he peaked in intramural volleyball 2019.",
+                    savage: "Bro dressed like he's about to ask if anyone wants to 'run some sets' at 9pm on a Tuesday. We all know you're just gonna stand there and call 'my bad' after every missed pass.",
+                    clever: "This guy definitely calls himself a 'setter' but really just touches the ball twice a game and blames the pass. Professional excuse generator with a 2% success rate."
+                };
+                
+                const roast = roasts[selectedStyle];
+                
+                document.getElementById('roastText').textContent = roast;
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+                this.disabled = false;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

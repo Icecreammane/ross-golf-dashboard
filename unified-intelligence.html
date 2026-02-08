@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Intelligence Dashboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .card h2 {
+            margin: 0 0 20px 0;
+            font-size: 20px;
+            color: #667eea;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-operational {
+            background: #10b981;
+        }
+        .status-error {
+            background: #ef4444;
+        }
+        .status-unknown {
+            background: #6b7280;
+        }
+        .insight {
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .insight-high {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+        }
+        .insight-medium {
+            background: rgba(251, 191, 36, 0.1);
+            border-color: #fbbf24;
+        }
+        .insight-low {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+        }
+        .metric {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 12px 0;
+        }
+        .label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Unified Intelligence</h1>
+            <p>All systems synchronized and operational</p>
+        </div>
+        
+        <div class="grid" id="systemsGrid"></div>
+        
+        <div class="card">
+            <h2>💡 Unified Insights</h2>
+            <div id="insightsContainer"></div>
+        </div>
+        
+        <div class="timestamp" id="timestamp"></div>
+    </div>
+    
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('/Users/clawdbot/clawd/memory/unified-state.json');
+                const data = await response.json();
+                
+                renderSystems(data.systems);
+                renderInsights(data.insights);
+                updateTimestamp(data.last_sync);
+            } catch (error) {
+                console.error('Failed to load data:', error);
+            }
+        }
+        
+        function renderSystems(systems) {
+            const grid = document.getElementById('systemsGrid');
+            grid.innerHTML = '';
+            
+            for (const [name, data] of Object.entries(systems)) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const statusClass = data.status === 'operational' ? 'operational' : 
+                                   data.status === 'error' ? 'error' : 'unknown';
+                
+                card.innerHTML = `
+                    <h2><span class="status-indicator status-${statusClass}"></span>${name.replace(/_/g, ' ').toUpperCase()}</h2>
+                    <div class="label">Status</div>
+                    <div class="metric">${data.status}</div>
+                `;
+                
+                grid.appendChild(card);
+            }
+        }
+        
+        function renderInsights(insights) {
+            const container = document.getElementById('insightsContainer');
+            container.innerHTML = '';
+            
+            if (!insights || insights.length === 0) {
+                container.innerHTML = '<p style="color: #666;">No insights available yet</p>';
+                return;
+            }
+            
+            insights.forEach(insight => {
+                const div = document.createElement('div');
+                div.className = `insight insight-${insight.priority}`;
+                div.innerHTML = `
+                    <strong>${insight.type.replace(/_/g, ' ').toUpperCase()}</strong>
+                    <p>${insight.message}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateTimestamp(timestamp) {
+            const elem = document.getElementById('timestamp');
+            elem.textContent = `Last sync: ${new Date(timestamp).toLocaleString()}`;
+        }
+        
+        // Load data on page load
+        loadData();
+        
+        // Refresh every 60 seconds
+        setInterval(loadData, 60000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Win Streak Amplifier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .header .status {
+            font-size: 24px;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .stat-value {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .streaks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .streak-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .streak-card.active {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .streak-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+        
+        .streak-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .streak-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .streak-emoji {
+            font-size: 32px;
+        }
+        
+        .streak-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .streak-status {
+            font-size: 24px;
+        }
+        
+        .streak-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .streak-stat {
+            flex: 1;
+        }
+        
+        .streak-stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        
+        .streak-stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .achievements {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .achievements h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .achievement {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+        
+        .achievement-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .achievement-desc {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .todays-wins {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .todays-wins h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .win {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .win-desc {
+            font-size: 14px;
+        }
+        
+        .win-time {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Win Streak Amplifier</h1>
+            <div class="status" id="status">Loading...</div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Level</div>
+                <div class="stat-value" id="level">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Points</div>
+                <div class="stat-value" id="points">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Combo Multiplier</div>
+                <div class="stat-value" id="multiplier">-</div>
+            </div>
+        </div>
+        
+        <div class="streaks-grid" id="streaksGrid"></div>
+        
+        <div class="achievements" id="achievementsSection" style="display: none;">
+            <h2>🏆 Recent Achievements</h2>
+            <div id="achievements"></div>
+        </div>
+        
+        <div class="todays-wins" id="winsSection" style="display: none;">
+            <h2>✅ Today's Wins</h2>
+            <div id="todaysWins"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('memory/win_streaks.json');
+                const data = await response.json();
+                
+                updateStats(data);
+                updateStreaks(data);
+                updateAchievements(data);
+                updateTodaysWins(data);
+                
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                document.getElementById('status').textContent = 'Error loading data';
+            }
+        }
+        
+        function updateStats(data) {
+            document.getElementById('level').textContent = data.level;
+            document.getElementById('points').textContent = data.total_points;
+            document.getElementById('multiplier').textContent = data.multiplier.toFixed(2) + 'x';
+            
+            const activeCount = Object.values(data.categories).filter(c => c.current_streak > 0).length;
+            
+            let statusText = '';
+            if (activeCount === 4) {
+                statusText = '🔥 BEAST MODE ACTIVATED! All streaks active!';
+            } else if (activeCount >= 3) {
+                statusText = '💪 Crushing it! Keep the momentum!';
+            } else if (activeCount >= 2) {
+                statusText = '⚡ Building momentum! Don\'t break the chain!';
+            } else if (activeCount === 1) {
+                statusText = '🎯 One streak going - time to stack more!';
+            } else {
+                statusText = '🚀 Let\'s start a streak! Log your first win!';
+            }
+            
+            document.getElementById('status').textContent = statusText;
+        }
+        
+        function updateStreaks(data) {
+            const grid = document.getElementById('streaksGrid');
+            grid.innerHTML = '';
+            
+            for (const [key, streak] of Object.entries(data.categories)) {
+                const card = document.createElement('div');
+                card.className = 'streak-card' + (streak.current_streak > 0 ? ' active' : '');
+                
+                const status = streak.current_streak > 0 ? '🔥' : '💤';
+                
+                card.innerHTML = `
+                    <div class="streak-header">
+                        <div class="streak-title">
+                            <span class="streak-emoji">${streak.emoji}</span>
+                            <span class="streak-name">${streak.name}</span>
+                        </div>
+                        <span class="streak-status">${status}</span>
+                    </div>
+                    <div class="streak-stats">
+                        <div class="streak-stat">
+                            <div class="streak-stat-label">Current</div>
+                            <div class="streak-stat-value">${streak.current_streak}</div>
+                        </div>
+                        <div class="streak-stat">
+                            <div class="streak-stat-label">Record</div>
+                            <div class="streak-stat-value">${streak.longest_streak}</div>
+                        </div>
+                        <div class="streak-stat">
+                            <div class="streak-stat-label">Total</div>
+                            <div class="streak-stat-value">${streak.total_wins}</div>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            }
+        }
+        
+        function updateAchievements(data) {
+            if (!data.achievements || data.achievements.length === 0) {
+                document.getElementById('achievementsSection').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('achievementsSection').style.display = 'block';
+            
+            const container = document.getElementById('achievements');
+            container.innerHTML = '';
+            
+            // Show last 5 achievements
+            const recent = data.achievements.slice(-5).reverse();
+            
+            recent.forEach(achievement => {
+                const div = document.createElement('div');
+                div.className = 'achievement';
+                div.innerHTML = `
+                    <div class="achievement-title">${achievement.title}</div>
+                    <div class="achievement-desc">${achievement.description}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateTodaysWins(data) {
+            const today = new Date().toISOString().split('T')[0];
+            const todaysWins = data.daily_wins.filter(w => {
+                const winDate = new Date(w.timestamp).toISOString().split('T')[0];
+                return winDate === today;
+            });
+            
+            if (todaysWins.length === 0) {
+                document.getElementById('winsSection').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('winsSection').style.display = 'block';
+            
+            const container = document.getElementById('todaysWins');
+            container.innerHTML = '';
+            
+            todaysWins.forEach(win => {
+                const category = data.categories[win.category];
+                const time = new Date(win.timestamp).toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+                
+                const div = document.createElement('div');
+                div.className = 'win';
+                div.innerHTML = `
+                    <div>
+                        <span style="font-size: 20px;">${category.emoji}</span>
+                        <span class="win-desc">${category.name}: ${win.description}</span>
+                    </div>
+                    <span class="win-time">${time}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        // Load data on page load
+        loadData();
+        
+        // Refresh every 60 seconds
+        setInterval(loadData, 60000);
+    </script>
+</body>
+</html>
