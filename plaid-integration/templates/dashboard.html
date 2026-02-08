@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Dashboard - Plaid Integration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-subtitle {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .net-worth-card .card-value {
+            color: #667eea;
+        }
+
+        .accounts-card {
+            grid-column: span 2;
+        }
+
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .account-item:last-child {
+            border-bottom: none;
+        }
+
+        .account-info h3 {
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+
+        .account-info p {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .account-balance {
+            text-align: right;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .transactions-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .transaction-list {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #eee;
+            color: #666;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .transaction-date {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .transaction-amount.positive {
+            color: #dc2626;
+        }
+
+        .transaction-amount.negative {
+            color: #059669;
+        }
+
+        .status-pending {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #667eea;
+        }
+
+        .spending-chart {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        #spendingChart {
+            max-height: 300px;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .accounts-card {
+                grid-column: span 1;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Finance Dashboard</h1>
+            <p class="header-subtitle">Your complete financial overview powered by Plaid</p>
+        </header>
+
+        <div id="messageContainer"></div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" onclick="linkBank()">+ Link Bank Account</button>
+            <button class="btn-secondary" onclick="refreshData()">🔄 Refresh Data</button>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card net-worth-card">
+                <div class="card-title">Total Net Worth</div>
+                <div class="card-value" id="netWorth">$0.00</div>
+                <div class="card-subtitle" id="netWorthDetail">0 accounts linked</div>
+            </div>
+
+            <div class="card accounts-card">
+                <div class="card-title">Linked Accounts</div>
+                <div id="accountsList" class="account-list"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">30-Day Spending</div>
+                <div class="card-value" id="monthlySpending">$0.00</div>
+                <div class="card-subtitle">Total expenses this month</div>
+            </div>
+        </div>
+
+        <div class="transactions-section">
+            <h2 class="section-title">Recent Transactions</h2>
+            
+            <div class="filter-section">
+                <select id="accountFilter" onchange="loadTransactions()">
+                    <option value="">All Accounts</option>
+                </select>
+                <select id="daysFilter" onchange="loadTransactions()">
+                    <option value="30">Last 30 days</option>
+                    <option value="60">Last 60 days</option>
+                    <option value="90">Last 90 days</option>
+                </select>
+            </div>
+
+            <div class="transaction-list">
+                <table id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Merchant</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsBody">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                <p>Link a bank account to see transactions</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="spendingChart" class="spending-chart" style="display: none;">
+                <h3>Spending by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.plaid.com/link/v3/stable/link-initialize.js"></script>
+    <script>
+        let plaidHandler;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNetWorth();
+            loadAccounts();
+            loadTransactions();
+            loadSpendingSummary();
+        });
+
+        function showMessage(message, type = 'success') {
+            const container = document.getElementById('messageContainer');
+            const className = type === 'success' ? 'success-message' : 'error-message';
+            container.innerHTML = `<div class="${className}">${message}</div>`;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        function linkBank() {
+            // Create link token
+            fetch('/api/link-token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.link_token) {
+                    Plaid.create({
+                        token: data.link_token,
+                        onSuccess: (public_token) => {
+                            // Exchange for access token
+                            fetch('/api/exchange-token', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ public_token: public_token })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                showMessage(`✅ Bank linked: ${data.institution}`);
+                                setTimeout(() => {
+                                    loadNetWorth();
+                                    loadAccounts();
+                                    loadTransactions();
+                                }, 1000);
+                            })
+                            .catch(e => showMessage(e.message, 'error'));
+                        },
+                        onExit: () => {}
+                    }).open();
+                }
+            })
+            .catch(e => showMessage('Error: ' + e.message, 'error'));
+        }
+
+        function loadNetWorth() {
+            fetch('/api/net-worth')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('netWorth').textContent = 
+                        '$' + data.total.toFixed(2);
+                    document.getElementById('netWorthDetail').textContent = 
+                        `${data.accounts_count} accounts linked`;
+                })
+                .catch(e => console.error('Error loading net worth:', e));
+        }
+
+        function loadAccounts() {
+            fetch('/api/accounts')
+                .then(res => res.json())
+                .then(accounts => {
+                    const list = document.getElementById('accountsList');
+                    const select = document.getElementById('accountFilter');
+                    
+                    // Clear and rebuild list
+                    list.innerHTML = '';
+                    select.innerHTML = '<option value="">All Accounts</option>';
+                    
+                    if (accounts.length === 0) {
+                        list.innerHTML = '<div style="color: #999;">No accounts linked yet</div>';
+                    } else {
+                        accounts.forEach(acc => {
+                            const html = `
+                                <div class="account-item">
+                                    <div class="account-info">
+                                        <h3>${acc.name}</h3>
+                                        <p>${acc.institution}</p>
+                                    </div>
+                                    <div class="account-balance">$${acc.balance.toFixed(2)}</div>
+                                </div>
+                            `;
+                            list.innerHTML += html;
+                            
+                            const option = document.createElement('option');
+                            option.value = acc.id;
+                            option.textContent = acc.name;
+                            select.appendChild(option);
+                        });
+                    }
+                })
+                .catch(e => console.error('Error loading accounts:', e));
+        }
+
+        function loadTransactions() {
+            const accountId = document.getElementById('accountFilter').value;
+            const days = document.getElementById('daysFilter').value;
+            
+            let url = `/api/transactions?days=${days}`;
+            if (accountId) url += `&account_id=${accountId}`;
+            
+            fetch(url)
+                .then(res => res.json())
+                .then(transactions => {
+                    const tbody = document.getElementById('transactionsBody');
+                    
+                    if (transactions.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><p>No transactions found</p></td></tr>';
+                    } else {
+                        tbody.innerHTML = transactions.map(t => `
+                            <tr>
+                                <td class="transaction-date">${new Date(t.date).toLocaleDateString()}</td>
+                                <td>${t.merchant}</td>
+                                <td>${t.category}</td>
+                                <td class="transaction-amount positive">-$${t.amount.toFixed(2)}</td>
+                                <td>${t.pending ? '<span class="status-pending">Pending</span>' : 'Completed'}</td>
+                            </tr>
+                        `).join('');
+                    }
+                    
+                    // Update monthly spending
+                    const totalSpending = transactions
+                        .filter(t => t.amount > 0)
+                        .reduce((sum, t) => sum + t.amount, 0);
+                    document.getElementById('monthlySpending').textContent = 
+                        '$' + totalSpending.toFixed(2);
+                })
+                .catch(e => console.error('Error loading transactions:', e));
+        }
+
+        function loadSpendingSummary() {
+            fetch('/api/spending-summary?days=30')
+                .then(res => res.json())
+                .then(data => {
+                    if (Object.keys(data).length > 0) {
+                        const ctx = document.getElementById('categoryChart').getContext('2d');
+                        const labels = Object.keys(data);
+                        const values = Object.values(data).map(v => v.total);
+                        
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    data: values,
+                                    backgroundColor: [
+                                        '#667eea',
+                                        '#764ba2',
+                                        '#f093fb',
+                                        '#4facfe',
+                                        '#43e97b',
+                                        '#fa709a'
+                                    ]
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }
+                            }
+                        });
+                        
+                        document.getElementById('spendingChart').style.display = 'block';
+                    }
+                })
+                .catch(e => console.error('Error loading spending summary:', e));
+        }
+
+        function refreshData() {
+            fetch('/api/refresh-accounts', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    showMessage('✅ Data refreshed successfully');
+                    loadNetWorth();
+                    loadAccounts();
+                    loadTransactions();
+                    loadSpendingSummary();
+                })
+                .catch(e => showMessage('Error: ' + e.message, 'error'));
+        }
+    </script>
+</body>
+</html>
