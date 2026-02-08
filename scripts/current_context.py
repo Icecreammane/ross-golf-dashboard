@@ -5,13 +5,12 @@ Always returns accurate current date/time and day information
 """
 
 from datetime import datetime
-import pytz
+import subprocess
 
 def get_current_context():
     """Get current date/time/day context"""
-    # Ross's timezone
-    tz = pytz.timezone('America/Chicago')
-    now = datetime.now(tz)
+    # Use system date which is already in CST
+    now = datetime.now()
     
     return {
         'datetime': now,
