@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Unique identifier for this daemon -->
+    <key>Label</key>
+    <string>com.clawdbot.twitter-daemon</string>
+    
+    <!-- Program to run -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/clawdbot/clawd/daemons/twitter_daemon.py</string>
+    </array>
+    
+    <!-- Working directory -->
+    <key>WorkingDirectory</key>
+    <string>/Users/clawdbot/clawd</string>
+    
+    <!-- Run every 15 minutes (900 seconds) -->
+    <key>StartInterval</key>
+    <integer>900</integer>
+    
+    <!-- Also run at load (immediate first run) -->
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <!-- Standard output (logs) -->
+    <key>StandardOutPath</key>
+    <string>/Users/clawdbot/clawd/logs/twitter-daemon-stdout.log</string>
+    
+    <!-- Standard error (errors) -->
+    <key>StandardErrorPath</key>
+    <string>/Users/clawdbot/clawd/logs/twitter-daemon-stderr.log</string>
+    
+    <!-- Keep the daemon running -->
+    <key>KeepAlive</key>
+    <false/>
+    
+    <!-- Run even when no user is logged in -->
+    <key>LaunchOnlyOnce</key>
+    <false/>
+    
+    <!-- Environment variables (optional - .env file is primary source) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+    
+    <!-- Throttle settings to prevent rapid respawns on failure -->
+    <key>ThrottleInterval</key>
+    <integer>300</integer>
+</dict>
+</plist>

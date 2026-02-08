@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Revenue Dashboard</h1>
+            <div class="header-actions">
+                <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+                <span id="lastUpdated" class="last-updated">Last updated: Never</span>
+            </div>
+        </header>
+
+        <!-- MRR Goal Progress -->
+        <div class="goal-section">
+            <div class="goal-header">
+                <h2>Monthly Recurring Revenue</h2>
+                <div class="goal-amount">$<span id="mrrAmount">0</span> / $500</div>
+            </div>
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+            </div>
+            <div class="goal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Progress</span>
+                    <span class="stat-value" id="progressPercent">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Days to Goal</span>
+                    <span class="stat-value" id="daysToGoal">—</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Projected Run Rate</span>
+                    <span class="stat-value">$<span id="runRate">0</span>/mo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Big Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card daily">
+                <div class="metric-icon">📈</div>
+                <div class="metric-content">
+                    <div class="metric-label">Today's Revenue</div>
+                    <div class="metric-value">$<span id="dailyRevenue">0</span></div>
+                </div>
+            </div>
+
+            <div class="metric-card total">
+                <div class="metric-icon">💵</div>
+                <div class="metric-content">
+                    <div class="metric-label">Total Revenue (30d)</div>
+                    <div class="metric-value">$<span id="totalRevenue">0</span></div>
+                </div>
+            </div>
+
+            <div class="metric-card subscriptions">
+                <div class="metric-icon">🔄</div>
+                <div class="metric-content">
+                    <div class="metric-label">Active Subscriptions</div>
+                    <div class="metric-value"><span id="subscriptionCount">0</span></div>
+                </div>
+            </div>
+
+            <div class="metric-card coaching">
+                <div class="metric-icon">⛳</div>
+                <div class="metric-content">
+                    <div class="metric-label">Golf Coaching Inquiries</div>
+                    <div class="metric-value"><span id="coachingCount">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Motivational Messages -->
+        <div id="motivationBox" class="motivation-box">
+            <p id="motivationText">Keep pushing! Every sale gets you closer to your goal! 💪</p>
+        </div>
+
+        <!-- Status Indicator -->
+        <div id="statusIndicator" class="status-indicator">
+            <span class="status-dot"></span>
+            <span class="status-text">Loading...</span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

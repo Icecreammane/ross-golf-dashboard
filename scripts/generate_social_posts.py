@@ -1,141 +1,199 @@
 #!/usr/bin/env python3
 """
-AI Social Post Generator - Jarvis
-Generates social media posts for Ross's side projects
-Uses GPT-5.2 for creative content generation
+Social Media Post Generator
+Generates 2-3 variations of high-value content daily using local LLM
+Topics: golf coaching, fitness, monetization journey, products
 """
 
 import json
-import os
+import logging
+import random
+import subprocess
 from datetime import datetime
 from pathlib import Path
 
-POSTS_DIR = Path.home() / "clawd" / "social_posts"
-POSTS_DIR.mkdir(exist_ok=True)
+# Configuration
+WORKSPACE = Path("/Users/clawdbot/clawd")
+QUEUE_FILE = WORKSPACE / "data" / "social-posts-queue.json"
+LOG_FILE = WORKSPACE / "logs" / "social-scheduler.log"
+OLLAMA_MODEL = "llama3.1:8b"  # Fast and capable
 
-# Post templates and themes
-POST_THEMES = [
-    "tech_tips",
-    "productivity",
-    "fitness_motivation",
-    "side_project_journey",
-    "building_in_public",
-    "fantasy_sports_insights",
-    "ai_automation"
-]
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
-def generate_post(theme, context=""):
-    """
-    Generate a social media post using AI
-    In production, this would call GPT-5.2 API
-    """
+# Content themes and prompts
+THEMES = {
+    "golf_coaching": [
+        "Share a counter-intuitive golf swing tip that most coaches get wrong",
+        "Explain the mental game aspect of golf that separates pros from amateurs",
+        "Share a specific drill that improved your students' accuracy by 20%",
+        "Discuss the business of golf coaching and how to scale beyond 1-on-1 lessons"
+    ],
+    "fitness": [
+        "Share a mobility exercise that directly improves golf performance",
+        "Explain the connection between core strength and swing power",
+        "Discuss the fitness routine that keeps you performing at your peak",
+        "Share a recovery technique that changed your training approach"
+    ],
+    "monetization": [
+        "Share a specific revenue milestone and what you learned getting there",
+        "Discuss a product launch that succeeded (or failed) and the lessons",
+        "Explain how you priced your coaching to match the value you deliver",
+        "Share the most profitable hour you spend in your business each week"
+    ],
+    "products": [
+        "Announce a product update and the problem it solves",
+        "Share customer results from your coaching program",
+        "Explain the transformation your product delivers in concrete terms",
+        "Discuss the research behind your latest offering"
+    ],
+    "high_value": [
+        "Share a mental model that changed how you approach your business",
+        "Explain a pattern you've noticed that most people miss",
+        "Discuss a tactical decision that 10x'd your results",
+        "Share the question you ask yourself every day to stay focused"
+    ]
+}
+
+def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
+    """Call local Ollama LLM and return generated text"""
+    try:
+        result = subprocess.run(
+            ["ollama", "run", model, prompt],
+            capture_output=True,
+            text=True,
+            timeout=120  # Increased timeout for local LLM
+        )
+        
+        if result.returncode == 0:
+            return result.stdout.strip()
+        else:
+            logger.error(f"Ollama error: {result.stderr}")
+            return None
+    except subprocess.TimeoutExpired:
+        logger.error("Ollama request timed out")
+        return None
+    except Exception as e:
+        logger.error(f"Error calling Ollama: {e}")
+        return None
+
+def generate_post(theme: str, prompt_template: str) -> dict:
+    """Generate a single social media post"""
     
-    # Placeholder - would use OpenAI API
-    sample_posts = {
-        "building_in_public": f"""🚀 Day {datetime.now().day} of building in public
+    system_prompt = f"""You are a concise social media content creator for a golf coach and fitness expert who is building digital products.
 
-Just shipped a new feature that automates my calendar management.
-Now my AI assistant handles scheduling while I focus on what matters.
+Generate a Twitter/X post (max 280 characters) based on this guidance:
+{prompt_template}
 
-The best productivity hack? Build tools that work FOR you, not the other way around.
+Requirements:
+- ONE powerful idea only
+- Conversational, direct tone
+- No fluff or generic advice
+- Include 2-3 relevant hashtags at the end
+- Optionally suggest [IMAGE: description] if a visual would add value
+- Be specific and actionable
 
-#BuildInPublic #AIAutomation #ProductivityHacks""",
-        
-        "tech_tips": """💡 Pro tip: Your AI assistant should feel like a co-pilot, not a chatbot.
+Output ONLY the post text, nothing else."""
 
-Here's what changed the game for me:
-→ Gave it permission to make decisions
-→ Let it build tools proactively
-→ Treated it like a team member, not a tool
-
-Result? 10x more productive in one week.
-
-#TechTips #AIProductivity""",
-        
-        "fitness_motivation": """💪 Fitness tracking just got smarter.
-
-Instead of manually logging every meal, I send voice messages.
-My AI parses it, calculates macros, and updates my dashboard.
-
-Tech should make discipline EASIER, not harder.
-
-What's your secret to staying consistent?
-
-#FitnessTech #SmartTracking""",
-        
-        "fantasy_sports_insights": """🏀 The edge in daily fantasy isn't just about rankings.
-
-It's about having the intel BEFORE everyone else:
-→ Injury updates in real-time
-→ Auto-pulled rankings from top sources
-→ Pattern recognition on what actually wins
-
-Built a dashboard that gives me this edge. Game changer.
-
-#FantasySports #DailyFantasy #NBA"""
-    }
+    generated = call_ollama(system_prompt)
     
-    post = sample_posts.get(theme, "Post generation placeholder")
+    if not generated:
+        return None
+    
+    # Parse image suggestion if present
+    image_placeholder = None
+    post_text = generated
+    
+    if "[IMAGE:" in generated and "]" in generated:
+        start = generated.find("[IMAGE:")
+        end = generated.find("]", start) + 1
+        image_placeholder = generated[start:end]
+        post_text = generated[:start].strip() + " " + generated[end:].strip()
+        post_text = post_text.strip()
     
     return {
+        "id": f"post_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000, 9999)}",
+        "text": post_text,
+        "image_placeholder": image_placeholder,
         "theme": theme,
-        "content": post,
-        "timestamp": datetime.now().isoformat(),
-        "platforms": ["twitter", "linkedin", "threads"],
-        "scheduled": False
+        "generated_at": datetime.now().isoformat(),
+        "scheduled_for": None,  # Will be assigned by posting script
+        "posted": False,
+        "posted_at": None,
+        "twitter_id": None
     }
 
-def save_post(post_data):
-    """Save generated post to file"""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{post_data['theme']}_{timestamp}.json"
-    filepath = POSTS_DIR / filename
-    
-    with open(filepath, 'w') as f:
-        json.dump(post_data, f, indent=2)
-    
-    # Also save as markdown for easy reading
-    md_file = POSTS_DIR / filename.replace('.json', '.md')
-    with open(md_file, 'w') as f:
-        f.write(f"# {post_data['theme']}\n\n")
-        f.write(f"{post_data['content']}\n\n")
-        f.write(f"**Generated:** {post_data['timestamp']}\n")
-        f.write(f"**Platforms:** {', '.join(post_data['platforms'])}\n")
-    
-    return filepath, md_file
+def load_queue() -> list:
+    """Load existing queue or create new"""
+    if QUEUE_FILE.exists():
+        try:
+            with open(QUEUE_FILE, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error(f"Error loading queue: {e}")
+            return []
+    return []
 
-def generate_daily_posts(count=3):
-    """Generate multiple posts for the day"""
-    import random
+def save_queue(queue: list):
+    """Save queue to file"""
+    QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(QUEUE_FILE, 'w') as f:
+        json.dump(queue, f, indent=2)
+
+def generate_daily_batch():
+    """Generate 2-3 post variations for the day"""
+    logger.info("Starting daily post generation batch")
     
-    themes = random.sample(POST_THEMES, count)
-    posts = []
+    # Select 2-3 random themes
+    num_posts = random.randint(2, 3)
+    selected_themes = random.sample(list(THEMES.keys()), num_posts)
     
-    for theme in themes:
-        post = generate_post(theme)
-        json_path, md_path = save_post(post)
-        posts.append({
-            "theme": theme,
-            "json": str(json_path),
-            "markdown": str(md_path)
-        })
-        print(f"✅ Generated: {theme}")
-        print(f"   → {md_path}")
+    queue = load_queue()
+    generated_count = 0
     
-    return posts
+    for theme in selected_themes:
+        prompt = random.choice(THEMES[theme])
+        logger.info(f"Generating post for theme: {theme}")
+        
+        post = generate_post(theme, prompt)
+        
+        if post:
+            queue.append(post)
+            generated_count += 1
+            logger.info(f"✅ Generated post: {post['id']}")
+            logger.info(f"   Text: {post['text'][:100]}...")
+        else:
+            logger.error(f"❌ Failed to generate post for theme: {theme}")
+    
+    # Remove posted items older than 7 days to keep queue clean
+    cutoff = datetime.now().timestamp() - (7 * 24 * 60 * 60)
+    queue = [
+        p for p in queue 
+        if not p['posted'] or 
+        (p['posted_at'] and datetime.fromisoformat(p['posted_at']).timestamp() > cutoff)
+    ]
+    
+    save_queue(queue)
+    
+    logger.info(f"✅ Batch complete: {generated_count} posts generated")
+    logger.info(f"📊 Queue status: {len([p for p in queue if not p['posted']])} unposted, {len(queue)} total")
+    
+    return generated_count
 
 if __name__ == "__main__":
-    import sys
-    
-    if len(sys.argv) > 1:
-        theme = sys.argv[1]
-        post = generate_post(theme)
-        json_path, md_path = save_post(post)
-        print(f"✅ Post generated!")
-        print(f"\nPreview:\n{post['content']}\n")
-        print(f"Saved to: {md_path}")
-    else:
-        print("🎨 Generating daily posts...\n")
-        posts = generate_daily_posts(3)
-        print(f"\n🎉 Generated {len(posts)} posts!")
-        print(f"📁 Saved to: {POSTS_DIR}")
+    try:
+        count = generate_daily_batch()
+        print(f"✅ Generated {count} social media posts")
+        exit(0)
+    except Exception as e:
+        logger.error(f"Fatal error in post generation: {e}", exc_info=True)
+        print(f"❌ Error: {e}")
+        exit(1)
