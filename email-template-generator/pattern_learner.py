@@ -6,15 +6,13 @@ Analyzes successful emails and extracts reusable patterns
 import re
 from typing import List, Dict, Tuple
 from collections import Counter
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
 import database as db
 
 class PatternLearner:
     """Learns from successful emails and extracts patterns"""
     
     def __init__(self):
-        self.vectorizer = TfidfVectorizer(max_features=50, stop_words='english')
+        pass
     
     def analyze_successful_emails(self, recipient_type: str = None, email_type: str = None):
         """Analyze successful emails and extract patterns"""
@@ -55,15 +53,20 @@ class PatternLearner:
         lengths = [len(email['body']) for email in emails]
         paragraphs = [len(email['body'].split('\n\n')) for email in emails]
         
-        avg_length = np.mean(lengths)
-        avg_paragraphs = np.mean(paragraphs)
+        avg_length = sum(lengths) / len(lengths)
+        avg_paragraphs = sum(paragraphs) / len(paragraphs)
+        
+        # Calculate percentiles manually
+        sorted_lengths = sorted(lengths)
+        p25_idx = len(sorted_lengths) // 4
+        p75_idx = (len(sorted_lengths) * 3) // 4
         
         patterns.append({
             'type': 'structure',
             'data': {
                 'avg_length': int(avg_length),
                 'avg_paragraphs': int(avg_paragraphs),
-                'length_range': [int(np.percentile(lengths, 25)), int(np.percentile(lengths, 75))]
+                'length_range': [sorted_lengths[p25_idx], sorted_lengths[p75_idx]]
             },
             'score': 0.7
         })
@@ -74,30 +77,28 @@ class PatternLearner:
         """Extract common high-performing phrases"""
         patterns = []
         
-        # Combine all email bodies
-        texts = [email['body'] for email in emails]
+        # Combine all email bodies and find common meaningful phrases
+        all_text = ' '.join([email['body'].lower() for email in emails])
         
-        if len(texts) > 1:
-            # Extract TF-IDF keywords
-            try:
-                tfidf_matrix = self.vectorizer.fit_transform(texts)
-                feature_names = self.vectorizer.get_feature_names_out()
-                
-                # Get top phrases
-                avg_tfidf = np.mean(tfidf_matrix.toarray(), axis=0)
-                top_indices = avg_tfidf.argsort()[-10:][::-1]
-                
-                top_phrases = [feature_names[i] for i in top_indices]
-                
-                patterns.append({
-                    'type': 'phrases',
-                    'data': {
-                        'high_value_terms': top_phrases
-                    },
-                    'score': 0.6
-                })
-            except:
-                pass
+        # Simple word frequency (exclude common words)
+        stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 
+                     'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'be', 'been',
+                     'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should',
+                     'could', 'may', 'might', 'can', 'this', 'that', 'these', 'those'}
+        
+        words = re.findall(r'\b\w+\b', all_text)
+        word_counts = Counter([w for w in words if w not in stop_words and len(w) > 3])
+        
+        top_phrases = [word for word, count in word_counts.most_common(10)]
+        
+        if top_phrases:
+            patterns.append({
+                'type': 'phrases',
+                'data': {
+                    'high_value_terms': top_phrases
+                },
+                'score': 0.6
+            })
         
         return patterns
     
