@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.jarvis.encrypted-backup</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/clawdbot/clawd/scripts/encrypted_backup.sh</string>
+    </array>
+    
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>23</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/clawdbot/clawd/logs/encrypted-backup-stdout.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/clawdbot/clawd/logs/encrypted-backup-stderr.log</string>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/clawdbot/clawd</string>
+    
+    <key>RunAtLoad</key>
+    <false/>
+    
+    <key>UserName</key>
+    <string>clawdbot</string>
+    
+    <key>GroupName</key>
+    <string>staff</string>
+    
+    <!-- Security: Minimal permissions -->
+    <key>Nice</key>
+    <integer>10</integer>
+    
+    <!-- No network access required for local backups -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

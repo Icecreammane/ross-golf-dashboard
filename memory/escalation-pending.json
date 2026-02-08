@@ -147,7 +147,21 @@
       "failure_count": 52,
       "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
       "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T15:30:36.561036",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T16:30:38.843258",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
     }
   ],
-  "timestamp": "2026-02-08T15:24:07.187579"
+  "timestamp": "2026-02-08T16:34:15.613202"
 }

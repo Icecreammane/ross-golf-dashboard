@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Analytics Report - Feb 01</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 24px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .header h1 { font-size: 32px; color: white; margin-bottom: 8px; }
+        .header .date { font-size: 14px; opacity: 0.9; color: white; }
+        .section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border-left: 4px solid #667eea;
+        }
+        .section h2 { color: #667eea; margin-bottom: 16px; font-size: 20px; }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: #0f0f0f;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card .number { font-size: 32px; font-weight: bold; color: #4ade80; margin-bottom: 4px; }
+        .stat-card .label { font-size: 12px; color: #888; text-transform: uppercase; }
+        .insight {
+            padding: 12px 16px;
+            background: #0f0f0f;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid #4ade80;
+        }
+        .insight.high { border-left-color: #f87171; }
+        .insight.medium { border-left-color: #fbbf24; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        .table th { text-align: left; padding: 8px; border-bottom: 2px solid #333; color: #888; }
+        .table td { padding: 8px; border-bottom: 1px solid #222; }
+        .footer { text-align: center; color: #666; font-size: 12px; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Weekly Analytics Report</h1>
+            <div class="date">February 01 - February 08, 2026</div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Opportunities Overview</h2>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="number">9</div>
+                    <div class="label">New This Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">9</div>
+                    <div class="label">Total Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">11.1%</div>
+                    <div class="label">Conversion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">1</div>
+                    <div class="label">Converted</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Performance by Source</h2>
+            <table class="table">
+                <tr>
+                    <th>Source</th>
+                    <th>Total</th>
+                    <th>Converted</th>
+                    <th>Rate</th>
+                    <th>Revenue</th>
+                </tr>
+
+                <tr>
+                    <td>Email</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>25%</td>
+                    <td>$500</td>
+                </tr>
+
+                <tr>
+                    <td>Twitter</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                </tr>
+
+                <tr>
+                    <td>Other</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 Key Insights</h2>
+
+            <div class="insight high">
+                <strong>[CONVERSION]</strong> Email inquiries convert at 25%. Other inquiries at 0%. Focus on email - it's 25.0x better!
+            </div>
+
+            <div class="insight high">
+                <strong>[REVENUE]</strong> Email generated $500 (100% of total). Primary revenue driver.
+            </div>
+
+            <div class="insight medium">
+                <strong>[OPPORTUNITY_QUALITY]</strong> Test Coaching opportunities convert at 100%. Focus on generating more of these high-quality leads.
+            </div>
+
+            <div class="insight high">
+                <strong>[ACTIONS]</strong> Recommended actions: 🎯 Double down on best performing channel, 💰 Prioritize highest revenue channel
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Generated: 2026-02-08 22:34 UTC • Auto-updates weekly
+        </div>
+    </div>
+</body>
+</html>

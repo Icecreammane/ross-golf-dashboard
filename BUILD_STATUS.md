@@ -11,16 +11,16 @@
 | Daemon | Status | Completion | Port | Notes |
 |--------|--------|-----------|------|-------|
 | **Email** | ✅ DONE | 100% | — | Deployed, needs Gmail password |
-| **Twitter** | 🔨 BUILDING | 0% | — | 2h build time, spawned 15:20 |
+| **Twitter** | ✅ DONE | 100% | — | Needs API creds to deploy |
 | **Task Queue** | ✅ DONE | 100% | — | Auto-generates from GOALS.md |
-| **Social Scheduler** | 🔨 BUILDING | 0% | — | 2.5h build time, spawned 15:20 |
-| **Revenue Dashboard** | 🔨 BUILDING | 0% | 3002 | 3h build time, spawned 15:20 |
-| **Financial Tracker** | 🔨 BUILDING | 0% | — | 1.5h build time, spawned 15:20 |
+| **Social Scheduler** | ✅ DONE | 100% | — | Auto-posts daily 2am/6am/12pm/6pm |
+| **Revenue Dashboard** | ✅ DONE | 100% | 3002 | Live: http://localhost:3002 |
+| **Financial Tracker** | ✅ DONE | 100% | — | Projects: $50K Florida Fund + FI date |
 | **Weather Daemon** | ✅ DONE | 100% | — | Nolensville + Orlando + Miami |
-| **Fitness Aggregator** | 📅 QUEUED | — | — | Week 1, Day 2 |
+| **Fitness Aggregator** | ✅ DONE | 100% | — | Daily insights @ 11pm |
 | **Golf Collector** | 📅 QUEUED | — | — | Week 1, Day 2 |
-| **Morning Brief** | 📅 QUEUED | — | — | Week 2, Day 1 |
-| **Opportunity Aggregator** | 📅 QUEUED | — | — | Week 2, Day 1 |
+| **Morning Brief** | ✅ DONE | 100% | — | Live: 7:30am daily |
+| **Opportunity Aggregator** | ✅ DONE | 100% | — | Ranked by revenue potential |
 | **Weekly Reporter** | 📅 QUEUED | — | — | Week 2, Day 1 |
 | **Central API** | 📅 QUEUED | 3003 | — | Week 2, Day 2 |
 | **Dashboard Hub** | 📅 QUEUED | 3004 | — | Week 2, Day 2 |

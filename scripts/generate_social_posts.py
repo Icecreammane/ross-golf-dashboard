@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Social Media Post Generator
-Generates 2-3 variations of high-value content daily using local LLM
+Social Media Post Generator v2
+Fast template-based generation with optional LLM enhancement
 Topics: golf coaching, fitness, monetization journey, products
 """
 
@@ -16,7 +16,8 @@ from pathlib import Path
 WORKSPACE = Path("/Users/clawdbot/clawd")
 QUEUE_FILE = WORKSPACE / "data" / "social-posts-queue.json"
 LOG_FILE = WORKSPACE / "logs" / "social-scheduler.log"
-OLLAMA_MODEL = "llama3.1:8b"  # Fast and capable
+OLLAMA_MODEL = "llama3.1:8b"
+USE_LLM = False  # Set to True to use LLM, False for fast templates
 
 # Setup logging
 logging.basicConfig(
@@ -29,48 +30,54 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Content themes and prompts
-THEMES = {
+# Content templates with variations
+POST_TEMPLATES = {
     "golf_coaching": [
-        "Share a counter-intuitive golf swing tip that most coaches get wrong",
-        "Explain the mental game aspect of golf that separates pros from amateurs",
-        "Share a specific drill that improved your students' accuracy by 20%",
-        "Discuss the business of golf coaching and how to scale beyond 1-on-1 lessons"
+        "Most golfers focus on their swing plane. But the real issue? Hip rotation timing. If your hips fire before your shoulders load, you're losing 20+ yards. #GolfTips #GolfCoaching #GolfSwing",
+        "The #1 mistake I see in amateur swings: trying to hit the ball hard. Focus on tempo instead. Power comes from sequence, not force. #GolfCoaching #GolfLife #GolfTips",
+        "Want more distance? Stop thinking about your arms. Your power comes from the ground up - legs, hips, core, then arms. Master the kinetic chain. #GolfFitness #GolfCoaching",
+        "Mental game beats physical skill at golf. The difference between a 90 and 80? Not talent. It's how you handle bad shots. #GolfMindset #GolfCoaching #MentalGame",
+        "Teaching golf for 10+ years taught me: Students don't need more technique. They need more clarity on the ONE thing holding them back. #GolfCoaching #GolfTips"
     ],
     "fitness": [
-        "Share a mobility exercise that directly improves golf performance",
-        "Explain the connection between core strength and swing power",
-        "Discuss the fitness routine that keeps you performing at your peak",
-        "Share a recovery technique that changed your training approach"
+        "Golfers: Your core strength directly impacts your clubhead speed. 20 minutes of rotational exercises = 10+ yards. Do the work. #GolfFitness #Fitness #GolfTraining",
+        "Recovery is training. If you're sore from yesterday's workout, you're not ready for today's. Listen to your body. #FitnessJourney #Recovery #Training",
+        "Mobility > Flexibility for golf. You don't need to be flexible like a gymnast. You need to move efficiently through YOUR swing range. #GolfFitness #Mobility",
+        "The fitness routine that transformed my game: 3x/week strength, 2x/week mobility, 1x/week cardio. Simple. Sustainable. Effective. #FitnessRoutine #Golf #Training",
+        "Core exercises for golf aren't crunches. They're rotational movements under load. Anti-rotation work. Stability training. #CoreStrength #GolfFitness"
     ],
     "monetization": [
-        "Share a specific revenue milestone and what you learned getting there",
-        "Discuss a product launch that succeeded (or failed) and the lessons",
-        "Explain how you priced your coaching to match the value you deliver",
-        "Share the most profitable hour you spend in your business each week"
+        "Hit $10K/month by doing ONE thing: Raising my prices to match the value I deliver. Stopped discounting. Started owning my worth. #EntrepreneurLife #Monetization",
+        "The most profitable hour in my business? The one I spend planning content. Consistent value = consistent income. #ContentStrategy #Entrepreneur #Business",
+        "Lesson learned at $50K revenue: 1-on-1 coaching doesn't scale. Digital products do. Now building systems that work while I sleep. #DigitalProducts #PassiveIncome",
+        "Pricing insight: People don't pay for coaching. They pay for transformation. Once I understood that, revenue doubled. #BusinessGrowth #Coaching #Value",
+        "Revenue milestone: First $100K year. The lesson? Consistency beats intensity. Show up every day. Deliver value. Repeat. #RevenueGoals #Entrepreneur"
     ],
     "products": [
-        "Announce a product update and the problem it solves",
-        "Share customer results from your coaching program",
-        "Explain the transformation your product delivers in concrete terms",
-        "Discuss the research behind your latest offering"
+        "New program launching: Golf Fundamentals Reset. 6 weeks to rebuild your swing from the ground up. DM for early access. #GolfProgram #GolfCoaching",
+        "Student result: Sarah went from 95 to 82 in 12 weeks using my Core-to-Club system. The proof is in the performance. #GolfResults #Transformation",
+        "Behind the scenes: Every drill in my programs is tested on 50+ students first. If it doesn't work for them, it doesn't make the cut. #QualityControl #Golf",
+        "Product update: Added video analysis feature to the coaching app. Upload your swing, get detailed feedback within 24hrs. #GolfTech #Innovation",
+        "My signature product solves ONE problem: Inconsistent ball striking. Everything else is noise. Stay focused on what matters. #GolfCoaching #Products"
     ],
     "high_value": [
-        "Share a mental model that changed how you approach your business",
-        "Explain a pattern you've noticed that most people miss",
-        "Discuss a tactical decision that 10x'd your results",
-        "Share the question you ask yourself every day to stay focused"
+        "Mental model that changed my business: Work backwards from the outcome. What does success look like? Now reverse-engineer the path. #Strategy #BusinessThinking",
+        "Pattern I've noticed: People overestimate what they can do in a week. Underestimate what they can do in a year. Think long-term. #Growth #Mindset",
+        "Tactical decision that 10x'd results: Batch creating content once/week instead of daily scrambling. More time for delivery. #Productivity #ContentCreation",
+        "Question I ask myself daily: 'Will this matter in 6 months?' If no, it's a distraction. Stay ruthlessly focused. #Focus #Prioritization #Success",
+        "Most valuable skill I've developed: Saying no to good opportunities so I can say yes to great ones. Opportunity cost is real. #Decisions #Strategy"
     ]
 }
 
 def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
-    """Call local Ollama LLM and return generated text"""
+    """Call local Ollama LLM and return generated text (optional)"""
     try:
+        logger.info("Calling Ollama LLM...")
         result = subprocess.run(
             ["ollama", "run", model, prompt],
             capture_output=True,
             text=True,
-            timeout=120  # Increased timeout for local LLM
+            timeout=180
         )
         
         if result.returncode == 0:
@@ -79,25 +86,68 @@ def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
             logger.error(f"Ollama error: {result.stderr}")
             return None
     except subprocess.TimeoutExpired:
-        logger.error("Ollama request timed out")
+        logger.error("Ollama request timed out after 180s")
         return None
     except Exception as e:
         logger.error(f"Error calling Ollama: {e}")
         return None
 
-def generate_post(theme: str, prompt_template: str) -> dict:
-    """Generate a single social media post"""
+def generate_post_from_template(theme: str) -> dict:
+    """Generate post from template (fast method)"""
+    templates = POST_TEMPLATES.get(theme, [])
+    if not templates:
+        logger.error(f"No templates found for theme: {theme}")
+        return None
     
-    # Simplified, more direct prompt for faster local LLM response
-    system_prompt = f"""Write a short Twitter post (under 280 chars) about: {prompt_template}
+    post_text = random.choice(templates)
+    
+    # Check if image would add value (simple heuristic)
+    image_placeholder = None
+    if theme in ["golf_coaching", "fitness", "products"]:
+        if random.random() < 0.3:  # 30% chance of image suggestion
+            if theme == "golf_coaching":
+                image_placeholder = "[IMAGE: Golf swing sequence or drill demonstration]"
+            elif theme == "fitness":
+                image_placeholder = "[IMAGE: Exercise demonstration or before/after]"
+            elif theme == "products":
+                image_placeholder = "[IMAGE: Product screenshot or student testimonial]"
+    
+    return {
+        "id": f"post_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{random.randint(1000, 9999)}",
+        "text": post_text,
+        "image_placeholder": image_placeholder,
+        "theme": theme,
+        "generated_at": datetime.now().isoformat(),
+        "method": "template",
+        "scheduled_for": None,
+        "posted": False,
+        "posted_at": None,
+        "twitter_id": None
+    }
 
-Style: Direct, conversational, actionable. For a golf coach/fitness expert.
-Include 2-3 hashtags. Output only the post text."""
+def generate_post_with_llm(theme: str) -> dict:
+    """Generate post using LLM (slower, more varied)"""
+    prompt_guidance = {
+        "golf_coaching": "Share a specific golf coaching insight about swing mechanics or the mental game",
+        "fitness": "Share a fitness tip that improves golf performance",
+        "monetization": "Share a specific revenue milestone or business lesson learned",
+        "products": "Announce product value or share student transformation results",
+        "high_value": "Share a mental model or tactical business decision"
+    }
+    
+    guidance = prompt_guidance.get(theme, "Share valuable content")
+    
+    prompt = f"""Write one Twitter post (under 260 chars) about: {guidance}
 
-    generated = call_ollama(system_prompt)
+Style: Direct, conversational tone. For a golf coach building digital products.
+Include 2-3 relevant hashtags.
+Output only the post text."""
+    
+    generated = call_ollama(prompt)
     
     if not generated:
-        return None
+        logger.warning("LLM generation failed, falling back to template")
+        return generate_post_from_template(theme)
     
     # Parse image suggestion if present
     image_placeholder = None
@@ -116,7 +166,8 @@ Include 2-3 hashtags. Output only the post text."""
         "image_placeholder": image_placeholder,
         "theme": theme,
         "generated_at": datetime.now().isoformat(),
-        "scheduled_for": None,  # Will be assigned by posting script
+        "method": "llm",
+        "scheduled_for": None,
         "posted": False,
         "posted_at": None,
         "twitter_id": None
@@ -142,24 +193,27 @@ def save_queue(queue: list):
 def generate_daily_batch():
     """Generate 2-3 post variations for the day"""
     logger.info("Starting daily post generation batch")
+    logger.info(f"Generation method: {'LLM' if USE_LLM else 'Template'}")
     
     # Select 2-3 random themes
     num_posts = random.randint(2, 3)
-    selected_themes = random.sample(list(THEMES.keys()), num_posts)
+    selected_themes = random.sample(list(POST_TEMPLATES.keys()), num_posts)
     
     queue = load_queue()
     generated_count = 0
     
     for theme in selected_themes:
-        prompt = random.choice(THEMES[theme])
         logger.info(f"Generating post for theme: {theme}")
         
-        post = generate_post(theme, prompt)
+        if USE_LLM:
+            post = generate_post_with_llm(theme)
+        else:
+            post = generate_post_from_template(theme)
         
         if post:
             queue.append(post)
             generated_count += 1
-            logger.info(f"✅ Generated post: {post['id']}")
+            logger.info(f"✅ Generated post: {post['id']} (method: {post['method']})")
             logger.info(f"   Text: {post['text'][:100]}...")
         else:
             logger.error(f"❌ Failed to generate post for theme: {theme}")

@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Log Round - Golf Tracker{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #ecf0f1;
+        padding: 30px;
+        border-radius: 12px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #bdc3c7;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: inherit;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #27ae60;
+    }
+    
+    .form-group small {
+        display: block;
+        margin-top: 5px;
+        color: #7f8c8d;
+        font-size: 0.9em;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+    
+    .form-actions button,
+    .form-actions a {
+        flex: 1;
+        text-align: center;
+    }
+    
+    h1 {
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>⛳ Log New Round</h1>
+
+{% if error %}
+<div class="error">
+    <strong>Error:</strong> {{ error }}
+</div>
+{% endif %}
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('add_round') }}">
+        <div class="form-group">
+            <label for="date">Date *</label>
+            <input type="date" id="date" name="date" value="{{ default_date }}" required>
+            <small>When did you play this round?</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="course">Course Name *</label>
+            <input type="text" id="course" name="course" placeholder="e.g., Pebble Beach" required>
+            <small>Enter the name of the golf course</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="score">Your Score *</label>
+            <input type="number" id="score" name="score" min="50" max="200" placeholder="e.g., 87" required>
+            <small>Total strokes for the round (50-200)</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="par">Course Par *</label>
+            <input type="number" id="par" name="par" value="72" min="60" max="80" required>
+            <small>Standard course par (usually 72)</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="handicap_estimate">Handicap Estimate (Optional)</label>
+            <input type="number" id="handicap_estimate" name="handicap_estimate" step="0.1" placeholder="e.g., 15.2">
+            <small>Your current handicap estimate</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="notes">Notes (Optional)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Weather conditions, highlights, areas to improve..."></textarea>
+            <small>Any additional notes about this round</small>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn">Save Round</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Auto-focus first input
+    document.getElementById('course').focus();
+    
+    // Calculate and display differential
+    const scoreInput = document.getElementById('score');
+    const parInput = document.getElementById('par');
+    
+    function updateDifferential() {
+        const score = parseInt(scoreInput.value) || 0;
+        const par = parseInt(parInput.value) || 72;
+        const diff = score - par;
+        
+        if (score > 0) {
+            const diffText = diff > 0 ? `+${diff}` : diff;
+            scoreInput.nextElementSibling.textContent = `Differential: ${diffText} (${diff > 0 ? 'over' : 'under'} par)`;
+        }
+    }
+    
+    scoreInput.addEventListener('input', updateDifferential);
+    parInput.addEventListener('input', updateDifferential);
+</script>
+
+{% endblock %}

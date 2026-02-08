@@ -1,0 +1,27 @@
+api:
+  host: "127.0.0.1"
+  port: 3003
+  debug: false
+  
+auth:
+  # Generate secure token: python3 -c "import secrets; print(secrets.token_urlsafe(32))"
+  api_token: "RNs0kb-QR63f_gK3iS6GDA_wL2-eftrIeZQPUUuxE_U"
+  
+redis:
+  enabled: true
+  host: "localhost"
+  port: 6379
+  db: 0
+  # Cache TTL in seconds
+  default_ttl: 300
+  
+rate_limiting:
+  enabled: true
+  default_limit: "100 per minute"
+  
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/central-api.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
