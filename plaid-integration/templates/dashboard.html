@@ -221,15 +221,58 @@
             color: #999;
         }
 
-        .empty-state p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px 20px;
-            color: #667eea;
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
         }
 
         .spending-chart {
@@ -283,6 +326,10 @@
             h1 {
                 font-size: 1.8em;
             }
+
+            .modal-content {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -290,14 +337,15 @@
     <div class="container">
         <header>
             <h1>💰 Finance Dashboard</h1>
-            <p class="header-subtitle">Your complete financial overview powered by Plaid</p>
+            <p class="header-subtitle">Track your spending, see your net worth, optimize your finances</p>
         </header>
 
         <div id="messageContainer"></div>
 
         <div class="action-buttons">
-            <button class="btn-primary" onclick="linkBank()">+ Link Bank Account</button>
-            <button class="btn-secondary" onclick="refreshData()">🔄 Refresh Data</button>
+            <button class="btn-primary" onclick="openAddAccountModal()">+ Add Account</button>
+            <button class="btn-primary" onclick="openAddTransactionModal()">+ Log Transaction</button>
+            <button class="btn-secondary" onclick="refreshData()">🔄 Refresh</button>
         </div>
 
         <div class="dashboard-grid">
@@ -341,13 +389,12 @@
                             <th>Merchant</th>
                             <th>Category</th>
                             <th>Amount</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="transactionsBody">
                         <tr>
-                            <td colspan="5" class="empty-state">
-                                <p>Link a bank account to see transactions</p>
+                            <td colspan="4" class="empty-state">
+                                <p>Add a bank account to see transactions</p>
                             </td>
                         </tr>
                     </tbody>
@@ -361,10 +408,148 @@
         </div>
     </div>
 
+    <!-- Modal for adding account -->
+    <div id="accountModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddAccountModal()">&times;</span>
+            <h2>Add Bank Account</h2>
+            <form onsubmit="addAccount(event)">
+                <div class="form-group">
+                    <label for="accountName">Account Name</label>
+                    <input type="text" id="accountName" placeholder="e.g., Chase Checking" required>
+                </div>
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select id="accountType" required>
+                        <option value="">Select type...</option>
+                        <option value="checking">Checking</option>
+                        <option value="savings">Savings</option>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="investment">Investment</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="currentBalance">Current Balance</label>
+                    <input type="number" id="currentBalance" placeholder="0.00" step="0.01" required>
+                </div>
+                <button type="submit" class="btn-primary">Add Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding transaction -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTransactionModal()">&times;</span>
+            <h2>Log Transaction</h2>
+            <form onsubmit="addTransaction(event)">
+                <div class="form-group">
+                    <label for="txnAccount">Account</label>
+                    <select id="txnAccount" required>
+                        <option value="">Select account...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="txnDate">Date</label>
+                    <input type="date" id="txnDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="txnMerchant">Merchant/Description</label>
+                    <input type="text" id="txnMerchant" placeholder="e.g., Whole Foods" required>
+                </div>
+                <div class="form-group">
+                    <label for="txnAmount">Amount</label>
+                    <input type="number" id="txnAmount" placeholder="0.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="txnCategory">Category</label>
+                    <select id="txnCategory">
+                        <option value="Food & Drink">Food & Drink</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Gas">Gas</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Fitness">Fitness</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Log Transaction</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script src="https://cdn.plaid.com/link/v3/stable/link-initialize.js"></script>
     <script>
-        let plaidHandler;
+        // Link test Plaid sandbox account
+        function linkTestAccount() {
+            showMessage('🔄 Linking test bank account...');
+            fetch('/api/link-test-account', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage(`✅ ${data.message}`);
+                    setTimeout(() => {
+                        loadNetWorth();
+                        loadAccounts();
+                        loadTransactions();
+                        loadSpendingSummary();
+                    }, 1000);
+                } else {
+                    showMessage('Error: ' + data.error, 'error');
+                }
+            })
+            .catch(e => showMessage('Error: ' + e.message, 'error'));
+        }
+
+        // Modal functions
+        function openAddAccountModal() {
+            document.getElementById("accountModal").style.display = "block";
+        }
+
+        function closeAddAccountModal() {
+            document.getElementById("accountModal").style.display = "none";
+        }
+
+        function openAddTransactionModal() {
+            // Populate account dropdown
+            fetch('/api/accounts')
+                .then(res => res.json())
+                .then(accounts => {
+                    const select = document.getElementById('txnAccount');
+                    select.innerHTML = '<option value="">Select account...</option>';
+                    accounts.forEach(acc => {
+                        const option = document.createElement('option');
+                        option.value = acc.id;
+                        option.textContent = acc.name;
+                        select.appendChild(option);
+                    });
+                });
+            
+            // Set today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('txnDate').value = today;
+            
+            document.getElementById("transactionModal").style.display = "block";
+        }
+
+        function closeAddTransactionModal() {
+            document.getElementById("transactionModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const accountModal = document.getElementById("accountModal");
+            const txnModal = document.getElementById("transactionModal");
+            if (event.target == accountModal) {
+                accountModal.style.display = "none";
+            }
+            if (event.target == txnModal) {
+                txnModal.style.display = "none";
+            }
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -383,37 +568,69 @@
             }, 5000);
         }
 
-        function linkBank() {
-            // Create link token
-            fetch('/api/link-token', {
+        function addAccount(event) {
+            event.preventDefault();
+            
+            const accountData = {
+                account_name: document.getElementById('accountName').value,
+                account_type: document.getElementById('accountType').value,
+                balance: parseFloat(document.getElementById('currentBalance').value)
+            };
+
+            fetch('/api/add-account', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(accountData)
             })
             .then(res => res.json())
             .then(data => {
-                if (data.link_token) {
-                    Plaid.create({
-                        token: data.link_token,
-                        onSuccess: (public_token) => {
-                            // Exchange for access token
-                            fetch('/api/exchange-token', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ public_token: public_token })
-                            })
-                            .then(res => res.json())
-                            .then(data => {
-                                showMessage(`✅ Bank linked: ${data.institution}`);
-                                setTimeout(() => {
-                                    loadNetWorth();
-                                    loadAccounts();
-                                    loadTransactions();
-                                }, 1000);
-                            })
-                            .catch(e => showMessage(e.message, 'error'));
-                        },
-                        onExit: () => {}
-                    }).open();
+                if (data.success) {
+                    showMessage(`✅ Account added`);
+                    closeAddAccountModal();
+                    document.getElementById('accountName').value = '';
+                    document.getElementById('currentBalance').value = '';
+                    setTimeout(() => {
+                        loadNetWorth();
+                        loadAccounts();
+                        loadTransactions();
+                    }, 500);
+                } else {
+                    showMessage(data.error, 'error');
+                }
+            })
+            .catch(e => showMessage('Error: ' + e.message, 'error'));
+        }
+
+        function addTransaction(event) {
+            event.preventDefault();
+            
+            const txnData = {
+                account_id: document.getElementById('txnAccount').value,
+                date: document.getElementById('txnDate').value,
+                merchant_name: document.getElementById('txnMerchant').value,
+                amount: parseFloat(document.getElementById('txnAmount').value),
+                category: document.getElementById('txnCategory').value,
+                description: document.getElementById('txnMerchant').value
+            };
+
+            fetch('/api/add-transaction', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(txnData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage('✅ Transaction logged');
+                    closeAddTransactionModal();
+                    document.getElementById('txnMerchant').value = '';
+                    document.getElementById('txnAmount').value = '';
+                    setTimeout(() => {
+                        loadTransactions();
+                        loadSpendingSummary();
+                    }, 500);
+                } else {
+                    showMessage(data.error, 'error');
                 }
             })
             .catch(e => showMessage('Error: ' + e.message, 'error'));
@@ -438,19 +655,18 @@
                     const list = document.getElementById('accountsList');
                     const select = document.getElementById('accountFilter');
                     
-                    // Clear and rebuild list
                     list.innerHTML = '';
                     select.innerHTML = '<option value="">All Accounts</option>';
                     
                     if (accounts.length === 0) {
-                        list.innerHTML = '<div style="color: #999;">No accounts linked yet</div>';
+                        list.innerHTML = '<div style="color: #999;">No accounts added yet</div>';
                     } else {
                         accounts.forEach(acc => {
                             const html = `
                                 <div class="account-item">
                                     <div class="account-info">
                                         <h3>${acc.name}</h3>
-                                        <p>${acc.institution}</p>
+                                        <p>${acc.type}</p>
                                     </div>
                                     <div class="account-balance">$${acc.balance.toFixed(2)}</div>
                                 </div>
@@ -480,7 +696,7 @@
                     const tbody = document.getElementById('transactionsBody');
                     
                     if (transactions.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><p>No transactions found</p></td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><p>No transactions yet</p></td></tr>';
                     } else {
                         tbody.innerHTML = transactions.map(t => `
                             <tr>
@@ -488,12 +704,10 @@
                                 <td>${t.merchant}</td>
                                 <td>${t.category}</td>
                                 <td class="transaction-amount positive">-$${t.amount.toFixed(2)}</td>
-                                <td>${t.pending ? '<span class="status-pending">Pending</span>' : 'Completed'}</td>
                             </tr>
                         `).join('');
                     }
                     
-                    // Update monthly spending
                     const totalSpending = transactions
                         .filter(t => t.amount > 0)
                         .reduce((sum, t) => sum + t.amount, 0);
@@ -545,16 +759,14 @@
         }
 
         function refreshData() {
-            fetch('/api/refresh-accounts', { method: 'POST' })
-                .then(res => res.json())
-                .then(data => {
-                    showMessage('✅ Data refreshed successfully');
-                    loadNetWorth();
-                    loadAccounts();
-                    loadTransactions();
-                    loadSpendingSummary();
-                })
-                .catch(e => showMessage('Error: ' + e.message, 'error'));
+            showMessage('🔄 Refreshing data...');
+            setTimeout(() => {
+                loadNetWorth();
+                loadAccounts();
+                loadTransactions();
+                loadSpendingSummary();
+                showMessage('✅ Data refreshed');
+            }, 500);
         }
     </script>
 </body>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Macro Progress Report</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            color: white;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 0.9em;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-ok { background: #dcfce7; color: #166534; }
+        .status-warning { background: #fef3c7; color: #b45309; }
+        .status-critical { background: #fee2e2; color: #991b1b; }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .day-breakdown {
+            margin-top: 40px;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .day-item {
+            display: grid;
+            grid-template-columns: 120px 1fr 150px;
+            gap: 20px;
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .day-item:last-child {
+            border-bottom: none;
+        }
+
+        .day-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .day-macros {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .macro-mini {
+            text-align: center;
+            font-size: 0.85em;
+        }
+
+        .macro-mini-value {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .macro-mini-label {
+            color: #999;
+            font-size: 0.75em;
+        }
+
+        .day-status {
+            text-align: right;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .recommendations {
+            margin-top: 40px;
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .rec-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .rec-list {
+            list-style: none;
+        }
+
+        .rec-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .rec-item strong {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .grid { grid-template-columns: 1fr; }
+            .day-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .day-macros {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💪 Weekly Macro Progress Report</h1>
+            <p class="subtitle">Week Ending Sunday, February 8, 2026</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Total Calories</div>
+                <div class="card-value">7,483</div>
+                <div class="card-subtitle">of 8,800 target (85%)</div>
+                <span class="status-badge status-warning">⚠️ Undereating</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Protein</div>
+                <div class="card-value">600g</div>
+                <div class="card-subtitle">of 800g target (75%)</div>
+                <span class="status-badge status-warning">⚠️ Below Target</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Carbs</div>
+                <div class="card-value">510g</div>
+                <div class="card-subtitle">of 1,000g target (51%)</div>
+                <span class="status-badge status-critical">🔴 Significantly Low</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 51%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Fat</div>
+                <div class="card-value">268g</div>
+                <div class="card-subtitle">of 280g target (96%)</div>
+                <span class="status-badge status-ok">✅ On Target</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 96%"></div>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <div class="card-title">Weekly Summary</div>
+                <div class="chart-container">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <div class="card-title">Macros by Day</div>
+                <div class="chart-container">
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-breakdown">
+            <h2 style="margin-bottom: 20px; color: #333;">📅 Day-by-Day Breakdown</h2>
+
+            <div class="day-item">
+                <div class="day-label">Monday (Feb 2)</div>
+                <div class="day-macros">
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">1,840</div>
+                        <div class="macro-mini-label">Cal</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">173g</div>
+                        <div class="macro-mini-label">Protein</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">126g</div>
+                        <div class="macro-mini-label">Carbs</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">69g</div>
+                        <div class="macro-mini-label">Fat</div>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-badge status-warning">84%</span>
+                    <p style="font-size: 0.85em; color: #999; margin-top: 4px;">Leg Day</p>
+                </div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-label">Tuesday (Feb 3)</div>
+                <div class="day-macros">
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">2,138</div>
+                        <div class="macro-mini-label">Cal</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">208g</div>
+                        <div class="macro-mini-label">Protein</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">119g</div>
+                        <div class="macro-mini-label">Carbs</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">88g</div>
+                        <div class="macro-mini-label">Fat</div>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-badge status-ok">97% ✅</span>
+                    <p style="font-size: 0.85em; color: #999; margin-top: 4px;">Best Day</p>
+                </div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-label">Wednesday (Feb 4)</div>
+                <div class="day-macros">
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">1,630</div>
+                        <div class="macro-mini-label">Cal</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">91g</div>
+                        <div class="macro-mini-label">Protein</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">154g</div>
+                        <div class="macro-mini-label">Carbs</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">11g</div>
+                        <div class="macro-mini-label">Fat</div>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-badge status-critical">74%</span>
+                    <p style="font-size: 0.85em; color: #999; margin-top: 4px;">Recovery Day</p>
+                </div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-label">Friday (Feb 6)</div>
+                <div class="day-macros">
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">1,875</div>
+                        <div class="macro-mini-label">Cal</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">128g</div>
+                        <div class="macro-mini-label">Protein</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">111g</div>
+                        <div class="macro-mini-label">Carbs</div>
+                    </div>
+                    <div class="macro-mini">
+                        <div class="macro-mini-value">100g</div>
+                        <div class="macro-mini-label">Fat</div>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-badge status-warning">85%</span>
+                    <p style="font-size: 0.85em; color: #999; margin-top: 4px;">Shoulder Day</p>
+                </div>
+            </div>
+
+            <div class="day-item">
+                <div class="day-label">Thu, Sat, Sun</div>
+                <div class="day-macros">
+                    <div class="macro-mini" style="color: #999;">
+                        <div class="macro-mini-value">—</div>
+                        <div class="macro-mini-label">Not Logged</div>
+                    </div>
+                </div>
+                <div class="day-status">
+                    <span class="status-badge status-warning">⚠️ Missing</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations">
+            <h2 class="rec-title">🎯 Recommendations for Next Week</h2>
+            <ul class="rec-list">
+                <li class="rec-item">
+                    <strong>CARBS ARE YOUR PRIORITY:</strong> You're at 51% of target. Add 50-75g carbs per meal (rice, potatoes, pasta, oats). This is your biggest gap.
+                </li>
+                <li class="rec-item">
+                    <strong>Log Everything:</strong> 3 days missing logs. Even rest days need tracking. All meals, snacks, drinks.
+                </li>
+                <li class="rec-item">
+                    <strong>Hit 200g Protein Daily:</strong> You're at 75%. Target 45-50g per meal across 4 meals/day.
+                </li>
+                <li class="rec-item">
+                    <strong>Stay around 2,200 calories:</strong> You're undereating by ~1,300 calories total. Consistent energy = better recovery & progress.
+                </li>
+                <li class="rec-item">
+                    <strong>Fat is Good:</strong> You're nailing fat intake. Keep that consistent.
+                </li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; color: white; margin-top: 40px; font-size: 1.1em;">
+            <p><strong>You're close, but underfueled on carbs.</strong></p>
+            <p style="margin-top: 10px;">Next week: Hit carbs, log everything, crush it. 💪</p>
+        </div>
+    </div>
+
+    <script>
+        // Weekly Summary Chart
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(weeklyCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Calories', 'Protein', 'Carbs', 'Fat'],
+                datasets: [
+                    {
+                        label: 'Actual',
+                        data: [85, 75, 51, 96],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#667eea'
+                    },
+                    {
+                        label: 'Target (100%)',
+                        data: [100, 100, 100, 100],
+                        borderColor: '#ccc',
+                        borderDash: [5, 5],
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 120,
+                        ticks: { stepSize: 20 }
+                    }
+                }
+            }
+        });
+
+        // Daily Breakdown Chart
+        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+        new Chart(dailyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon (Feb 2)', 'Tue (Feb 3)', 'Wed (Feb 4)', 'Fri (Feb 6)'],
+                datasets: [
+                    {
+                        label: 'Calories',
+                        data: [1840, 2138, 1630, 1875],
+                        backgroundColor: '#667eea',
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Protein (g)',
+                        data: [173, 208, 91, 128],
+                        backgroundColor: '#764ba2',
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'bottom' }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Calories' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Protein (g)' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
