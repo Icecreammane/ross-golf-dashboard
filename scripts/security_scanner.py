@@ -84,6 +84,17 @@ class SecurityScanner:
                         for wl in self.whitelist
                     )
                     
+                    # Check if we're loading from .credentials/ directory
+                    line_start = max(0, text.rfind('\n', 0, match.start()))
+                    line_end = text.find('\n', match.start())
+                    if line_end == -1:
+                        line_end = len(text)
+                    line_context = text[line_start:line_end]
+                    
+                    # Skip if loading from credentials file
+                    if '.credentials' in line_context or 'credentials[' in line_context:
+                        is_whitelisted = True
+                    
                     if not is_whitelisted:
                         # Get line number
                         line_num = text[:match.start()].count('\n') + 1
@@ -113,6 +124,10 @@ class SecurityScanner:
     
     def scan_file(self, filepath):
         """Scan a single file"""
+        # Skip scanning the security scanner itself (contains pattern definitions)
+        if 'security_scanner.py' in str(filepath) or 'security_audit.py' in str(filepath):
+            return []
+        
         try:
             with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()

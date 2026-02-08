@@ -235,9 +235,10 @@ For instant notifications bypassing email, configure Jarvis to send alerts.
 # Telegram Alert Script for FitTrack Downtime
 # Sends instant alert to Ross via Telegram
 
-# Configuration
-TELEGRAM_BOT_TOKEN="7869330755:AAEj9m1oMCLcXzHy09TlqxlCZ3E6zlZXaM4"  # Jarvis bot token
-TELEGRAM_CHAT_ID="8412148376"  # Ross's Telegram ID
+# Load credentials from secure storage
+CREDENTIALS_FILE="$HOME/clawd/.credentials/telegram_credentials.json"
+TELEGRAM_BOT_TOKEN=$(python3 -c "import json; print(json.load(open('$CREDENTIALS_FILE'))['bot_token'])")
+TELEGRAM_CHAT_ID=$(python3 -c "import json; print(json.load(open('$CREDENTIALS_FILE'))['ross_chat_id'])")
 
 send_alert() {
     local SITE_URL="$1"

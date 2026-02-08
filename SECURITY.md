@@ -1,5 +1,81 @@
 # SECURITY.md - Jarvis Security Infrastructure
 
+## Credential Management 🔐
+
+### Storage Location
+All API credentials, passwords, and tokens stored in:
+```
+~/clawd/.credentials/
+```
+
+**Permissions:** `600` (read/write owner only)
+
+### Current Credentials
+- `gmail_credentials.json` - Email/SMTP access
+- `telegram_credentials.json` - Bot token and chat IDs
+
+### Adding New Credentials
+```bash
+# Create new credential file
+echo '{
+  "api_key": "your_key_here",
+  "purpose": "Brief description",
+  "created": "2026-02-07",
+  "authorized_by": "Ross"
+}' > ~/clawd/.credentials/service_name.json
+
+# Set secure permissions
+chmod 600 ~/clawd/.credentials/service_name.json
+```
+
+### Using Credentials in Scripts
+
+**Python:**
+```python
+import json
+from pathlib import Path
+
+creds_path = Path.home() / "clawd" / ".credentials" / "service_name.json"
+with open(creds_path) as f:
+    creds = json.load(f)
+
+api_key = creds["api_key"]
+```
+
+**Bash:**
+```bash
+CREDS_FILE="$HOME/clawd/.credentials/service_name.json"
+API_KEY=$(python3 -c "import json; print(json.load(open('$CREDS_FILE'))['api_key'])")
+```
+
+### Security Rules
+- ❌ **NEVER** hardcode credentials in scripts
+- ❌ **NEVER** commit credential files to git (`.credentials/` is in `.gitignore`)
+- ✅ **ALWAYS** use `600` permissions on credential files
+- ✅ **ALWAYS** document credentials in this file
+- ✅ **ALWAYS** include `purpose` and `authorized_by` fields
+
+### Backup & Recovery
+Credentials included in daily workspace backups:
+```bash
+~/clawd/scripts/backup.sh
+```
+
+**Restoring credentials:**
+```bash
+# List backups
+ls ~/clawd/backups/
+
+# Extract credentials from backup
+tar -xzf ~/clawd/backups/backup_YYYYMMDD_HHMMSS.tar.gz -C /tmp/restore .credentials/
+
+# Review and restore
+cp /tmp/restore/.credentials/* ~/clawd/.credentials/
+chmod 600 ~/clawd/.credentials/*.json
+```
+
+---
+
 ## Kill Switch 🚨
 
 **Emergency credential revocation**

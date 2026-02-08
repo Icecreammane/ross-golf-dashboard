@@ -6,15 +6,22 @@ Usage: python3 send-email.py <to> <subject> <body>
 
 import smtplib
 import sys
+import json
+from pathlib import Path
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 
+# Load credentials from secure storage
+CREDENTIALS_PATH = Path.home() / "clawd" / ".credentials" / "gmail_credentials.json"
+with open(CREDENTIALS_PATH) as f:
+    credentials = json.load(f)
+
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 587
-FROM_EMAIL = "bigmeatyclawd@gmail.com"
+FROM_EMAIL = credentials["email"]
 FROM_NAME = "Jarvis"
-PASSWORD = "iigy dewa ymfq lfcf"
+PASSWORD = credentials["smtp_app_password"]
 
 def send_email(to_email, subject, body, body_html=None):
     """Send email via Gmail SMTP"""

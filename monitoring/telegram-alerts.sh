@@ -17,9 +17,16 @@
 #   - Can be run manually for testing
 ################################################################################
 
-# Configuration
-TELEGRAM_BOT_TOKEN="7869330755:AAEj9m1oMCLcXzHy09TlqxlCZ3E6zlZXaM4"  # Jarvis bot token
-TELEGRAM_CHAT_ID="8412148376"  # Ross's Telegram user ID
+# Load credentials from secure storage
+CREDENTIALS_FILE="$HOME/clawd/.credentials/telegram_credentials.json"
+if [ ! -f "$CREDENTIALS_FILE" ]; then
+    echo "ERROR: Credentials file not found: $CREDENTIALS_FILE"
+    exit 1
+fi
+
+# Extract credentials using python (jq might not be installed)
+TELEGRAM_BOT_TOKEN=$(python3 -c "import json; print(json.load(open('$CREDENTIALS_FILE'))['bot_token'])")
+TELEGRAM_CHAT_ID=$(python3 -c "import json; print(json.load(open('$CREDENTIALS_FILE'))['ross_chat_id'])")
 
 # Function: Send Telegram message
 send_alert() {

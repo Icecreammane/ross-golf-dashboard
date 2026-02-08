@@ -68,6 +68,23 @@ If current day is Sunday and time is between 5:55pm-6:05pm CST:
 
 **Note:** The auto-recovery system handles most failures automatically. Only alerts that persist after 3+ recovery attempts will be escalated.
 
+## Weekly Security Audit (Sunday 9:00am CST)
+If current day is Sunday and time is between 8:55am-9:05am CST:
+1. Run: `python3 ~/clawd/scripts/security_audit.py`
+2. Read the generated report from `security-logs/audit-YYYY-MM-DD.md`
+3. If critical issues found (exit code 1):
+   - Alert Ross immediately with issue summary
+   - Include link to full report
+4. If warnings found (exit code 0 + warnings):
+   - Send summary: "⚠️ Weekly security audit complete: X warnings found"
+   - Include top 3 warnings
+5. If all clear:
+   - Log "security_audit_passed" in memory/heartbeat-state.json
+   - Send brief confirmation: "✅ Weekly security audit: All clear"
+6. Update SECURITY_CHECKLIST.md with audit date and results
+
+**Purpose:** Proactive security monitoring, catch credential leaks early, maintain security posture
+
 ## Pending Integrations Check (Weekly)
 If it's been 7+ days since last check:
 - Check if Spotify developer dashboard allows new app creation
