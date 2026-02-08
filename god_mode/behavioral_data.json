@@ -1,0 +1,1373 @@
+{
+  "files_processed": 16,
+  "time_patterns": {},
+  "decisions": [],
+  "wins": [
+    {
+      "date": "2025-02-06",
+      "text": "\u2705 Complete:**"
+    },
+    {
+      "date": "2025-02-06",
+      "text": "\u2705 \"Ross can launch tomorrow in 5 minutes\" - Run launch script, post"
+    },
+    {
+      "date": "2025-02-06",
+      "text": "\u2705 \"All edge cases considered\" - 12 response templates, full troubleshooting guide"
+    },
+    {
+      "date": "2025-02-06",
+      "text": "\u2705 \"Professional, ready to get first customer\" - Production-quality landing page, email templates"
+    },
+    {
+      "date": "2025-02-06",
+      "text": "\u2705 \"No 'oh shit I forgot X' moments\" - Complete checklist, everything documented"
+    },
+    {
+      "date": "2025-02-06",
+      "text": "COMPLETED"
+    },
+    {
+      "date": "2026-01-31",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-01",
+      "text": "\u2705 **Morning Brief System** (2h)"
+    },
+    {
+      "date": "2026-02-01",
+      "text": "\u2705 **Task Dashboard** (2h)"
+    },
+    {
+      "date": "2026-02-01",
+      "text": "\u2705 **Golf Club Spec Matcher** (4h)"
+    },
+    {
+      "date": "2026-02-01",
+      "text": "\u2705 **GOALS.md Framework** (1h)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Logged successfully"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Fitness tracker running (port 3000)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Web server running (port 8080)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Photo logger ready for food pics"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Voice system tested and approved"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Generated \"The Builder\" story audio (1.3 MB MP3)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Built Revenue Dashboard (visual tracker for side project income)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Built Goal Progress Dashboard (visual tracker for all Q1 2026 goals)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 Built Jarvis Command Center (central hub for all tools)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 BUILT NOW"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 \"leg 6pm\" \u2192 Leg Day Wed Feb 4 at 6:00 PM  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 \"chest friday 630\" \u2192 Chest Day Fri Feb 6 at 6:30 PM  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 \"meal sunday 5\" \u2192 Meal Prep Sun Feb 8 at 5:00 PM"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\ud83c\udfc6"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\ud83c\udfc6"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "win: [text]\""
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETE**"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETE**"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETE**"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-02",
+      "text": "COMPLETED \u2705  "
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Infrastructure setup (logs, dashboard, queue)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Market research (competitors, pricing, positioning)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Business model with unit economics"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Service packages (-10k setup defined)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 4 detailed customer profiles"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Complete go-to-market strategy"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Flask application with full backend"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Beautiful landing page (features, how-it-works, CTA)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Main app interface (URL input \u2192 email output)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 OpenAI GPT-4 integration"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Web scraping (BeautifulSoup)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Mock mode for demo without API key"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 One-click copy to clipboard"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Comprehensive README with docs"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Autonomous Build System (queue, dashboard, report gen, framework)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 AI Concierge Business Research (5 comprehensive docs)"
+    },
+    {
+      "date": "2026-02-05",
+      "text": "\u2705 Cold Email AI Platform MVP (working Flask app)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Autonomous builds now fully operational!"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Trusted Actions (DONE)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Hybrid Model Strategy (DONE)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Coding arms structure live. Each specialist handles their domain."
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Approve, \u274c Reject, \u270f\ufe0f Edit)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Running (PID 52449)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Running (local AI)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "\u2705 Running (port 8081)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "COMPLETE: Operator Loop Core \u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "COMPLETE \u2705"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "COMPLETE \u2705"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Remember facts about Ross (calorie goals, preferences, etc.)  "
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Recall past conversations (\"What did we discuss yesterday?\")  "
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Learn from interactions (auto-extract and store new information)  "
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Provide context-aware responses (no more redundant questions)"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Python environment"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Dependencies"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Embedding pipeline"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Search functionality"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Performance (<500ms)"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Run test suite: `bash scripts/test-memory-system.sh`"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Try manual searches: `./scripts/search-memory.sh \"test\"`"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Read integration guide: `INTEGRATION_GUIDE.md`"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Add to heartbeat or cron for automation"
+    },
+    {
+      "date": "README",
+      "text": "\u2705 Integrate `check_memory_before_response()` into main agent"
+    },
+    {
+      "date": "README",
+      "text": "\u2705"
+    },
+    {
+      "date": "README",
+      "text": "COMPLETE! \u2713\""
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705 Morning brief delivered to Telegram"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705 Dashboard shows all completed work"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705 Golf matcher ready to use (can test with Club Champion specs)"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705 GOALS.md ready for review/editing"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "\u2705 3 proposals in PROPOSALS.md awaiting approval"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "COMPLETE** \u2705"
+    },
+    {
+      "date": "build-log-2026-02-01",
+      "text": "COMPLETE - Entering standby*"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 BUILDING NOW (sub-agent launched 18:44, ETA 3-4 hrs)"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Spawning builder agent\" (immediately)"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **Proactive Building** - Build things without asking permission first"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **Sub-Agent Spawning** - Use sessions_spawn to parallelize work"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **Ship First, Report After** - Show results, not plans"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **Revenue Focus** - Income generation is TOP priority"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **Weekend Goal** - Generate ideas + build/ship something revenue-generating"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 COMPLETE"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **GOALS.md** \u2014 Ross's north star document"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **autonomous_check.py** \u2014 The autonomous brain"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Working correctly"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **AUTONOMOUS_AGENT.md** \u2014 Operating protocol"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **AGENTS.md** \u2014 Updated with autonomous startup"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **HEARTBEAT.md** \u2014 Updated with autonomous checks"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 **AUTONOMOUS_SYSTEM_README.md** \u2014 Complete documentation"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 GOALS.md loaded"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Queue has 3 pending tasks. No generation needed."
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 GOALS.md created with Ross's actual goals  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 autonomous_check.py working (generates tasks, spawns builds)  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 AUTONOMOUS_AGENT.md documents the protocol  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 AGENTS.md updated (runs autonomous check on startup)  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 HEARTBEAT.md updated (runs check every 30min)  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Test passes (generates task, spawns build)  "
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Documentation complete (AUTONOMOUS_SYSTEM_README.md)"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705*"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Smart Sequential/Parallel Spawning - Adapts to Ross's schedule"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Progress Tracking System - Real-time progress bars"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Cost Tracking & Budget Alerts - $20/day budget monitoring"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Build Time Estimates - ETAs for all tasks"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Failure Recovery & Auto-Retry - 80% fewer permanent failures"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Task Batching Intelligence - 30-40% cost reduction"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Quiet Hours Respect - No 2am-6am spawns"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Dashboard Auto-Reload - 5s updates, progress bars, cost display"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Memory Optimization - Automatic cleanup script"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Quick Command Shortcuts - jarvis_quick for all operations"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Build spawned successfully: build-test-build---simple-echo---add"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "\u2705 Autonomous check complete"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "COMPLETE"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "COMPLETE"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "COMPLETE"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 OPERATIONAL"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Pull latest NBA stats (using ESPN API)"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Build ranking algorithm (points, assists, rebounds weighted)"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Output rankings.json"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Output rankings-report.md"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Create regeneration script"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Test system end-to-end"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705 Document for Ross"
+    },
+    {
+      "date": "nba-rankings-build",
+      "text": "\u2705"
+    },
+    {
+      "date": "pending-integrations",
+      "text": "\u2705 RELEASED on 2026-02-03 (Codename: Fennec)  "
+    },
+    {
+      "date": "surprise-build-2026-02-02",
+      "text": "\u2705 Ross says \"wow\" or equivalent  "
+    },
+    {
+      "date": "surprise-build-2026-02-02",
+      "text": "\u2705 Immediately usable (not theoretical)  "
+    },
+    {
+      "date": "surprise-build-2026-02-02",
+      "text": "\u2705 Shows capabilities he didn't know I had  "
+    },
+    {
+      "date": "surprise-build-2026-02-02",
+      "text": "\u2705 Advances his goals tangibly  "
+    },
+    {
+      "date": "surprise-build-2026-02-02",
+      "text": "\u2705 Works flawlessly on iPhone  "
+    }
+  ],
+  "workouts": [
+    {
+      "date": "2026-02-02",
+      "text": "- Tracks: workouts, weight change, nutrition, builds"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Multi-axis progress chart (weight, workouts, revenue)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Workout consistency: 0/5 per week (behind)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Tracks all-time bests per exercise"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Workout templates: \"leg day\", \"chest day\", \"back day\""
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Executes fitness logging, workout tracking, status checks"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Workouts: \"leg day\", \"chest day\", \"back day\", \"arm day\", \"cardio\""
+    },
+    {
+      "date": "2026-02-02",
+      "text": "**Why It Matters:** Hands-free logging at gym, in car, while cooking. Just talk to Jarvis. No typing, no app switching."
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Pre-built helpers: workouts, meal prep, reminders, focus blocks"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- `workout` - Schedule workout sessions with emoji and notes"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "python3 calendar_creator.py workout \"Leg Day\""
+    },
+    {
+      "date": "2026-02-02",
+      "text": "Ross can now say: \"Schedule leg day tomorrow at 6pm\" and I can create it automatically."
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- Automatic workout planning"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2022 6:00 PM - Leg Day"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- \"leg 6pm\" \u2192 Leg Day tomorrow at 6pm"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- \"chest friday 630\" \u2192 Chest Day Friday at 6:30pm"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "- 10+ workout types (leg, chest, back, arms, cardio, etc.)"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 \"leg 6pm\" \u2192 Leg Day Wed Feb 4 at 6:00 PM"
+    },
+    {
+      "date": "2026-02-02",
+      "text": "\u2705 \"chest friday 630\" \u2192 Chest Day Fri Feb 6 at 6:30 PM"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "## 06:50PM - Workout (Voice Logged)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "chest day 90 minutes felt great"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "- Voice Handler: Parses voice commands (\"log workout\", \"add win\", etc.)"
+    },
+    {
+      "date": "2026-02-07",
+      "text": "- Voice handler successfully parsed and executed \"log workout\" command"
+    },
+    {
+      "date": "README",
+      "text": "./scripts/search-memory.sh --type daily_log \"workout\" -n 10"
+    },
+    {
+      "date": "jarvis-journal",
+      "text": "1. Workout Auto-Logger (text parsing)"
+    },
+    {
+      "date": "opinions",
+      "text": "- Best workout times?"
+    },
+    {
+      "date": "pending-integrations",
+      "text": "- \ud83c\udfcb\ufe0f Workout playlists (different vibes per lift day)"
+    }
+  ],
+  "energy_by_date": {
+    "2025-02-06": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2025-07-22": {
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    },
+    "2026-01-30": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-01-31": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-02-01": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-02-02": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-02-04": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-02-05": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "2026-02-07": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "README": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "build-log-2026-02-01": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "jarvis-journal": {
+      "high": 1,
+      "medium": 0,
+      "low": 1
+    },
+    "nba-rankings-build": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "opinions": {
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    },
+    "pending-integrations": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    },
+    "surprise-build-2026-02-02": {
+      "high": 0,
+      "medium": 1,
+      "low": 0
+    }
+  },
+  "activity_by_hour": {
+    "17": 49,
+    "20": 8,
+    "21": 18,
+    "22": 8,
+    "7": 18,
+    "8": 18,
+    "9": 23,
+    "10": 17,
+    "12": 3,
+    "19": 18,
+    "23": 5,
+    "14": 31,
+    "18": 67,
+    "0": 7,
+    "16": 49,
+    "4": 4,
+    "2": 5,
+    "1": 4,
+    "11": 4,
+    "5": 3,
+    "6": 3,
+    "15": 36
+  },
+  "daily_summaries": {
+    "2025-02-06": {
+      "decisions": 0,
+      "wins": 6,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 2
+    },
+    "2025-07-22": {
+      "decisions": 0,
+      "wins": 0,
+      "workouts": 0,
+      "energy": "high",
+      "activity_count": 0
+    },
+    "2026-01-30": {
+      "decisions": 0,
+      "wins": 0,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 0
+    },
+    "2026-01-31": {
+      "decisions": 0,
+      "wins": 1,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 8
+    },
+    "2026-02-01": {
+      "decisions": 0,
+      "wins": 4,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 10
+    },
+    "2026-02-02": {
+      "decisions": 0,
+      "wins": 36,
+      "workouts": 19,
+      "energy": "medium",
+      "activity_count": 35
+    },
+    "2026-02-04": {
+      "decisions": 0,
+      "wins": 0,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 3
+    },
+    "2026-02-05": {
+      "decisions": 0,
+      "wins": 19,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 2
+    },
+    "2026-02-07": {
+      "decisions": 0,
+      "wins": 23,
+      "workouts": 4,
+      "energy": "medium",
+      "activity_count": 24
+    },
+    "README": {
+      "decisions": 0,
+      "wins": 16,
+      "workouts": 1,
+      "energy": "medium",
+      "activity_count": 1
+    },
+    "build-log-2026-02-01": {
+      "decisions": 0,
+      "wins": 8,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 12
+    },
+    "jarvis-journal": {
+      "decisions": 0,
+      "wins": 126,
+      "workouts": 1,
+      "energy": "low",
+      "activity_count": 290
+    },
+    "nba-rankings-build": {
+      "decisions": 0,
+      "wins": 10,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 8
+    },
+    "opinions": {
+      "decisions": 0,
+      "wins": 0,
+      "workouts": 1,
+      "energy": "high",
+      "activity_count": 0
+    },
+    "pending-integrations": {
+      "decisions": 0,
+      "wins": 1,
+      "workouts": 1,
+      "energy": "medium",
+      "activity_count": 2
+    },
+    "surprise-build-2026-02-02": {
+      "decisions": 0,
+      "wins": 5,
+      "workouts": 0,
+      "energy": "medium",
+      "activity_count": 1
+    }
+  },
+  "patterns": {
+    "most_active_hours": [
+      "18:00",
+      "17:00",
+      "16:00"
+    ],
+    "peak_productivity_time": "18:00",
+    "avg_daily_wins": 15.94,
+    "avg_daily_decisions": 0.0,
+    "workout_frequency": 27,
+    "high_energy_days": 2,
+    "low_energy_days": 1,
+    "total_days_tracked": 16
+  },
+  "mined_at": "2026-02-07T19:10:21.376634",
+  "version": "1.0"
+}
