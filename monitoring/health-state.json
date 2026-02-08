@@ -1,34 +1,6 @@
 {
-  "last_check": "2026-02-07T17:54:37.467216",
+  "last_check": "2026-02-07T17:59:37.667790",
   "check_history": [
-    {
-      "timestamp": "2026-02-07T09:39:18.042054",
-      "results": {
-        "gateway": {
-          "status": "ok",
-          "pid": 89561
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 77.6
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 50.5
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
     {
       "timestamp": "2026-02-07T09:44:18.243362",
       "results": {
@@ -2795,6 +2767,34 @@
         "memory": {
           "status": "ok",
           "percent_used": 57.3
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-07T17:59:37.667796",
+      "results": {
+        "gateway": {
+          "status": "ok",
+          "pid": 47129
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "down",
+          "message": "Hub Dashboard not responding on port 8080"
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 70.8
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 57.7
         },
         "log_files": {
           "status": "ok"
