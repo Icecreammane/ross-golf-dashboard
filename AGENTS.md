@@ -9,21 +9,25 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 ## Every Session
 
 Before doing anything else:
-1. Read `SOUL.md` — this is who you are
-2. Read `USER.md` — this is who you're helping
-3. **Read `GOALS.md` — this is what we're working toward** ← NEW
-4. **Run: `python3 ~/clawd/scripts/autonomous_check.py`** ← NEW
+1. **Check current date/time:** `python3 ~/clawd/scripts/current_context.py` ← **ALWAYS DO THIS FIRST**
+   - Don't rely on message timestamps (they can be old)
+   - Know what day it is, what time of day, weekend vs weekday
+   - This avoids saying "Good Friday night!" on Saturday
+2. Read `SOUL.md` — this is who you are
+3. Read `USER.md` — this is who you're helping
+4. **Read `GOALS.md` — this is what we're working toward**
+5. **Run: `python3 ~/clawd/scripts/autonomous_check.py`**
    - Generates tasks if queue empty
    - Spawns builds if ready
    - See `AUTONOMOUS_AGENT.md` for full protocol
-5. **Load Intelligence Systems** ← NEW v2.0
+6. **Load Intelligence Systems** ← NEW v2.0
    - Context Telepathy: Predict needs before being asked
    - Instant Recall: Search memory for relevant context
    - Decision Confidence: Score autonomy for actions
    - Personality Model: Adjust tone/style appropriately
    - See `INTELLIGENCE.md` for full documentation
-6. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-7. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+7. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+8. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
