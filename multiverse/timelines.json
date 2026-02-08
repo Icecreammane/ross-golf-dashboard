@@ -1,0 +1,505 @@
+{
+  "generated_at": "2026-02-07T19:54:12.015567",
+  "ross_current_state": {
+    "age": 30,
+    "location": "Tennessee",
+    "job": "Product Developer",
+    "income": 0,
+    "goals": [
+      "$500 MRR",
+      "Escape corporate",
+      "Move to Florida",
+      "Financial freedom"
+    ]
+  },
+  "timelines": {
+    "current_pace": {
+      "name": "\ud83d\udcc8 Current Pace",
+      "description": "No changes. Current trajectory continues.",
+      "predictions": [
+        {
+          "timepoint": "1_month",
+          "side_income": 500,
+          "life_situation": "Still at 9-5, closed first freelance client",
+          "achievements": [
+            "First $500 earned",
+            "Built portfolio site"
+          ],
+          "regret_level": 30,
+          "happiness": 65,
+          "vivid_detail": "Wakes up knowing he can make money on his own"
+        },
+        {
+          "timepoint": "3_months",
+          "side_income": 1200,
+          "life_situation": "9-5, closed two freelance clients, started building fitness tracker dashboard",
+          "achievements": [
+            "Begun work on custom fitness tracker",
+            "Signed up for API integration services client"
+          ],
+          "regret_level": 35,
+          "happiness": 70,
+          "vivid_detail": "Works on side projects until midnight most days"
+        },
+        {
+          "timepoint": "6_months",
+          "side_income": 1800,
+          "life_situation": "9-5, multiple freelance clients including autonomous AI integration for business processes",
+          "achievements": [
+            "First major project completed",
+            "Earned $3400 in total"
+          ],
+          "regret_level": 40,
+          "happiness": 75,
+          "vivid_detail": "Has lunch with a friend who compliments his progress and motivation"
+        },
+        {
+          "timepoint": "1_year",
+          "side_income": 2800,
+          "life_situation": "9-5, several freelance clients, working on API integration services for fitness apps",
+          "achievements": [
+            "Begun work with multiple major clients",
+            "Made connections in the industry"
+          ],
+          "regret_level": 45,
+          "happiness": 80,
+          "vivid_detail": "Spends weekends coding while listening to podcasts about startups and tech"
+        },
+        {
+          "timepoint": "2_years",
+          "side_income": 3900,
+          "life_situation": "9-5, full-time freelance projects, plans for Florida move in next year",
+          "achievements": [
+            "Savings goal nearing completion",
+            "Started looking at houses"
+          ],
+          "regret_level": 60,
+          "happiness": 85,
+          "vivid_detail": "Decides to apply for a corporate job in Florida but keeps side income streams going"
+        },
+        {
+          "timepoint": "5_years",
+          "side_income": 4300,
+          "life_situation": "Part-time remote work, mostly freelance and projects, living in Florida with wife and kid",
+          "achievements": [
+            "Moved to Florida",
+            "Started own business"
+          ],
+          "regret_level": 70,
+          "happiness": 90,
+          "vivid_detail": "Balances family life with work demands but finds time for regular workouts"
+        },
+        {
+          "timepoint": "10_years",
+          "side_income": 4600,
+          "life_situation": "Full-time freelance and own business, stable income from clients and projects in Florida",
+          "achievements": [
+            "Successfully transitioned to full-time entrepreneur",
+            "Lifestyle business thriving"
+          ],
+          "regret_level": 75,
+          "happiness": 95,
+          "vivid_detail": "Meets with a mentor regularly for advice on expanding his business"
+        }
+      ],
+      "generated_at": "2026-02-07T19:48:46.940890"
+    },
+    "optimized": {
+      "name": "\ud83c\udfaf Optimized",
+      "description": "Follow ALL AI recommendations. Smart execution.",
+      "predictions": [
+        {
+          "timepoint": "1_month",
+          "side_income": 500,
+          "life_situation": "Still at 9-5, closed first freelance client",
+          "achievements": [
+            "First $500 earned",
+            "Built portfolio site"
+          ],
+          "regret_level": 30,
+          "happiness": 65,
+          "vivid_detail": "Wakes up knowing he can make money on his own"
+        },
+        {
+          "timepoint": "3_months",
+          "side_income": 1200,
+          "life_situation": "Part-time freelance, closed 3 clients, working towards full-time",
+          "achievements": [
+            "Closed first big client ($800)",
+            "Launched API integration project",
+            "Started networking with other freelancers"
+          ],
+          "regret_level": 45,
+          "happiness": 72,
+          "vivid_detail": "Spends afternoons working on custom fitness tracker dashboard projects"
+        },
+        {
+          "timepoint": "6_months",
+          "side_income": 1800,
+          "life_situation": "Full-time freelance, quit corporate job, moved to Nashville",
+          "achievements": [
+            "Escaped corporate life",
+            "Moved closer to Florida",
+            "Closed two major clients"
+          ],
+          "regret_level": 25,
+          "happiness": 83,
+          "vivid_detail": "Spend mornings networking and afternoons working on projects"
+        },
+        {
+          "timepoint": "1_year",
+          "side_income": 2400,
+          "life_situation": "Full-time freelance, expanding business, living in Florida",
+          "achievements": [
+            "Escaped corporate life",
+            "Moved to Florida",
+            "Launched AI integration for multiple clients"
+          ],
+          "regret_level": 15,
+          "happiness": 92,
+          "vivid_detail": "Spends mornings working on a new project and afternoons developing business strategies"
+        },
+        {
+          "timepoint": "2_years",
+          "side_income": 3600,
+          "life_situation": "Freelance with side projects, growing team of contractors, living in Florida beach town",
+          "achievements": [
+            "Moved to Florida",
+            "Hired his first contractor",
+            "Developed multiple successful client projects"
+          ],
+          "regret_level": 12,
+          "happiness": 95,
+          "vivid_detail": "Spends weekends surfing and afternoons working on growing business"
+        },
+        {
+          "timepoint": "5_years",
+          "side_income": 7000,
+          "life_situation": "Successful freelancer with multiple contracts, part-time coaching gigs, beach house in Florida",
+          "achievements": [
+            "Hired full-time staff",
+            "Built a strong client base",
+            "Bought his first property"
+          ],
+          "regret_level": 8,
+          "happiness": 98,
+          "vivid_detail": "Balances work with personal projects and helping others achieve their fitness goals"
+        },
+        {
+          "timepoint": "10_years",
+          "side_income": 25000,
+          "life_situation": "Well-established freelance business, part-time consultancy in AI integration, beach house and small rental properties in Florida",
+          "achievements": [
+            "Developed his own fitness app",
+            "Expanded into consultancy work for startups",
+            "Purchased multiple investment properties"
+          ],
+          "regret_level": 5,
+          "happiness": 97,
+          "vivid_detail": "Spends mornings on business meetings, afternoons at the beach with a new business venture in mind"
+        }
+      ],
+      "generated_at": "2026-02-07T19:50:37.804630"
+    },
+    "beast_mode": {
+      "name": "\ud83d\udcaa Beast Mode",
+      "description": "Go ALL IN. Maximum effort.",
+      "predictions": [
+        {
+          "timepoint": "1_month",
+          "side_income": 500,
+          "life_situation": "Still at 9-5, closed first freelance client",
+          "achievements": [
+            "First $500 earned",
+            "Built portfolio site"
+          ],
+          "regret_level": 30,
+          "happiness": 65,
+          "vivid_detail": "Wakes up knowing he can make money on his own"
+        },
+        {
+          "timepoint": "3_months",
+          "side_income": 1200,
+          "life_situation": "At 9-5, starting to focus more on freelancing during lunch breaks and after work hours",
+          "achievements": [
+            "First $1000 earned in a month",
+            "Completed first major project for a fitness tracker client"
+          ],
+          "regret_level": 25,
+          "happiness": 70,
+          "vivid_detail": "Spending more time on freelancing projects than at his corporate job"
+        },
+        {
+          "timepoint": "6_months",
+          "side_income": 3000,
+          "life_situation": "9-5, but working less and less as he transitions to freelance work",
+          "achievements": [
+            "First $2000 earned in a month",
+            "Completed first major integration project"
+          ],
+          "regret_level": 15,
+          "happiness": 80,
+          "vivid_detail": "Working from home on weekends for clients, feeling more independent and self-reliant"
+        },
+        {
+          "timepoint": "1_year",
+          "side_income": 4500,
+          "life_situation": "Quits corporate job to focus full-time on freelancing",
+          "achievements": [
+            "First $500 MRR hit",
+            "Completed multiple projects, built a strong client base"
+          ],
+          "regret_level": 10,
+          "happiness": 85,
+          "vivid_detail": "Leaves Tennessee for Florida to be closer to clients and enjoy better weather while working"
+        },
+        {
+          "timepoint": "2_years",
+          "side_income": 7000,
+          "life_situation": "Living in Florida, freelancing full-time",
+          "achievements": [
+            "Consistently hitting $500 MRR",
+            "Begins creating content to attract more clients"
+          ],
+          "regret_level": 12,
+          "happiness": 90,
+          "vivid_detail": "Has a morning routine that includes working out, then freelancing and creating content throughout the day"
+        },
+        {
+          "timepoint": "5_years",
+          "side_income": 10000,
+          "life_situation": "Freelance consultant with steady clients in Florida",
+          "achievements": [
+            "Consistent $1000 MRR",
+            "Expanding business into content creation and coaching"
+          ],
+          "regret_level": 8,
+          "happiness": 95,
+          "vivid_detail": "Spending time with a growing network of like-minded professionals, building a community around his work"
+        },
+        {
+          "timepoint": "10_years",
+          "side_income": 20000,
+          "life_situation": "Business owner with multiple revenue streams in Florida",
+          "achievements": [
+            "$500k annual income from business",
+            "Expanding into new markets, hiring freelancers"
+          ],
+          "regret_level": 7,
+          "happiness": 98,
+          "vivid_detail": "Balancing work and leisure by living a semi-retired lifestyle in Florida while still actively running his business"
+        }
+      ],
+      "generated_at": "2026-02-07T19:51:51.079483"
+    },
+    "chaos": {
+      "name": "\ud83d\udd25 Chaos (Quit Job)",
+      "description": "Quit job Monday. Force yourself to succeed.",
+      "predictions": [
+        {
+          "timepoint": "1_month",
+          "side_income": 500,
+          "life_situation": "Still working part-time at current job, closed first freelance client",
+          "achievements": [
+            "First $500 earned",
+            "Built portfolio site"
+          ],
+          "regret_level": 30,
+          "happiness": 65,
+          "vivid_detail": "Wakes up knowing he can make money on his own but still feels unsure about the transition."
+        },
+        {
+          "timepoint": "3_months",
+          "side_income": 2000,
+          "life_situation": "Part-time corporate, part-time freelancer, moving towards full-freelance",
+          "achievements": [
+            "Closed second freelance client",
+            "Started small fitness API project"
+          ],
+          "regret_level": 45,
+          "happiness": 70,
+          "vivid_detail": "Spending long nights working on both corporate and freelance projects, feeling burnt out but motivated."
+        },
+        {
+          "timepoint": "6_months",
+          "side_income": 3000,
+          "life_situation": "Full-time freelancer, still living in Tennessee",
+          "achievements": [
+            "Closed first big fitness tracker project",
+            "Started API integration services"
+          ],
+          "regret_level": 55,
+          "happiness": 75,
+          "vivid_detail": "Balancing between multiple clients while trying to maintain a work-life balance."
+        },
+        {
+          "timepoint": "1_year",
+          "side_income": 4000,
+          "life_situation": "Full-time freelancer, started working with larger companies",
+          "achievements": [
+            "Closed first autonomous AI integration project",
+            "Hiring assistant"
+          ],
+          "regret_level": 65,
+          "happiness": 80,
+          "vivid_detail": "Working on large projects and dealing with the challenges of managing a growing freelance business."
+        },
+        {
+          "timepoint": "2_years",
+          "side_income": 7000,
+          "life_situation": "Freelancer, moved to Florida for better networking opportunities",
+          "achievements": [
+            "Gained major clients",
+            "Started building product ideas"
+          ],
+          "regret_level": 85,
+          "happiness": 90,
+          "vivid_detail": "Living in a new city and meeting potential investors while juggling multiple high-profile projects."
+        },
+        {
+          "timepoint": "5_years",
+          "side_income": 12000,
+          "life_situation": "Freelancer turned entrepreneur, product line launched",
+          "achievements": [
+            "Product developer role at small tech startup",
+            "Grew fitness tracker business"
+          ],
+          "regret_level": 89,
+          "happiness": 95,
+          "vivid_detail": "Working on growing his company and products while maintaining a healthy lifestyle."
+        },
+        {
+          "timepoint": "10_years",
+          "side_income": 20000,
+          "life_situation": "CEO of tech startup, successful product line, expanding globally",
+          "achievements": [
+            "Multiple successful launches",
+            "Acquisitions and partnerships"
+          ],
+          "regret_level": 95,
+          "happiness": 100,
+          "vivid_detail": "Running a growing company that integrates fitness technology with AI, enjoying the lifestyle in Florida."
+        }
+      ],
+      "generated_at": "2026-02-07T19:52:58.931355"
+    },
+    "safe": {
+      "name": "\ud83d\udc22 Safe & Slow",
+      "description": "Play it cautious. Slow and steady.",
+      "predictions": [
+        {
+          "timepoint": "1_month",
+          "side_income": 500,
+          "life_situation": "Still at 9-5, closed first freelance client for API integration services",
+          "achievements": [
+            "First $500 earned",
+            "Built portfolio site"
+          ],
+          "regret_level": 30,
+          "happiness": 65,
+          "vivid_detail": "Wakes up knowing he can make money on his own, starts day feeling empowered"
+        },
+        {
+          "timepoint": "3_months",
+          "side_income": 1200,
+          "life_situation": "Still at 9-5, closed second freelance client for fitness tracker dashboard",
+          "achievements": [
+            "Second $500+ milestone hit",
+            "Begins to explore Florida lifestyle"
+          ],
+          "regret_level": 35,
+          "happiness": 68,
+          "vivid_detail": "Finishes work early and begins freelance projects, evening out his work-life balance"
+        },
+        {
+          "timepoint": "6_months",
+          "side_income": 2000,
+          "life_situation": "Still at 9-5, completed third project for autonomous AI integration",
+          "achievements": [
+            "First $1000+ milestone hit",
+            "Explores remote work opportunities"
+          ],
+          "regret_level": 40,
+          "happiness": 72,
+          "vivid_detail": "Starts to see the possibility of living in Florida, daydreaming during his commute"
+        },
+        {
+          "timepoint": "1_year",
+          "side_income": 3500,
+          "life_situation": "Still at 9-5, secured consistent freelance clients and expanded portfolio",
+          "achievements": [
+            "First $3000+ milestone hit",
+            "Begins to plan move to Florida"
+          ],
+          "regret_level": 45,
+          "happiness": 76,
+          "vivid_detail": "Spends mornings working on his own projects, enjoying a sense of progress and stability"
+        },
+        {
+          "timepoint": "2_years",
+          "side_income": 8000,
+          "life_situation": "Still at 9-5 but considering full-time freelance work, moving to Florida",
+          "achievements": [
+            "Escaped corporate job temporarily",
+            "Moved to Florida"
+          ],
+          "regret_level": 48,
+          "happiness": 78,
+          "vivid_detail": "Takes a morning beach walk before starting his day of freelancing and side projects"
+        },
+        {
+          "timepoint": "5_years",
+          "side_income": 20000,
+          "life_situation": "Full-time freelance, owning multiple businesses in fitness tech space, living comfortably in Florida",
+          "achievements": [
+            "Achieved $500 MRR",
+            "Started mentoring others"
+          ],
+          "regret_level": 49,
+          "happiness": 82,
+          "vivid_detail": "Spends mornings brainstorming new projects and afternoons meeting clients at local cafes"
+        },
+        {
+          "timepoint": "10_years",
+          "side_income": 50000,
+          "life_situation": "Full-time entrepreneur, owns multiple successful businesses in fitness tech space, living a balanced life in Florida",
+          "achievements": [
+            "Escaped corporate completely",
+            "Started philanthropic work"
+          ],
+          "regret_level": 49,
+          "happiness": 86,
+          "vivid_detail": "Spend mornings coaching and afternoons working on personal ventures, enjoying the serene lifestyle"
+        }
+      ],
+      "generated_at": "2026-02-07T19:54:12.015524"
+    }
+  },
+  "comparison": {
+    "current_pace": {
+      "1_year_income": 2800,
+      "5_year_happiness": 90,
+      "avg_regret": 50.714285714285715
+    },
+    "optimized": {
+      "1_year_income": 2400,
+      "5_year_happiness": 98,
+      "avg_regret": 20.0
+    },
+    "beast_mode": {
+      "1_year_income": 4500,
+      "5_year_happiness": 95,
+      "avg_regret": 15.285714285714286
+    },
+    "chaos": {
+      "1_year_income": 4000,
+      "5_year_happiness": 95,
+      "avg_regret": 66.28571428571429
+    },
+    "safe": {
+      "1_year_income": 3500,
+      "5_year_happiness": 82,
+      "avg_regret": 42.285714285714285
+    }
+  }
+}

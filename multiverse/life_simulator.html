@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Life Simulator - Choose Your Path</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #000000 100%);
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 3px solid #0ff;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #0ff;
+            text-shadow: 0 0 20px #0ff;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.2em;
+        }
+        
+        .scenario {
+            background: rgba(20, 20, 40, 0.8);
+            border: 2px solid #0ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .scenario-text {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        .choices {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .choice-button {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #0ff;
+            padding: 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .choice-button:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .choice-label {
+            font-weight: bold;
+            color: #0ff;
+            margin-bottom: 5px;
+        }
+        
+        .choice-desc {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        
+        .impact {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #f0f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .impact-title {
+            color: #f0f;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-change {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+        
+        .stat-increase {
+            color: #0f0;
+        }
+        
+        .stat-decrease {
+            color: #f00;
+        }
+        
+        .stats-bar {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .stat-row {
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .stat-bar {
+            width: 100%;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            transition: width 1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .income-fill { background: linear-gradient(90deg, #0f0, #ff0); }
+        .energy-fill { background: linear-gradient(90deg, #00f, #0ff); }
+        .skill-fill { background: linear-gradient(90deg, #f0f, #f00); }
+        .freedom-fill { background: linear-gradient(90deg, #ff0, #0f0); }
+        
+        button {
+            background: linear-gradient(45deg, #0ff, #0f0);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            color: #000;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .game-over {
+            background: rgba(0, 100, 0, 0.3);
+            border: 3px solid #0f0;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .game-over h2 {
+            color: #0f0;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 LIFE SIMULATOR</h1>
+            <div class="subtitle">Your Choices Shape Your Future</div>
+        </header>
+        
+        <div class="stats-bar">
+            <div class="stat-row">
+                <div class="stat-label">Monthly Income</div>
+                <div class="stat-bar">
+                    <div class="stat-fill income-fill" id="income-bar" style="width: 0%">$0/mo</div>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Energy Level</div>
+                <div class="stat-bar">
+                    <div class="stat-fill energy-fill" id="energy-bar" style="width: 70%">70/100</div>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Skill Progress</div>
+                <div class="stat-bar">
+                    <div class="stat-fill skill-fill" id="skill-bar" style="width: 50%">50/100</div>
+                </div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Freedom Score</div>
+                <div class="stat-bar">
+                    <div class="stat-fill freedom-fill" id="freedom-bar" style="width: 20%">20/100</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="game-content">
+            <!-- Game scenarios load here -->
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="startGame()">🎮 Start New Game</button>
+            <button onclick="location.href='dashboard.html'">🌌 View Timelines</button>
+        </div>
+    </div>
+    
+    <script>
+        let gameState = {
+            income: 0,
+            energy: 70,
+            skill: 50,
+            freedom: 20,
+            week: 1,
+            decisions: []
+        };
+        
+        const scenarios = [
+            {
+                text: "It's Saturday night. You have 4 free hours before bed. What do you do?",
+                choices: [
+                    {
+                        label: "A) Apply to 3 freelance jobs",
+                        desc: "High effort, potential high reward",
+                        impact: { income: +5, energy: -10, skill: +5, freedom: +3 },
+                        result: "You spend 3 hours crafting perfect proposals. One client responds immediately!"
+                    },
+                    {
+                        label: "B) Scroll TikTok / Social media",
+                        desc: "Low effort, instant gratification",
+                        impact: { income: 0, energy: -15, skill: 0, freedom: -2 },
+                        result: "4 hours disappear. You feel worse than before. Nothing gained."
+                    },
+                    {
+                        label: "C) Build a portfolio project",
+                        desc: "Medium effort, long-term value",
+                        impact: { income: +2, energy: -5, skill: +10, freedom: +2 },
+                        result: "You build something cool. Your skills level up. This will attract clients later."
+                    },
+                    {
+                        label: "D) Hit the gym + meal prep",
+                        desc: "Invest in yourself",
+                        impact: { income: 0, energy: +10, skill: +2, freedom: +1 },
+                        result: "You feel amazing. High energy tomorrow = better work. Compound gains."
+                    }
+                ]
+            },
+            {
+                text: "Monday morning. Your 9-5 job vs. a $1,500 freelance opportunity. What do you do?",
+                choices: [
+                    {
+                        label: "A) Call in sick, do freelance work",
+                        desc: "Risk it for the biscuit",
+                        impact: { income: +15, energy: -20, skill: +8, freedom: +5 },
+                        result: "You close the client! $1,500 earned. But burnout is real."
+                    },
+                    {
+                        label: "B) Work 9-5, freelance in evening",
+                        desc: "Grind mode engaged",
+                        impact: { income: +10, energy: -15, skill: +5, freedom: +3 },
+                        result: "You pull it off. Exhausted but proud. The client is happy."
+                    },
+                    {
+                        label: "C) Pass on the opportunity",
+                        desc: "Not ready yet",
+                        impact: { income: 0, energy: 0, skill: 0, freedom: -5 },
+                        result: "Safe choice. But you wonder... what if?"
+                    }
+                ]
+            },
+            {
+                text: "You made $2,000 this month. How do you spend it?",
+                choices: [
+                    {
+                        label: "A) Reinvest in business (ads, tools)",
+                        desc: "Growth mindset",
+                        impact: { income: +10, energy: 0, skill: +5, freedom: +5 },
+                        result: "Smart move. You land 2 more clients next month. Compounding works."
+                    },
+                    {
+                        label: "B) Save it all",
+                        desc: "Build runway",
+                        impact: { income: +2, energy: +5, skill: 0, freedom: +3 },
+                        result: "Security feels good. You can take bigger risks later."
+                    },
+                    {
+                        label: "C) Treat yourself (new setup)",
+                        desc: "You earned it",
+                        impact: { income: 0, energy: +10, skill: +2, freedom: +1 },
+                        result: "New monitor, better chair. Working feels premium now."
+                    }
+                ]
+            },
+            {
+                text: "A client offers you $5k for a 3-month project. But you'd need to quit your job. What do you do?",
+                choices: [
+                    {
+                        label: "A) TAKE THE LEAP",
+                        desc: "Full send",
+                        impact: { income: +20, energy: -10, skill: +15, freedom: +20 },
+                        result: "You quit. You're terrified. But you're FREE. And you make it work."
+                    },
+                    {
+                        label: "B) Negotiate to keep both",
+                        desc: "Smart compromise",
+                        impact: { income: +15, energy: -20, skill: +10, freedom: +10 },
+                        result: "You convince them you can do weekends + evenings. No sleep but worth it."
+                    },
+                    {
+                        label: "C) Pass, not ready yet",
+                        desc: "Build more first",
+                        impact: { income: 0, energy: 0, skill: 0, freedom: -10 },
+                        result: "Safe, but you'll always wonder. The opportunity doesn't come back."
+                    }
+                ]
+            }
+        ];
+        
+        function updateStats() {
+            document.getElementById('income-bar').style.width = Math.min(gameState.income, 100) + '%';
+            document.getElementById('income-bar').textContent = '$' + (gameState.income * 50) + '/mo';
+            
+            document.getElementById('energy-bar').style.width = gameState.energy + '%';
+            document.getElementById('energy-bar').textContent = gameState.energy + '/100';
+            
+            document.getElementById('skill-bar').style.width = gameState.skill + '%';
+            document.getElementById('skill-bar').textContent = gameState.skill + '/100';
+            
+            document.getElementById('freedom-bar').style.width = gameState.freedom + '%';
+            document.getElementById('freedom-bar').textContent = gameState.freedom + '/100';
+        }
+        
+        function makeChoice(scenarioIndex, choiceIndex) {
+            const scenario = scenarios[scenarioIndex];
+            const choice = scenario.choices[choiceIndex];
+            
+            // Apply impacts
+            gameState.income += choice.impact.income || 0;
+            gameState.energy += choice.impact.energy || 0;
+            gameState.skill += choice.impact.skill || 0;
+            gameState.freedom += choice.impact.freedom || 0;
+            
+            // Clamp values
+            gameState.energy = Math.max(0, Math.min(100, gameState.energy));
+            gameState.skill = Math.max(0, Math.min(100, gameState.skill));
+            gameState.freedom = Math.max(0, Math.min(100, gameState.freedom));
+            
+            gameState.week++;
+            gameState.decisions.push({scenario: scenarioIndex, choice: choiceIndex});
+            
+            // Show result
+            showResult(choice, scenarioIndex);
+            
+            updateStats();
+        }
+        
+        function showResult(choice, scenarioIndex) {
+            const content = document.getElementById('game-content');
+            
+            let html = `
+                <div class="impact">
+                    <div class="impact-title">📊 IMPACT</div>
+                    <div class="stat-change ${choice.impact.income > 0 ? 'stat-increase' : 'stat-decrease'}">
+                        Income: ${choice.impact.income > 0 ? '+' : ''}$${choice.impact.income * 50}/mo
+                    </div>
+                    <div class="stat-change ${choice.impact.energy > 0 ? 'stat-increase' : 'stat-decrease'}">
+                        Energy: ${choice.impact.energy > 0 ? '+' : ''}${choice.impact.energy}
+                    </div>
+                    <div class="stat-change ${choice.impact.skill > 0 ? 'stat-increase' : 'stat-decrease'}">
+                        Skill: ${choice.impact.skill > 0 ? '+' : ''}${choice.impact.skill}
+                    </div>
+                    <div class="stat-change ${choice.impact.freedom > 0 ? 'stat-increase' : 'stat-decrease'}">
+                        Freedom: ${choice.impact.freedom > 0 ? '+' : ''}${choice.impact.freedom}
+                    </div>
+                    <p style="margin-top: 15px; color: #fff;">
+                        ${choice.result}
+                    </p>
+                </div>
+            `;
+            
+            // Check if game over or continue
+            if (scenarioIndex >= scenarios.length - 1 || gameState.freedom >= 80) {
+                html += endGame();
+            } else {
+                html += `<button onclick="loadScenario(${scenarioIndex + 1})">Continue ➡️</button>`;
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        function loadScenario(index) {
+            if (index >= scenarios.length) {
+                document.getElementById('game-content').innerHTML = endGame();
+                return;
+            }
+            
+            const scenario = scenarios[index];
+            const content = document.getElementById('game-content');
+            
+            let html = `
+                <div class="scenario">
+                    <div class="scenario-text">
+                        <strong>Week ${gameState.week}:</strong><br><br>
+                        ${scenario.text}
+                    </div>
+                    <div class="choices">
+            `;
+            
+            scenario.choices.forEach((choice, i) => {
+                html += `
+                    <div class="choice-button" onclick="makeChoice(${index}, ${i})">
+                        <div class="choice-label">${choice.label}</div>
+                        <div class="choice-desc">${choice.desc}</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+        }
+        
+        function endGame() {
+            const income = gameState.income * 50;
+            const timeline = income >= 4000 ? "Beast Mode" : income >= 2500 ? "Optimized" : "Current Pace";
+            
+            return `
+                <div class="game-over">
+                    <h2>🎉 SIMULATION COMPLETE</h2>
+                    <p style="font-size: 1.5em; margin: 20px 0;">
+                        Final Income: <strong style="color: #0f0;">$${income}/month</strong>
+                    </p>
+                    <p style="font-size: 1.2em; margin: 20px 0;">
+                        You're on the <strong>${timeline}</strong> timeline!
+                    </p>
+                    <p style="color: #888; margin: 20px 0;">
+                        Freedom Score: ${gameState.freedom}/100<br>
+                        Skill Level: ${gameState.skill}/100<br>
+                        Energy: ${gameState.energy}/100
+                    </p>
+                    <p style="margin-top: 30px;">
+                        Your choices matter. Each decision compounds over time.
+                    </p>
+                </div>
+            `;
+        }
+        
+        function startGame() {
+            gameState = {
+                income: 0,
+                energy: 70,
+                skill: 50,
+                freedom: 20,
+                week: 1,
+                decisions: []
+            };
+            
+            updateStats();
+            loadScenario(0);
+        }
+        
+        // Start game on load
+        startGame();
+    </script>
+</body>
+</html>
