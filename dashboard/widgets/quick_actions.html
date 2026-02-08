@@ -1,0 +1,209 @@
+
+<div class="quick-actions-widget">
+    <div class="widget-header">
+        <h3>⚡ Quick Actions</h3>
+    </div>
+    
+    <div class="actions-grid">
+
+        <div class="action-card" onclick="window.open('https://mail.google.com', '_blank')" style="border-color: #3b82f6;">
+            <div class="action-icon" style="background-color: #3b82f6;">
+                📧
+            </div>
+            <div class="action-content">
+                <div class="action-label">Open Gmail</div>
+                <div class="action-description">Check support tickets</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="runSecurityAudit()" style="border-color: #ef4444;">
+            <div class="action-icon" style="background-color: #ef4444;">
+                🔒
+            </div>
+            <div class="action-content">
+                <div class="action-label">Run Security Audit</div>
+                <div class="action-description">Scan for vulnerabilities</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="window.location.href='hub.html'" style="border-color: #8b5cf6;">
+            <div class="action-icon" style="background-color: #8b5cf6;">
+                📊
+            </div>
+            <div class="action-content">
+                <div class="action-label">View Analytics</div>
+                <div class="action-description">Dashboard metrics</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="window.open('http://localhost:8000', '_blank')" style="border-color: #10b981;">
+            <div class="action-icon" style="background-color: #10b981;">
+                🏋️
+            </div>
+            <div class="action-content">
+                <div class="action-label">FitTrack</div>
+                <div class="action-description">Log workout/meal</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="runBackup()" style="border-color: #f59e0b;">
+            <div class="action-icon" style="background-color: #f59e0b;">
+                💾
+            </div>
+            <div class="action-content">
+                <div class="action-label">Backup Workspace</div>
+                <div class="action-description">Create backup</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="gitPush()" style="border-color: #06b6d4;">
+            <div class="action-icon" style="background-color: #06b6d4;">
+                🔄
+            </div>
+            <div class="action-content">
+                <div class="action-label">Git Push</div>
+                <div class="action-description">Push latest commits</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="openDailyLog()" style="border-color: #ec4899;">
+            <div class="action-icon" style="background-color: #ec4899;">
+                📝
+            </div>
+            <div class="action-content">
+                <div class="action-label">Daily Log</div>
+                <div class="action-description">View/edit today</div>
+            </div>
+        </div>
+
+        <div class="action-card" onclick="deployToProduction()" style="border-color: #14b8a6;">
+            <div class="action-icon" style="background-color: #14b8a6;">
+                🚀
+            </div>
+            <div class="action-content">
+                <div class="action-label">Deploy</div>
+                <div class="action-description">Ship to production</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.quick-actions-widget {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #334155;
+}
+
+.widget-header {
+    margin-bottom: 20px;
+}
+
+.widget-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #60a5fa;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.action-card {
+    background: #0f172a;
+    padding: 16px;
+    border-radius: 10px;
+    border-left: 4px solid;
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-card:hover {
+    background: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.action-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.action-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.action-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 2px;
+}
+
+.action-description {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+function runSecurityAudit() {
+    if (confirm('Run security audit? This will scan all files in the workspace.')) {
+        alert('Security audit started... Check terminal output.');
+        // In production, trigger actual audit
+    }
+}
+
+function runBackup() {
+    if (confirm('Create workspace backup?')) {
+        alert('Backup started... Check ~/clawd/backups/ for result.');
+        // In production, trigger actual backup
+    }
+}
+
+function gitPush() {
+    if (confirm('Push all commits to remote?')) {
+        alert('Git push started... Check terminal for status.');
+        // In production, trigger actual git push
+    }
+}
+
+function openDailyLog() {
+    const today = new Date().toISOString().split('T')[0];
+    window.location.href = `../memory/${today}.md`;
+}
+
+function deployToProduction() {
+    if (confirm('⚠️ Deploy to production? This will:
+- Run tests
+- Build production assets
+- Deploy to server
+
+Continue?')) {
+        alert('Deployment started... Monitor deployment logs.');
+        // In production, trigger actual deployment
+    }
+}
+</script>

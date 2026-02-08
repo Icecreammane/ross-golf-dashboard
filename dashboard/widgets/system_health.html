@@ -1,0 +1,285 @@
+
+<div class="health-widget">
+    <div class="widget-header">
+        <h3>💓 System Health</h3>
+        <span class="uptime-badge">🕐 Uptime: 7 days</span>
+    </div>
+    
+    <div class="health-grid">
+
+        <div class="health-card">
+            <div class="card-header">
+                <span class="card-icon">🖥️</span>
+                <span class="card-title">CPU</span>
+            </div>
+            <div class="progress-ring">
+                <svg width="80" height="80">
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#0f172a" stroke-width="8"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#10b981" stroke-width="8"
+                            stroke-dasharray="18.799999999999997 188.4" 
+                            stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                </svg>
+                <div class="ring-text">10%</div>
+            </div>
+            <div class="card-details">
+                <div class="detail-row">
+                    <span>User:</span>
+                    <span>1.2%</span>
+                </div>
+                <div class="detail-row">
+                    <span>System:</span>
+                    <span>9.0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="health-card">
+            <div class="card-header">
+                <span class="card-icon">🧠</span>
+                <span class="card-title">Memory</span>
+            </div>
+            <div class="progress-ring">
+                <svg width="80" height="80">
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#0f172a" stroke-width="8"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#10b981" stroke-width="8"
+                            stroke-dasharray="110.91999999999999 188.4" 
+                            stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                </svg>
+                <div class="ring-text">59%</div>
+            </div>
+            <div class="card-details">
+                <div class="detail-row">
+                    <span>Used:</span>
+                    <span>1.9 GB</span>
+                </div>
+                <div class="detail-row">
+                    <span>Total:</span>
+                    <span>3.2 GB</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="health-card">
+            <div class="card-header">
+                <span class="card-icon">💾</span>
+                <span class="card-title">Disk</span>
+            </div>
+            <div class="progress-ring">
+                <svg width="80" height="80">
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#0f172a" stroke-width="8"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#10b981" stroke-width="8"
+                            stroke-dasharray="56.4 188.4" 
+                            stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                </svg>
+                <div class="ring-text">30%</div>
+            </div>
+            <div class="card-details">
+                <div class="detail-row">
+                    <span>Used:</span>
+                    <span>58Gi</span>
+                </div>
+                <div class="detail-row">
+                    <span>Available:</span>
+                    <span>141Gi</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="services-section">
+        <div class="services-header">🔧 Services</div>
+        <div class="services-list">
+
+            <div class="service-item">
+                <span class="service-name">Email Monitor</span>
+                <span class="service-status" style="color: #64748b;">
+                    ⚙️ Not Configured
+                </span>
+            </div>
+
+            <div class="service-item">
+                <span class="service-name">FitTrack</span>
+                <span class="service-status" style="color: #f59e0b;">
+                    ❓ Unknown
+                </span>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="widget-footer">
+        <button onclick="refreshHealth()">
+            🔄 Refresh
+        </button>
+        <button onclick="viewDetailedStats()">
+            📊 Details
+        </button>
+    </div>
+</div>
+
+<style>
+.health-widget {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #334155;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.widget-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #60a5fa;
+}
+
+.uptime-badge {
+    font-size: 12px;
+    color: #94a3b8;
+    background: #0f172a;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.health-card {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.card-icon {
+    font-size: 24px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.progress-ring {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+}
+
+.ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.card-details {
+    font-size: 13px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    color: #94a3b8;
+}
+
+.detail-row span:last-child {
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+.services-section {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.services-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: #1e293b;
+    border-radius: 6px;
+}
+
+.service-name {
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.service-status {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.widget-footer {
+    display: flex;
+    gap: 10px;
+}
+
+.widget-footer button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    background: #0f172a;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.widget-footer button:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+</style>
+
+<script>
+function refreshHealth() {
+    location.reload();
+}
+
+function viewDetailedStats() {
+    alert('Detailed system stats:
+
+Use Activity Monitor (macOS) or htop for detailed resource monitoring.');
+}
+</script>

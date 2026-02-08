@@ -1,0 +1,304 @@
+
+<div class="activity-widget">
+    <div class="widget-header">
+        <h3>📊 Recent Activity</h3>
+        <span class="activity-count">15 events</span>
+    </div>
+    
+    <div class="timeline">
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Autonomous Build System - FIXED! 🎉</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Workflow Optimizations - Weekend Build Plan 🚀</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Expanded Model Roster - The Coding Arms 🤖</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">6:04pm - Dashboard LIVE! ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">6:34pm - Phase 1 Complete: Daemon LIVE! ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">6:38pm - Local Model Integration LIVE! ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">6:50pm - Operator Loop Core WORKING! ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">7:00pm - Stream 1 COMPLETE: Operator Loop Core ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">06:50PM - Workout (Voice Logged)</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item log">
+            <div class="timeline-icon">📝</div>
+            <div class="timeline-content">
+                <div class="timeline-message">7:20pm - Stream 2 Core COMPLETE ✅</div>
+                <div class="timeline-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="timeline-item commit">
+            <div class="timeline-icon">🔨</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Email monitoring system: 24/7 daemon, auto-responder, 14 tem...</div>
+                <div class="timeline-time">2m ago</div>
+            </div>
+        </div>
+
+        <div class="timeline-item commit">
+            <div class="timeline-icon">🔨</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Security cleanup: Move credentials to .credentials/, update ...</div>
+                <div class="timeline-time">5m ago</div>
+            </div>
+        </div>
+
+        <div class="timeline-item security">
+            <div class="timeline-icon">🔒</div>
+            <div class="timeline-content">
+                <div class="timeline-message">Security audit completed</div>
+                <div class="timeline-time">6m ago</div>
+            </div>
+        </div>
+
+        <div class="timeline-item commit">
+            <div class="timeline-icon">🔨</div>
+            <div class="timeline-content">
+                <div class="timeline-message">security: LOCKDOWN - Remove sensitive files and add protecti...</div>
+                <div class="timeline-time">45m ago</div>
+            </div>
+        </div>
+
+        <div class="timeline-item commit">
+            <div class="timeline-icon">🔨</div>
+            <div class="timeline-content">
+                <div class="timeline-message">feat: Security Layer - Complete Protection System...</div>
+                <div class="timeline-time">51m ago</div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="widget-footer">
+        <button onclick="refreshTimeline()">
+            🔄 Refresh
+        </button>
+        <button onclick="viewFullLog()">
+            📜 Full Log
+        </button>
+    </div>
+</div>
+
+<style>
+.activity-widget {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #334155;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.widget-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #60a5fa;
+}
+
+.activity-count {
+    font-size: 12px;
+    color: #94a3b8;
+    background: #0f172a;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.timeline {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.timeline::-webkit-scrollbar {
+    width: 6px;
+}
+
+.timeline::-webkit-scrollbar-track {
+    background: #0f172a;
+    border-radius: 3px;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+}
+
+.timeline::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #0f172a;
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.timeline-icon {
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f172a;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.timeline-item.commit .timeline-icon {
+    background: #1e40af;
+}
+
+.timeline-item.email .timeline-icon {
+    background: #15803d;
+}
+
+.timeline-item.security .timeline-icon {
+    background: #b91c1c;
+}
+
+.timeline-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.timeline-message {
+    font-size: 14px;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.timeline-time {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.no-activity {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.no-activity-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.no-activity-text {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.widget-footer {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #0f172a;
+    padding-top: 15px;
+}
+
+.widget-footer button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    background: #0f172a;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.widget-footer button:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+</style>
+
+<script>
+function refreshTimeline() {
+    location.reload();
+}
+
+function viewFullLog() {
+    window.location.href = '../memory/';
+}
+</script>

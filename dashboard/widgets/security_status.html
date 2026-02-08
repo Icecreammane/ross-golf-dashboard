@@ -1,0 +1,259 @@
+
+<div class="security-widget">
+    <div class="widget-header">
+        <h3>🔒 Security Status</h3>
+        <span class="status-badge secure" style="background-color: #10b981;">
+            🔒 SECURE
+        </span>
+    </div>
+    
+    <div class="security-grid">
+
+        <div class="security-card">
+            <div class="card-icon">🔍</div>
+            <div class="card-content">
+                <div class="card-label">Last Security Audit</div>
+                <div class="card-value good">
+                    0 warnings
+                </div>
+                <div class="card-meta">772 files • 0h ago</div>
+            </div>
+        </div>
+
+        <div class="security-card">
+            <div class="card-icon">🔑</div>
+            <div class="card-content">
+                <div class="card-label">Credential Storage</div>
+                <div class="card-value secure">
+                    2 files
+                </div>
+                <div class="card-meta">Secure</div>
+            </div>
+        </div>
+
+        <div class="security-card">
+            <div class="card-icon">⚠️</div>
+            <div class="card-content">
+                <div class="card-label">Git Status</div>
+                <div class="card-value warning">
+                    1 uncommitted
+                </div>
+                <div class="card-meta">Security files</div>
+            </div>
+        </div>
+
+        <div class="security-card">
+            <div class="card-icon">🌐</div>
+            <div class="card-content">
+                <div class="card-label">API Access</div>
+                <div class="card-value good">
+                    Active
+                </div>
+                <div class="card-meta">Kill switch ready</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="credential-list">
+        <div class="list-header">Active Credentials:</div>
+
+        <div class="credential-item">
+            <span class="cred-name">telegram_credentials</span>
+            <span class="cred-status">✓</span>
+        </div>
+
+        <div class="credential-item">
+            <span class="cred-name">gmail_credentials</span>
+            <span class="cred-status">✓</span>
+        </div>
+
+    </div>
+
+    <div class="widget-actions">
+        <button onclick="runSecurityAudit()">
+            🔍 Run Audit
+        </button>
+        <button onclick="viewSecurityLog()">
+            📄 View Logs
+        </button>
+        <button onclick="confirmKillSwitch()">
+            🚨 Kill Switch
+        </button>
+    </div>
+</div>
+
+<style>
+.security-widget {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #334155;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.widget-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #60a5fa;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.security-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.security-card {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.card-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-label {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 4px;
+}
+
+.card-value {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.card-value.good {
+    color: #10b981;
+}
+
+.card-value.warning {
+    color: #f59e0b;
+}
+
+.card-value.error {
+    color: #ef4444;
+}
+
+.card-meta {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.credential-list {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.list-header {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.credential-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #1e293b;
+    font-size: 13px;
+}
+
+.credential-item:last-child {
+    border-bottom: none;
+}
+
+.cred-name {
+    color: #e2e8f0;
+}
+
+.cred-status {
+    color: #10b981;
+}
+
+.issues-section {
+    background: #7f1d1d;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.issues-header {
+    font-size: 12px;
+    color: #fecaca;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.issue-item {
+    font-size: 13px;
+    color: #fecaca;
+    padding: 6px 0;
+}
+
+.widget-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.widget-actions button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    background: #0f172a;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.widget-actions button:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+</style>
+
+<script>
+function runSecurityAudit() {
+    alert('Running security audit... (Feature not yet implemented in web dashboard)');
+}
+
+function viewSecurityLog() {
+    window.location.href = '../security-logs/';
+}
+
+function confirmKillSwitch() {
+    if (confirm('⚠️ WARNING: Kill switch will revoke ALL credentials immediately.\n\nThis cannot be undone easily. Are you sure?')) {
+        alert('Kill switch activation requires shell access. Run: python3 ~/clawd/scripts/kill_switch.py --execute');
+    }
+}
+</script>
