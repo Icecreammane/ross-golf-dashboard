@@ -1,0 +1,38 @@
+[
+  {
+    "id": "test_001",
+    "source": "reddit",
+    "type": "lead",
+    "title": "Need help building fitness tracker",
+    "context": "Looking for someone to build a fitness tracking app. Budget around $2-3k. Need it done ASAP.",
+    "url": "https://reddit.com/r/test",
+    "score": 60,
+    "detected_at": "2026-02-07T18:45:16.551470",
+    "status": "drafted",
+    "draft": "Hi there,\n\nI saw your post and I\u2019m really interested in helping you build that fitness tracker. With my background in full-stack development and AI automation, I can help optimize the workflow and create an efficient solution for your needs. Let\u2019s chat more about it to see how we can make this happen quickly.\n\nFeel free to shoot me an email or give me a call when you get a chance. Looking forward to working with you!\n\nBest,\nRoss"
+  },
+  {
+    "id": "email_1770511545",
+    "source": "email",
+    "type": "inquiry",
+    "title": "Project inquiry - Fitness tracking dashboard",
+    "context": "Email from potential client: 'I saw your work and I'm interested in building a custom fitness tracking dashboard for my gym. We have a budget of $5-7k. Can you help?' - Clear project scope, budget mentioned, aligns with your skills.",
+    "url": null,
+    "score": 35,
+    "detected_at": "2026-02-07T18:45:45.555042",
+    "status": "drafted",
+    "draft": "Hi [Client's Name],\n\nI'm thrilled to hear about your interest in building a custom fitness tracking dashboard! Given my background in full-stack development and AI automation, I believe I can help you create a tailored solution that meets all of your gym\u2019s needs. Let's schedule a quick call or chat so we can discuss the specifics and outline the best approach for this project.\n\nLooking forward to connecting!\n\nBest regards,\nRoss Caster"
+  },
+  {
+    "id": "twitter_1770511533",
+    "source": "twitter",
+    "type": "engagement",
+    "title": "Reply to your tweet about AI automation",
+    "context": "Someone replied: 'This is exactly what I need for my business. How can I implement something like this?' - Shows clear interest in your automation skills.",
+    "url": "https://twitter.com/_icecreammane/status/mock",
+    "score": 10,
+    "detected_at": "2026-02-07T18:45:33.085358",
+    "status": "drafted",
+    "draft": "Hi [Their Name],\n\nThanks for reaching out! I\u2019d love to help you implement AI automation in your business. Let's chat about how we can optimize your workflows and create a custom solution that fits your needs perfectly.\n\nFeel free to reach out via email or give me a quick call to discuss the next steps. Looking forward to working with you!\n\nBest,\nRoss"
+  }
+]
