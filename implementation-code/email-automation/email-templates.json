@@ -1,0 +1,81 @@
+{
+  "welcome_sequence": {
+    "description": "7-email onboarding sequence for new signups",
+    "emails": [
+      {
+        "id": "welcome_day0",
+        "delay_days": 0,
+        "subject": "Welcome to [Product]! Here's how to get started 🎉",
+        "title": "Welcome aboard!",
+        "content": "<h2>Hi {{first_name}}!</h2><p>Thanks for signing up for <strong>[Your Product]</strong>. We're excited to help you [primary benefit].</p><p>Here's what you can do right now:</p><ul><li><strong>Complete your profile</strong> - Takes 2 minutes</li><li><strong>Try [key feature]</strong> - The most popular feature</li><li><strong>Check out the quick start guide</strong> - 5-minute walkthrough</li></ul><p><a href='{{dashboard_url}}' class='button'>Get Started Now</a></p><p>If you have any questions, just hit reply. I read every email personally.</p><p>Cheers,<br>{{sender_name}}<br>Founder, [Your Product]</p>"
+      },
+      {
+        "id": "tutorial_day1",
+        "delay_days": 1,
+        "subject": "Quick tutorial: Get the most out of [Product]",
+        "title": "Master the Basics",
+        "content": "<h2>Hey {{first_name}}!</h2><p>Yesterday you joined [Product]. Today, let me show you the fastest way to [achieve outcome].</p><h3>🎯 3-Minute Tutorial</h3><p><strong>Step 1: [Action]</strong><br>Why: [Benefit]<br><a href='{{tutorial_url}}'>Watch video (1 min)</a></p><p><strong>Step 2: [Action]</strong><br>Why: [Benefit]<br><a href='{{tutorial_url}}'>Watch video (1 min)</a></p><p><strong>Step 3: [Action]</strong><br>Why: [Benefit]<br><a href='{{tutorial_url}}'>Watch video (1 min)</a></p><p><a href='{{dashboard_url}}' class='button'>Try It Now</a></p><p><strong>Pro tip:</strong> Most users see results within the first 24 hours. The key is [specific advice].</p><p>Questions? Hit reply!</p><p>{{sender_name}}</p>"
+      },
+      {
+        "id": "tips_day3",
+        "delay_days": 3,
+        "subject": "3 tips to [achieve specific outcome] faster",
+        "title": "Tips & Tricks",
+        "content": "<h2>Hey {{first_name}},</h2><p>You've been using [Product] for a few days now. Here are 3 tips from power users:</p><h3>💡 Tip #1: [Specific tip]</h3><p>Most people don't know this, but [specific advice that makes a big difference].</p><p>Try this: [Concrete action]</p><h3>⚡ Tip #2: [Specific tip]</h3><p>[Another valuable insight]. This alone can [quantified benefit].</p><h3>🎯 Tip #3: [Specific tip]</h3><p>The users who get the best results all do this: [pattern/behavior].</p><p><a href='{{blog_url}}' class='button'>Read Full Guide</a></p><p><strong>How's it going?</strong></p><p>Are you seeing the results you expected? Hit reply and let me know. I read every response.</p><p>{{sender_name}}</p>"
+      },
+      {
+        "id": "success_story_day5",
+        "delay_days": 5,
+        "subject": "How [Customer Name] used [Product] to [achieve result]",
+        "title": "Customer Success Story",
+        "content": "<h2>Hey {{first_name}},</h2><p>I wanted to share a quick success story that might inspire you.</p><h3>Meet [Customer Name]</h3><p>[Customer Name] was in a similar situation as you - [problem they had].</p><p>After using [Product] for [timeframe], here's what happened:</p><ul><li>📈 [Specific metric] increased by [X%]</li><li>⏰ Saved [X hours] per week</li><li>💰 [Financial benefit]</li></ul><blockquote style='border-left: 4px solid #5469d4; padding-left: 20px; margin: 20px 0; font-style: italic; color: #555;'>"[Actual customer quote about their experience and results]"<br><br>— [Customer Name], [Job Title] at [Company]</blockquote><h3>Their secret?</h3><p>[Customer Name] did these 3 things:</p><ol><li>[Specific action they took]</li><li>[Second action]</li><li>[Third action]</li></ol><p>You can do the same thing.</p><p><a href='{{dashboard_url}}' class='button'>Start Now</a></p><p>Want to be featured as a success story? Reply and tell me your results!</p><p>{{sender_name}}</p>"
+      },
+      {
+        "id": "upgrade_day7",
+        "delay_days": 7,
+        "subject": "{{first_name}}, ready to unlock the full power?",
+        "title": "Upgrade to Premium",
+        "content": "<h2>Hey {{first_name}},</h2><p>You've been using [Product] for a week now. How's it going?</p><p>You're currently on the <strong>free plan</strong>, which is great for getting started. But you're missing out on some powerful features:</p><h3>🚀 Premium Features</h3><table style='width: 100%; border-collapse: collapse; margin: 20px 0;'><tr style='border-bottom: 1px solid #eee;'><td style='padding: 15px 0;'><strong>✓ [Premium Feature 1]</strong><br><span style='color: #666;'>[Benefit description]</span></td></tr><tr style='border-bottom: 1px solid #eee;'><td style='padding: 15px 0;'><strong>✓ [Premium Feature 2]</strong><br><span style='color: #666;'>[Benefit description]</span></td></tr><tr style='border-bottom: 1px solid #eee;'><td style='padding: 15px 0;'><strong>✓ [Premium Feature 3]</strong><br><span style='color: #666;'>[Benefit description]</span></td></tr><tr><td style='padding: 15px 0;'><strong>✓ Priority Support</strong><br><span style='color: #666;'>Get help within hours, not days</span></td></tr></table><p><strong>Special offer:</strong> Use code <code style='background: #f4f4f4; padding: 4px 8px; border-radius: 4px; font-family: monospace;'>WELCOME20</code> for 20% off your first month.</p><p><a href='{{pricing_url}}' class='button'>Upgrade to Premium</a></p><p><strong>Not ready yet?</strong> No problem. Keep using the free plan as long as you want. This offer doesn't expire.</p><p>Questions about premium? Hit reply.</p><p>{{sender_name}}</p>"
+      },
+      {
+        "id": "feedback_day14",
+        "delay_days": 14,
+        "subject": "Quick question: How can we improve?",
+        "title": "We'd Love Your Feedback",
+        "content": "<h2>Hey {{first_name}},</h2><p>You've been using [Product] for 2 weeks now. I'd love to hear from you.</p><p><strong>3 quick questions:</strong></p><ol><li>What's working well for you?</li><li>What's frustrating or confusing?</li><li>What feature would make this a 10/10 product?</li></ol><p><a href='{{feedback_url}}' class='button'>Share Feedback (2 min)</a></p><p><strong>Or just hit reply</strong> and tell me your thoughts. I read every single response.</p><p>Your feedback directly shapes what we build next.</p><h3>📊 Your Impact</h3><p>Last month, users like you suggested [X] improvements. We shipped [Y] of them. Here's what's new:</p><ul><li>[Recent feature] - Suggested by @username</li><li>[Recent improvement] - Based on your feedback</li><li>[Bug fix] - Thanks to eagle-eyed users</li></ul><p>Your voice matters.</p><p>Thanks for being part of this,<br>{{sender_name}}</p>"
+      },
+      {
+        "id": "reengagement_day30",
+        "delay_days": 30,
+        "subject": "We miss you, {{first_name}} 👋",
+        "title": "Come Back!",
+        "content": "<h2>Hey {{first_name}},</h2><p>I noticed you haven't logged into [Product] in a while. Everything okay?</p><p>Sometimes people stop using a product because:</p><ul><li>❓ Something wasn't clear</li><li>😕 A feature didn't work as expected</li><li>⏰ Life got busy</li><li>🤷 It just wasn't the right fit</li></ul><p>Whatever the reason, I'd love to know. Hit reply and tell me what happened. No sales pitch, I promise - just want to understand.</p><h3>📬 If you want to come back...</h3><p>Here's what's new since you left:</p><ul><li>[New feature released]</li><li>[Improvement made]</li><li>[Integration added]</li></ul><p><a href='{{dashboard_url}}' class='button'>Check It Out</a></p><h3>👋 If you want to leave...</h3><p>No hard feelings! Not every product is for everyone.</p><p>If you want to delete your account and data, <a href='{{delete_account_url}}'>click here</a>.</p><p>Either way, thanks for giving us a shot.</p><p>{{sender_name}}<br>Founder, [Your Product]</p><p><em>P.S. Seriously, hit reply. I answer every email myself, usually within 24 hours.</em></p>"
+      }
+    ]
+  },
+  "transactional_templates": {
+    "description": "One-off transactional emails",
+    "templates": {
+      "password_reset": {
+        "subject": "Reset your password - [Product]",
+        "title": "Password Reset",
+        "content": "<h2>Reset Your Password</h2><p>Someone (hopefully you!) requested a password reset for your [Product] account.</p><p><a href='{{reset_url}}' class='button'>Reset Password</a></p><p>This link expires in 1 hour.</p><p><strong>Didn't request this?</strong> Ignore this email. Your password won't change.</p>"
+      },
+      "email_verification": {
+        "subject": "Verify your email address",
+        "title": "Verify Your Email",
+        "content": "<h2>Almost there!</h2><p>Click the button below to verify your email address and activate your account.</p><p><a href='{{verify_url}}' class='button'>Verify Email Address</a></p><p>This link expires in 24 hours.</p>"
+      },
+      "payment_success": {
+        "subject": "Payment received - Thank you!",
+        "title": "Payment Confirmed",
+        "content": "<h2>Thanks for your payment!</h2><p>We received your payment of <strong>${{amount}}</strong> for [Product] Premium.</p><p><strong>Receipt Details:</strong></p><ul><li>Amount: ${{amount}}</li><li>Date: {{date}}</li><li>Payment method: {{payment_method}}</li><li>Invoice: <a href='{{invoice_url}}'>View invoice</a></li></ul><p>Your premium features are now active.</p><p><a href='{{dashboard_url}}' class='button'>Go to Dashboard</a></p>"
+      },
+      "payment_failed": {
+        "subject": "Payment failed - Please update your card",
+        "title": "Payment Issue",
+        "content": "<h2>Payment Failed</h2><p>We tried to charge your card for your [Product] subscription, but the payment failed.</p><p><strong>Reason:</strong> {{failure_reason}}</p><p>Please update your payment method to keep your account active.</p><p><a href='{{billing_url}}' class='button'>Update Payment Method</a></p><p>Your subscription will be canceled if payment isn't received within 7 days.</p>"
+      }
+    }
+  }
+}
