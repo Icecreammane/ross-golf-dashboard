@@ -208,24 +208,38 @@ class AutonomousActions:
     def commit_memory_updates(self, check_result):
         """Automatically commit memory file updates"""
         try:
+            # Use safe_git wrapper for security
+            from safe_git import SafeGit
+            git = SafeGit()
+            
             # Stage memory files
-            subprocess.run(
-                ["git", "add", "memory/"],
-                cwd=WORKSPACE,
-                timeout=5
+            add_result = git.safe_add(["memory/"])
+            
+            if not add_result["success"]:
+                return {
+                    "success": False,
+                    "reason": "staging_failed",
+                    "error": add_result.get("reason")
+                }
+            
+            # Commit with auto flag
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+            commit_result = git.safe_commit(
+                f"chore: auto-update memory files ({timestamp})",
+                auto=True
             )
             
-            # Commit
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-            subprocess.run(
-                ["git", "commit", "-m", f"chore: auto-update memory files ({timestamp})"],
-                cwd=WORKSPACE,
-                timeout=10
-            )
+            if not commit_result["success"]:
+                return {
+                    "success": False,
+                    "reason": commit_result.get("reason"),
+                    "error": commit_result.get("error")
+                }
             
             return {
                 "success": True,
-                "files_committed": check_result.get("files", 0)
+                "files_committed": check_result.get("files", 0),
+                "commit_hash": commit_result.get("output", "")[:8]
             }
             
         except Exception as e:

@@ -1,40 +1,85 @@
-# Credentials & Secrets
-.env
-calendar/credentials.json
-calendar/token.json
+# ========================================
+# CREDENTIALS & SECRETS (CRITICAL)
+# ========================================
 .credentials/
+.env
+.env.*
 *.pem
 *.key
+*_credentials.json
+*_token.json
+*_key.json
+calendar/credentials.json
+calendar/token.json
+secrets/
+config/secrets.yaml
 
-# Local data
-*.db
-*.sqlite*
-data/
-monitoring/*.json
+# ========================================
+# PERSONAL DATA (MEMORY & LOGS)
+# ========================================
+# Memory files contain personal data
 memory/*.json
 memory/vector_db/
+memory/heartbeat-state.json
+memory/spawn-signal.json
+memory/escalation-pending.json
 
-# Logs
+# Daily logs contain personal conversations
+memory/2*.md
+
+# Exception: Keep README and templates
+!memory/README.md
+
+# ========================================
+# LOGS (MAY CONTAIN SENSITIVE DATA)
+# ========================================
 *.log
 logs/
 monitoring/*.log
+security-logs/
+*.log.*
 
-# Temporary files
+# ========================================
+# DATABASES
+# ========================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# ========================================
+# BUILD ARTIFACTS & TEMP
+# ========================================
 tmp/
 *.tmp
 .DS_Store
-
-# Python
-__pycache__/
 *.pyc
 *.pyo
-venv/
+__pycache__/
+*.swp
+*.swo
+*~
 .pytest_cache/
+.coverage
 
-# Node
+# ========================================
+# NODE & DEPENDENCIES
+# ========================================
 node_modules/
+package-lock.json
+.npm/
 
-# Git submodules (nested repos)
+# ========================================
+# PYTHON VIRTUAL ENVIRONMENTS
+# ========================================
+venv/
+.venv/
+env/
+ENV/
+
+# ========================================
+# GIT SUBMODULES (NESTED REPOS)
+# ========================================
 fitness-tracker/
 florida-freedom-dashboard-project/
 golf-coaching-launcher/
@@ -42,3 +87,17 @@ life-os/
 mission-control/
 morning-command-center-project/
 projects/command-center/
+
+# ========================================
+# DATA DIRECTORIES
+# ========================================
+data/
+backups/
+monitoring/*.json
+
+# ========================================
+# COMPILED / BUILD OUTPUT
+# ========================================
+dist/
+build/
+*.egg-info/
