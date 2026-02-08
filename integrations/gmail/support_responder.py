@@ -133,10 +133,11 @@ class SupportResponder:
         
         if not new_tickets:
             print("✅ No new tickets to process")
-            return
+            return 0
         
         print(f"📋 Processing {len(new_tickets)} tickets...")
         
+        drafts_created = 0
         for ticket in new_tickets:
             success = self.process_ticket(ticket)
             
@@ -144,11 +145,13 @@ class SupportResponder:
                 # Update ticket status
                 ticket['status'] = 'drafted'
                 ticket['drafted_at'] = datetime.now().isoformat()
+                drafts_created += 1
         
         # Save updated queue
         self.monitor.save_support_queue(queue)
         
         print(f"\n✅ Processed {len(new_tickets)} tickets")
+        return drafts_created
 
 
 if __name__ == "__main__":

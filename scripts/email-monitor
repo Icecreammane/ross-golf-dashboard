@@ -1,0 +1,185 @@
+#!/bin/bash
+################################################################################
+# Email Monitor Service Controller
+# Usage: email-monitor {start|stop|status|restart|logs}
+################################################################################
+
+WORKSPACE="$HOME/clawd"
+DAEMON_SCRIPT="$WORKSPACE/services/email_monitor_daemon.py"
+PID_FILE="$WORKSPACE/data/email_monitor.pid"
+LOG_FILE="$WORKSPACE/logs/email_monitor.log"
+
+# Ensure directories exist
+mkdir -p "$WORKSPACE/data"
+mkdir -p "$WORKSPACE/logs"
+
+start() {
+    if [ -f "$PID_FILE" ]; then
+        PID=$(cat "$PID_FILE")
+        if ps -p "$PID" > /dev/null 2>&1; then
+            echo "✅ Email monitor already running (PID: $PID)"
+            return 0
+        fi
+        # Stale PID file
+        rm "$PID_FILE"
+    fi
+    
+    echo "🚀 Starting email monitor daemon..."
+    
+    # Start daemon in background
+    nohup python3 "$DAEMON_SCRIPT" > "$LOG_FILE" 2>&1 &
+    PID=$!
+    
+    echo $PID > "$PID_FILE"
+    
+    # Wait a moment and check if it's still running
+    sleep 2
+    if ps -p "$PID" > /dev/null 2>&1; then
+        echo "✅ Email monitor started (PID: $PID)"
+        echo "📄 Logs: $LOG_FILE"
+        return 0
+    else
+        echo "❌ Failed to start email monitor"
+        echo "📄 Check logs: $LOG_FILE"
+        rm "$PID_FILE"
+        return 1
+    fi
+}
+
+stop() {
+    if [ ! -f "$PID_FILE" ]; then
+        echo "⚠️  Email monitor not running"
+        return 0
+    fi
+    
+    PID=$(cat "$PID_FILE")
+    
+    if ! ps -p "$PID" > /dev/null 2>&1; then
+        echo "⚠️  Email monitor not running (stale PID file)"
+        rm "$PID_FILE"
+        return 0
+    fi
+    
+    echo "🛑 Stopping email monitor (PID: $PID)..."
+    
+    # Send SIGTERM for graceful shutdown
+    kill -TERM "$PID"
+    
+    # Wait for process to stop (max 10 seconds)
+    for i in {1..10}; do
+        if ! ps -p "$PID" > /dev/null 2>&1; then
+            rm "$PID_FILE"
+            echo "✅ Email monitor stopped"
+            return 0
+        fi
+        sleep 1
+    done
+    
+    # Force kill if still running
+    echo "⚠️  Forcing shutdown..."
+    kill -KILL "$PID" 2>/dev/null
+    rm "$PID_FILE"
+    echo "✅ Email monitor stopped (forced)"
+    return 0
+}
+
+status() {
+    if [ ! -f "$PID_FILE" ]; then
+        echo "❌ Email monitor not running"
+        return 1
+    fi
+    
+    PID=$(cat "$PID_FILE")
+    
+    if ps -p "$PID" > /dev/null 2>&1; then
+        echo "✅ Email monitor running (PID: $PID)"
+        
+        # Show stats if available
+        STATS_FILE="$WORKSPACE/data/email_monitor_stats.json"
+        if [ -f "$STATS_FILE" ]; then
+            echo ""
+            echo "📊 Stats:"
+            python3 -c "
+import json
+with open('$STATS_FILE') as f:
+    stats = json.load(f)
+    print(f\"   • Total scans: {stats.get('total_scans', 0)}\")
+    print(f\"   • Emails processed: {stats.get('total_emails_processed', 0)}\")
+    print(f\"   • Drafts created: {stats.get('total_drafts_created', 0)}\")
+    if stats.get('last_scan'):
+        print(f\"   • Last scan: {stats['last_scan']}\")
+"
+        fi
+        
+        return 0
+    else
+        echo "❌ Email monitor not running (stale PID file)"
+        rm "$PID_FILE"
+        return 1
+    fi
+}
+
+logs() {
+    if [ ! -f "$LOG_FILE" ]; then
+        echo "⚠️  No logs yet"
+        return 0
+    fi
+    
+    if command -v tail > /dev/null; then
+        echo "📄 Email monitor logs (last 50 lines):"
+        echo "========================================="
+        tail -50 "$LOG_FILE"
+    else
+        cat "$LOG_FILE"
+    fi
+}
+
+restart() {
+    echo "🔄 Restarting email monitor..."
+    stop
+    sleep 1
+    start
+}
+
+# Main command handler
+case "$1" in
+    start)
+        start
+        ;;
+    
+    stop)
+        stop
+        ;;
+    
+    status)
+        status
+        ;;
+    
+    restart)
+        restart
+        ;;
+    
+    logs)
+        logs
+        ;;
+    
+    *)
+        echo "Email Monitor Service Controller"
+        echo ""
+        echo "Usage: $0 {start|stop|status|restart|logs}"
+        echo ""
+        echo "Commands:"
+        echo "  start   - Start the email monitor daemon"
+        echo "  stop    - Stop the email monitor daemon"
+        echo "  status  - Check if daemon is running and show stats"
+        echo "  restart - Restart the daemon"
+        echo "  logs    - View recent logs"
+        echo ""
+        echo "Example:"
+        echo "  $0 start"
+        echo "  $0 status"
+        exit 1
+        ;;
+esac
+
+exit $?
