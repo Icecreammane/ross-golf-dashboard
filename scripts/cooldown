@@ -1,0 +1,10 @@
+#!/bin/bash
+# Cool Down - Quick launcher
+
+cd ~/clawd
+
+if [ "$1" == "quick" ]; then
+    python3 scripts/cool_down.py quick
+else
+    python3 scripts/cool_down.py
+fi
