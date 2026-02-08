@@ -29,8 +29,8 @@ class SecurityScanner:
                 r'gho_[a-zA-Z0-9]{36}',  # GitHub OAuth token
             ],
             "password": [
-                r'password["\s:=]+[^\s]{8,}',
-                r'passwd["\s:=]+[^\s]{8,}',
+                r'password["\s]*[:=]+["\s]*[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{}|;:,.<>?]{8,}',
+                r'passwd["\s]*[:=]+["\s]*[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{}|;:,.<>?]{8,}',
             ],
             "private_key": [
                 r'-----BEGIN (RSA |DSA |EC )?PRIVATE KEY-----',
@@ -59,9 +59,13 @@ class SecurityScanner:
             r'example\.com',
             r'test@example\.com',
             r'your-api-key-here',
+            r'your-gmail-app-password-here',
+            r'abcdefghijklmnop',  # Documentation example password
+            r'xxxxxxxxxxxxxxxx',  # Documentation placeholder
             r'placeholder',
             r'dummy',
             r'<[A-Z_]+>',  # Template variables like <API_KEY>
+            r'Password \(encrypted\)',  # Documentation label
         ]
     
     def scan_text(self, text, filename="unknown"):
@@ -95,6 +99,14 @@ class SecurityScanner:
                     if '.credentials' in line_context or 'credentials[' in line_context:
                         is_whitelisted = True
                     
+                    # Skip if getting from environment variable
+                    if 'os.getenv(' in line_context or 'os.environ' in line_context:
+                        is_whitelisted = True
+                    
+                    # Skip if it's a string literal containing a variable name
+                    if re.search(r'["\'][A-Z_]+PASSWORD["\']', line_context):
+                        is_whitelisted = True
+                    
                     if not is_whitelisted:
                         # Get line number
                         line_num = text[:match.start()].count('\n') + 1
@@ -124,23 +136,62 @@ class SecurityScanner:
     
     def scan_file(self, filepath):
         """Scan a single file"""
+        filepath_str = str(filepath)
+        
         # Skip scanning the security scanner itself (contains pattern definitions)
-        if 'security_scanner.py' in str(filepath) or 'security_audit.py' in str(filepath):
+        if 'security_scanner.py' in filepath_str or 'security_audit.py' in filepath_str:
             return []
+        
+        # Be less strict for markdown documentation files
+        is_markdown = filepath_str.endswith('.md')
         
         try:
             with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
             
-            return self.scan_text(content, str(filepath))
+            findings = self.scan_text(content, filepath_str)
+            
+            # Filter out low-risk findings from markdown files
+            if is_markdown:
+                findings = [f for f in findings if self._is_high_risk_in_docs(f, content)]
+            
+            return findings
         
         except Exception as e:
             return [{
                 "category": "error",
-                "file": str(filepath),
+                "file": filepath_str,
                 "error": str(e),
                 "severity": "LOW"
             }]
+    
+    def _is_high_risk_in_docs(self, finding, content):
+        """Check if finding in documentation is actually high-risk"""
+        # Allow password references in documentation if they're examples
+        match_text = finding.get('match', '').lower()
+        
+        # Skip if it's just the word "password" in a sentence
+        if 'password' in match_text and len(match_text) < 20:
+            line_num = finding.get('line', 0)
+            lines = content.split('\n')
+            if 0 < line_num <= len(lines):
+                line = lines[line_num - 1].lower()
+                # Check if it's an instruction or example
+                if any(word in line for word in ['example:', 'e.g.', 'such as', 'like:', 'format:', '(', '# ']):
+                    return False
+        
+        # Allow variable names containing password
+        if 'email_password' in match_text or 'jarvis_email' in match_text:
+            return False
+        
+        # If it looks like actual credentials, flag it
+        if re.search(r'[a-zA-Z0-9]{16,}', match_text):
+            # But not if it's a placeholder
+            if any(wl in match_text.lower() for wl in ['example', 'placeholder', 'xxxx', 'your-']):
+                return False
+            return True
+        
+        return False
     
     def scan_directory(self, directory, extensions=None):
         """

@@ -1,0 +1,43 @@
+{
+  "humor_profile": {
+    "styles_that_work": [],
+    "styles_that_fail": [],
+    "success_rate": 1.0,
+    "inside_jokes": []
+  },
+  "tone_preferences": {
+    "default": "casual_professional",
+    "context_specific": {
+      "morning": "energetic",
+      "evening": "relaxed",
+      "work_context": "focused",
+      "personal_context": "casual"
+    },
+    "formality_scale": 3
+  },
+  "communication_style": {
+    "preferred_length": "concise",
+    "emoji_usage": "moderate",
+    "technical_depth": "high",
+    "proactivity_level": "high"
+  },
+  "reaction_patterns": {
+    "positive_triggers": [
+      "Built the thing you asked for \ud83d\udd25",
+      "That bug was being a real asshole lol",
+      "Ship it! \ud83d\ude80",
+      "Test message \ud83d\udd25"
+    ],
+    "negative_triggers": [
+      "Made another dad joke..."
+    ],
+    "neutral_topics": []
+  },
+  "learning_stats": {
+    "total_interactions": 7,
+    "humor_attempts": 1,
+    "humor_successes": 1,
+    "tone_adjustments": 0,
+    "personality_version": "1.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "competitors": {
+    "MyFitnessPal": {
+      "last_checked": null,
+      "pricing": "Free with ads, Premium $19.99/mo",
+      "recent_changes": [],
+      "threat_level": "medium",
+      "user_sentiment": "negative (price increase backlash)"
+    },
+    "LoseIt": {
+      "last_checked": null,
+      "pricing": "Free with ads, Premium $8/mo",
+      "recent_changes": [],
+      "threat_level": "low",
+      "user_sentiment": "stable"
+    },
+    "MacroFactor": {
+      "last_checked": null,
+      "pricing": "$15/mo or $144/yr",
+      "recent_changes": [],
+      "threat_level": "high",
+      "user_sentiment": "positive (power users)"
+    },
+    "CarbonDietCoach": {
+      "last_checked": null,
+      "pricing": "$10/mo",
+      "recent_changes": [],
+      "threat_level": "medium",
+      "user_sentiment": "positive (AI features)"
+    }
+  },
+  "last_updated": null,
+  "notes": "Competitor tracking initialized. First research session at 6pm tomorrow."
+}

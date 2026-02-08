@@ -1,0 +1,15 @@
+{
+  "activity_by_hour": {},
+  "productive_hours": [],
+  "energy_patterns": [],
+  "workout_correlation": [],
+  "decision_quality_by_hour": {},
+  "insights": [
+    {
+      "type": "workout_correlation",
+      "insight": "Workouts logged: 1 days",
+      "recommendation": "Continue tracking to find workout\u2192productivity patterns",
+      "confidence": 0.5
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "interactions": [
+    {
+      "timestamp": "2026-02-07T23:54:25.818462",
+      "hour": 23,
+      "day_of_week": "Saturday",
+      "type": "query",
+      "topic": "workout",
+      "context": {
+        "details": "evening check"
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:25.818789",
+      "hour": 23,
+      "day_of_week": "Saturday",
+      "type": "query",
+      "topic": "fantasy",
+      "context": {
+        "details": "Tuesday evening"
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:25.818960",
+      "hour": 23,
+      "day_of_week": "Saturday",
+      "type": "query",
+      "topic": "builds",
+      "context": {
+        "details": "after fantasy check"
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:55:06.767078",
+      "hour": 23,
+      "day_of_week": "Saturday",
+      "type": "query",
+      "topic": "workout",
+      "context": {
+        "time": "evening"
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:57:50.892548",
+      "hour": 23,
+      "day_of_week": "Saturday",
+      "type": "query",
+      "topic": "workout",
+      "context": {
+        "time": "evening"
+      }
+    }
+  ],
+  "topics": {
+    "workout": [
+      "2026-02-07T23:54:25.818462",
+      "2026-02-07T23:55:06.767078",
+      "2026-02-07T23:57:50.892548"
+    ],
+    "fantasy": [
+      "2026-02-07T23:54:25.818789"
+    ],
+    "builds": [
+      "2026-02-07T23:54:25.818960"
+    ]
+  },
+  "last_updated": "2026-02-07T23:57:50.892548"
+}

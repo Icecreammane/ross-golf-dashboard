@@ -1,0 +1,118 @@
+{
+  "reactions": [
+    {
+      "timestamp": "2026-02-07T23:54:34.085521",
+      "jarvis_message": "Built the thing you asked for \ud83d\udd25",
+      "ross_response": "Awesome, thanks!",
+      "sentiment": "positive",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "work_related": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.085979",
+      "jarvis_message": "That bug was being a real asshole lol",
+      "ross_response": "haha nice",
+      "sentiment": "positive",
+      "was_humor": true,
+      "humor_success": true,
+      "jarvis_tone": "concise",
+      "context": {
+        "casual": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086256",
+      "jarvis_message": "Here's a detailed 500-word explanation...",
+      "ross_response": "Just give me the summary",
+      "sentiment": "neutral",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "work_related": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086499",
+      "jarvis_message": "Ship it! \ud83d\ude80",
+      "ross_response": "Perfect",
+      "sentiment": "positive",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "work_related": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086758",
+      "jarvis_message": "Made another dad joke...",
+      "ross_response": "Not funny",
+      "sentiment": "negative",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "casual": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:55:06.812681",
+      "jarvis_message": "Test message \ud83d\udd25",
+      "ross_response": "Great!",
+      "sentiment": "positive",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "work": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T23:57:50.936292",
+      "jarvis_message": "Test message \ud83d\udd25",
+      "ross_response": "Great!",
+      "sentiment": "positive",
+      "was_humor": false,
+      "humor_success": null,
+      "jarvis_tone": "concise",
+      "context": {
+        "work": true
+      }
+    }
+  ],
+  "sentiment_history": [
+    {
+      "timestamp": "2026-02-07T23:54:34.085521",
+      "sentiment": "positive"
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.085979",
+      "sentiment": "positive"
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086256",
+      "sentiment": "neutral"
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086499",
+      "sentiment": "positive"
+    },
+    {
+      "timestamp": "2026-02-07T23:54:34.086758",
+      "sentiment": "negative"
+    },
+    {
+      "timestamp": "2026-02-07T23:55:06.812681",
+      "sentiment": "positive"
+    },
+    {
+      "timestamp": "2026-02-07T23:57:50.936292",
+      "sentiment": "positive"
+    }
+  ]
+}

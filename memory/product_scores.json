@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Volleyball Template",
+    "scores": {
+      "market_validation": 6,
+      "ross_fit": 5,
+      "speed_to_revenue": 4,
+      "effort": 6
+    },
+    "total": 5.2,
+    "recommendation": "MAYBE - Explain concerns",
+    "timestamp": "2026-02-08T00:50:22.741802"
+  },
+  {
+    "name": "Fitness Tracker + Stripe",
+    "scores": {
+      "market_validation": 8,
+      "ross_fit": 10,
+      "speed_to_revenue": 9,
+      "effort": 7
+    },
+    "total": 8.5,
+    "recommendation": "BUILD IT - Strong candidate",
+    "timestamp": "2026-02-08T00:50:22.742080"
+  },
+  {
+    "name": "Action Plan + Revenue Dashboard",
+    "scores": {
+      "market_validation": 7,
+      "ross_fit": 10,
+      "speed_to_revenue": 3,
+      "effort": 8
+    },
+    "total": 7.0,
+    "recommendation": "RECOMMEND - Good option with tradeoffs",
+    "timestamp": "2026-02-08T00:50:22.742236"
+  }
+]

@@ -25,13 +25,15 @@ If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happene
 
 ## Morning Brief (7:30am CST)
 If current time is between 7:25am-7:35am CST and morning brief hasn't been sent today:
-1. Run: `python3 ~/clawd/scripts/generate-morning-brief.py`
-2. Read the generated morning-brief.html
-3. Send summary to Ross via Telegram with mobile-friendly formatting
-4. Include link: "Full brief: file:///Users/clawdbot/clawd/morning-brief.html"
-5. Log "morning_brief_sent" in memory/heartbeat-state.json
 
-**Mobile Optimization:** Brief is designed for iPhone viewing while Ross gets ready for work.
+**Format (exactly 3 questions, nothing else unless urgent):**
+1. **What's the single most important thing today?** — One clear priority
+2. **What's about to become a problem if I ignore it?** — Blocker or deadline warning
+3. **What did you do since last session that I should know about?** — Background work summary
+
+Send via Telegram. Keep it tight. Start tomorrow (2026-02-09).
+
+5. Log "morning_brief_sent" in memory/heartbeat-state.json
 
 ## Weekly Progress Report (Sunday 6:00pm CST)
 If current day is Sunday and time is between 5:55pm-6:05pm CST:

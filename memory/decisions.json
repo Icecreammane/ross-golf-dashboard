@@ -1,0 +1,17 @@
+{
+  "decisions": [
+    {
+      "id": 1,
+      "timestamp": "2026-02-07T16:58:14.640938",
+      "decision": "Ship all 11 upgrades this weekend",
+      "context": "Weekend build, high energy",
+      "category": "development",
+      "confidence": null,
+      "hour": 16,
+      "day_of_week": "Saturday",
+      "outcome": null,
+      "outcome_recorded": null,
+      "lessons": []
+    }
+  ]
+}

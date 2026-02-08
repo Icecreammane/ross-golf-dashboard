@@ -1,0 +1,18 @@
+{
+  "leads": [],
+  "stats": {
+    "total_leads": 0,
+    "hot_leads": 0,
+    "warm_leads": 0,
+    "cold_leads": 0,
+    "converted_leads": 0
+  },
+  "funnel": {
+    "outreach_sent": 0,
+    "replies_received": 0,
+    "trials_started": 0,
+    "paid_conversions": 0
+  },
+  "last_updated": null,
+  "notes": "CRM initialized. First leads added in first sales mode session."
+}

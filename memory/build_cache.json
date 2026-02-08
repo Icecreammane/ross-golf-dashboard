@@ -1,0 +1,13 @@
+{
+  "templates_used": {
+    "flask_endpoint": 1
+  },
+  "build_times": [
+    {
+      "timestamp": "2026-02-07T23:54:43.794630",
+      "duration": 0.650786,
+      "tasks": 4
+    }
+  ],
+  "parallel_builds": 1
+}

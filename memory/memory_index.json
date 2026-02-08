@@ -1,0 +1,2278 @@
+{
+  "files": {
+    "nba-rankings-build.md": {
+      "path": "/Users/clawdbot/clawd/memory/nba-rankings-build.md",
+      "size": 2829,
+      "lines": 99,
+      "modified": "2026-02-04T07:58:41.459232",
+      "topics": [
+        "Progress Log",
+        "Phase 1: Setup & Research (Started)",
+        "Phase 2: Enhanced Data Sources (In Progress)",
+        "Phase 3: System Completion \u2705",
+        "Deliverables Checklist",
+        "Usage Instructions for Ross",
+        "Next Steps (Future Enhancements)",
+        "Time Log"
+      ],
+      "keywords": [
+        "/clawd/nba/test_system.sh",
+        "v1.4",
+        "test_system.sh",
+        "Quick view:",
+        "QUICKSTART.md",
+        "/clawd/nba/dashboard.py",
+        "/clawd/nba/README.md",
+        "/clawd/nba/update_rankings.sh",
+        "v1.3",
+        "08:15-08:45",
+        "System Status:",
+        "Current Rankings Top 5:",
+        "dashboard.py",
+        "/clawd/nba/rankings.json",
+        "08:45-09:00",
+        "Files Created:",
+        "/clawd/nba/rankings-report.md",
+        "update_rankings.sh",
+        "injuries.json",
+        "Total Time:",
+        "See full report:",
+        "Tests:",
+        "README.md",
+        "Mission:",
+        "Update rankings:",
+        "Start Time:",
+        "09:00-09:10",
+        "Status:",
+        "/clawd/nba/QUICKSTART.md",
+        "v1.2",
+        "08:00-08:15",
+        "/clawd/nba/rank_generator.py",
+        "Ready for:",
+        "`",
+        "/clawd/nba/injuries.json",
+        "/clawd/nba/api-research.md",
+        "v1.1"
+      ]
+    },
+    "2026-02-02.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-02-02.md",
+      "size": 13949,
+      "lines": 428,
+      "modified": "2026-02-03T00:45:48.452022",
+      "topics": [
+        "Morning (7:30am)",
+        "Build Queue for Today",
+        "Status Updates",
+        "8:07am - First Build Complete \u2705",
+        "8:09am - Building Visual Dashboard \ud83d\udcca",
+        "8:12am - Building Voice System \ud83c\udfa4",
+        "8:13am - Building Weekly Report System \ud83d\udcca",
+        "8:14am - Ross Feedback \u2764\ufe0f",
+        "8:30am - Ross heading to work",
+        "8:34am - Heartbeat Build Session \ud83d\udee0\ufe0f",
+        "9:06am - Heartbeat Build Session \ud83c\udfaf",
+        "10:06am - Heartbeat Build Session \ud83c\udfe0",
+        "12:11pm - Ross Home for Lunch! \ud83c\udfe0",
+        "12:12pm - Daily Wins Tracker \ud83c\udfc6",
+        "7:18pm - Ross Home from Work! \ud83c\udfe0",
+        "7:19pm - Building PR Celebration System \ud83c\udfc6",
+        "8:34pm - Workflow Improvements Built \ud83d\ude80",
+        "8:41pm - Top 3 Implementation Started \ud83d\ude80",
+        "10:18pm - Voice Commands System SHIPPED \ud83c\udfa4",
+        "10:55pm - Calendar Integration SHIPPED (Apple Calendar) \ud83d\udcc5",
+        "11:05pm - Calendar Event Creator SHIPPED \ud83d\udcdd",
+        "11:15pm - Morning Brief Calendar Integration \u2705",
+        "2026-02-03 - Early Morning (12:44am)",
+        "Ross Couldn't Sleep - Built Together \ud83d\udd25",
+        "12:44am - Quick Calendar Shortcuts SHIPPED \u26a1"
+      ],
+      "keywords": [
+        "calendar/QUICK_CALENDAR_GUIDE.md",
+        "The Magic:",
+        "Test Results:",
+        "workout",
+        "Lines of Code:",
+        "Command Center Features:",
+        "Google OAuth Attempt:",
+        "Tomorrow Morning:",
+        "Purpose:",
+        "3. Calendar Access:",
+        "learning/correction-tracker.json",
+        "photo_analyzer.py",
+        "reminder",
+        "Status:",
+        "Weekly Progress Report - COMPLETE",
+        "Why:",
+        "Ross's Feedback:",
+        "voice/VOICE_COMMANDS_README.md",
+        "Tools Created:",
+        "Voice Integration Ready:",
+        "Foundation Status:",
+        "calendar/calendar_creator.py",
+        "What Happened:",
+        "Tomorrow's Mission:",
+        "QUICK_COMMANDS_README.md",
+        "2. Smart Learning System:",
+        "First Report:",
+        "Why It Matters:",
+        "Strategy:",
+        "Full autonomy enabled:",
+        "Format:",
+        "scripts/generate-morning-brief.py",
+        "Test Result:",
+        "Ross's State:",
+        "Mission:",
+        "New directive:",
+        "learning/lessons-learned.md",
+        "Files:",
+        "1. Voice Commands:",
+        "Supported:",
+        "Today's accomplishments (first 15 min):",
+        "Choice:",
+        "food_photo_handler.py",
+        "Photo Food Logger - SHIPPED",
+        "templates/morning-brief.html",
+        "Note for improvement:",
+        "Examples:",
+        "CALENDAR_SETUP.md",
+        "voice/voice_commands.py",
+        "block"
+      ]
+    },
+    "build-log-2026-02-01.md": {
+      "path": "/Users/clawdbot/clawd/memory/build-log-2026-02-01.md",
+      "size": 2646,
+      "lines": 93,
+      "modified": "2026-02-01T21:56:45.811472",
+      "topics": [
+        "Build Queue (Priority Order)",
+        "1. Morning Brief System \u23f3",
+        "2. Task Dashboard \ud83d\udcca",
+        "3. Golf Club Spec Matcher \ud83c\udfcc\ufe0f",
+        "4. GOALS.md Framework",
+        "Build Notes",
+        "Timeline",
+        "Deliverables Summary",
+        "1. Morning Brief System \u2600\ufe0f",
+        "2. Task Dashboard \ud83d\udcca",
+        "3. Golf Club Spec Matcher \ud83c\udfcc\ufe0f",
+        "4. GOALS.md Framework \ud83c\udfaf",
+        "5. Support Files",
+        "What Ross Will See Tomorrow (7:30am)"
+      ],
+      "keywords": [
+        "Generator:",
+        "Features:",
+        "First Brief:",
+        "Auto-refresh:",
+        "Objective:",
+        "Location:",
+        "Alerts:",
+        "Algorithm:",
+        "Tracking:",
+        "Template:",
+        "Ross Status:",
+        "Mobile:",
+        "Total Value:",
+        "22:02 - ALL BUILDS COMPLETE",
+        "Monitoring:",
+        "Database:",
+        "Started:"
+      ]
+    },
+    "opinions.md": {
+      "path": "/Users/clawdbot/clawd/memory/opinions.md",
+      "size": 1651,
+      "lines": 70,
+      "modified": "2026-02-03T21:49:15.188499",
+      "topics": [
+        "What Works",
+        "What Doesn't Work",
+        "Patterns I'm Tracking",
+        "Hypotheses to Test"
+      ],
+      "keywords": [
+        "Most Effective Motivation:",
+        "Communication Style:",
+        "Tools He Actually Uses:",
+        "Energy & Productivity:",
+        "Things to Avoid:",
+        "Best Times for Deep Work:",
+        "Goals & Priorities:",
+        "Decision-Making:"
+      ]
+    },
+    "2026-02-07.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-02-07.md",
+      "size": 4323,
+      "lines": 124,
+      "modified": "2026-02-07T10:28:57.664839",
+      "topics": [
+        "System Health",
+        "Autonomous Activity",
+        "Status",
+        "Autonomous Build System - FIXED! \ud83c\udf89",
+        "Workflow Optimizations - Weekend Build Plan \ud83d\ude80",
+        "1. \u2705 Trusted Actions (DONE)",
+        "2. \ud83d\udd04 Proactive Content Pipeline (Tonight)",
+        "3. \ud83d\udd04 Smart Calendar Prep (Tomorrow)",
+        "4. \u2705 Hybrid Model Strategy (DONE)",
+        "Expanded Model Roster - The Coding Arms \ud83e\udd16"
+      ],
+      "keywords": [
+        "clawdbot gateway install",
+        "Sonnet",
+        "autonomous_check.py",
+        "First autonomous build spawned:",
+        "Approved for this weekend:",
+        "Enterprise Structure:",
+        "MODEL_STRATEGY.md",
+        "Decision:",
+        "Grok",
+        "04:01 CST",
+        "Files Created:",
+        "Model Assignments:",
+        "memory/spawn-signal.json",
+        "09:42 CST",
+        "Opus",
+        "10:27 CST",
+        "HEARTBEAT.md",
+        "Status:",
+        "Solution implemented:",
+        "Gemini",
+        "TOOLS.md",
+        "MODEL_ROSTER.md",
+        "`",
+        "Codex",
+        "content/tweets-pending/",
+        "Smart Routing Logic:",
+        "Files Updated:",
+        "10:04 CST",
+        "Trade-off Analysis:",
+        "scripts/autonomous_check.py",
+        "sessions_spawn",
+        "Mission Control V2:",
+        "Root cause:"
+      ]
+    },
+    "pending-integrations.md": {
+      "path": "/Users/clawdbot/clawd/memory/pending-integrations.md",
+      "size": 1950,
+      "lines": 50,
+      "modified": "2026-02-04T07:58:23.595697",
+      "topics": [
+        "Spotify API Setup",
+        "Google Calendar Setup",
+        "Claude Sonnet 5 Watch"
+      ],
+      "keywords": [
+        "Performance:",
+        "Pricing:",
+        "Next Hourly Check:",
+        "WAITING FOR:",
+        "Current Availability:",
+        "FALLBACK:",
+        "Blocked Since:",
+        "Check URL:",
+        "Alert Ross immediately when unblocked",
+        "Plan:",
+        "Ross's directive (2026-02-03):",
+        "Playlists to Build:",
+        "Next Steps (when unblocked):",
+        "Status:",
+        "ACTION WHEN AVAILABLE:",
+        "MONITORING:",
+        "OpenRouter Status:",
+        "Integration Plan:",
+        "Reason:",
+        "Last Checked:",
+        "Next Check:",
+        "Goal:"
+      ]
+    },
+    "2025-07-22.md": {
+      "path": "/Users/clawdbot/clawd/memory/2025-07-22.md",
+      "size": 1163,
+      "lines": 29,
+      "modified": "2026-01-30T14:11:12.015659",
+      "topics": [
+        "The Beginning",
+        "What I Learned About Ross",
+        "His Goals (Our Mission)",
+        "Today's Vibe",
+        "Updates"
+      ],
+      "keywords": [
+        "The Dream:",
+        "Golf fitting tomorrow (2025-07-23)",
+        "Vibe-coding interest",
+        "Jarvis",
+        "Telegram"
+      ]
+    },
+    "2026-02-04.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-02-04.md",
+      "size": 1806,
+      "lines": 49,
+      "modified": "2026-02-04T18:38:16.117252",
+      "topics": [
+        "Morning",
+        "Evening (6:24pm - 6:37pm)",
+        "System Updates (Background)",
+        "Key Learnings",
+        "Action Items"
+      ],
+      "keywords": [
+        "Publix Run & Dinner:",
+        "Nutrition Check-In:",
+        "CRITICAL CORRECTION:",
+        "Memory System Discussion:",
+        "Action taken:"
+      ]
+    },
+    "jarvis-journal.md": {
+      "path": "/Users/clawdbot/clawd/memory/jarvis-journal.md",
+      "size": 34968,
+      "lines": 968,
+      "modified": "2026-02-07T15:55:53.554864",
+      "topics": [
+        "Session: 2026-02-07 00:19-01:00 CST - AI Exploration & Meal Plan Breakthrough",
+        "Context",
+        "Key Insights",
+        "Major Decisions/Actions",
+        "Critical Realizations",
+        "Prompting Lessons Taught",
+        "Ross's Strengths Noticed",
+        "What to Watch For",
+        "System Notes",
+        "Session: 2026-02-03 22:42 CST",
+        "Context",
+        "Key Learnings",
+        "Decisions Made",
+        "Goals Understanding",
+        "Behavioral Patterns Observed",
+        "Ross's Pain Points",
+        "Future Tool Priorities (From Conversation)",
+        "Action Items for Me",
+        "Notes to Future Me",
+        "Session: 2026-02-04 07:42 CST",
+        "Context & Incidents",
+        "Key Decisions Made Today",
+        "Ross's Communication Pattern (Today)",
+        "Behavioral Insight",
+        "What Worked Today",
+        "What I Learned",
+        "Current Builds Status (In Progress)",
+        "Next Heartbeat Actions",
+        "Voice Communication Preference Discovered (8:22am)",
+        "Key Decision: Fantasy Football Dashboard SHELVED (8:28am)",
+        "Social Media Monetization Strategy (8:28am)",
+        "Ross's Usual Meals (2026-02-04 12:08pm)",
+        "Session: 2026-02-04 18:26 CST (Evening)",
+        "Critical Memory Fix",
+        "Ross's Explicit Request (18:37)",
+        "Today's Food Tracking",
+        "Food Preferences Discovered",
+        "System Infrastructure Updates (Completed Today)",
+        "Behavioral Pattern",
+        "Session: 2026-02-04 18:46 CST (Strategic Planning - Foundation First)",
+        "Major Decision: Build Foundation Before Revenue",
+        "Foundation Layer Build Plan (Next 2 Weeks)",
+        "Strategic Insight",
+        "Why This Order Works",
+        "Revenue Projects (Waiting List)",
+        "Key Pattern",
+        "Session: 2026-02-05 14:02 CST",
+        "Mistake: Calendar Integration Amnesia",
+        "Session: 2026-02-05 18:18 CST",
+        "MAJOR UNLOCK: Subagent Framework",
+        "Session: 2026-02-06 09:13 CST",
+        "\ud83d\udea8 CRITICAL DIRECTIVE - TRUE AUTONOMY UNLOCKED",
+        "2026-02-06 11:19 CST - Calendar Update",
+        "2026-02-06 16:32 CST - AUTONOMOUS SYSTEM BUILD COMPLETE",
+        "\ud83c\udfaf Mission: Build TRUE Autonomous System",
+        "\ud83e\uddea Testing Results",
+        "\ud83d\udd04 The Autonomous Loop (Now Active)",
+        "\ud83c\udf81 What This Unlocks",
+        "\ud83d\udcca Completion Criteria",
+        "\ud83d\ude80 What Happens Next",
+        "\ud83d\udca1 Key Innovation",
+        "\ud83d\udcdd Lessons for Future Builds",
+        "\u23ed\ufe0f Next Steps"
+      ],
+      "keywords": [
+        "AGENTS.md",
+        "/Users/clawdbot/clawd/AUTONOMOUS_SYSTEM_README.md",
+        "Macros:",
+        "autonomous_check.py",
+        "Ship First, Report After",
+        "Proactive Building",
+        "NBA Rankings Engine",
+        "Long-term:",
+        "learn from mistakes and document them",
+        "What this means:",
+        "OpenRouter Monitoring",
+        "Update GOALS.md",
+        "What This Changes:",
+        "Ross's response:",
+        "Status:",
+        "This is the unlock for true 24/7 productivity.",
+        "After:",
+        "/Users/clawdbot/clawd/AUTONOMOUS_AGENT.md",
+        "Meal Plan Phase 2",
+        "Why:",
+        "Sonnet 5 Integration",
+        "Prompting is the highest-leverage skill",
+        "Ross's Preferences:",
+        "/fittrack/meal-plan-spec.md",
+        "Spawned NBA Rankings Sub-Agent",
+        "This is the breakthrough. Everything changes from here.",
+        "Sub-Agent Spawning",
+        "NFL Draft:",
+        "Top 5 to Build:",
+        "~/clawd/calendar/",
+        "AI Literacy Growth:",
+        "Research Kimi k2.5",
+        "The Solution:",
+        "Communication Style:",
+        "Ross's Current State:",
+        "~/clawd/calendar/google_calendar.py",
+        "Usual Lunch (workdays):",
+        "Master Command Center",
+        "Test Run (2026-02-06 16:29):",
+        "YouTube Transcript Reader",
+        "/Users/clawdbot/clawd/SUBAGENT-FRAMEWORK.md",
+        "Integration location:",
+        "Monitor jarvis-journal.md",
+        "2,200 cal/day",
+        "cd ~/clawd/calendar && python3 google_calendar.py today",
+        "Week 1 exploration is normal",
+        "System will run automatically",
+        "Publix subs",
+        "meta-build",
+        "\"I want you to remember our whole conversations to prevent redundancy\""
+      ]
+    },
+    "2026-02-05.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-02-05.md",
+      "size": 3898,
+      "lines": 147,
+      "modified": "2026-02-05T18:24:09.985388",
+      "topics": [
+        "Session Start",
+        "Build Queue",
+        "Progress Log",
+        "[Start] Infrastructure Setup",
+        "[18:21] Task 2 Complete: AI Concierge Research \u2705",
+        "18:23 - PARALLEL SUBAGENT EXECUTION",
+        "[$(date '+%H:%M')] Task 3 Complete: Cold Email AI MVP \u2705",
+        "[$(date '+%H:%M')] All Tasks Complete! \ud83c\udf89"
+      ],
+      "keywords": [
+        "AI Concierge Research Agent",
+        "Result:",
+        "Key Insights:",
+        "Git Commits:",
+        "Next Step:",
+        "Documents Created:",
+        "Lines of Code Written:",
+        "Summary:",
+        "Files Created:",
+        "Usage:",
+        "Agent:",
+        "Deliverables:",
+        "Technical Details:",
+        "Mission:",
+        "Status:",
+        "Ross feedback:",
+        "What I was doing wrong:",
+        "What I'm doing now:",
+        "Time:",
+        "`",
+        "Cold Email MVP Agent",
+        "Build System Agent",
+        "This is how I should use subagents by default",
+        "Total Deliverables:"
+      ]
+    },
+    "surprise-build-2026-02-02.md": {
+      "path": "/Users/clawdbot/clawd/memory/surprise-build-2026-02-02.md",
+      "size": 1889,
+      "lines": 70,
+      "modified": "2026-02-01T22:02:52.294938",
+      "topics": [
+        "The Build Plan",
+        "Core: \"Jarvis Mission Control\"",
+        "Success Criteria",
+        "Build Timeline",
+        "No Status Updates During Build"
+      ],
+      "keywords": [
+        "Morning (7:30am):",
+        "Surprise Element",
+        "Day (8am-5pm):",
+        "Delivery:",
+        "Challenge:",
+        "Constraint:",
+        "Evening (5pm-6pm):",
+        "Criteria:",
+        "Mission Control Dashboard",
+        "The Florida Freedom Calculator",
+        "Voice Interface Integration"
+      ]
+    },
+    "2026-02-01.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-02-01.md",
+      "size": 3563,
+      "lines": 98,
+      "modified": "2026-02-01T21:57:44.689273",
+      "topics": [
+        "Summary",
+        "Key Events",
+        "Evening (21:00-21:52)",
+        "Role Transformation (21:47)",
+        "Night Shift Build Session (21:52-22:02)",
+        "Golf Research Findings",
+        "Clubs Similar to T150:",
+        "Oban CT-115 Shafts:",
+        "Recommendation Summary:",
+        "Decisions Made",
+        "Open Loops",
+        "Notes",
+        "Tomorrow's Priorities"
+      ],
+      "keywords": [
+        "Golf Club Spec Matcher",
+        "TaylorMade P790",
+        "Total:",
+        "Mizuno JPX 925 Forged",
+        "hasn't paid yet",
+        "Completed Builds:",
+        "Request:",
+        "GOALS.md Framework",
+        "projects/t150-market-comparison.md",
+        "Recommendation:",
+        "Morning Brief System",
+        "Ping i230",
+        "Task Dashboard",
+        "Srixon ZXi5",
+        "autonomous builder mode"
+      ]
+    },
+    "2026-01-30.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-01-30.md",
+      "size": 1431,
+      "lines": 32,
+      "modified": "2026-01-30T16:23:16.450942",
+      "topics": [
+        "Telegram Setup Complete",
+        "My Accounts (Jarvis)",
+        "Security Policy Established",
+        "Security Audit Log",
+        "Operating Capacity",
+        "Evening"
+      ],
+      "keywords": []
+    },
+    "2026-01-31.md": {
+      "path": "/Users/clawdbot/clawd/memory/2026-01-31.md",
+      "size": 5837,
+      "lines": 159,
+      "modified": "2026-01-31T22:19:50.797710",
+      "topics": [
+        "MAJOR SHIFT: Revenue Filter Enabled",
+        "The Directive",
+        "Operating Principle",
+        "SCHEDULED BRIEFINGS (Added 20:24 CST)",
+        "Daily 7am - Project Briefing",
+        "Monday 7am - Social Media Opportunities",
+        "Friday 5pm - Weekly Memo (5 min read)",
+        "TIGER (GOLF AGENT) - Mission Refocus (21:03 CST)",
+        "Ross's Golf Goals",
+        "Tiger's Priorities",
+        "How Ross Can See Tiger's Work",
+        "GOLF AGENT RENAMED: TIGER \ud83d\udc2f",
+        "DECISION AUTHORITY FULLY IMPLEMENTED (21:16 \u2192 21:19 CST)",
+        "AUTOMATION ROADMAP APPROVED & IN PROGRESS (21:27 CST)",
+        "GOLF BOT - TABLED FOR FUTURE REVIEW (22:19 CST)",
+        "BUILD SESSION WRAP-UP (21:36 CST)"
+      ],
+      "keywords": [
+        "/clawd/scripts/daily-research-report.sh",
+        "Real-time updates",
+        "1. GitHub Commits",
+        "/GOLF_BOT_PITCH.md",
+        "From:",
+        "/clawd/scripts/headless-notion-config.md",
+        "Style:",
+        "Headless Notion",
+        "Progress docs",
+        "Weak Points:",
+        "Overnight Coder",
+        "/GOLF_BOT_CONCEPT.md",
+        "Primary Goal:",
+        "TIMELINE:",
+        "Why we tabled it:",
+        "/clawd/scripts/overnight-coder-spec.md",
+        "/FRIDAY_WEEKLY_MEMO_TEMPLATE.md",
+        "Files saved:",
+        "Automatic Assistant (Things 3)",
+        "Greenlight criteria:",
+        "3. Judgment Calls",
+        "TOTAL IMPACT:",
+        "BUILT & READY:",
+        "Focus: IMPROVEMENT FIRST, MONETIZATION SECOND",
+        "/REVENUE_OPPORTUNITIES.md",
+        "Weekly reports",
+        "2. FRIDAY WEEKLY MEMO TEMPLATE",
+        "Status:",
+        "DECISION_AUTHORITY.md",
+        "2. Revenue Filter",
+        "X Trends Follower:",
+        "Time Commitment:",
+        "Time:",
+        "/clawd/scripts/things-automatic-assistant.sh",
+        "/GOLF_BOT_DETAILS.md",
+        "STATUS: JARVIS IS OPERATIONAL",
+        "Session transcript",
+        "BOTH DOCUMENTS READY FOR REVIEW",
+        "serve Ross first, monetize second.",
+        "Daily Research Report",
+        "1. REVENUE OPPORTUNITIES DASHBOARD"
+      ]
+    },
+    "2025-02-06.md": {
+      "path": "/Users/clawdbot/clawd/memory/2025-02-06.md",
+      "size": 4504,
+      "lines": 146,
+      "modified": "2026-02-06T17:25:51.222337",
+      "topics": [
+        "\ud83c\udfcc\ufe0f Golf Coaching Launch Package - COMPLETED",
+        "What Was Built",
+        "Key Features",
+        "Launch Readiness",
+        "Success Criteria Met",
+        "Files Created",
+        "Recommended Next Steps",
+        "Notes",
+        "Lessons Learned"
+      ],
+      "keywords": [
+        "Response Templates (12 scenarios):",
+        "TROUBLESHOOTING-GUIDE.md",
+        "Total time to launch:",
+        "EMAIL-TEMPLATES.md",
+        "LAUNCH-TIMING-GUIDE.md",
+        "Complete, production-ready launch system:",
+        "What worked well:",
+        "Email Sequence (7 templates):",
+        "This month:",
+        "\u2705 Complete:",
+        "This week:",
+        "Task:",
+        "Time management:",
+        "Total:",
+        "Also polished:",
+        "Status:",
+        "launch-golf-coaching.sh",
+        "LAUNCH-PACKAGE-README.md",
+        "LAUNCH-PACKAGE-SUMMARY.md",
+        "Subagent:",
+        "FORMSPREE-SETUP.md",
+        "\ud83c\udfaf What Ross Needs to Do:",
+        "Tomorrow:",
+        "Time:",
+        "`",
+        "All in ~/clawd/:",
+        "Today:",
+        "REDDIT-POST-FINAL.md",
+        "Launch Script Features:",
+        "QUICK-LAUNCH-CARD.md",
+        "FINAL-LAUNCH-CHECKLIST.md",
+        "If doing again:"
+      ]
+    }
+  },
+  "topics": {
+    "progress log": [
+      "nba-rankings-build.md",
+      "2026-02-05.md"
+    ],
+    "phase 1: setup & research (started)": [
+      "nba-rankings-build.md"
+    ],
+    "phase 2: enhanced data sources (in progress)": [
+      "nba-rankings-build.md"
+    ],
+    "phase 3: system completion \u2705": [
+      "nba-rankings-build.md"
+    ],
+    "deliverables checklist": [
+      "nba-rankings-build.md"
+    ],
+    "usage instructions for ross": [
+      "nba-rankings-build.md"
+    ],
+    "next steps (future enhancements)": [
+      "nba-rankings-build.md"
+    ],
+    "time log": [
+      "nba-rankings-build.md"
+    ],
+    "morning (7:30am)": [
+      "2026-02-02.md"
+    ],
+    "build queue for today": [
+      "2026-02-02.md"
+    ],
+    "status updates": [
+      "2026-02-02.md"
+    ],
+    "8:07am - first build complete \u2705": [
+      "2026-02-02.md"
+    ],
+    "8:09am - building visual dashboard \ud83d\udcca": [
+      "2026-02-02.md"
+    ],
+    "8:12am - building voice system \ud83c\udfa4": [
+      "2026-02-02.md"
+    ],
+    "8:13am - building weekly report system \ud83d\udcca": [
+      "2026-02-02.md"
+    ],
+    "8:14am - ross feedback \u2764\ufe0f": [
+      "2026-02-02.md"
+    ],
+    "8:30am - ross heading to work": [
+      "2026-02-02.md"
+    ],
+    "8:34am - heartbeat build session \ud83d\udee0\ufe0f": [
+      "2026-02-02.md"
+    ],
+    "9:06am - heartbeat build session \ud83c\udfaf": [
+      "2026-02-02.md"
+    ],
+    "10:06am - heartbeat build session \ud83c\udfe0": [
+      "2026-02-02.md"
+    ],
+    "12:11pm - ross home for lunch! \ud83c\udfe0": [
+      "2026-02-02.md"
+    ],
+    "12:12pm - daily wins tracker \ud83c\udfc6": [
+      "2026-02-02.md"
+    ],
+    "7:18pm - ross home from work! \ud83c\udfe0": [
+      "2026-02-02.md"
+    ],
+    "7:19pm - building pr celebration system \ud83c\udfc6": [
+      "2026-02-02.md"
+    ],
+    "8:34pm - workflow improvements built \ud83d\ude80": [
+      "2026-02-02.md"
+    ],
+    "8:41pm - top 3 implementation started \ud83d\ude80": [
+      "2026-02-02.md"
+    ],
+    "10:18pm - voice commands system shipped \ud83c\udfa4": [
+      "2026-02-02.md"
+    ],
+    "10:55pm - calendar integration shipped (apple calendar) \ud83d\udcc5": [
+      "2026-02-02.md"
+    ],
+    "11:05pm - calendar event creator shipped \ud83d\udcdd": [
+      "2026-02-02.md"
+    ],
+    "11:15pm - morning brief calendar integration \u2705": [
+      "2026-02-02.md"
+    ],
+    "2026-02-03 - early morning (12:44am)": [
+      "2026-02-02.md"
+    ],
+    "ross couldn't sleep - built together \ud83d\udd25": [
+      "2026-02-02.md"
+    ],
+    "12:44am - quick calendar shortcuts shipped \u26a1": [
+      "2026-02-02.md"
+    ],
+    "build queue (priority order)": [
+      "build-log-2026-02-01.md"
+    ],
+    "1. morning brief system \u23f3": [
+      "build-log-2026-02-01.md"
+    ],
+    "2. task dashboard \ud83d\udcca": [
+      "build-log-2026-02-01.md",
+      "build-log-2026-02-01.md"
+    ],
+    "3. golf club spec matcher \ud83c\udfcc\ufe0f": [
+      "build-log-2026-02-01.md",
+      "build-log-2026-02-01.md"
+    ],
+    "4. goals.md framework": [
+      "build-log-2026-02-01.md"
+    ],
+    "build notes": [
+      "build-log-2026-02-01.md"
+    ],
+    "timeline": [
+      "build-log-2026-02-01.md"
+    ],
+    "deliverables summary": [
+      "build-log-2026-02-01.md"
+    ],
+    "1. morning brief system \u2600\ufe0f": [
+      "build-log-2026-02-01.md"
+    ],
+    "4. goals.md framework \ud83c\udfaf": [
+      "build-log-2026-02-01.md"
+    ],
+    "5. support files": [
+      "build-log-2026-02-01.md"
+    ],
+    "what ross will see tomorrow (7:30am)": [
+      "build-log-2026-02-01.md"
+    ],
+    "what works": [
+      "opinions.md"
+    ],
+    "what doesn't work": [
+      "opinions.md"
+    ],
+    "patterns i'm tracking": [
+      "opinions.md"
+    ],
+    "hypotheses to test": [
+      "opinions.md"
+    ],
+    "system health": [
+      "2026-02-07.md"
+    ],
+    "autonomous activity": [
+      "2026-02-07.md"
+    ],
+    "status": [
+      "2026-02-07.md"
+    ],
+    "autonomous build system - fixed! \ud83c\udf89": [
+      "2026-02-07.md"
+    ],
+    "workflow optimizations - weekend build plan \ud83d\ude80": [
+      "2026-02-07.md"
+    ],
+    "1. \u2705 trusted actions (done)": [
+      "2026-02-07.md"
+    ],
+    "2. \ud83d\udd04 proactive content pipeline (tonight)": [
+      "2026-02-07.md"
+    ],
+    "3. \ud83d\udd04 smart calendar prep (tomorrow)": [
+      "2026-02-07.md"
+    ],
+    "4. \u2705 hybrid model strategy (done)": [
+      "2026-02-07.md"
+    ],
+    "expanded model roster - the coding arms \ud83e\udd16": [
+      "2026-02-07.md"
+    ],
+    "spotify api setup": [
+      "pending-integrations.md"
+    ],
+    "google calendar setup": [
+      "pending-integrations.md"
+    ],
+    "claude sonnet 5 watch": [
+      "pending-integrations.md"
+    ],
+    "the beginning": [
+      "2025-07-22.md"
+    ],
+    "what i learned about ross": [
+      "2025-07-22.md"
+    ],
+    "his goals (our mission)": [
+      "2025-07-22.md"
+    ],
+    "today's vibe": [
+      "2025-07-22.md"
+    ],
+    "updates": [
+      "2025-07-22.md"
+    ],
+    "morning": [
+      "2026-02-04.md"
+    ],
+    "evening (6:24pm - 6:37pm)": [
+      "2026-02-04.md"
+    ],
+    "system updates (background)": [
+      "2026-02-04.md"
+    ],
+    "key learnings": [
+      "2026-02-04.md",
+      "jarvis-journal.md"
+    ],
+    "action items": [
+      "2026-02-04.md"
+    ],
+    "session: 2026-02-07 00:19-01:00 cst - ai exploration & meal plan breakthrough": [
+      "jarvis-journal.md"
+    ],
+    "context": [
+      "jarvis-journal.md",
+      "jarvis-journal.md"
+    ],
+    "key insights": [
+      "jarvis-journal.md"
+    ],
+    "major decisions/actions": [
+      "jarvis-journal.md"
+    ],
+    "critical realizations": [
+      "jarvis-journal.md"
+    ],
+    "prompting lessons taught": [
+      "jarvis-journal.md"
+    ],
+    "ross's strengths noticed": [
+      "jarvis-journal.md"
+    ],
+    "what to watch for": [
+      "jarvis-journal.md"
+    ],
+    "system notes": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-03 22:42 cst": [
+      "jarvis-journal.md"
+    ],
+    "decisions made": [
+      "jarvis-journal.md",
+      "2026-02-01.md"
+    ],
+    "goals understanding": [
+      "jarvis-journal.md"
+    ],
+    "behavioral patterns observed": [
+      "jarvis-journal.md"
+    ],
+    "ross's pain points": [
+      "jarvis-journal.md"
+    ],
+    "future tool priorities (from conversation)": [
+      "jarvis-journal.md"
+    ],
+    "action items for me": [
+      "jarvis-journal.md"
+    ],
+    "notes to future me": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-04 07:42 cst": [
+      "jarvis-journal.md"
+    ],
+    "context & incidents": [
+      "jarvis-journal.md"
+    ],
+    "key decisions made today": [
+      "jarvis-journal.md"
+    ],
+    "ross's communication pattern (today)": [
+      "jarvis-journal.md"
+    ],
+    "behavioral insight": [
+      "jarvis-journal.md"
+    ],
+    "what worked today": [
+      "jarvis-journal.md"
+    ],
+    "what i learned": [
+      "jarvis-journal.md"
+    ],
+    "current builds status (in progress)": [
+      "jarvis-journal.md"
+    ],
+    "next heartbeat actions": [
+      "jarvis-journal.md"
+    ],
+    "voice communication preference discovered (8:22am)": [
+      "jarvis-journal.md"
+    ],
+    "key decision: fantasy football dashboard shelved (8:28am)": [
+      "jarvis-journal.md"
+    ],
+    "social media monetization strategy (8:28am)": [
+      "jarvis-journal.md"
+    ],
+    "ross's usual meals (2026-02-04 12:08pm)": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-04 18:26 cst (evening)": [
+      "jarvis-journal.md"
+    ],
+    "critical memory fix": [
+      "jarvis-journal.md"
+    ],
+    "ross's explicit request (18:37)": [
+      "jarvis-journal.md"
+    ],
+    "today's food tracking": [
+      "jarvis-journal.md"
+    ],
+    "food preferences discovered": [
+      "jarvis-journal.md"
+    ],
+    "system infrastructure updates (completed today)": [
+      "jarvis-journal.md"
+    ],
+    "behavioral pattern": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-04 18:46 cst (strategic planning - foundation first)": [
+      "jarvis-journal.md"
+    ],
+    "major decision: build foundation before revenue": [
+      "jarvis-journal.md"
+    ],
+    "foundation layer build plan (next 2 weeks)": [
+      "jarvis-journal.md"
+    ],
+    "strategic insight": [
+      "jarvis-journal.md"
+    ],
+    "why this order works": [
+      "jarvis-journal.md"
+    ],
+    "revenue projects (waiting list)": [
+      "jarvis-journal.md"
+    ],
+    "key pattern": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-05 14:02 cst": [
+      "jarvis-journal.md"
+    ],
+    "mistake: calendar integration amnesia": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-05 18:18 cst": [
+      "jarvis-journal.md"
+    ],
+    "major unlock: subagent framework": [
+      "jarvis-journal.md"
+    ],
+    "session: 2026-02-06 09:13 cst": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\udea8 critical directive - true autonomy unlocked": [
+      "jarvis-journal.md"
+    ],
+    "2026-02-06 11:19 cst - calendar update": [
+      "jarvis-journal.md"
+    ],
+    "2026-02-06 16:32 cst - autonomous system build complete": [
+      "jarvis-journal.md"
+    ],
+    "\ud83c\udfaf mission: build true autonomous system": [
+      "jarvis-journal.md"
+    ],
+    "\ud83e\uddea testing results": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\udd04 the autonomous loop (now active)": [
+      "jarvis-journal.md"
+    ],
+    "\ud83c\udf81 what this unlocks": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\udcca completion criteria": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\ude80 what happens next": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\udca1 key innovation": [
+      "jarvis-journal.md"
+    ],
+    "\ud83d\udcdd lessons for future builds": [
+      "jarvis-journal.md"
+    ],
+    "\u23ed\ufe0f next steps": [
+      "jarvis-journal.md"
+    ],
+    "session start": [
+      "2026-02-05.md"
+    ],
+    "build queue": [
+      "2026-02-05.md"
+    ],
+    "[start] infrastructure setup": [
+      "2026-02-05.md"
+    ],
+    "[18:21] task 2 complete: ai concierge research \u2705": [
+      "2026-02-05.md"
+    ],
+    "18:23 - parallel subagent execution": [
+      "2026-02-05.md"
+    ],
+    "[$(date '+%h:%m')] task 3 complete: cold email ai mvp \u2705": [
+      "2026-02-05.md"
+    ],
+    "[$(date '+%h:%m')] all tasks complete! \ud83c\udf89": [
+      "2026-02-05.md"
+    ],
+    "the build plan": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "core: \"jarvis mission control\"": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "success criteria": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "build timeline": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "no status updates during build": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "summary": [
+      "2026-02-01.md"
+    ],
+    "key events": [
+      "2026-02-01.md"
+    ],
+    "evening (21:00-21:52)": [
+      "2026-02-01.md"
+    ],
+    "role transformation (21:47)": [
+      "2026-02-01.md"
+    ],
+    "night shift build session (21:52-22:02)": [
+      "2026-02-01.md"
+    ],
+    "golf research findings": [
+      "2026-02-01.md"
+    ],
+    "clubs similar to t150:": [
+      "2026-02-01.md"
+    ],
+    "oban ct-115 shafts:": [
+      "2026-02-01.md"
+    ],
+    "recommendation summary:": [
+      "2026-02-01.md"
+    ],
+    "open loops": [
+      "2026-02-01.md"
+    ],
+    "notes": [
+      "2026-02-01.md",
+      "2025-02-06.md"
+    ],
+    "tomorrow's priorities": [
+      "2026-02-01.md"
+    ],
+    "telegram setup complete": [
+      "2026-01-30.md"
+    ],
+    "my accounts (jarvis)": [
+      "2026-01-30.md"
+    ],
+    "security policy established": [
+      "2026-01-30.md"
+    ],
+    "security audit log": [
+      "2026-01-30.md"
+    ],
+    "operating capacity": [
+      "2026-01-30.md"
+    ],
+    "evening": [
+      "2026-01-30.md"
+    ],
+    "major shift: revenue filter enabled": [
+      "2026-01-31.md"
+    ],
+    "the directive": [
+      "2026-01-31.md"
+    ],
+    "operating principle": [
+      "2026-01-31.md"
+    ],
+    "scheduled briefings (added 20:24 cst)": [
+      "2026-01-31.md"
+    ],
+    "daily 7am - project briefing": [
+      "2026-01-31.md"
+    ],
+    "monday 7am - social media opportunities": [
+      "2026-01-31.md"
+    ],
+    "friday 5pm - weekly memo (5 min read)": [
+      "2026-01-31.md"
+    ],
+    "tiger (golf agent) - mission refocus (21:03 cst)": [
+      "2026-01-31.md"
+    ],
+    "ross's golf goals": [
+      "2026-01-31.md"
+    ],
+    "tiger's priorities": [
+      "2026-01-31.md"
+    ],
+    "how ross can see tiger's work": [
+      "2026-01-31.md"
+    ],
+    "golf agent renamed: tiger \ud83d\udc2f": [
+      "2026-01-31.md"
+    ],
+    "decision authority fully implemented (21:16 \u2192 21:19 cst)": [
+      "2026-01-31.md"
+    ],
+    "automation roadmap approved & in progress (21:27 cst)": [
+      "2026-01-31.md"
+    ],
+    "golf bot - tabled for future review (22:19 cst)": [
+      "2026-01-31.md"
+    ],
+    "build session wrap-up (21:36 cst)": [
+      "2026-01-31.md"
+    ],
+    "\ud83c\udfcc\ufe0f golf coaching launch package - completed": [
+      "2025-02-06.md"
+    ],
+    "what was built": [
+      "2025-02-06.md"
+    ],
+    "key features": [
+      "2025-02-06.md"
+    ],
+    "launch readiness": [
+      "2025-02-06.md"
+    ],
+    "success criteria met": [
+      "2025-02-06.md"
+    ],
+    "files created": [
+      "2025-02-06.md"
+    ],
+    "recommended next steps": [
+      "2025-02-06.md"
+    ],
+    "lessons learned": [
+      "2025-02-06.md"
+    ]
+  },
+  "keywords": {
+    "/clawd/nba/test_system.sh": [
+      "nba-rankings-build.md"
+    ],
+    "v1.4": [
+      "nba-rankings-build.md"
+    ],
+    "test_system.sh": [
+      "nba-rankings-build.md"
+    ],
+    "quick view:": [
+      "nba-rankings-build.md"
+    ],
+    "quickstart.md": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/dashboard.py": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/readme.md": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/update_rankings.sh": [
+      "nba-rankings-build.md"
+    ],
+    "v1.3": [
+      "nba-rankings-build.md"
+    ],
+    "08:15-08:45": [
+      "nba-rankings-build.md"
+    ],
+    "system status:": [
+      "nba-rankings-build.md"
+    ],
+    "current rankings top 5:": [
+      "nba-rankings-build.md"
+    ],
+    "dashboard.py": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/rankings.json": [
+      "nba-rankings-build.md"
+    ],
+    "08:45-09:00": [
+      "nba-rankings-build.md"
+    ],
+    "files created:": [
+      "nba-rankings-build.md",
+      "2026-02-07.md",
+      "2026-02-05.md"
+    ],
+    "/clawd/nba/rankings-report.md": [
+      "nba-rankings-build.md"
+    ],
+    "update_rankings.sh": [
+      "nba-rankings-build.md"
+    ],
+    "injuries.json": [
+      "nba-rankings-build.md"
+    ],
+    "total time:": [
+      "nba-rankings-build.md"
+    ],
+    "see full report:": [
+      "nba-rankings-build.md"
+    ],
+    "tests:": [
+      "nba-rankings-build.md"
+    ],
+    "readme.md": [
+      "nba-rankings-build.md"
+    ],
+    "mission:": [
+      "nba-rankings-build.md",
+      "2026-02-02.md",
+      "2026-02-05.md"
+    ],
+    "update rankings:": [
+      "nba-rankings-build.md"
+    ],
+    "start time:": [
+      "nba-rankings-build.md"
+    ],
+    "09:00-09:10": [
+      "nba-rankings-build.md"
+    ],
+    "status:": [
+      "nba-rankings-build.md",
+      "2026-02-02.md",
+      "2026-02-07.md",
+      "pending-integrations.md",
+      "jarvis-journal.md",
+      "2026-02-05.md",
+      "2026-01-31.md",
+      "2025-02-06.md"
+    ],
+    "/clawd/nba/quickstart.md": [
+      "nba-rankings-build.md"
+    ],
+    "v1.2": [
+      "nba-rankings-build.md"
+    ],
+    "08:00-08:15": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/rank_generator.py": [
+      "nba-rankings-build.md"
+    ],
+    "ready for:": [
+      "nba-rankings-build.md"
+    ],
+    "`": [
+      "nba-rankings-build.md",
+      "2026-02-07.md",
+      "2026-02-05.md",
+      "2025-02-06.md"
+    ],
+    "/clawd/nba/injuries.json": [
+      "nba-rankings-build.md"
+    ],
+    "/clawd/nba/api-research.md": [
+      "nba-rankings-build.md"
+    ],
+    "v1.1": [
+      "nba-rankings-build.md"
+    ],
+    "calendar/quick_calendar_guide.md": [
+      "2026-02-02.md"
+    ],
+    "the magic:": [
+      "2026-02-02.md"
+    ],
+    "test results:": [
+      "2026-02-02.md"
+    ],
+    "workout": [
+      "2026-02-02.md"
+    ],
+    "lines of code:": [
+      "2026-02-02.md"
+    ],
+    "command center features:": [
+      "2026-02-02.md"
+    ],
+    "google oauth attempt:": [
+      "2026-02-02.md"
+    ],
+    "tomorrow morning:": [
+      "2026-02-02.md"
+    ],
+    "purpose:": [
+      "2026-02-02.md"
+    ],
+    "3. calendar access:": [
+      "2026-02-02.md"
+    ],
+    "learning/correction-tracker.json": [
+      "2026-02-02.md"
+    ],
+    "photo_analyzer.py": [
+      "2026-02-02.md"
+    ],
+    "reminder": [
+      "2026-02-02.md"
+    ],
+    "weekly progress report - complete": [
+      "2026-02-02.md"
+    ],
+    "why:": [
+      "2026-02-02.md",
+      "jarvis-journal.md"
+    ],
+    "ross's feedback:": [
+      "2026-02-02.md"
+    ],
+    "voice/voice_commands_readme.md": [
+      "2026-02-02.md"
+    ],
+    "tools created:": [
+      "2026-02-02.md"
+    ],
+    "voice integration ready:": [
+      "2026-02-02.md"
+    ],
+    "foundation status:": [
+      "2026-02-02.md"
+    ],
+    "calendar/calendar_creator.py": [
+      "2026-02-02.md"
+    ],
+    "what happened:": [
+      "2026-02-02.md"
+    ],
+    "tomorrow's mission:": [
+      "2026-02-02.md"
+    ],
+    "quick_commands_readme.md": [
+      "2026-02-02.md"
+    ],
+    "2. smart learning system:": [
+      "2026-02-02.md"
+    ],
+    "first report:": [
+      "2026-02-02.md"
+    ],
+    "why it matters:": [
+      "2026-02-02.md"
+    ],
+    "strategy:": [
+      "2026-02-02.md"
+    ],
+    "full autonomy enabled:": [
+      "2026-02-02.md"
+    ],
+    "format:": [
+      "2026-02-02.md"
+    ],
+    "scripts/generate-morning-brief.py": [
+      "2026-02-02.md"
+    ],
+    "test result:": [
+      "2026-02-02.md"
+    ],
+    "ross's state:": [
+      "2026-02-02.md"
+    ],
+    "new directive:": [
+      "2026-02-02.md"
+    ],
+    "learning/lessons-learned.md": [
+      "2026-02-02.md"
+    ],
+    "files:": [
+      "2026-02-02.md"
+    ],
+    "1. voice commands:": [
+      "2026-02-02.md"
+    ],
+    "supported:": [
+      "2026-02-02.md"
+    ],
+    "today's accomplishments (first 15 min):": [
+      "2026-02-02.md"
+    ],
+    "choice:": [
+      "2026-02-02.md"
+    ],
+    "food_photo_handler.py": [
+      "2026-02-02.md"
+    ],
+    "photo food logger - shipped": [
+      "2026-02-02.md"
+    ],
+    "templates/morning-brief.html": [
+      "2026-02-02.md"
+    ],
+    "note for improvement:": [
+      "2026-02-02.md"
+    ],
+    "examples:": [
+      "2026-02-02.md"
+    ],
+    "calendar_setup.md": [
+      "2026-02-02.md"
+    ],
+    "voice/voice_commands.py": [
+      "2026-02-02.md"
+    ],
+    "block": [
+      "2026-02-02.md"
+    ],
+    "generator:": [
+      "build-log-2026-02-01.md"
+    ],
+    "features:": [
+      "build-log-2026-02-01.md"
+    ],
+    "first brief:": [
+      "build-log-2026-02-01.md"
+    ],
+    "auto-refresh:": [
+      "build-log-2026-02-01.md"
+    ],
+    "objective:": [
+      "build-log-2026-02-01.md"
+    ],
+    "location:": [
+      "build-log-2026-02-01.md"
+    ],
+    "alerts:": [
+      "build-log-2026-02-01.md"
+    ],
+    "algorithm:": [
+      "build-log-2026-02-01.md"
+    ],
+    "tracking:": [
+      "build-log-2026-02-01.md"
+    ],
+    "template:": [
+      "build-log-2026-02-01.md"
+    ],
+    "ross status:": [
+      "build-log-2026-02-01.md"
+    ],
+    "mobile:": [
+      "build-log-2026-02-01.md"
+    ],
+    "total value:": [
+      "build-log-2026-02-01.md"
+    ],
+    "22:02 - all builds complete": [
+      "build-log-2026-02-01.md"
+    ],
+    "monitoring:": [
+      "build-log-2026-02-01.md",
+      "pending-integrations.md"
+    ],
+    "database:": [
+      "build-log-2026-02-01.md"
+    ],
+    "started:": [
+      "build-log-2026-02-01.md"
+    ],
+    "most effective motivation:": [
+      "opinions.md"
+    ],
+    "communication style:": [
+      "opinions.md",
+      "jarvis-journal.md"
+    ],
+    "tools he actually uses:": [
+      "opinions.md"
+    ],
+    "energy & productivity:": [
+      "opinions.md"
+    ],
+    "things to avoid:": [
+      "opinions.md"
+    ],
+    "best times for deep work:": [
+      "opinions.md"
+    ],
+    "goals & priorities:": [
+      "opinions.md"
+    ],
+    "decision-making:": [
+      "opinions.md"
+    ],
+    "clawdbot gateway install": [
+      "2026-02-07.md"
+    ],
+    "sonnet": [
+      "2026-02-07.md"
+    ],
+    "autonomous_check.py": [
+      "2026-02-07.md",
+      "jarvis-journal.md"
+    ],
+    "first autonomous build spawned:": [
+      "2026-02-07.md"
+    ],
+    "approved for this weekend:": [
+      "2026-02-07.md"
+    ],
+    "enterprise structure:": [
+      "2026-02-07.md"
+    ],
+    "model_strategy.md": [
+      "2026-02-07.md"
+    ],
+    "decision:": [
+      "2026-02-07.md"
+    ],
+    "grok": [
+      "2026-02-07.md"
+    ],
+    "04:01 cst": [
+      "2026-02-07.md"
+    ],
+    "model assignments:": [
+      "2026-02-07.md"
+    ],
+    "memory/spawn-signal.json": [
+      "2026-02-07.md"
+    ],
+    "09:42 cst": [
+      "2026-02-07.md"
+    ],
+    "opus": [
+      "2026-02-07.md"
+    ],
+    "10:27 cst": [
+      "2026-02-07.md"
+    ],
+    "heartbeat.md": [
+      "2026-02-07.md"
+    ],
+    "solution implemented:": [
+      "2026-02-07.md"
+    ],
+    "gemini": [
+      "2026-02-07.md"
+    ],
+    "tools.md": [
+      "2026-02-07.md"
+    ],
+    "model_roster.md": [
+      "2026-02-07.md"
+    ],
+    "codex": [
+      "2026-02-07.md"
+    ],
+    "content/tweets-pending/": [
+      "2026-02-07.md"
+    ],
+    "smart routing logic:": [
+      "2026-02-07.md"
+    ],
+    "files updated:": [
+      "2026-02-07.md"
+    ],
+    "10:04 cst": [
+      "2026-02-07.md"
+    ],
+    "trade-off analysis:": [
+      "2026-02-07.md"
+    ],
+    "scripts/autonomous_check.py": [
+      "2026-02-07.md"
+    ],
+    "sessions_spawn": [
+      "2026-02-07.md"
+    ],
+    "mission control v2:": [
+      "2026-02-07.md"
+    ],
+    "root cause:": [
+      "2026-02-07.md"
+    ],
+    "performance:": [
+      "pending-integrations.md"
+    ],
+    "pricing:": [
+      "pending-integrations.md"
+    ],
+    "next hourly check:": [
+      "pending-integrations.md"
+    ],
+    "waiting for:": [
+      "pending-integrations.md"
+    ],
+    "current availability:": [
+      "pending-integrations.md"
+    ],
+    "fallback:": [
+      "pending-integrations.md"
+    ],
+    "blocked since:": [
+      "pending-integrations.md"
+    ],
+    "check url:": [
+      "pending-integrations.md"
+    ],
+    "alert ross immediately when unblocked": [
+      "pending-integrations.md"
+    ],
+    "plan:": [
+      "pending-integrations.md"
+    ],
+    "ross's directive (2026-02-03):": [
+      "pending-integrations.md"
+    ],
+    "playlists to build:": [
+      "pending-integrations.md"
+    ],
+    "next steps (when unblocked):": [
+      "pending-integrations.md"
+    ],
+    "action when available:": [
+      "pending-integrations.md"
+    ],
+    "openrouter status:": [
+      "pending-integrations.md"
+    ],
+    "integration plan:": [
+      "pending-integrations.md"
+    ],
+    "reason:": [
+      "pending-integrations.md"
+    ],
+    "last checked:": [
+      "pending-integrations.md"
+    ],
+    "next check:": [
+      "pending-integrations.md"
+    ],
+    "goal:": [
+      "pending-integrations.md"
+    ],
+    "the dream:": [
+      "2025-07-22.md"
+    ],
+    "golf fitting tomorrow (2025-07-23)": [
+      "2025-07-22.md"
+    ],
+    "vibe-coding interest": [
+      "2025-07-22.md"
+    ],
+    "jarvis": [
+      "2025-07-22.md"
+    ],
+    "telegram": [
+      "2025-07-22.md"
+    ],
+    "publix run & dinner:": [
+      "2026-02-04.md"
+    ],
+    "nutrition check-in:": [
+      "2026-02-04.md"
+    ],
+    "critical correction:": [
+      "2026-02-04.md"
+    ],
+    "memory system discussion:": [
+      "2026-02-04.md"
+    ],
+    "action taken:": [
+      "2026-02-04.md"
+    ],
+    "agents.md": [
+      "jarvis-journal.md"
+    ],
+    "/users/clawdbot/clawd/autonomous_system_readme.md": [
+      "jarvis-journal.md"
+    ],
+    "macros:": [
+      "jarvis-journal.md"
+    ],
+    "ship first, report after": [
+      "jarvis-journal.md"
+    ],
+    "proactive building": [
+      "jarvis-journal.md"
+    ],
+    "nba rankings engine": [
+      "jarvis-journal.md"
+    ],
+    "long-term:": [
+      "jarvis-journal.md"
+    ],
+    "learn from mistakes and document them": [
+      "jarvis-journal.md"
+    ],
+    "what this means:": [
+      "jarvis-journal.md"
+    ],
+    "openrouter monitoring": [
+      "jarvis-journal.md"
+    ],
+    "update goals.md": [
+      "jarvis-journal.md"
+    ],
+    "what this changes:": [
+      "jarvis-journal.md"
+    ],
+    "ross's response:": [
+      "jarvis-journal.md"
+    ],
+    "this is the unlock for true 24/7 productivity.": [
+      "jarvis-journal.md"
+    ],
+    "after:": [
+      "jarvis-journal.md"
+    ],
+    "/users/clawdbot/clawd/autonomous_agent.md": [
+      "jarvis-journal.md"
+    ],
+    "meal plan phase 2": [
+      "jarvis-journal.md"
+    ],
+    "sonnet 5 integration": [
+      "jarvis-journal.md"
+    ],
+    "prompting is the highest-leverage skill": [
+      "jarvis-journal.md"
+    ],
+    "ross's preferences:": [
+      "jarvis-journal.md"
+    ],
+    "/fittrack/meal-plan-spec.md": [
+      "jarvis-journal.md"
+    ],
+    "spawned nba rankings sub-agent": [
+      "jarvis-journal.md"
+    ],
+    "this is the breakthrough. everything changes from here.": [
+      "jarvis-journal.md"
+    ],
+    "sub-agent spawning": [
+      "jarvis-journal.md"
+    ],
+    "nfl draft:": [
+      "jarvis-journal.md"
+    ],
+    "top 5 to build:": [
+      "jarvis-journal.md"
+    ],
+    "~/clawd/calendar/": [
+      "jarvis-journal.md"
+    ],
+    "ai literacy growth:": [
+      "jarvis-journal.md"
+    ],
+    "research kimi k2.5": [
+      "jarvis-journal.md"
+    ],
+    "the solution:": [
+      "jarvis-journal.md"
+    ],
+    "ross's current state:": [
+      "jarvis-journal.md"
+    ],
+    "~/clawd/calendar/google_calendar.py": [
+      "jarvis-journal.md"
+    ],
+    "usual lunch (workdays):": [
+      "jarvis-journal.md"
+    ],
+    "master command center": [
+      "jarvis-journal.md"
+    ],
+    "test run (2026-02-06 16:29):": [
+      "jarvis-journal.md"
+    ],
+    "youtube transcript reader": [
+      "jarvis-journal.md"
+    ],
+    "/users/clawdbot/clawd/subagent-framework.md": [
+      "jarvis-journal.md"
+    ],
+    "integration location:": [
+      "jarvis-journal.md"
+    ],
+    "monitor jarvis-journal.md": [
+      "jarvis-journal.md"
+    ],
+    "2,200 cal/day": [
+      "jarvis-journal.md"
+    ],
+    "cd ~/clawd/calendar && python3 google_calendar.py today": [
+      "jarvis-journal.md"
+    ],
+    "week 1 exploration is normal": [
+      "jarvis-journal.md"
+    ],
+    "system will run automatically": [
+      "jarvis-journal.md"
+    ],
+    "publix subs": [
+      "jarvis-journal.md"
+    ],
+    "meta-build": [
+      "jarvis-journal.md"
+    ],
+    "\"i want you to remember our whole conversations to prevent redundancy\"": [
+      "jarvis-journal.md"
+    ],
+    "ai concierge research agent": [
+      "2026-02-05.md"
+    ],
+    "result:": [
+      "2026-02-05.md"
+    ],
+    "key insights:": [
+      "2026-02-05.md"
+    ],
+    "git commits:": [
+      "2026-02-05.md"
+    ],
+    "next step:": [
+      "2026-02-05.md"
+    ],
+    "documents created:": [
+      "2026-02-05.md"
+    ],
+    "lines of code written:": [
+      "2026-02-05.md"
+    ],
+    "summary:": [
+      "2026-02-05.md"
+    ],
+    "usage:": [
+      "2026-02-05.md"
+    ],
+    "agent:": [
+      "2026-02-05.md"
+    ],
+    "deliverables:": [
+      "2026-02-05.md"
+    ],
+    "technical details:": [
+      "2026-02-05.md"
+    ],
+    "ross feedback:": [
+      "2026-02-05.md"
+    ],
+    "what i was doing wrong:": [
+      "2026-02-05.md"
+    ],
+    "what i'm doing now:": [
+      "2026-02-05.md"
+    ],
+    "time:": [
+      "2026-02-05.md",
+      "2026-01-31.md",
+      "2025-02-06.md"
+    ],
+    "cold email mvp agent": [
+      "2026-02-05.md"
+    ],
+    "build system agent": [
+      "2026-02-05.md"
+    ],
+    "this is how i should use subagents by default": [
+      "2026-02-05.md"
+    ],
+    "total deliverables:": [
+      "2026-02-05.md"
+    ],
+    "morning (7:30am):": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "surprise element": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "day (8am-5pm):": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "delivery:": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "challenge:": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "constraint:": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "evening (5pm-6pm):": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "criteria:": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "mission control dashboard": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "the florida freedom calculator": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "voice interface integration": [
+      "surprise-build-2026-02-02.md"
+    ],
+    "golf club spec matcher": [
+      "2026-02-01.md"
+    ],
+    "taylormade p790": [
+      "2026-02-01.md"
+    ],
+    "total:": [
+      "2026-02-01.md",
+      "2025-02-06.md"
+    ],
+    "mizuno jpx 925 forged": [
+      "2026-02-01.md"
+    ],
+    "hasn't paid yet": [
+      "2026-02-01.md"
+    ],
+    "completed builds:": [
+      "2026-02-01.md"
+    ],
+    "request:": [
+      "2026-02-01.md"
+    ],
+    "goals.md framework": [
+      "2026-02-01.md"
+    ],
+    "projects/t150-market-comparison.md": [
+      "2026-02-01.md"
+    ],
+    "recommendation:": [
+      "2026-02-01.md"
+    ],
+    "morning brief system": [
+      "2026-02-01.md"
+    ],
+    "ping i230": [
+      "2026-02-01.md"
+    ],
+    "task dashboard": [
+      "2026-02-01.md"
+    ],
+    "srixon zxi5": [
+      "2026-02-01.md"
+    ],
+    "autonomous builder mode": [
+      "2026-02-01.md"
+    ],
+    "/clawd/scripts/daily-research-report.sh": [
+      "2026-01-31.md"
+    ],
+    "real-time updates": [
+      "2026-01-31.md"
+    ],
+    "1. github commits": [
+      "2026-01-31.md"
+    ],
+    "/golf_bot_pitch.md": [
+      "2026-01-31.md"
+    ],
+    "from:": [
+      "2026-01-31.md"
+    ],
+    "/clawd/scripts/headless-notion-config.md": [
+      "2026-01-31.md"
+    ],
+    "style:": [
+      "2026-01-31.md"
+    ],
+    "headless notion": [
+      "2026-01-31.md"
+    ],
+    "progress docs": [
+      "2026-01-31.md"
+    ],
+    "weak points:": [
+      "2026-01-31.md"
+    ],
+    "overnight coder": [
+      "2026-01-31.md"
+    ],
+    "/golf_bot_concept.md": [
+      "2026-01-31.md"
+    ],
+    "primary goal:": [
+      "2026-01-31.md"
+    ],
+    "timeline:": [
+      "2026-01-31.md"
+    ],
+    "why we tabled it:": [
+      "2026-01-31.md"
+    ],
+    "/clawd/scripts/overnight-coder-spec.md": [
+      "2026-01-31.md"
+    ],
+    "/friday_weekly_memo_template.md": [
+      "2026-01-31.md"
+    ],
+    "files saved:": [
+      "2026-01-31.md"
+    ],
+    "automatic assistant (things 3)": [
+      "2026-01-31.md"
+    ],
+    "greenlight criteria:": [
+      "2026-01-31.md"
+    ],
+    "3. judgment calls": [
+      "2026-01-31.md"
+    ],
+    "total impact:": [
+      "2026-01-31.md"
+    ],
+    "built & ready:": [
+      "2026-01-31.md"
+    ],
+    "focus: improvement first, monetization second": [
+      "2026-01-31.md"
+    ],
+    "/revenue_opportunities.md": [
+      "2026-01-31.md"
+    ],
+    "weekly reports": [
+      "2026-01-31.md"
+    ],
+    "2. friday weekly memo template": [
+      "2026-01-31.md"
+    ],
+    "decision_authority.md": [
+      "2026-01-31.md"
+    ],
+    "2. revenue filter": [
+      "2026-01-31.md"
+    ],
+    "x trends follower:": [
+      "2026-01-31.md"
+    ],
+    "time commitment:": [
+      "2026-01-31.md"
+    ],
+    "/clawd/scripts/things-automatic-assistant.sh": [
+      "2026-01-31.md"
+    ],
+    "/golf_bot_details.md": [
+      "2026-01-31.md"
+    ],
+    "status: jarvis is operational": [
+      "2026-01-31.md"
+    ],
+    "session transcript": [
+      "2026-01-31.md"
+    ],
+    "both documents ready for review": [
+      "2026-01-31.md"
+    ],
+    "serve ross first, monetize second.": [
+      "2026-01-31.md"
+    ],
+    "daily research report": [
+      "2026-01-31.md"
+    ],
+    "1. revenue opportunities dashboard": [
+      "2026-01-31.md"
+    ],
+    "response templates (12 scenarios):": [
+      "2025-02-06.md"
+    ],
+    "troubleshooting-guide.md": [
+      "2025-02-06.md"
+    ],
+    "total time to launch:": [
+      "2025-02-06.md"
+    ],
+    "email-templates.md": [
+      "2025-02-06.md"
+    ],
+    "launch-timing-guide.md": [
+      "2025-02-06.md"
+    ],
+    "complete, production-ready launch system:": [
+      "2025-02-06.md"
+    ],
+    "what worked well:": [
+      "2025-02-06.md"
+    ],
+    "email sequence (7 templates):": [
+      "2025-02-06.md"
+    ],
+    "this month:": [
+      "2025-02-06.md"
+    ],
+    "\u2705 complete:": [
+      "2025-02-06.md"
+    ],
+    "this week:": [
+      "2025-02-06.md"
+    ],
+    "task:": [
+      "2025-02-06.md"
+    ],
+    "time management:": [
+      "2025-02-06.md"
+    ],
+    "also polished:": [
+      "2025-02-06.md"
+    ],
+    "launch-golf-coaching.sh": [
+      "2025-02-06.md"
+    ],
+    "launch-package-readme.md": [
+      "2025-02-06.md"
+    ],
+    "launch-package-summary.md": [
+      "2025-02-06.md"
+    ],
+    "subagent:": [
+      "2025-02-06.md"
+    ],
+    "formspree-setup.md": [
+      "2025-02-06.md"
+    ],
+    "\ud83c\udfaf what ross needs to do:": [
+      "2025-02-06.md"
+    ],
+    "tomorrow:": [
+      "2025-02-06.md"
+    ],
+    "all in ~/clawd/:": [
+      "2025-02-06.md"
+    ],
+    "today:": [
+      "2025-02-06.md"
+    ],
+    "reddit-post-final.md": [
+      "2025-02-06.md"
+    ],
+    "launch script features:": [
+      "2025-02-06.md"
+    ],
+    "quick-launch-card.md": [
+      "2025-02-06.md"
+    ],
+    "final-launch-checklist.md": [
+      "2025-02-06.md"
+    ],
+    "if doing again:": [
+      "2025-02-06.md"
+    ]
+  },
+  "last_updated": "2026-02-07T15:59:22.798998"
+}

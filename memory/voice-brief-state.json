@@ -1,0 +1,19 @@
+{
+  "last_generated": "2026-02-05",
+  "history": [
+    {
+      "date": "2026-02-04",
+      "audio_path": "/Users/clawdbot/clawd/morning-briefs/morning-brief-2026-02-04.opus",
+      "transcript_path": "/Users/clawdbot/clawd/morning-briefs/morning-brief-2026-02-04.txt",
+      "char_count": 441,
+      "timestamp": "2026-02-04T12:41:06.999613"
+    },
+    {
+      "date": "2026-02-05",
+      "audio_path": "/Users/clawdbot/clawd/morning-briefs/morning-brief-2026-02-05.opus",
+      "transcript_path": "/Users/clawdbot/clawd/morning-briefs/morning-brief-2026-02-05.txt",
+      "char_count": 456,
+      "timestamp": "2026-02-05T08:03:18.603208"
+    }
+  ]
+}

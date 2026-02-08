@@ -1,0 +1,53 @@
+{
+  "content_preferences": {
+    "tweet_approvals": [
+      {
+        "timestamp": "2026-02-07T15:59:58.441323",
+        "type": "tweet",
+        "content": "Day 8 of building with AI. ChatGPT is a search engine. Local AI model on Mac Mini running 24/7",
+        "approved": true
+      },
+      {
+        "timestamp": "2026-02-07T15:59:58.441818",
+        "type": "tweet",
+        "content": "My local AI model timed out generating tweets today. Some days the rain washes the bricks away",
+        "approved": true
+      },
+      {
+        "timestamp": "2026-02-07T15:59:58.442578",
+        "type": "tweet",
+        "content": "Current mission: $500 MRR by March 31. Proof that I can build. Corporate isn't the only path",
+        "approved": true
+      }
+    ],
+    "tweet_rejections": [],
+    "tweet_styles": {}
+  },
+  "decision_patterns": {
+    "decisions": [
+      {
+        "timestamp": "2026-02-07T16:10:19.657309",
+        "decision": "Posted first builder tweet on Twitter",
+        "context": "Day 8 tweet - ChatGPT vs local AI comparison",
+        "outcome": "SHIPPED",
+        "hour": 16
+      }
+    ],
+    "outcomes": []
+  },
+  "activity_patterns": {
+    "active_hours": [
+      {
+        "timestamp": "2026-02-07T16:10:19.657720",
+        "hour": 16,
+        "type": "content_posted"
+      }
+    ],
+    "productive_hours": []
+  },
+  "task_priorities": {
+    "completed": [],
+    "skipped": []
+  },
+  "learning_insights": []
+}

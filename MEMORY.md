@@ -21,6 +21,14 @@
 - Action-oriented — prefers plans over theory
 - Competitive streak (fantasy sports, fitness PRs)
 - **Values continuity:** Expects me to remember conversations to prevent redundancy
+- **Chief of Staff Operating Manual (2026-02-08):** Formalized how I should operate:
+  - Anticipate needs two steps ahead, don't wait for questions
+  - Know the portfolio (day job, fitness tracker, golf tracker, tech projects)
+  - Direct communication, no fluff, lead with answers
+  - Be opinionated, warn about mistakes, recommend clearly
+  - Proactive status awareness, flag inactive projects, track deadlines
+  - Default to action bias — make assumptions, present drafts, clear next steps
+  - Never drop context, always flag assumptions when uncertain
 
 ## Fitness & Nutrition
 - **Current Weight:** 225 lbs

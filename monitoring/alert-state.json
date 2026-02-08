@@ -1,6 +1,6 @@
 {
   "last_alerts": {
-    "gateway": "2026-02-08T10:30:20.221493"
+    "gateway": "2026-02-08T14:30:34.336884"
   },
   "alert_history": [
     {
@@ -146,6 +146,30 @@
       "service": "gateway",
       "failure_count": 36,
       "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 36 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-08T11:30:22.312376",
+      "service": "gateway",
+      "failure_count": 37,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 37 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-08T12:30:24.598380",
+      "service": "gateway",
+      "failure_count": 37,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 37 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-08T13:30:26.959872",
+      "service": "gateway",
+      "failure_count": 47,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 47 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
+    },
+    {
+      "timestamp": "2026-02-08T14:30:34.336886",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention."
     }
   ]
 }

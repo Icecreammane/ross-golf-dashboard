@@ -1,0 +1,77 @@
+{
+  "current_work": {
+    "timestamp": "2026-02-07T16:58:18.164262",
+    "active_topics": [
+      "weekend_build"
+    ],
+    "recent_files": [
+      {
+        "path": "/Users/clawdbot/clawd/scripts/context_loader.py",
+        "name": "context_loader.py",
+        "modified": "2026-02-07T16:58:05.464047"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/decision_logger.py",
+        "name": "decision_logger.py",
+        "modified": "2026-02-07T16:57:22.338253"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/vision_processor.py",
+        "name": "vision_processor.py",
+        "modified": "2026-02-07T16:54:14.967252"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/event_monitor.py",
+        "name": "event_monitor.py",
+        "modified": "2026-02-07T16:53:47.907382"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/pattern_detection.py",
+        "name": "pattern_detection.py",
+        "modified": "2026-02-07T16:53:21.307367"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/voice_brief.py",
+        "name": "voice_brief.py",
+        "modified": "2026-02-07T16:33:57.847145"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/reddit_scanner.py",
+        "name": "reddit_scanner.py",
+        "modified": "2026-02-07T16:33:07.931057"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/learning_loop.py",
+        "name": "learning_loop.py",
+        "modified": "2026-02-07T15:59:51.086367"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/persistent_memory.py",
+        "name": "persistent_memory.py",
+        "modified": "2026-02-07T15:59:18.174268"
+      },
+      {
+        "path": "/Users/clawdbot/clawd/scripts/jarvis-daemon.py",
+        "name": "jarvis-daemon.py",
+        "modified": "2026-02-07T15:04:46.420033"
+      }
+    ],
+    "relevant_docs": {
+      "weekend_build": [
+        "/Users/clawdbot/clawd/WEEKEND_BUILD.md",
+        "/Users/clawdbot/clawd/ARCHITECTURE.md"
+      ]
+    },
+    "related_decisions": {
+      "weekend_build": []
+    },
+    "memory_context": {
+      "weekend_build": "Searching for: weekend build\n\n1. 2026-02-07.md (topic)\n   Match: workflow optimizations - weekend build plan \ud83d\ude80\n\n"
+    }
+  },
+  "recent_files": [],
+  "active_topics": [
+    "weekend_build"
+  ],
+  "loaded_context": {}
+}

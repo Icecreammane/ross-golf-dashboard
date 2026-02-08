@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-07T20:54:11.344560",
+  "categories": {
+    "workout": {
+      "name": "Workout Warrior",
+      "emoji": "\ud83d\udcaa",
+      "current_streak": 1,
+      "longest_streak": 1,
+      "total_wins": 1,
+      "last_win_date": "2026-02-07T20:54:11.344216"
+    },
+    "protein": {
+      "name": "Protein Pro",
+      "emoji": "\ud83e\udd69",
+      "current_streak": 1,
+      "longest_streak": 1,
+      "total_wins": 1,
+      "last_win_date": "2026-02-07T20:54:11.344410"
+    },
+    "side_project": {
+      "name": "Builder Mode",
+      "emoji": "\ud83d\udd28",
+      "current_streak": 1,
+      "longest_streak": 1,
+      "total_wins": 1,
+      "last_win_date": "2026-02-07T20:54:11.344553"
+    },
+    "revenue_action": {
+      "name": "Money Moves",
+      "emoji": "\ud83d\udcb0",
+      "current_streak": 0,
+      "longest_streak": 0,
+      "total_wins": 0,
+      "last_win_date": null
+    }
+  },
+  "daily_wins": [
+    {
+      "timestamp": "2026-02-07T20:54:11.344218",
+      "category": "workout",
+      "description": "Chest day - 90 minutes",
+      "impact": "high",
+      "streak_at_time": 1
+    },
+    {
+      "timestamp": "2026-02-07T20:54:11.344412",
+      "category": "protein",
+      "description": "Hit 200g protein target",
+      "impact": "medium",
+      "streak_at_time": 1
+    },
+    {
+      "timestamp": "2026-02-07T20:54:11.344555",
+      "category": "side_project",
+      "description": "Built party demo apps",
+      "impact": "high",
+      "streak_at_time": 1
+    }
+  ],
+  "achievements": [],
+  "multiplier": 1.75,
+  "level": 1,
+  "total_points": 17
+}

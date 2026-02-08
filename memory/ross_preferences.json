@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-07T20:53:21.286217",
+  "categories": {
+    "build_style": {
+      "likes": [
+        "Practical, tangible results",
+        "Fast builds (under 1 hour)",
+        "Competitive/gamified features",
+        "Clear metrics and progress",
+        "Revenue-focused projects"
+      ],
+      "dislikes": [
+        "Abstract/philosophical projects",
+        "Overly complex systems",
+        "Things that take days to see results",
+        "Tools he won't actually use"
+      ]
+    },
+    "communication": {
+      "likes": [
+        "Options presented (A/B/C format)",
+        "Quick, direct responses",
+        "Recommendations with reasoning",
+        "Actions over explanations"
+      ],
+      "dislikes": [
+        "Long explanations without action",
+        "Open-ended 'what do you think?' questions",
+        "Overthinking simple decisions"
+      ]
+    },
+    "demo_style": {
+      "likes": [
+        "Interactive (people can touch/use it)",
+        "Fun/entertaining first, impressive second",
+        "Works for groups (volleyball crew, parties)",
+        "Simple to explain"
+      ],
+      "dislikes": [
+        "Too technical/nerdy",
+        "Requires long setup/explanation",
+        "Shows off personal stuff to strangers"
+      ]
+    },
+    "goals": {
+      "primary": [
+        "$500 MRR by March 31",
+        "Escape corporate job",
+        "Move to Florida (beach volleyball life)",
+        "Build recurring income streams"
+      ],
+      "secondary": [
+        "Win fantasy championship",
+        "Hit fitness goals (200g protein, 2200 cal)",
+        "Level up volleyball skills",
+        "Build in public on social"
+      ]
+    },
+    "personality": {
+      "traits": [
+        "Competitive (responds to challenges)",
+        "Results-driven (show me the metrics)",
+        "Action-oriented (just ship it)",
+        "Practical > Theoretical",
+        "Values efficiency and speed"
+      ],
+      "motivators": [
+        "Visible progress",
+        "Competition (with self or others)",
+        "Money/revenue potential",
+        "Freedom/autonomy",
+        "Winning/achievement"
+      ]
+    }
+  },
+  "learned_patterns": [
+    {
+      "timestamp": "2026-02-07T20:53:21.286067",
+      "pattern": "Ross responds well to 'Ship it' moments - decisive, action-oriented",
+      "confidence": "high"
+    },
+    {
+      "timestamp": "2026-02-07T20:53:21.286214",
+      "pattern": "When given abstract options, Ross says 'pivot to something else entirely' - prefers concrete ideas",
+      "confidence": "high"
+    }
+  ],
+  "decision_history": [
+    {
+      "timestamp": "2026-02-07T20:53:21.285890",
+      "context": "Saturday night build - party demo vs fun personal project",
+      "options": [
+        "Roast Bot + Ask Anything (party demos)",
+        "Fantasy Football AI",
+        "Volleyball analyzer",
+        "Infrastructure improvements"
+      ],
+      "choice": "Party demos + then pivot to infrastructure",
+      "reasoning": "Wanted practical party demo, then pivoted to making Jarvis smarter + personal motivation tool"
+    }
+  ]
+}

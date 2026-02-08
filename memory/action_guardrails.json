@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "dry_run_mode": false,
+  "emergency_brake": false,
+  "action_levels": {
+    "level_1": {
+      "auto_execute": true,
+      "notify_after": true,
+      "actions": [
+        "memory_commit",
+        "reminder_send",
+        "health_check"
+      ]
+    },
+    "level_2": {
+      "auto_execute": true,
+      "notify_before": true,
+      "notify_after": false,
+      "actions": [
+        "streak_warning",
+        "protein_reminder",
+        "task_queue_populate"
+      ]
+    },
+    "level_3": {
+      "auto_execute": false,
+      "require_approval": true,
+      "actions": [
+        "git_push",
+        "file_delete",
+        "config_change"
+      ]
+    }
+  },
+  "rate_limits": {
+    "global_budget": 50,
+    "per_action_budget": 10,
+    "current_hour_count": 0,
+    "hour_reset_time": "2026-02-07T22:42:38.426068"
+  },
+  "blocked_actions": [],
+  "pending_approvals": []
+}
