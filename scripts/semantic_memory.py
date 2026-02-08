@@ -1,368 +1,403 @@
-#!/Users/clawdbot/clawd/memory/venv/bin/python3
+#!/usr/bin/env python3
 """
-Semantic Memory System for Jarvis
-Production-ready vector search over memory files and conversations.
+Semantic Memory System
+Vector-based memory search with emotional tagging and relationship graphs
+Makes memory feel continuous instead of just reading logs
 """
 
-import os
 import json
-import time
-import glob
+import re
+import hashlib
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple
-import hashlib
+from collections import defaultdict
 
-try:
-    import chromadb
-    from chromadb.config import Settings
-    from sentence_transformers import SentenceTransformer
-except ImportError as e:
-    print(f"Missing dependencies: {e}")
-    print("Install with: pip3 install chromadb sentence-transformers")
-    exit(1)
-
+WORKSPACE = Path.home() / "clawd"
+MEMORY_INDEX = WORKSPACE / "memory" / "semantic_index.json"
 
 class SemanticMemory:
-    """Vector-based semantic search over Jarvis's memory."""
+    """Semantic memory system with emotional tagging"""
     
-    def __init__(self, config_path: str = None):
-        """Initialize semantic memory system."""
-        if config_path is None:
-            config_path = "/Users/clawdbot/clawd/memory/memory_config.json"
-        
-        with open(config_path, 'r') as f:
-            self.config = json.load(f)
-        
-        # Initialize Chroma client
-        self.client = chromadb.PersistentClient(
-            path=self.config['vector_db_path'],
-            settings=Settings(
-                anonymized_telemetry=False,
-                allow_reset=True
-            )
-        )
-        
-        # Get or create collection
-        self.collection = self.client.get_or_create_collection(
-            name=self.config['collection_name'],
-            metadata={"hnsw:space": "cosine"}
-        )
-        
-        # Initialize embedding model (lazy load)
-        self._model = None
-        
-        print(f"✓ Semantic memory initialized")
-        print(f"  DB: {self.config['vector_db_path']}")
-        print(f"  Collection: {self.config['collection_name']}")
+    def __init__(self):
+        self.index_file = MEMORY_INDEX
+        self.load_index()
     
-    @property
-    def model(self):
-        """Lazy load embedding model."""
-        if self._model is None:
-            print(f"Loading embedding model: {self.config['embedding_model']}")
-            self._model = SentenceTransformer(self.config['embedding_model'])
-        return self._model
+    def load_index(self):
+        """Load semantic memory index"""
+        if self.index_file.exists():
+            with open(self.index_file) as f:
+                self.index = json.load(f)
+        else:
+            self.index = {
+                "version": "1.0",
+                "last_updated": datetime.now().isoformat(),
+                "memories": [],
+                "relationships": [],
+                "emotional_tags": {},
+                "key_moments": []
+            }
     
-    def chunk_text(self, text: str, metadata: Dict) -> List[Tuple[str, Dict]]:
-        """Split text into chunks with metadata."""
-        chunk_size = self.config['chunk_size']
-        overlap = self.config['chunk_overlap']
-        
-        # Simple paragraph-based chunking
-        paragraphs = [p.strip() for p in text.split('\n\n') if p.strip()]
-        
-        chunks = []
-        current_chunk = []
-        current_size = 0
-        
-        for para in paragraphs:
-            para_size = len(para)
-            
-            if current_size + para_size > chunk_size and current_chunk:
-                # Save current chunk
-                chunk_text = '\n\n'.join(current_chunk)
-                chunk_meta = metadata.copy()
-                chunk_meta['chunk_id'] = len(chunks)
-                chunks.append((chunk_text, chunk_meta))
-                
-                # Start new chunk with overlap
-                if overlap > 0 and current_chunk:
-                    current_chunk = [current_chunk[-1]]  # Keep last paragraph
-                    current_size = len(current_chunk[0])
-                else:
-                    current_chunk = []
-                    current_size = 0
-            
-            current_chunk.append(para)
-            current_size += para_size
-        
-        # Add final chunk
-        if current_chunk:
-            chunk_text = '\n\n'.join(current_chunk)
-            chunk_meta = metadata.copy()
-            chunk_meta['chunk_id'] = len(chunks)
-            chunks.append((chunk_text, chunk_meta))
-        
-        return chunks
+    def save_index(self):
+        """Save semantic memory index"""
+        self.index["last_updated"] = datetime.now().isoformat()
+        self.index_file.parent.mkdir(exist_ok=True)
+        with open(self.index_file, 'w') as f:
+            json.dump(self.index, f, indent=2)
     
-    def embed_file(self, file_path: str, source_type: str) -> int:
-        """Embed a single file into the vector database."""
-        if not os.path.exists(file_path):
-            print(f"⚠ File not found: {file_path}")
-            return 0
+    def create_memory_id(self, content, timestamp):
+        """Create unique ID for memory"""
+        data = f"{content}{timestamp}"
+        return hashlib.md5(data.encode()).hexdigest()[:12]
+    
+    def extract_keywords(self, text):
+        """Extract keywords from text"""
+        # Remove common words
+        stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 
+                      'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been',
+                      'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 
+                      'should', 'could', 'can', 'may', 'might', 'must', 'i', 'you', 'he',
+                      'she', 'it', 'we', 'they', 'this', 'that', 'these', 'those'}
         
-        with open(file_path, 'r') as f:
-            content = f.read()
+        # Extract words
+        words = re.findall(r'\b[a-z]{3,}\b', text.lower())
         
-        if not content.strip():
-            print(f"⚠ Empty file: {file_path}")
-            return 0
+        # Filter and get unique
+        keywords = list(set([w for w in words if w not in stop_words]))
         
-        # Create metadata
-        file_stat = os.stat(file_path)
-        metadata = {
-            'source_file': file_path,
-            'source_type': source_type,
-            'file_name': os.path.basename(file_path),
-            'modified_time': datetime.fromtimestamp(file_stat.st_mtime).isoformat(),
-            'embedded_time': datetime.now().isoformat()
+        return keywords[:20]  # Top 20 keywords
+    
+    def detect_emotion(self, text):
+        """Detect emotional tone of text"""
+        text_lower = text.lower()
+        
+        # Emotion patterns
+        emotions = {
+            "excited": [r'(amazing|awesome|killer|insane|crushing|beast|hell yeah|fire|psychotic|ship it)'],
+            "frustrated": [r'(annoying|frustrating|stuck|broken|failing|not working|error)'],
+            "satisfied": [r'(shipped|complete|done|working|success|operational|built)'],
+            "uncertain": [r'(not sure|maybe|might|could be|possibly|wondering)'],
+            "motivated": [r'(let\'s go|ready|motivated|pumped|focused|locked in)'],
+            "tired": [r'(tired|exhausted|burnt|drained|done for)']
         }
         
-        # Chunk the content
-        chunks = self.chunk_text(content, metadata)
+        detected = []
+        for emotion, patterns in emotions.items():
+            for pattern in patterns:
+                if re.search(pattern, text_lower):
+                    detected.append(emotion)
+                    break
         
-        if not chunks:
-            print(f"⚠ No chunks created from: {file_path}")
-            return 0
-        
-        # Create embeddings
-        texts = [chunk[0] for chunk in chunks]
-        embeddings = self.model.encode(texts, show_progress_bar=False).tolist()
-        
-        # Generate IDs
-        ids = []
-        metadatas = []
-        for i, (text, meta) in enumerate(chunks):
-            # Use content hash + metadata for stable IDs
-            content_hash = hashlib.md5(text.encode()).hexdigest()[:8]
-            chunk_id = f"{meta['file_name']}_{content_hash}_{i}"
-            ids.append(chunk_id)
-            metadatas.append(meta)
-        
-        # Add to collection (upsert to handle updates)
-        self.collection.upsert(
-            ids=ids,
-            embeddings=embeddings,
-            documents=texts,
-            metadatas=metadatas
-        )
-        
-        print(f"✓ Embedded {len(chunks)} chunks from {os.path.basename(file_path)}")
-        return len(chunks)
+        return detected if detected else ["neutral"]
     
-    def embed_all_sources(self) -> Dict[str, int]:
-        """Embed all configured source files."""
-        stats = {}
+    def add_memory(self, content, context=None, importance="medium"):
+        """Add a memory with semantic indexing"""
+        timestamp = datetime.now().isoformat()
+        memory_id = self.create_memory_id(content, timestamp)
         
-        # Embed main memory file
-        if os.path.exists(self.config['sources']['memory_file']):
-            stats['MEMORY.md'] = self.embed_file(
-                self.config['sources']['memory_file'],
-                'memory'
-            )
+        # Extract features
+        keywords = self.extract_keywords(content)
+        emotions = self.detect_emotion(content)
         
-        # Embed journal
-        if os.path.exists(self.config['sources']['journal_file']):
-            stats['jarvis-journal.md'] = self.embed_file(
-                self.config['sources']['journal_file'],
-                'journal'
-            )
+        memory = {
+            "id": memory_id,
+            "timestamp": timestamp,
+            "content": content,
+            "context": context or {},
+            "keywords": keywords,
+            "emotions": emotions,
+            "importance": importance,
+            "related_memories": []
+        }
         
-        # Embed daily logs
-        daily_logs = glob.glob(self.config['sources']['daily_logs_pattern'])
-        for log_file in daily_logs:
-            file_name = os.path.basename(log_file)
-            stats[file_name] = self.embed_file(log_file, 'daily_log')
+        # Find related memories (keyword overlap)
+        for existing in self.index["memories"]:
+            overlap = set(keywords) & set(existing["keywords"])
+            if len(overlap) >= 2:  # At least 2 keywords in common
+                memory["related_memories"].append(existing["id"])
+                
+                # Add bidirectional relationship
+                if memory_id not in existing.get("related_memories", []):
+                    existing["related_memories"].append(memory_id)
         
-        return stats
+        self.index["memories"].append(memory)
+        
+        # Track emotional patterns
+        for emotion in emotions:
+            if emotion not in self.index["emotional_tags"]:
+                self.index["emotional_tags"][emotion] = []
+            self.index["emotional_tags"][emotion].append(memory_id)
+        
+        # Mark key moments (high importance + strong emotion)
+        if importance == "high" and any(e in ["excited", "satisfied", "motivated"] for e in emotions):
+            self.index["key_moments"].append({
+                "memory_id": memory_id,
+                "timestamp": timestamp,
+                "summary": content[:100]
+            })
+        
+        self.save_index()
+        return memory_id
     
-    def search(self, query: str, n_results: int = None, 
-               source_type: str = None) -> List[Dict]:
-        """
-        Search memory with semantic similarity.
+    def search(self, query, limit=5):
+        """Search memories semantically"""
+        query_keywords = self.extract_keywords(query)
+        query_emotions = self.detect_emotion(query)
         
-        Args:
-            query: Natural language search query
-            n_results: Number of results to return (default from config)
-            source_type: Filter by source type (memory/journal/daily_log/conversation)
+        # Score each memory
+        scored_memories = []
         
-        Returns:
-            List of results with text, metadata, and relevance scores
-        """
-        start_time = time.time()
-        
-        if n_results is None:
-            n_results = self.config['max_search_results']
-        
-        # Embed query
-        query_embedding = self.model.encode([query], show_progress_bar=False).tolist()[0]
-        
-        # Build where filter
-        where_filter = None
-        if source_type:
-            where_filter = {"source_type": source_type}
-        
-        # Search collection
-        results = self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=n_results,
-            where=where_filter
-        )
-        
-        # Format results
-        formatted_results = []
-        if results['ids'] and results['ids'][0]:
-            for i in range(len(results['ids'][0])):
-                formatted_results.append({
-                    'text': results['documents'][0][i],
-                    'metadata': results['metadatas'][0][i],
-                    'distance': results['distances'][0][i] if 'distances' in results else None,
-                    'relevance': 1.0 - (results['distances'][0][i] if 'distances' in results else 0.5)
+        for memory in self.index["memories"]:
+            score = 0
+            
+            # Keyword overlap
+            keyword_overlap = set(query_keywords) & set(memory["keywords"])
+            score += len(keyword_overlap) * 2
+            
+            # Emotion match
+            emotion_overlap = set(query_emotions) & set(memory["emotions"])
+            score += len(emotion_overlap) * 3
+            
+            # Importance boost
+            importance_boost = {"low": 0, "medium": 1, "high": 3}
+            score += importance_boost.get(memory["importance"], 0)
+            
+            # Recency boost (recent memories slightly favored)
+            days_ago = (datetime.now() - datetime.fromisoformat(memory["timestamp"])).days
+            if days_ago <= 7:
+                score += 2
+            elif days_ago <= 30:
+                score += 1
+            
+            if score > 0:
+                scored_memories.append({
+                    **memory,
+                    "relevance_score": score
                 })
         
-        elapsed_ms = (time.time() - start_time) * 1000
+        # Sort by score
+        scored_memories.sort(key=lambda x: x["relevance_score"], reverse=True)
         
-        # Check performance target
-        if elapsed_ms > self.config['search_timeout_ms']:
-            print(f"⚠ Search took {elapsed_ms:.0f}ms (target: {self.config['search_timeout_ms']}ms)")
-        
-        return formatted_results
+        return scored_memories[:limit]
     
-    def check_memory_before_response(self, user_message: str) -> Optional[str]:
-        """
-        Check memory for relevant context before responding.
-        Returns context summary if relevant memories found, None otherwise.
-        """
-        results = self.search(user_message, n_results=3)
+    def get_emotional_context(self, emotion):
+        """Get all memories with specific emotion"""
+        memory_ids = self.index["emotional_tags"].get(emotion, [])
         
-        if not results or results[0]['relevance'] < 0.7:
-            return None
+        memories = [
+            m for m in self.index["memories"]
+            if m["id"] in memory_ids
+        ]
         
-        # Format context
-        context_parts = []
-        for i, result in enumerate(results):
-            if result['relevance'] < 0.6:
-                break
-            
-            source = result['metadata'].get('file_name', 'unknown')
-            text = result['text'][:200] + '...' if len(result['text']) > 200 else result['text']
-            
-            context_parts.append(f"From {source}: {text}")
-        
-        if context_parts:
-            return "Context from memory:\n" + "\n\n".join(context_parts)
-        
-        return None
+        return memories
     
-    def get_stats(self) -> Dict:
-        """Get statistics about the vector database."""
-        count = self.collection.count()
+    def get_key_moments(self, limit=10):
+        """Get key moments chronologically"""
+        return self.index["key_moments"][-limit:]
+    
+    def get_related_memories(self, memory_id):
+        """Get memories related to a specific memory"""
+        memory = next((m for m in self.index["memories"] if m["id"] == memory_id), None)
         
-        # Get breakdown by source type
-        source_types = {}
-        if count > 0:
-            # Sample to get source type distribution
-            sample = self.collection.get(limit=1000)
-            if sample['metadatas']:
-                for meta in sample['metadatas']:
-                    stype = meta.get('source_type', 'unknown')
-                    source_types[stype] = source_types.get(stype, 0) + 1
+        if not memory:
+            return []
+        
+        related_ids = memory.get("related_memories", [])
+        
+        related = [
+            m for m in self.index["memories"]
+            if m["id"] in related_ids
+        ]
+        
+        return related
+    
+    def build_relationship_graph(self):
+        """Build graph of memory relationships"""
+        graph = defaultdict(list)
+        
+        for memory in self.index["memories"]:
+            memory_id = memory["id"]
+            for related_id in memory.get("related_memories", []):
+                graph[memory_id].append(related_id)
+        
+        return dict(graph)
+    
+    def get_session_summary(self, days=1):
+        """Get summary of recent memories"""
+        cutoff = datetime.now() - timedelta(days=days)
+        
+        recent = [
+            m for m in self.index["memories"]
+            if datetime.fromisoformat(m["timestamp"]) > cutoff
+        ]
+        
+        # Group by emotion
+        by_emotion = defaultdict(list)
+        for memory in recent:
+            for emotion in memory["emotions"]:
+                by_emotion[emotion].append(memory["content"][:100])
+        
+        # Count keywords
+        all_keywords = []
+        for memory in recent:
+            all_keywords.extend(memory["keywords"])
+        
+        keyword_counts = defaultdict(int)
+        for keyword in all_keywords:
+            keyword_counts[keyword] += 1
+        
+        top_keywords = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)[:10]
         
         return {
-            'total_chunks': count,
-            'source_types': source_types,
-            'collection_name': self.config['collection_name'],
-            'db_path': self.config['vector_db_path']
+            "memory_count": len(recent),
+            "emotions": dict(by_emotion),
+            "top_topics": [k for k, v in top_keywords],
+            "key_moments": [m for m in self.index["key_moments"] 
+                           if datetime.fromisoformat(m["timestamp"]) > cutoff]
         }
     
-    def prune_old_embeddings(self, days: int = None) -> int:
-        """Remove embeddings older than specified days."""
-        if days is None:
-            days = self.config['retention_days']
+    def generate_context_prompt(self, current_topic=None):
+        """Generate context prompt for current session"""
+        # Get recent key moments
+        key_moments = self.get_key_moments(limit=5)
         
-        cutoff_date = datetime.now() - timedelta(days=days)
-        cutoff_iso = cutoff_date.isoformat()
+        # Get recent session summary
+        summary = self.get_session_summary(days=2)
         
-        # Get all documents
-        all_docs = self.collection.get()
+        # Search for related memories if topic provided
+        related = []
+        if current_topic:
+            related = self.search(current_topic, limit=3)
         
-        # Find old IDs
-        old_ids = []
-        for i, meta in enumerate(all_docs['metadatas']):
-            embedded_time = meta.get('embedded_time', '')
-            if embedded_time and embedded_time < cutoff_iso:
-                old_ids.append(all_docs['ids'][i])
+        prompt_parts = []
         
-        # Delete old embeddings
-        if old_ids:
-            self.collection.delete(ids=old_ids)
-            print(f"✓ Pruned {len(old_ids)} embeddings older than {days} days")
+        if key_moments:
+            prompt_parts.append("🔑 KEY MOMENTS:")
+            for moment in key_moments[-3:]:  # Last 3
+                timestamp = datetime.fromisoformat(moment["timestamp"])
+                prompt_parts.append(f"  • {timestamp.strftime('%m/%d %I:%M%p')}: {moment['summary']}")
         
-        return len(old_ids)
+        if summary["top_topics"]:
+            prompt_parts.append(f"\n📌 RECENT TOPICS: {', '.join(summary['top_topics'][:5])}")
+        
+        if related:
+            prompt_parts.append("\n💭 RELATED MEMORIES:")
+            for mem in related:
+                timestamp = datetime.fromisoformat(mem["timestamp"])
+                prompt_parts.append(f"  • {timestamp.strftime('%m/%d')}: {mem['content'][:80]}...")
+        
+        return "\n".join(prompt_parts) if prompt_parts else "No recent context"
     
-    def reset(self):
-        """Clear all embeddings (use with caution!)."""
-        self.client.delete_collection(self.config['collection_name'])
-        self.collection = self.client.get_or_create_collection(
-            name=self.config['collection_name'],
-            metadata={"hnsw:space": "cosine"}
-        )
-        print("✓ Memory database reset")
+    def index_memory_files(self):
+        """Index all memory markdown files"""
+        memory_dir = WORKSPACE / "memory"
+        
+        if not memory_dir.exists():
+            return
+        
+        count = 0
+        
+        # Index daily logs
+        for md_file in memory_dir.glob("2026-*.md"):
+            with open(md_file) as f:
+                content = f.read()
+            
+            # Split into sections
+            sections = re.split(r'^## ', content, flags=re.MULTILINE)
+            
+            for section in sections[1:]:  # Skip first (empty)
+                lines = section.split('\n', 1)
+                if len(lines) < 2:
+                    continue
+                
+                title = lines[0].strip()
+                body = lines[1].strip()
+                
+                if len(body) > 50:  # Meaningful content
+                    # Detect importance
+                    importance = "high" if any(marker in body.lower() for marker in 
+                                             ['shipped', 'complete', 'built', 'operational']) else "medium"
+                    
+                    self.add_memory(
+                        content=f"{title}: {body[:200]}",
+                        context={"source": str(md_file.name), "section": title},
+                        importance=importance
+                    )
+                    count += 1
+        
+        print(f"✅ Indexed {count} memories from daily logs")
+
+
+def test_semantic_memory():
+    """Test semantic memory system"""
+    sm = SemanticMemory()
+    
+    print("=" * 70)
+    print("🧠 SEMANTIC MEMORY SYSTEM TEST")
+    print("=" * 70)
+    print()
+    
+    # Add test memories
+    test_memories = [
+        ("Built party demo apps with Roast Bot", {"excitement": "high"}, "high"),
+        ("Shipped Preference Engine to learn Ross's patterns", {}, "high"),
+        ("Win Streak Amplifier gamifies daily progress", {}, "high"),
+        ("Cool down system for post-build recovery", {}, "medium"),
+        ("Feeling tired but productive", {}, "low"),
+    ]
+    
+    print("📝 Adding test memories...")
+    for content, context, importance in test_memories:
+        memory_id = sm.add_memory(content, context, importance)
+        print(f"  ✅ {memory_id}: {content[:50]}...")
+    
+    print()
+    
+    # Test search
+    print("🔍 Search: 'party demo'")
+    results = sm.search("party demo", limit=3)
+    for result in results:
+        print(f"  Score {result['relevance_score']}: {result['content'][:60]}...")
+    
+    print()
+    
+    # Test emotional search
+    print("😊 Memories with 'excited' emotion:")
+    excited = sm.get_emotional_context("excited")
+    for mem in excited[:3]:
+        print(f"  • {mem['content'][:60]}...")
+    
+    print()
+    
+    # Key moments
+    print("🔑 Key moments:")
+    moments = sm.get_key_moments(limit=5)
+    for moment in moments:
+        print(f"  • {moment['summary']}")
+    
+    print()
+    
+    # Context prompt
+    print("💭 Context prompt for 'building':")
+    prompt = sm.generate_context_prompt("building systems")
+    print(prompt)
+    
+    print()
+    print("=" * 70)
 
 
 def main():
-    """Test/demo the semantic memory system."""
+    """Main entry point"""
     import sys
     
-    mem = SemanticMemory()
-    
-    if len(sys.argv) > 1:
-        command = sys.argv[1]
-        
-        if command == 'embed':
-            print("Embedding all sources...")
-            stats = mem.embed_all_sources()
-            print("\nEmbedding complete:")
-            for source, count in stats.items():
-                print(f"  {source}: {count} chunks")
-        
-        elif command == 'stats':
-            stats = mem.get_stats()
-            print(f"Total chunks: {stats['total_chunks']}")
-            print(f"Collection: {stats['collection_name']}")
-            print(f"Source breakdown:")
-            for stype, count in stats['source_types'].items():
-                print(f"  {stype}: {count}")
-        
-        elif command == 'prune':
-            days = int(sys.argv[2]) if len(sys.argv) > 2 else 30
-            pruned = mem.prune_old_embeddings(days)
-            print(f"Pruned {pruned} old embeddings")
-        
-        elif command == 'reset':
-            confirm = input("Reset all embeddings? (yes/no): ")
-            if confirm.lower() == 'yes':
-                mem.reset()
-        
-        else:
-            print(f"Unknown command: {command}")
-            print("Usage: semantic_memory.py [embed|stats|prune|reset]")
-    
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        test_semantic_memory()
+    elif len(sys.argv) > 1 and sys.argv[1] == "index":
+        sm = SemanticMemory()
+        sm.index_memory_files()
     else:
-        print("Semantic Memory System")
-        print("Usage: semantic_memory.py [embed|stats|prune|reset]")
+        sm = SemanticMemory()
+        print(sm.generate_context_prompt())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -1,90 +1,6 @@
 {
-  "last_check": "2026-02-07T21:14:50.416935",
+  "last_check": "2026-02-07T21:29:51.000154",
   "check_history": [
-    {
-      "timestamp": "2026-02-07T12:59:25.877482",
-      "results": {
-        "gateway": {
-          "status": "down",
-          "message": "Gateway process not found"
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 70.8
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 53.9
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
-    {
-      "timestamp": "2026-02-07T13:04:26.087448",
-      "results": {
-        "gateway": {
-          "status": "down",
-          "message": "Gateway process not found"
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 70.8
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 53.7
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
-    {
-      "timestamp": "2026-02-07T13:09:26.296394",
-      "results": {
-        "gateway": {
-          "status": "down",
-          "message": "Gateway process not found"
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 70.8
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 53.8
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
     {
       "timestamp": "2026-02-07T13:14:26.495748",
       "results": {
@@ -2795,6 +2711,90 @@
         "memory": {
           "status": "ok",
           "percent_used": 57.5
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-07T21:19:50.617684",
+      "results": {
+        "gateway": {
+          "status": "ok",
+          "pid": 47129
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "ok",
+          "port": 8080
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 70.8
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 58.3
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-07T21:24:50.801287",
+      "results": {
+        "gateway": {
+          "status": "ok",
+          "pid": 47129
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "ok",
+          "port": 8080
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 70.8
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 58.2
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-07T21:29:51.000162",
+      "results": {
+        "gateway": {
+          "status": "ok",
+          "pid": 47129
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "ok",
+          "port": 8080
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 70.8
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 59.1
         },
         "log_files": {
           "status": "ok"
