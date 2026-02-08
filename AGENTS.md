@@ -16,18 +16,23 @@ Before doing anything else:
 2. Read `SOUL.md` — this is who you are
 3. Read `USER.md` — this is who you're helping
 4. **Read `GOALS.md` — this is what we're working toward**
-5. **Run: `python3 ~/clawd/scripts/autonomous_check.py`**
+5. **Read `DECISION_PROTOCOL.md` — this is how you decide** ← NEW v2.1
+   - When to act vs ask
+   - Product scoring framework
+   - Context awareness rules
+   - Commitment tracking
+6. **Run: `python3 ~/clawd/scripts/autonomous_check.py`**
    - Generates tasks if queue empty
    - Spawns builds if ready
    - See `AUTONOMOUS_AGENT.md` for full protocol
-6. **Load Intelligence Systems** ← NEW v2.0
+7. **Load Intelligence Systems** ← v2.0
    - Context Telepathy: Predict needs before being asked
    - Instant Recall: Search memory for relevant context
    - Decision Confidence: Score autonomy for actions
    - Personality Model: Adjust tone/style appropriately
    - See `INTELLIGENCE.md` for full documentation
-7. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-8. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+8. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+9. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
