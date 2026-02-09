@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Underdog Fantasy - Live Projections</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #e5e7eb;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(30, 27, 75, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #818cf8;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+            color: #9ca3af;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .meta-label {
+            font-size: 0.85em;
+            color: #818cf8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        label {
+            color: #818cf8;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        select, input {
+            padding: 8px 12px;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            background: rgba(15, 23, 42, 0.8);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #818cf8;
+            box-shadow: 0 0 10px rgba(129, 140, 248, 0.3);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: rgba(30, 27, 75, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(99, 102, 241, 0.15);
+            border-bottom: 2px solid rgba(129, 140, 248, 0.5);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #818cf8;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            font-size: 0.95em;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .rank {
+            font-weight: 700;
+            color: #818cf8;
+            font-size: 1.1em;
+            width: 40px;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #fff;
+            min-width: 150px;
+        }
+
+        .team {
+            background: rgba(129, 140, 248, 0.15);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #818cf8;
+        }
+
+        .salary {
+            color: #10b981;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .projection {
+            font-weight: 700;
+            color: #fbbf24;
+            font-size: 1.1em;
+            text-align: right;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-width: 70px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+        }
+
+        .stat-item {
+            display: flex;
+            gap: 5px;
+        }
+
+        .stat-label {
+            color: #6b7280;
+        }
+
+        .stat-value {
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+
+        .value-score {
+            text-align: right;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: #6b7280;
+            font-size: 0.85em;
+        }
+
+        .last-updated {
+            color: #818cf8;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+
+            .meta {
+                gap: 15px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏀 NBA Underdog Fantasy</h1>
+            <p style="color: #9ca3af; margin-top: 10px;">Live Projections & Rankings</p>
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Generated</span>
+                    <span class="meta-value" id="generated-date">—</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Slate Date</span>
+                    <span class="meta-value" id="slate-date">—</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Players Ranked</span>
+                    <span class="meta-value" id="num-players">—</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Scoring System</span>
+                    <span class="meta-value">Underdog</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="min-salary">Min Salary</label>
+                <input type="number" id="min-salary" placeholder="5000" min="0" value="0" style="width: 80px;">
+            </div>
+            <div class="filter-group">
+                <label for="max-salary">Max Salary</label>
+                <input type="number" id="max-salary" placeholder="11000" max="11000" value="11000" style="width: 80px;">
+            </div>
+            <div class="filter-group">
+                <label for="min-fp">Min FP</label>
+                <input type="number" id="min-fp" placeholder="0" min="0" value="0" style="width: 80px;">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Team</th>
+                        <th>Salary</th>
+                        <th>Projected FP</th>
+                        <th>Stats</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="projections-body">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px;">Loading projections...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Last updated: <span class="last-updated" id="update-time">loading...</span></p>
+            <p style="margin-top: 10px; color: #4b5563;">Underdog Fantasy Scoring: 1pt PPG, 1.2pt RPG, 1.5pt AST, 1pt 3PM, 2pt STL/BLK, -0.5pt TO</p>
+        </footer>
+    </div>
+
+    <script>
+        let allProjections = [];
+
+        async function loadProjections() {
+            try {
+                const response = await fetch('rankings-live.json');
+                const data = await response.json();
+                allProjections = data.projections || [];
+
+                // Update header info
+                const genDate = new Date(data.generated_at);
+                document.getElementById('generated-date').textContent = genDate.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                document.getElementById('slate-date').textContent = data.slate_date;
+                document.getElementById('num-players').textContent = data.num_players;
+                document.getElementById('update-time').textContent = genDate.toLocaleString();
+
+                renderProjections();
+            } catch (error) {
+                console.error('Error loading projections:', error);
+                document.getElementById('projections-body').innerHTML = 
+                    '<tr><td colspan="7" style="text-align: center; padding: 40px;">Error loading projections. Please refresh.</td></tr>';
+            }
+        }
+
+        function renderProjections(filtered = null) {
+            const tbody = document.getElementById('projections-body');
+            const projections = filtered || allProjections;
+
+            if (projections.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">No players match filters.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = projections.map(p => `
+                <tr>
+                    <td class="rank">#${p.rank}</td>
+                    <td class="player-name">${p.name}</td>
+                    <td><span class="team">${p.team}</span></td>
+                    <td class="salary">$${p.salary.toLocaleString()}</td>
+                    <td class="projection">${p.projected_underdog}</td>
+                    <td class="stats">
+                        <span class="stat-item"><span class="stat-label">PPG:</span> <span class="stat-value">${p.ppg.toFixed(1)}</span></span>
+                        <span class="stat-item"><span class="stat-label">RPG:</span> <span class="stat-value">${p.rpg.toFixed(1)}</span></span>
+                        <span class="stat-item"><span class="stat-label">APG:</span> <span class="stat-value">${p.apg.toFixed(1)}</span></span>
+                    </td>
+                    <td class="value-score">${p.value}</td>
+                </tr>
+            `).join('');
+        }
+
+        function applyFilters() {
+            const minSalary = parseFloat(document.getElementById('min-salary').value) || 0;
+            const maxSalary = parseFloat(document.getElementById('max-salary').value) || 11000;
+            const minFp = parseFloat(document.getElementById('min-fp').value) || 0;
+
+            const filtered = allProjections.filter(p => 
+                p.salary >= minSalary && 
+                p.salary <= maxSalary && 
+                p.projected_underdog >= minFp
+            );
+
+            renderProjections(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('min-salary').addEventListener('input', applyFilters);
+        document.getElementById('max-salary').addEventListener('input', applyFilters);
+        document.getElementById('min-fp').addEventListener('input', applyFilters);
+
+        // Load on page load
+        loadProjections();
+
+        // Refresh every 30 minutes
+        setInterval(loadProjections, 30 * 60 * 1000);
+    </script>
+</body>
+</html>
