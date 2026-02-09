@@ -17,8 +17,6 @@ import numpy as np
 from scrapers.injury_scraper import InjuryScraper
 from scrapers.underdog_scraper import UnderdogScraper
 from ranking_engine import RankingEngine
-from real_projections_engine import RealProjectionsEngine
-from real_data_integration import RealDataIntegrator
 
 # Custom JSON encoder for numpy types
 class NumpyEncoder(json.JSONEncoder):
@@ -53,11 +51,6 @@ injury_scraper = InjuryScraper()
 underdog_scraper = UnderdogScraper()
 ranking_engine = RankingEngine()
 
-# NEW: Real data integration (Feb 9, 2026)
-real_projections_engine = RealProjectionsEngine()
-real_data_integrator = RealDataIntegrator()
-USE_REAL_DATA = True  # Toggle between real and mock data
-
 def update_slate_data():
     """Fetch and update all slate data"""
     global current_data
@@ -69,64 +62,36 @@ def update_slate_data():
     print(f"[{datetime.now()}] Updating slate data...")
     
     try:
-        if USE_REAL_DATA:
-            # NEW: Use real data integration
-            print("🔥 Using REAL NBA data (Feb 9, 2026)...")
-            
-            # Get real injuries
-            injuries = real_projections_engine.data_integrator.injury_fetcher.get_injury_report()
-            current_data['injuries'] = injuries
-            
-            # Get real Vegas lines
-            vegas = real_projections_engine.data_integrator.vegas_fetcher.get_vegas_lines()
-            current_data['vegas_lines'] = vegas
-            
-            # Generate real projections with Underdog scoring
-            players = real_projections_engine.generate_slate_projections()
-            
-            # Run ranking algorithm on real data
-            ranked_df = ranking_engine.rank_players(players)
-            ranked_df = ranking_engine.assign_tiers(ranked_df)
-            
-            # Generate recommendations
-            recommendations = ranking_engine.generate_recommendations(ranked_df)
-            
-            # Update global state
-            current_data['players'] = ranked_df.to_dict('records')
-            current_data['recommendations'] = recommendations
-            current_data['last_update'] = datetime.now().isoformat()
-            current_data['data_source'] = 'REAL (ESPN + Vegas APIs)'
-            
-            print(f"✅ Real data update complete. {len(players)} players ranked.")
-            
-        else:
-            # LEGACY: Use mock data (for testing only)
-            print("⚠️  Using mock data (testing mode)...")
-            injuries = injury_scraper.get_all_injuries()
-            current_data['injuries'] = injuries
-            
-            players = underdog_scraper.fetch_slate_players()
-            vegas = underdog_scraper.fetch_vegas_lines()
-            current_data['vegas_lines'] = vegas
-            
-            ranked_df = ranking_engine.rank_players(players)
-            ranked_df = ranking_engine.assign_tiers(ranked_df)
-            recommendations = ranking_engine.generate_recommendations(ranked_df)
-            
-            current_data['players'] = ranked_df.to_dict('records')
-            current_data['recommendations'] = recommendations
-            current_data['last_update'] = datetime.now().isoformat()
-            current_data['data_source'] = 'MOCK (testing)'
-            
-            print(f"Update complete. {len(players)} players ranked.")
+        # Fetch injuries
+        injuries = injury_scraper.get_all_injuries()
+        current_data['injuries'] = injuries
+        
+        # Fetch Underdog player data
+        players = underdog_scraper.fetch_slate_players()
+        
+        # Fetch Vegas lines
+        vegas = underdog_scraper.fetch_vegas_lines()
+        current_data['vegas_lines'] = vegas
+        
+        # Run ranking algorithm
+        ranked_df = ranking_engine.rank_players(players)
+        ranked_df = ranking_engine.assign_tiers(ranked_df)
+        
+        # Generate recommendations
+        recommendations = ranking_engine.generate_recommendations(ranked_df)
+        
+        # Update global state
+        current_data['players'] = ranked_df.to_dict('records')
+        current_data['recommendations'] = recommendations
+        current_data['last_update'] = datetime.now().isoformat()
         
         # Save to JSON
         save_data_to_file()
         
+        print(f"Update complete. {len(players)} players ranked.")
+        
     except Exception as e:
         print(f"Error updating slate data: {e}")
-        import traceback
-        traceback.print_exc()
 
 def save_data_to_file():
     """Save current analysis to JSON file"""
