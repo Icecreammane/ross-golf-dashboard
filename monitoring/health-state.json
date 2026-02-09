@@ -1,62 +1,6 @@
 {
-  "last_check": "2026-02-09T08:36:14.001218",
+  "last_check": "2026-02-09T08:46:14.174195",
   "check_history": [
-    {
-      "timestamp": "2026-02-09T00:20:55.332035",
-      "results": {
-        "gateway": {
-          "status": "ok",
-          "pid": 1677
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 67.7
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 56.5
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
-    {
-      "timestamp": "2026-02-09T00:25:55.511508",
-      "results": {
-        "gateway": {
-          "status": "ok",
-          "pid": 1677
-        },
-        "fitness_tracker": {
-          "status": "ok",
-          "port": 3000
-        },
-        "hub_dashboard": {
-          "status": "ok",
-          "port": 8080
-        },
-        "disk_space": {
-          "status": "ok",
-          "percent_free": 67.7
-        },
-        "memory": {
-          "status": "ok",
-          "percent_used": 57.0
-        },
-        "log_files": {
-          "status": "ok"
-        }
-      }
-    },
     {
       "timestamp": "2026-02-09T00:30:55.557508",
       "results": {
@@ -2795,6 +2739,62 @@
         "memory": {
           "status": "ok",
           "percent_used": 56.3
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-09T08:41:14.047707",
+      "results": {
+        "gateway": {
+          "status": "down",
+          "message": "Gateway process not found"
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "ok",
+          "port": 8080
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 67.5
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 56.5
+        },
+        "log_files": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-09T08:46:14.174205",
+      "results": {
+        "gateway": {
+          "status": "ok",
+          "pid": 18715
+        },
+        "fitness_tracker": {
+          "status": "ok",
+          "port": 3000
+        },
+        "hub_dashboard": {
+          "status": "ok",
+          "port": 8080
+        },
+        "disk_space": {
+          "status": "ok",
+          "percent_free": 67.5
+        },
+        "memory": {
+          "status": "ok",
+          "percent_used": 57.8
         },
         "log_files": {
           "status": "ok"

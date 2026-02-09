@@ -1047,13 +1047,21 @@
       "success": false,
       "message": "Failed: /bin/sh: clawdbot: command not found\n",
       "failure_count": 128
+    },
+    {
+      "timestamp": "2026-02-09T08:41:14.057632",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 129
     }
   ],
   "failure_counts": {
-    "gateway": 129
+    "gateway": 130
   },
   "last_recovery_times": {
-    "gateway": "2026-02-09T08:36:14.005659",
+    "gateway": "2026-02-09T08:41:14.051625",
     "hub_dashboard": "2026-02-08T14:15:28.565693"
   }
 }
