@@ -185,7 +185,10 @@
     <div class="container">
         <header>
             <h1>🏀 NBA DFS Slate Rankings</h1>
-            <div class="subtitle">Underdog Contest - Monday, February 9, 2026</div>
+            <div class="subtitle">Underdog Fantasy - Monday, February 9, 2026</div>
+            <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                ⚡ Scoring: PTS=1.0 | REB=1.2 | AST=1.5 | STL=3.0 | BLK=3.0 | TO=-1.0
+            </div>
         </header>
         
         <div id="locked-banner" class="locked-banner" style="display: none;">
@@ -207,6 +210,7 @@
             </div>
             <div class="stat-box">
                 <button class="refresh-btn" onclick="refreshData()">Refresh Now</button>
+                <button class="refresh-btn" onclick="window.location.href='/api/export/csv'" style="margin-top: 10px; background: #2196F3;">📊 Export CSV</button>
             </div>
         </div>
         
@@ -321,6 +325,10 @@
                             <div class="player-team">${player.team} - $${player.salary.toLocaleString()}</div>
                             <div class="player-stats">
                                 <div class="stat-row">
+                                    <span>🔮 Underdog Pts:</span>
+                                    <strong>${player.projected_underdog_points || player.projected_points || 'N/A'}</strong>
+                                </div>
+                                <div class="stat-row">
                                     <span>Ceiling:</span>
                                     <strong>${player.ceiling}</strong>
                                 </div>
@@ -425,17 +433,38 @@
             players.forEach(player => {
                 const card = document.createElement('div');
                 card.className = 'player-card';
+                
+                // Build stat projections display if available
+                let statDetails = '';
+                if (player.stat_projections) {
+                    const stats = player.stat_projections;
+                    statDetails = `
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <div style="font-size: 0.85em; opacity: 0.8; margin-bottom: 5px;">Projected Stats:</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; font-size: 0.85em;">
+                                <div>PTS: ${stats.points}</div>
+                                <div>REB: ${stats.rebounds}</div>
+                                <div>AST: ${stats.assists}</div>
+                                <div>STL: ${stats.steals}</div>
+                                <div>BLK: ${stats.blocks}</div>
+                                <div>TO: ${stats.turnovers}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
                 card.innerHTML = `
                     <div class="player-name">${player.name}</div>
                     <div class="player-team">${player.team} ${player.position} - $${player.salary.toLocaleString()}</div>
                     <div class="player-stats">
+                        <div class="stat-row"><span>🔮 Underdog Pts:</span><strong>${player.projected_underdog_points || player.projected_points}</strong></div>
                         <div class="stat-row"><span>Ceiling:</span><strong>${player.ceiling}</strong></div>
                         <div class="stat-row"><span>Floor:</span><strong>${player.floor}</strong></div>
                         <div class="stat-row"><span>Value:</span><strong>${player.value}</strong></div>
-                        <div class="stat-row"><span>Projected:</span><strong>${player.projected_points}</strong></div>
                         <div class="stat-row"><span>Upside:</span><strong>${player.upside}</strong></div>
                         <div class="stat-row"><span>Ownership:</span><strong>${player.ownership_pct}%</strong></div>
                     </div>
+                    ${statDetails}
                     <div style="margin-top: 10px; opacity: 0.7; font-size: 0.85em;">${player.tier}</div>
                 `;
                 container.querySelector('.player-grid').appendChild(card);

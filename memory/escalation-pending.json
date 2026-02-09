@@ -161,7 +161,42 @@
       "failure_count": 52,
       "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
       "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T17:30:40.865618",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T18:30:43.085910",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T19:30:45.354424",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T20:30:47.606064",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
+    },
+    {
+      "timestamp": "2026-02-08T21:30:49.675239",
+      "service": "gateway",
+      "failure_count": 52,
+      "message": "\ud83d\udea8 System issue: gateway\n\nTried fixing 52 times, still failing.\n\nCheck logs:\n/Users/clawdbot/clawd/monitoring/recovery.log\n\nService may need manual intervention.",
+      "log_path": "/Users/clawdbot/clawd/monitoring/recovery.log"
     }
   ],
-  "timestamp": "2026-02-08T17:19:20.948523"
+  "timestamp": "2026-02-08T22:29:57.687579"
 }

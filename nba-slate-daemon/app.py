@@ -2,8 +2,10 @@
 NBA Slate Rankings Dashboard
 Flask app with live updates and scheduled tasks
 """
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, send_file
 from flask_cors import CORS
+import pandas as pd
+import io
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime
@@ -208,6 +210,48 @@ def manual_refresh():
         update_slate_data()
         return jsonify({'status': 'refreshed', 'timestamp': current_data['last_update']})
     return jsonify({'status': 'locked', 'message': 'Rankings are locked'})
+
+@app.route('/api/export/csv')
+def export_csv():
+    """Export player rankings to CSV with Underdog scoring"""
+    df = pd.DataFrame(current_data['players'])
+    
+    # Select key columns for export
+    export_columns = [
+        'name', 'team', 'position', 'salary', 
+        'projected_underdog_points', 'projected_points',
+        'ceiling', 'floor', 'value', 'upside', 'ppd',
+        'ownership_pct', 'tier', 'overall_rank'
+    ]
+    
+    # Add stat projections if available
+    if 'stat_projections' in df.columns:
+        # Expand stat_projections dict into separate columns
+        stats_df = pd.json_normalize(df['stat_projections'])
+        stats_df.columns = ['stat_' + col for col in stats_df.columns]
+        df = pd.concat([df, stats_df], axis=1)
+        export_columns.extend(['stat_points', 'stat_rebounds', 'stat_assists', 
+                              'stat_steals', 'stat_blocks', 'stat_turnovers'])
+    
+    # Filter to available columns
+    available_cols = [col for col in export_columns if col in df.columns]
+    export_df = df[available_cols]
+    
+    # Sort by overall rank
+    export_df = export_df.sort_values('overall_rank')
+    
+    # Create CSV in memory
+    output = io.StringIO()
+    export_df.to_csv(output, index=False)
+    output.seek(0)
+    
+    # Return as downloadable file
+    return send_file(
+        io.BytesIO(output.getvalue().encode()),
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name=f'nba-slate-underdog-{datetime.now().strftime("%Y%m%d")}.csv'
+    )
 
 def setup_scheduler():
     """Setup APScheduler for automated tasks"""
