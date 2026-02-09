@@ -1,0 +1,31 @@
+{
+  "initialized": true,
+  "analyzed_at": null,
+  "total_decisions": 0,
+  "category_success": {
+    "data_work": {"success_rate": null, "total_decisions": 0},
+    "revenue": {"success_rate": null, "total_decisions": 0},
+    "automation": {"success_rate": null, "total_decisions": 0},
+    "external": {"success_rate": null, "total_decisions": 0},
+    "creative": {"success_rate": null, "total_decisions": 0}
+  },
+  "time_patterns": {
+    "morning_6_9": {"success_rate": null},
+    "morning_9_12": {"success_rate": null},
+    "afternoon_12_5": {"success_rate": null},
+    "evening_5_10": {"success_rate": null},
+    "late_night_10_1": {"success_rate": null}
+  },
+  "mood_patterns": {
+    "frustrated": {"success_rate": null},
+    "focused": {"success_rate": null},
+    "exploratory": {"success_rate": null},
+    "casual": {"success_rate": null}
+  },
+  "learnings": [
+    "Learning system initialized. Patterns will populate as decisions are logged."
+  ],
+  "recommendations": [
+    "Make first decision with clear context so learning system can calibrate."
+  ]
+}

@@ -23,6 +23,34 @@ If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happene
 
 **Purpose:** Daily connection ritual, proactive engagement, easier win logging
 
+## Evening Learning Review (8:15pm CST)
+**NEW:** Jarvis now learns from every interaction
+If current time is between 8:10pm-8:20pm CST and learning review hasn't happened today:
+1. Run: `python3 ~/clawd/scripts/pattern_analyzer.py`
+   - Analyzes all decision history
+   - Updates confidence patterns
+   - Generates learnings and recommendations
+   - Saves to `memory/decision-patterns.json`
+2. Review today's `memory/YYYY-MM-DD.md`
+   - Extract significant decisions made
+   - Identify what I got right/wrong
+   - Note any pattern shifts
+3. Update `memory/decision-log.json` with today's outcomes
+   - Log each decision with what actually happened
+   - Score confidence vs. reality
+4. Identify high-impact learnings:
+   - Categories where I succeeded/failed most
+   - Time patterns (when decisions went well/poorly)
+   - Mood patterns (how your state affects outcomes)
+5. Update `MEMORY.md` with distilled insights (every 3 days)
+   - Keep long-term learnings about your preferences
+   - Record decision patterns that stabilized
+   - Note areas where I improved
+
+**Purpose:** Continuous learning system. Over time, I become more accurate at predicting what you want and when to act autonomously.
+
+**Log:** Mark "evening_learning_done" in memory/heartbeat-state.json
+
 ## Morning Brief (7:30am CST)
 If current time is between 7:25am-7:35am CST and morning brief hasn't been sent today:
 

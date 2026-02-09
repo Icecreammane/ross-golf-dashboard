@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Rankings Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 2px solid #0f3460;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+            color: #aaa;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .info-label {
+            font-size: 0.85em;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        label {
+            color: #00d4ff;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        select, input {
+            padding: 8px 12px;
+            border: 1px solid #0f3460;
+            background: #0f3460;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: rgba(15, 52, 96, 0.3);
+            border-radius: 8px;
+            border: 1px solid #0f3460;
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(0, 212, 255, 0.1);
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #00d4ff;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            font-size: 0.95em;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .rank {
+            font-weight: 700;
+            color: #00d4ff;
+            font-size: 1.1em;
+            min-width: 30px;
+        }
+
+        .player-name {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .team {
+            background: rgba(0, 212, 255, 0.15);
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            font-size: 0.85em;
+        }
+
+        .position {
+            color: #aaa;
+            font-size: 0.85em;
+            text-transform: uppercase;
+        }
+
+        .stat {
+            text-align: right;
+            color: #aaa;
+        }
+
+        .stat strong {
+            color: #fff;
+        }
+
+        .fp {
+            font-weight: 700;
+            color: #00d4ff;
+            font-size: 1.05em;
+            text-align: right;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: 3px;
+            min-width: 60px;
+        }
+
+        .opponent {
+            color: #aaa;
+            font-size: 0.85em;
+        }
+
+        .home-badge {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .away-badge {
+            background: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #00d4ff;
+            font-size: 1.2em;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.85em;
+            color: #aaa;
+        }
+
+        .stat-item {
+            display: flex;
+            gap: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .stat-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #0f3460;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+
+            .info {
+                gap: 20px;
+            }
+
+            .stats-row {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏀 NBA Fantasy Rankings</h1>
+            <div class="info">
+                <div class="info-item">
+                    <span class="info-label">Generated</span>
+                    <span class="info-value" id="generated-date">—</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Slate Date</span>
+                    <span class="info-value" id="slate-date">—</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Games Today</span>
+                    <span class="info-value" id="num-games">—</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Players Ranked</span>
+                    <span class="info-value" id="num-players">—</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="position-filter">Position</label>
+                <select id="position-filter">
+                    <option value="">All</option>
+                    <option value="G">Guard</option>
+                    <option value="F">Forward</option>
+                    <option value="C">Center</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="team-filter">Team</label>
+                <input type="text" id="team-filter" placeholder="e.g., LAL, MIL">
+            </div>
+            <div class="filter-group">
+                <label for="fp-filter">Min FP</label>
+                <input type="number" id="fp-filter" placeholder="0" min="0" value="0" style="width: 80px;">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Opponent</th>
+                        <th>Projected FP</th>
+                        <th>Stats</th>
+                    </tr>
+                </thead>
+                <tbody id="rankings-body">
+                    <tr>
+                        <td colspan="7" class="loading">Loading rankings...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Last updated: <span id="update-time">loading...</span></p>
+        </footer>
+    </div>
+
+    <script>
+        let allRankings = [];
+
+        async function loadRankings() {
+            try {
+                const response = await fetch('rankings.json');
+                const data = await response.json();
+                allRankings = data.rankings;
+
+                // Update header info
+                document.getElementById('generated-date').textContent = new Date(data.generated_at).toLocaleDateString();
+                document.getElementById('slate-date').textContent = new Date(data.slate_date).toLocaleDateString();
+                document.getElementById('num-games').textContent = data.num_games;
+                document.getElementById('num-players').textContent = data.num_players;
+                document.getElementById('update-time').textContent = new Date(data.generated_at).toLocaleString();
+
+                renderRankings();
+            } catch (error) {
+                console.error('Error loading rankings:', error);
+                document.getElementById('rankings-body').innerHTML = 
+                    '<tr><td colspan="7" class="loading">Error loading rankings. Please refresh.</td></tr>';
+            }
+        }
+
+        function renderRankings(filtered = null) {
+            const tbody = document.getElementById('rankings-body');
+            const rankings = filtered || allRankings;
+
+            if (rankings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="loading">No players match filters.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = rankings.map(player => {
+                const gameTime = new Date(player.game_time);
+                const gameTimeStr = gameTime.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+                
+                const homeBadge = player.is_home 
+                    ? '<span class="home-badge">Home</span>' 
+                    : '<span class="away-badge">Away</span>';
+
+                return `
+                    <tr>
+                        <td class="rank">#${player.rank}</td>
+                        <td class="player-name">${player.name}</td>
+                        <td class="position">${player.position}</td>
+                        <td><span class="team">${player.team}</span></td>
+                        <td class="opponent">${player.opponent} ${homeBadge}</td>
+                        <td class="fp">${player.projected_fantasy_points.toFixed(1)}</td>
+                        <td class="stat">
+                            <div class="stats-row">
+                                <span class="stat-item"><span class="stat-label">PPG:</span> <span class="stat-value">${player.ppg}</span></span>
+                                <span class="stat-item"><span class="stat-label">RPG:</span> <span class="stat-value">${player.rpg}</span></span>
+                                <span class="stat-item"><span class="stat-label">APG:</span> <span class="stat-value">${player.apg}</span></span>
+                                <span class="stat-item"><span class="stat-label">USG:</span> <span class="stat-value">${player.usage_rate}%</span></span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function applyFilters() {
+            const positionFilter = document.getElementById('position-filter').value;
+            const teamFilter = document.getElementById('team-filter').value.toUpperCase();
+            const fpFilter = parseFloat(document.getElementById('fp-filter').value) || 0;
+
+            const filtered = allRankings.filter(player => {
+                const positionMatch = !positionFilter || player.position === positionFilter;
+                const teamMatch = !teamFilter || player.team === teamFilter;
+                const fpMatch = player.projected_fantasy_points >= fpFilter;
+                return positionMatch && teamMatch && fpMatch;
+            });
+
+            renderRankings(filtered);
+        }
+
+        // Event listeners for filters
+        document.getElementById('position-filter').addEventListener('change', applyFilters);
+        document.getElementById('team-filter').addEventListener('input', applyFilters);
+        document.getElementById('fp-filter').addEventListener('input', applyFilters);
+
+        // Load rankings on page load
+        loadRankings();
+
+        // Auto-refresh every 5 minutes
+        setInterval(loadRankings, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
