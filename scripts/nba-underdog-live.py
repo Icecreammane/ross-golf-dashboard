@@ -180,19 +180,16 @@ class LiveUnderdogProjector:
         print(f"✅ Saved {len(projections)} projections to JSON")
     
     def save_csv(self, projections):
-        """Save CSV"""
+        """Save simple CSV with just rank, name, team, and points"""
         self.output_csv.parent.mkdir(parents=True, exist_ok=True)
         
         with open(self.output_csv, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=[
-                'rank', 'name', 'team', 'position', 'salary',
-                'projected_underdog', 'ceiling', 'floor', 'value',
-                'ppg', 'rpg', 'apg', 'threes', 'stl', 'blk', 'to', 'gp'
-            ])
-            writer.writeheader()
-            writer.writerows(projections)
+            writer = csv.writer(f)
+            writer.writerow(['rank', 'name', 'team', 'projected_points'])
+            for p in projections:
+                writer.writerow([p['rank'], p['name'], p['team'], p['projected_underdog']])
         
-        print(f"✅ Exported {len(projections)} players to CSV")
+        print(f"✅ Exported {len(projections)} players to CSV (rank, name, team, points)")
     
     def save(self, projections):
         """Save both formats"""
