@@ -447,13 +447,613 @@
       "success": false,
       "message": "Failed: /bin/sh: clawdbot: command not found\n",
       "failure_count": 53
+    },
+    {
+      "timestamp": "2026-02-09T02:20:58.798411",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 54
+    },
+    {
+      "timestamp": "2026-02-09T02:25:59.001946",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 55
+    },
+    {
+      "timestamp": "2026-02-09T02:30:59.206662",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 56
+    },
+    {
+      "timestamp": "2026-02-09T02:35:59.383045",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 57
+    },
+    {
+      "timestamp": "2026-02-09T02:40:59.585591",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 58
+    },
+    {
+      "timestamp": "2026-02-09T02:45:59.789867",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 59
+    },
+    {
+      "timestamp": "2026-02-09T02:50:59.989140",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 60
+    },
+    {
+      "timestamp": "2026-02-09T02:56:00.193943",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 61
+    },
+    {
+      "timestamp": "2026-02-09T03:01:00.401352",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 62
+    },
+    {
+      "timestamp": "2026-02-09T03:06:00.615385",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 63
+    },
+    {
+      "timestamp": "2026-02-09T03:11:00.821163",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 64
+    },
+    {
+      "timestamp": "2026-02-09T03:16:01.028071",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 65
+    },
+    {
+      "timestamp": "2026-02-09T03:21:01.232498",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 66
+    },
+    {
+      "timestamp": "2026-02-09T03:26:01.435692",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 67
+    },
+    {
+      "timestamp": "2026-02-09T03:31:01.638647",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 68
+    },
+    {
+      "timestamp": "2026-02-09T03:36:01.841874",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 69
+    },
+    {
+      "timestamp": "2026-02-09T03:41:02.027774",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 70
+    },
+    {
+      "timestamp": "2026-02-09T03:46:02.227982",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 71
+    },
+    {
+      "timestamp": "2026-02-09T03:51:02.434585",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 72
+    },
+    {
+      "timestamp": "2026-02-09T03:56:02.637563",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 73
+    },
+    {
+      "timestamp": "2026-02-09T04:01:02.844945",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 74
+    },
+    {
+      "timestamp": "2026-02-09T04:06:03.050108",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 75
+    },
+    {
+      "timestamp": "2026-02-09T04:11:03.256612",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 76
+    },
+    {
+      "timestamp": "2026-02-09T04:16:03.490428",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 77
+    },
+    {
+      "timestamp": "2026-02-09T04:21:03.695611",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 78
+    },
+    {
+      "timestamp": "2026-02-09T04:26:03.899250",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 79
+    },
+    {
+      "timestamp": "2026-02-09T04:31:04.104829",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 80
+    },
+    {
+      "timestamp": "2026-02-09T04:36:04.311110",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 81
+    },
+    {
+      "timestamp": "2026-02-09T04:41:04.520636",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 82
+    },
+    {
+      "timestamp": "2026-02-09T04:46:04.721548",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 83
+    },
+    {
+      "timestamp": "2026-02-09T04:51:04.928111",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 84
+    },
+    {
+      "timestamp": "2026-02-09T04:56:05.138330",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 85
+    },
+    {
+      "timestamp": "2026-02-09T05:01:05.344022",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 86
+    },
+    {
+      "timestamp": "2026-02-09T05:06:05.556160",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 87
+    },
+    {
+      "timestamp": "2026-02-09T05:11:05.762866",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 88
+    },
+    {
+      "timestamp": "2026-02-09T05:16:05.963623",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 89
+    },
+    {
+      "timestamp": "2026-02-09T05:21:06.130873",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 90
+    },
+    {
+      "timestamp": "2026-02-09T05:26:06.332588",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 91
+    },
+    {
+      "timestamp": "2026-02-09T05:31:06.535905",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 92
+    },
+    {
+      "timestamp": "2026-02-09T05:36:06.735840",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 93
+    },
+    {
+      "timestamp": "2026-02-09T05:41:06.935501",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 94
+    },
+    {
+      "timestamp": "2026-02-09T05:46:07.145426",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 95
+    },
+    {
+      "timestamp": "2026-02-09T05:51:07.344760",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 96
+    },
+    {
+      "timestamp": "2026-02-09T05:56:07.546040",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 97
+    },
+    {
+      "timestamp": "2026-02-09T06:01:07.751386",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 98
+    },
+    {
+      "timestamp": "2026-02-09T06:06:07.957128",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 99
+    },
+    {
+      "timestamp": "2026-02-09T06:11:08.160081",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 100
+    },
+    {
+      "timestamp": "2026-02-09T06:16:08.365319",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 101
+    },
+    {
+      "timestamp": "2026-02-09T06:21:08.566374",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 102
+    },
+    {
+      "timestamp": "2026-02-09T06:26:08.770006",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 103
+    },
+    {
+      "timestamp": "2026-02-09T06:31:08.974103",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 104
+    },
+    {
+      "timestamp": "2026-02-09T06:36:09.196712",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 105
+    },
+    {
+      "timestamp": "2026-02-09T06:41:09.408041",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 106
+    },
+    {
+      "timestamp": "2026-02-09T06:46:09.611331",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 107
+    },
+    {
+      "timestamp": "2026-02-09T06:51:09.818588",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 108
+    },
+    {
+      "timestamp": "2026-02-09T06:56:10.013659",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 109
+    },
+    {
+      "timestamp": "2026-02-09T07:01:10.217174",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 110
+    },
+    {
+      "timestamp": "2026-02-09T07:06:10.427498",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 111
+    },
+    {
+      "timestamp": "2026-02-09T07:11:10.632710",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 112
+    },
+    {
+      "timestamp": "2026-02-09T07:16:10.840538",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 113
+    },
+    {
+      "timestamp": "2026-02-09T07:21:11.045722",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 114
+    },
+    {
+      "timestamp": "2026-02-09T07:26:11.251302",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 115
+    },
+    {
+      "timestamp": "2026-02-09T07:31:11.455292",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 116
+    },
+    {
+      "timestamp": "2026-02-09T07:36:11.656716",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 117
+    },
+    {
+      "timestamp": "2026-02-09T07:41:11.893044",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 118
+    },
+    {
+      "timestamp": "2026-02-09T07:46:12.028058",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 119
+    },
+    {
+      "timestamp": "2026-02-09T07:51:12.235754",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 120
+    },
+    {
+      "timestamp": "2026-02-09T07:56:12.443616",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 121
+    },
+    {
+      "timestamp": "2026-02-09T08:01:12.650559",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 122
+    },
+    {
+      "timestamp": "2026-02-09T08:06:12.860662",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 123
+    },
+    {
+      "timestamp": "2026-02-09T08:11:13.067264",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 124
+    },
+    {
+      "timestamp": "2026-02-09T08:16:13.269585",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 125
+    },
+    {
+      "timestamp": "2026-02-09T08:21:13.474048",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 126
+    },
+    {
+      "timestamp": "2026-02-09T08:26:13.679373",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 127
+    },
+    {
+      "timestamp": "2026-02-09T08:36:14.015022",
+      "service": "gateway",
+      "action": "restart",
+      "success": false,
+      "message": "Failed: /bin/sh: clawdbot: command not found\n",
+      "failure_count": 128
     }
   ],
   "failure_counts": {
-    "gateway": 54
+    "gateway": 129
   },
   "last_recovery_times": {
-    "gateway": "2026-02-08T23:15:53.449159",
+    "gateway": "2026-02-09T08:36:14.005659",
     "hub_dashboard": "2026-02-08T14:15:28.565693"
   }
 }

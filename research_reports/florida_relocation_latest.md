@@ -1,6 +1,6 @@
 # Research Report: florida_relocation
 **Query:** best areas to live in Florida for beach volleyball and fitness lifestyle
-**Date:** 2026-02-08 02:00
+**Date:** 2026-02-09 02:00
 
 ## Key Findings:
 (AI-generated summary would go here based on search results)
