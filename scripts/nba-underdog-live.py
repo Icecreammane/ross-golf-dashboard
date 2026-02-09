@@ -2,10 +2,12 @@
 """
 NBA Underdog Fantasy - LIVE Projections
 Pulls current season stats from NBA.com via nba_api
-Calculates fresh Underdog projections
+Calculates fresh Underdog projections for ALL 526+ players
+Exports CSV
 """
 
 import json
+import csv
 from datetime import datetime
 from pathlib import Path
 from nba_api.stats.endpoints import leaguedashplayerstats
@@ -13,20 +15,21 @@ from nba_api.stats.endpoints import leaguedashplayerstats
 class LiveUnderdogProjector:
     """Live projections using current season stats"""
     
-    # Underdog Fantasy Scoring
+    # Dawg Bowl Qualifier Scoring
     SCORING = {
         'pts': 1.0,
         'reb': 1.2,
         'ast': 1.5,
-        '3pm': 1.0,
-        'stl': 2.0,
-        'blk': 2.0,
-        'to': -0.5
+        '3pm': 0.0,  # Not in Dawg Bowl
+        'stl': 3.0,  # Changed from 2.0
+        'blk': 3.0,  # Changed from 2.0
+        'to': -1.0   # Changed from -0.5
     }
     
     def __init__(self):
         self.workspace = Path.home() / 'clawd'
-        self.output_file = self.workspace / 'nba' / 'rankings-live.json'
+        self.output_json = self.workspace / 'nba' / 'dawgbowl-rankings.json'
+        self.output_csv = self.workspace / 'nba' / 'dawgbowl-rankings.csv'
     
     def get_current_stats(self):
         """Fetch live stats from NBA.com"""
@@ -48,7 +51,7 @@ class LiveUnderdogProjector:
             return None
     
     def load_today_slate(self):
-        """Load today's slate (salary caps)"""
+        """Load today's slate (salary caps, positions)"""
         slate_file = self.workspace / 'data' / 'nba-slate-2026-02-09.json'
         
         if slate_file.exists():
@@ -71,8 +74,18 @@ class LiveUnderdogProjector:
         )
         return round(projection, 2)
     
+    def estimate_salary(self, ppg, position):
+        """Estimate salary for players not in slate"""
+        # Rough salary estimation based on PPG and position
+        base = ppg * 300
+        if position == 'C':
+            base *= 1.1
+        elif position == 'PG':
+            base *= 1.05
+        return max(3500, min(11000, int(base)))
+    
     def generate_projections(self):
-        """Generate live projections"""
+        """Generate live projections for ALL players"""
         stats_df = self.get_current_stats()
         if stats_df is None:
             return []
@@ -85,14 +98,6 @@ class LiveUnderdogProjector:
             name = row['PLAYER_NAME']
             team = row['TEAM_ABBREVIATION']
             
-            # Find in slate for salary
-            slate_player = slate.get(name)
-            if not slate_player:
-                continue  # Only include players in today's slate
-            
-            salary = slate_player['salary']
-            position = slate_player.get('position', 'F')
-            
             # Get stats
             ppg = float(row.get('PTS', 0) or 0)
             rpg = float(row.get('REB', 0) or 0)
@@ -101,12 +106,26 @@ class LiveUnderdogProjector:
             stl = float(row.get('STL', 0) or 0)
             blk = float(row.get('BLK', 0) or 0)
             to = float(row.get('TOV', 0) or 0)
+            gp = int(row.get('GP', 0) or 0)
+            
+            # Skip if minimal games played
+            if gp < 5:
+                continue
+            
+            # Find in slate for salary/position, or estimate
+            slate_player = slate.get(name)
+            if slate_player:
+                salary = slate_player['salary']
+                position = slate_player.get('position', 'F')
+            else:
+                position = 'F'  # Default position
+                salary = self.estimate_salary(ppg, position)
             
             # Calculate
             projection = self.calculate_projection(ppg, rpg, apg, threes, stl, blk, to)
             ceiling = round(projection * 1.25, 1)
             floor = round(projection * 0.75, 1)
-            value = round((ceiling / salary) * 1000, 2)
+            value = round((ceiling / salary) * 1000, 2) if salary > 0 else 0
             
             projections.append({
                 'rank': 0,  # Will renumber
@@ -115,12 +134,17 @@ class LiveUnderdogProjector:
                 'position': position,
                 'salary': salary,
                 'projected_underdog': projection,
+                'ceiling': ceiling,
+                'floor': floor,
+                'value': value,
                 'ppg': round(ppg, 1),
                 'rpg': round(rpg, 1),
                 'apg': round(apg, 1),
-                'ceiling': ceiling,
-                'floor': floor,
-                'value': value
+                'threes': round(threes, 1),
+                'stl': round(stl, 2),
+                'blk': round(blk, 2),
+                'to': round(to, 1),
+                'gp': gp
             })
         
         # Sort and renumber
@@ -130,23 +154,51 @@ class LiveUnderdogProjector:
         
         return projections
     
-    def save(self, projections):
-        """Save projections"""
+    def save_json(self, projections):
+        """Save JSON"""
         output = {
             'generated_at': datetime.now().isoformat(),
             'slate_date': '2026-02-09',
             'source': 'NBA.com (nba_api)',
-            'scoring_system': 'Underdog Fantasy',
+            'scoring_system': 'Dawg Bowl Qualifier #5',
+            'scoring': {
+                'points': 1.0,
+                'assists': 1.5,
+                'rebounds': 1.2,
+                'blocks': 3.0,
+                'steals': 3.0,
+                'turnovers': -1.0
+            },
             'num_players': len(projections),
             'projections': projections
         }
         
-        self.output_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(self.output_file, 'w') as f:
+        self.output_json.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.output_json, 'w') as f:
             json.dump(output, f, indent=2)
         
-        print(f"✅ Saved {len(projections)} LIVE projections")
-        return output
+        print(f"✅ Saved {len(projections)} projections to JSON")
+    
+    def save_csv(self, projections):
+        """Save CSV"""
+        self.output_csv.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(self.output_csv, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=[
+                'rank', 'name', 'team', 'position', 'salary',
+                'projected_underdog', 'ceiling', 'floor', 'value',
+                'ppg', 'rpg', 'apg', 'threes', 'stl', 'blk', 'to', 'gp'
+            ])
+            writer.writeheader()
+            writer.writerows(projections)
+        
+        print(f"✅ Exported {len(projections)} players to CSV")
+    
+    def save(self, projections):
+        """Save both formats"""
+        self.save_json(projections)
+        self.save_csv(projections)
+        return projections
 
 
 def main():
@@ -155,9 +207,11 @@ def main():
     projector.save(projections)
     
     if projections:
-        print("\n=== TOP 15 TODAY ===")
+        print(f"\n=== TOP 15 ({len(projections)} Total Players) ===")
         for p in projections[:15]:
-            print(f"{p['rank']:2d}. {p['name']:25s} {p['team']} ${p['salary']:5d} - {p['projected_underdog']:5.1f} FP | {p['ppg']:5.1f} PPG {p['rpg']:5.1f} RPG {p['apg']:5.1f} APG")
+            print(f"{p['rank']:3d}. {p['name']:25s} {p['team']} ${p['salary']:5d} - {p['projected_underdog']:6.1f} FP | {p['ppg']:5.1f} PPG {p['rpg']:5.1f} RPG {p['apg']:5.1f} APG | Value: {p['value']}")
+        
+        print(f"\n📊 Download CSV: ~/clawd/nba/dawgbowl-rankings.csv")
 
 
 if __name__ == '__main__':

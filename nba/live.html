@@ -291,6 +291,9 @@
                 <label for="min-fp">Min FP</label>
                 <input type="number" id="min-fp" placeholder="0" min="0" value="0" style="width: 80px;">
             </div>
+            <div class="filter-group">
+                <button id="download-csv" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">📥 Download CSV</button>
+            </div>
         </div>
 
         <div class="table-wrapper">
@@ -392,6 +395,21 @@
         document.getElementById('min-salary').addEventListener('input', applyFilters);
         document.getElementById('max-salary').addEventListener('input', applyFilters);
         document.getElementById('min-fp').addEventListener('input', applyFilters);
+
+        // CSV Download
+        document.getElementById('download-csv').addEventListener('click', function() {
+            const csv = 'rank,name,team,position,salary,projected_underdog,ceiling,floor,value,ppg,rpg,apg,threes,stl,blk,to,gp\n' +
+                allProjections.map(p => 
+                    `${p.rank},"${p.name}",${p.team},${p.position},${p.salary},${p.projected_underdog},${p.ceiling},${p.floor},${p.value},${p.ppg},${p.rpg},${p.apg},${p.threes},${p.stl},${p.blk},${p.to},${p.gp}`
+                ).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nba-projections-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        });
 
         // Load on page load
         loadProjections();
