@@ -1,0 +1,56 @@
+Rank,Player,Team,Pos,Game,Spread,O/U,Final_Proj,Ceiling,Floor,Std_Dev,Ownership,Leverage,Status,Notes
+1,Nikola Jokic,DEN,C,CLE @ DEN,CLE -1.5,237.5,61.5,72,48,8.2,87%,CHALK,ACTIVE,Gordon OUT - Mobley OUT - Must have
+2,Donovan Mitchell,CLE,G,CLE @ DEN,CLE -1.5,237.5,52.1,68,38,9.1,72%,STACK,ACTIVE,Harden integration 2nd game - high usage
+3,James Harden,CLE,G,CLE @ DEN,CLE -1.5,237.5,48.7,62,35,7.8,58%,LEVERAGE,ACTIVE,2nd game with team - underowned leverage
+4,Cade Cunningham,DET,G,DET @ CHA,DET -2.5,223.5,45.2,54,35,7.5,58%,NEUTRAL,ACTIVE,Tight game - extended minutes likely
+5,Rudy Gobert,MIN,C,ATL @ MIN,MIN -6.5,237.5,35.4,45,26,6.8,33%,UNDEROWNED,ACTIVE,Hidden value - 69.6% FG - low ownership
+6,Julius Randle,MIN,PF,ATL @ MIN,MIN -6.5,237.5,38.1,47,28,7.6,45%,NEUTRAL,ACTIVE,Fast pace environment
+7,Anthony Edwards,MIN,G,ATL @ MIN,MIN -6.5,237.5,48.2,58,35,9.4,68%,FADE,ACTIVE,1-for-8 from three Sunday - B2B fatigue
+8,Bam Adebayo,MIA,C,UTA @ MIA,MIA -8.5,242.5,39.1,48,28,7.2,38%,UNDEROWNED,ACTIVE,Best matchup on slate - UTA allows 126.7 PPG to centers
+9,Lauri Markkanen,UTA,C,UTA @ MIA,MIA -8.5,242.5,37.2,48,24,8.3,55%,FADE,ACTIVE,Blowout risk MIA -8.5 - early benching
+10,Norman Powell,MIA,G,UTA @ MIA,MIA -8.5,242.5,38.9,48,22,7.9,41%,GTD,GTD,Back concern - blowout risk
+11,Paolo Banchero,ORL,F,MIL @ ORL,ORL -10.5,218.5,36.5,46,25,7.8,49%,AVOID,ACTIVE,Lowest O/U game - low ceiling
+12,Jalen Suggs,ORL,G,MIL @ ORL,ORL -10.5,218.5,31.2,40,22,6.1,62%,FADE,ACTIVE,Lowest O/U - overowned for ceiling
+13,Anfernee Simons,CHI,G,CHI @ BKN,CHI -3.5,223.5,30.8,40,22,6.2,48%,NEUTRAL,ACTIVE,Fresh trade - 30+ in 2 games
+14,Josh Giddey,CHI,G,CHI @ BKN,CHI -3.5,223.5,29.3,38,18,6.1,38%,GTD,GTD,Hamstring GTD - monitor at lock
+15,LaMelo Ball,CHA,G,DET @ CHA,DET -2.5,223.5,28.5,38,18,6.9,42%,VALUE,ACTIVE,19.1 PPG baseline - 7.5 APG upside
+16,Danny Wolf,BKN,F,CHI @ BKN,CHI -3.5,223.5,28.4,38,18,6.9,41%,VALUE,ACTIVE,Expected 5x value - 25+ min
+17,Ziaire Williams,BKN,F,CHI @ BKN,CHI -3.5,223.5,23.5,32,14,5.8,31%,VALUE_FLIER,ACTIVE,CHI weak D - deep flier
+18,Trey Murphy III,NOP,G,SAC @ NOP,TBD,~215,32.1,42,22,6.4,52%,NEUTRAL,ACTIVE,30+ FP in 21 of last 21
+19,Jeremiah Fears,NOP,G,SAC @ NOP,TBD,~215,24.8,35,15,6.2,28%,VALUE_LEVERAGE,ACTIVE,Best sub-$5K play - deepest leverage
+20,Devin Carter,SAC,G,SAC @ NOP,TBD,~215,26.1,36,16,6.8,35%,VALUE,ACTIVE,Monk/LaVine/Hunter OUT - usage spike
+21,Jaren Jackson Jr.,UTA,F,UTA @ MIA,MIA -8.5,242.5,26.4,34,16,6.1,31%,VALUE,ACTIVE,19.3 PPG - block upside
+22,Jamal Murray,DEN,G,CLE @ DEN,CLE -1.5,237.5,42.8,52,28,8.1,52%,GTD,GTD,Hip GTD - confidence 75% - monitor
+23,Christian Braun,DEN,G,CLE @ DEN,CLE -1.5,237.5,21.2,30,12,6.1,19%,GTD,GTD,Ankle GTD - confidence 70%
+24,Dyson Daniels,ATL,G,ATL @ MIN,MIN -6.5,237.5,22.3,32,14,6.2,24%,GTD,GTD,Ankle GTD - 11/6/3 before exit
+25,Collin Sexton,CHI,G,CHI @ BKN,CHI -3.5,223.5,24.1,33,15,5.9,28%,VALUE,GTD,GTD status - likely plays vs weak D
+26,Tre Jones,CHI,G,CHI @ BKN,CHI -3.5,223.5,21.8,30,12,5.8,22%,DEEP_VALUE,GTD,Hamstring GTD - backup PG minutes
+27,Jalen Smith,CHI,F,CHI @ BKN,CHI -3.5,223.5,22.6,31,13,6.0,25%,VALUE,GTD,Calf GTD - favorable matchup if plays
+28,Jalen Williams,OKC,F,OKC @ LAL,OKC -4,220.5,41.6,52,18,9.2,22%,CONTRARIAN,GTD,RETURNING from 10 games - SGA/Luka OUT - IF PLAYS: 40+ FP ceiling
+29,Jalen Johnson,ATL,F,ATL @ MIN,MIN -6.5,237.5,32.4,68,14,12.1,64%,FADE,GTD,KNEE GTD - confidence 40% - triple-double threat IF plays but risky
+30,Cole Anthony,PHX,G,PHX vs HOU,TBD,TBD,27.2,35,16,6.0,25%,FLIER,ACTIVE,Backup PG - GTD status expected to clear
+31,DeMar DeRozan,CHI,F,CHI @ BKN,CHI -3.5,223.5,34.2,44,24,7.2,62%,NEUTRAL,ACTIVE,All-Star forward - 22+ PPG - reliable floor
+32,Nikola Vucevic,CHI,C,CHI @ BKN,CHI -3.5,223.5,28.7,38,18,6.8,48%,VALUE,ACTIVE,12+ RPG baseline - favorable matchup
+33,Brandon Miller,CHA,F,DET @ CHA,DET -2.5,223.5,24.1,33,14,6.5,35%,VALUE,ACTIVE,22.9 PPG season avg - improving young star
+34,Nick Richards,CHA,C,DET @ CHA,DET -2.5,223.5,22.8,31,12,6.2,29%,VALUE,ACTIVE,11.3 PPG - 1.2 BPG upside
+35,Isaiah Stewart,DET,F,DET @ CHA,DET -2.5,223.5,20.4,28,11,5.9,24%,VALUE_FLIER,ACTIVE,Solid frontcourt depth - 3rd or 4th option
+36,Jaden Ivey,DET,G,DET @ CHA,DET -2.5,223.5,19.6,27,10,5.8,21%,FLIER,ACTIVE,Young guard - upside in tight game
+37,John Collins,UTA,PF,UTA @ MIA,MIA -8.5,242.5,22.1,30,12,6.1,32%,VALUE,ACTIVE,13.5 PPG - pace environment favorable despite blowout risk
+38,Simone Fontecchio,UTA,F,UTA @ MIA,MIA -8.5,242.5,18.9,26,10,5.7,19%,DEEP_VALUE,ACTIVE,Role player - deep bench flier
+39,Caleb Martin,MIA,F,UTA @ MIA,MIA -8.5,242.5,16.4,23,8,5.4,15%,DEEP_FLIER,ACTIVE,Energy/defense guy - limited scoring
+40,Duncan Robinson,MIA,G,UTA @ MIA,MIA -8.5,242.5,19.2,27,10,5.8,18%,VALUE,ACTIVE,3PT specialist - 11.8 PPG
+41,Kevon Harris,ORL,F,MIL @ ORL,ORL -10.5,218.5,16.8,24,8,5.5,12%,DEEP_FLIER,ACTIVE,Role player - lowest O/U game
+42,Aaron Gordon,DEN,PF,CLE @ DEN,CLE -1.5,237.5,0,0,0,0,0%,OUT,OUT,OUT through Feb 27 - REMOVED
+43,Naz Reid,MIN,C,ATL @ MIN,MIN -6.5,237.5,23.4,32,13,6.0,26%,VALUE,ACTIVE,Backup C - 10.2 PPG - pace environment helpful
+44,Taurean Prince,MIL,G,MIL @ ORL,ORL -10.5,218.5,15.2,22,8,5.3,11%,DEEP_FLIER,OUT,Expected out through Feb 20 - REMOVED
+45,Herbert Jones,NOP,F,SAC @ NOP,TBD,~215,19.8,28,10,5.9,21%,VALUE,ACTIVE,Defensive forward - limited scoring but reliable
+46,Brandon Ingram,NOP,F,SAC @ NOP,TBD,~215,24.3,33,14,6.2,38%,NEUTRAL,ACTIVE,26.1 PPG season avg - consistent scorer
+47,Isaiah Jackson,LAC,C,OKC @ LAL,OKC -4,220.5,18.6,26,10,5.6,14%,FLIER,GTD,GTD (not injury) - bench role
+48,Bennedict Mathurin,LAC,G,OKC @ LAL,OKC -4,220.5,21.4,29,11,6.0,19%,VALUE,GTD,GTD status - likely plays
+49,Darius Garland,LAC,G,OKC @ LAL,OKC -4,220.5,23.7,32,13,6.1,25%,VALUE,GTD,GTD toe - starter role if plays
+50,Trey Burke,OKC,G,OKC @ LAL,OKC -4,220.5,17.2,24,9,5.5,12%,DEEP_FLIER,ACTIVE,Backup PG - low ownership depth play
+51,Austin Reaves,LAL,G,OKC @ LAL,OKC -4,220.5,24.3,33,14,6.1,32%,VALUE,ACTIVE,18.6 PPG - role expansion vs depleted OKC
+52,Rui Hachimura,LAL,F,OKC @ LAL,OKC -4,220.5,19.7,27,10,5.8,18%,VALUE,ACTIVE,10.2 PPG - solid forward depth
+53,D'Angelo Russell,LAL,G,OKC @ LAL,OKC -4,220.5,22.1,30,12,6.0,21%,VALUE,GTD,GTD illness - if plays: reliable scorer
+54,Thomas Bryant,LAL,C,OKC @ LAL,OKC -4,220.5,16.8,24,8,5.5,12%,DEEP_FLIER,ACTIVE,Backup C - limited role
+55,Cam Reddish,LAL,F,OKC @ LAL,OKC -4,220.5,15.4,22,8,5.3,10%,DEEP_FLIER,ACTIVE,Wing depth - low ownership

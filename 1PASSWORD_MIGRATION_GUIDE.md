@@ -43,7 +43,7 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 1. Click "+" → New Item → "API Credential"
 2. **Title:** "Jarvis - Google Gemini API"
 3. **Fields:**
-   - **API Key:** `AIzaSyD-z8D8Utcuccc0Rig_4w5f_tqumNu_wEM` (from `.env`)
+   - **API Key:** `[REDACTED - stored in 1Password vault]` (from `.env`)
    - **Type:** "API Key"
    - **Endpoint:** `https://generativelanguage.googleapis.com/`
 4. **Tags:** `jarvis`, `ai`, `gemini`
@@ -55,7 +55,7 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 1. New Item → "API Credential"
 2. **Title:** "Jarvis - Grok API (xAI)"
 3. **Fields:**
-   - **API Key:** `xai-UVWupUxiVqLmjfiV3PUibUTyZV5JyyZh3A2XQZ6krFa1GRYBrZN6bwSQHnnoQVZeiuzKnWxCKtxSbX4M`
+   - **API Key:** `[REDACTED - stored in 1Password vault]`
    - **Type:** "API Key"
    - **Endpoint:** `https://api.x.ai/`
 4. **Tags:** `jarvis`, `ai`, `grok`
@@ -67,8 +67,8 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 2. **Title:** "Jarvis Gmail Account"
 3. **Fields:**
    - **Email:** `bigmeatyclawd@gmail.com`
-   - **Password:** `JarvisAssistant3080!`
-   - **App Password (SMTP):** `blqs rljt paym kzzp`
+   - **Password:** `[REDACTED - stored in 1Password vault]`
+   - **App Password (SMTP):** `[REDACTED - stored in 1Password vault]`
 4. **Tags:** `jarvis`, `email`, `gmail`
 5. **Notes:** "Jarvis operational email. App password for SMTP/IMAP access."
 6. **Created:** February 2, 2026
@@ -78,7 +78,7 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 1. New Item → "API Credential"
 2. **Title:** "Jarvis Telegram Bot"
 3. **Fields:**
-   - **Bot Token:** `7869330755:AAEj9m1oMCLcXzHy09TlqxlCZ3E6zlZXaM4`
+   - **Bot Token:** `[REDACTED - stored in 1Password vault]`
    - **Bot Username:** `@RossJarvisBot`
    - **Ross Chat ID:** `8412148376`
 4. **Tags:** `jarvis`, `telegram`, `bot`
@@ -90,9 +90,9 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 1. New Item → "API Credential"
 2. **Title:** "Jarvis - Stripe Test Keys (Fitness Tracker)"
 3. **Fields:**
-   - **Secret Key:** `sk_test_...` (from `fitness-tracker/.env`)
-   - **Publishable Key:** `pk_test_...`
-   - **Webhook Secret:** `whsec_...`
+   - **Secret Key:** `[REDACTED - stored in 1Password vault]` (from `fitness-tracker/.env`)
+   - **Publishable Key:** `[REDACTED - stored in 1Password vault]`
+   - **Webhook Secret:** `[REDACTED - stored in 1Password vault]`
    - **Environment:** "Test"
 4. **Tags:** `jarvis`, `stripe`, `fitness-tracker`, `test`
 5. **Notes:** "Test keys for Fitness Tracker development. DO NOT use in production."
@@ -119,8 +119,8 @@ Currently, API keys are stored in `.env` files with secure permissions (600). Th
 1. New Item → "API Credential"
 2. **Title:** "Jarvis - Google Calendar OAuth"
 3. **Fields:**
-   - **Client ID:** `722126192387-f4strl6hqfp65ge9ot7efta0r73f1k70.apps.googleusercontent.com`
-   - **Client Secret:** `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`
+   - **Client ID:** `[REDACTED - stored in 1Password vault]`
+   - **Client Secret:** `[REDACTED - stored in 1Password vault]`
    - **Project ID:** `psyched-canto-486116-d7`
 4. **Tags:** `jarvis`, `google`, `oauth`, `calendar`
 5. **Notes:** "OAuth credentials for Google Calendar integration"

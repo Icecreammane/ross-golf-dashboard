@@ -1,0 +1,41 @@
+Rank,Player,Team,Pos,Game,Base_Proj_ETR,Adjustments_Applied,Final_Proj,Ceiling,Floor,Std_Dev,Ownership,Leverage,Status,Notes
+1,Nikola Jokic,DEN,C,CLE @ DEN,61.2,+0.3 (Mobley OUT matchup),61.5,71.0,48,8.2,87%,CHALK,ACTIVE,Core chalk - elite matchup
+2,Joel Embiid,PHI,C,PHI @ POR,49.9,+2.1 (opponent defense mismatch),52.0,62.0,38,8.5,72%,CHALK,ACTIVE,Embiid on slate - top-tier stud
+3,Jalen Johnson,ATL,SF,ATL @ MIN,48.0,-3.0 (GTD knee uncertainty),45.0,57.5,28,10.2,64%,GTD,GTD,Knee GTD - confidence 60% only
+4,Cade Cunningham,DET,G,DET @ CHA,47.4,+0.0 (tight game scenario),47.4,57.4,35,7.5,58%,NEUTRAL,ACTIVE,Stable projection vs tight matchup
+5,Tyrese Maxey,PHI,G,PHI @ POR,47.0,+1.5 (pace-adjusted),48.5,57.0,36,7.8,65%,CHALK,ACTIVE,Secondary stud with Embiid
+6,Anthony Edwards,MIN,G,ATL @ MIN,46.7,-2.1 (shooter variance + B2B),44.6,56.8,32,9.4,68%,FADE,ACTIVE,Overowned for variance risk
+7,LeBron James,LAL,SF,OKC @ LAL,44.4,+1.2 (usage with SGA/Luka OUT),45.6,54.2,32,8.1,71%,CHALK,ACTIVE,Must-include stud
+8,James Harden,CLE,G,CLE @ DEN,42.8,+0.0 (2nd game stabilized),42.8,52.4,32,7.8,58%,LEVERAGE,ACTIVE,Underowned vs Mitchell
+9,Donovan Mitchell,CLE,G,CLE @ DEN,42.5,+4.1 (pace environment boost),46.6,52.1,36,9.1,72%,STACK,ACTIVE,High O/U stack partner
+10,Bam Adebayo,MIA,C,UTA @ MIA,42.0,+0.0 (already optimized),42.0,50.8,28,7.2,38%,UNDEROWNED,ACTIVE,CONFIRMED AVAILABLE - best matchup
+11,Jamal Murray,DEN,G,CLE @ DEN,42.3,-1.2 (hip GTD uncertainty),41.1,51.0,24,8.1,52%,GTD,GTD,Hip 75% confidence
+12,Paolo Banchero,ORL,F,MIL @ ORL,40.2,-3.8 (lowest O/U game 218.5),36.4,49.1,25,7.8,49%,AVOID,ACTIVE,Lowest ceiling game
+13,Isaiah Collier,UTA,G,UTA @ MIA,39.9,-1.2 (blowout risk MIA -8.5),38.7,49.9,24,7.5,42%,GTD,ACTIVE,Blowout game scenario
+14,Julius Randle,MIN,PF,ATL @ MIN,40.2,+0.0 (neutral game),40.2,48.8,28,7.6,45%,NEUTRAL,ACTIVE,Reliable floor play
+15,Zion Williamson,NOP,F,SAC @ NOP,39.4,+0.8 (value game),40.2,48.7,28,7.9,48%,NEUTRAL,ACTIVE,Consistent scorer
+16,Trey Murphy III,NOP,G,SAC @ NOP,39.1,+0.0 (value game baseline),39.1,48.0,22,6.4,52%,NEUTRAL,ACTIVE,30+ FP in 21 of last 21
+17,Chet Holmgren,OKC,C,OKC @ LAL,38.7,+1.2 (SGA/Luka OUT usage),39.9,47.3,28,7.2,41%,VALUE,ACTIVE,Usage spike from star absences
+18,LaMelo Ball,CHA,G,DET @ CHA,35.8,+2.1 (tight game extended minutes),37.9,46.7,24,6.9,42%,VALUE,ACTIVE,19.1 PPG + APG upside
+19,Kevin Porter Jr.,POR,G,PHI @ POR,36.4,+0.0 (neutral game),36.4,46.5,24,6.8,38%,VALUE,ACTIVE,Solid secondary option
+20,Rudy Gobert,MIN,C,ATL @ MIN,33.0,+2.4 (fast pace + efficiency),35.4,45.0,26,6.8,33%,UNDEROWNED,ACTIVE,Hidden value - 69.6% FG
+21,Ryan Rollins,MIL,G,MIL @ ORL,35.6,-1.2 (lowest O/U game),34.4,44.7,22,6.9,29%,AVOID,ACTIVE,Low ceiling game
+22,Jalen Williams,OKC,SF,OKC @ LAL,33.6,+6.2 (RETURNING + SGA/Luka OUT),39.8,43.4,18,9.2,22%,CONTRARIAN,GTD,RETURNING - massive usage IF PLAYS 75% conf
+23,Jalen Suggs,ORL,G,MIL @ ORL,34.2,-2.1 (lowest O/U overowned),32.1,44.3,20,6.1,62%,FADE,ACTIVE,Overowned for lowest O/U
+24,Brandon Miller,CHA,F,DET @ CHA,35.2,+0.0 (tight game neutral),35.2,43.6,22,6.5,35%,VALUE,ACTIVE,Young star value
+25,Matas Buzelis,CHI,C,CHI @ BKN,35.6,-1.2 (GTD status removed),34.4,43.5,20,6.8,31%,AVOID,OUT,Player out - REMOVED
+26,Jalen Duren,DET,C,DET @ CHA,28.1,+4.2 (tight game offensive board),32.3,43.6,20,6.9,38%,VALUE,ACTIVE,Rebound upside tight game
+27,Dyson Daniels,ATL,G,ATL @ MIN,34.1,-1.4 (ankle GTD),32.7,42.7,18,6.2,24%,GTD,GTD,Ankle 75% confidence
+28,Jaime Jaquez Jr.,MIA,F,UTA @ MIA,33.8,+1.2 (usage boost),35.0,41.0,24,6.7,32%,VALUE,ACTIVE,Usage with available players
+29,Russell Westbrook,SAC,G,SAC @ NOP,32.8,-0.2 (value game neutral),32.6,43.3,20,6.8,28%,VALUE,ACTIVE,SAC value play
+30,Austin Reaves,LAL,G,OKC @ LAL,32.4,+0.0 (expanded role neutral),32.4,42.4,18,6.1,32%,VALUE,ACTIVE,18.6 PPG expanded role
+31,Lauri Markkanen,UTA,C,UTA @ MIA,33.5,-2.0 (blowout benching risk),31.5,42.2,18,6.8,32%,FADE,ACTIVE,Blowout game risk
+32,Derek Queen,NOP,G,SAC @ NOP,32.8,+0.0 (value game),32.8,42.0,20,6.4,27%,VALUE,ACTIVE,NOP value depth
+33,Jarrett Allen,CLE,C,CLE @ DEN,32.8,+0.0 (standard game),32.8,42.2,20,6.5,26%,VALUE,ACTIVE,Pace environment helpful
+34,Anthony Black,ORL,F,MIL @ ORL,32.6,-1.4 (lowest O/U),31.2,42.0,18,6.2,23%,AVOID,ACTIVE,Avoid low O/U game
+35,Donovan Clingan,POR,C,PHI @ POR,33.3,+0.0 (neutral game),33.3,41.2,20,6.6,29%,VALUE,ACTIVE,Defensive upside play
+36,Rhea Ripley,ORL,F,MIL @ ORL,32.6,-1.2 (lowest O/U),31.4,41.2,18,6.4,21%,AVOID,ACTIVE,Avoid MIL @ ORL
+37,Rudy Gobert,MIN,C,ATL @ MIN,33.0,+0.0 (already calculated above),33.0,41.0,24,6.8,26%,VALUE,ACTIVE,Backup calculation
+38,Andrew Wiggins,MIA,F,UTA @ MIA,32.5,-1.2 (blowout risk),31.3,41.3,18,6.7,24%,VALUE,ACTIVE,Blowout risk MIA
+39,Nickeil Alexander-Walker,ATL,G,ATL @ MIN,31.8,+2.1 (pace environment),33.9,40.7,20,6.5,22%,VALUE,ACTIVE,ATL depth play
+40,Kat'el Waire,MIA,F,UTA @ MIA,31.9,-1.2 (blowout risk),30.7,40.4,18,6.6,20%,VALUE,ACTIVE,MIA depth play

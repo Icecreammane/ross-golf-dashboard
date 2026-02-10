@@ -1,0 +1,51 @@
+rank,name,team,projection,ceiling,floor,injury_status,adjusted_projection
+1,Jalen Johnson,ATL,56.98,74.1,39.9,Healthy,56.98
+2,Anthony Edwards,MIN,54.51,70.9,38.2,Healthy,54.51
+3,Nikola Jokić,DEN,68.48,89.0,47.9,PROBABLE (80%),54.78
+4,Donovan Mitchell,CLE,49.22,64.0,34.5,Healthy,49.22
+5,James Harden,CLE,48.29,62.8,33.8,Healthy,48.29
+6,Tyrese Maxey,PHI,48.68,63.3,34.1,Healthy,48.68
+7,Julius Randle,MIN,47.4,61.6,33.2,Healthy,47.4
+8,Cade Cunningham,DET,47.36,61.6,33.2,Healthy,47.36
+9,Lauri Markkanen,UTA,46.99,61.1,32.9,Healthy,46.99
+10,Jamal Murray,DEN,48.4,62.9,33.9,QUESTIONABLE (70%),33.88
+11,Paolo Banchero,ORL,38.97,50.7,27.3,Healthy,38.97
+12,Onyeka Okongwu,ATL,38.77,50.4,27.1,Healthy,38.77
+13,Tyler Herro,MIA,36.96,48.0,25.9,Healthy,36.96
+14,Nickeil Alexander-Walker,ATL,37.81,49.2,26.5,Healthy,37.81
+15,Austin Reaves,LAL,40.67,52.9,28.5,Healthy,40.67
+16,Jaren Jackson Jr.,UTA,39.14,50.9,27.4,Healthy,39.14
+17,Rudy Gobert,MIN,38.09,49.5,26.7,Healthy,38.09
+18,Jusuf Nurkić,UTA,38.03,49.4,26.6,Healthy,38.03
+19,Bam Adebayo,MIA,40.19,52.2,28.1,Healthy,40.19
+20,Joel Embiid,PHI,42.24,54.9,29.6,QUESTIONABLE (70%),29.57
+21,Deni Avdija,POR,40.77,53.0,28.5,QUESTIONABLE (70%),28.54
+22,Chet Holmgren,OKC,35.64,46.3,24.9,Healthy,35.64
+23,Norman Powell,MIA,35.71,46.4,25.0,Healthy,35.71
+24,LaMelo Ball,CHA,35.3,45.9,24.7,Healthy,35.3
+25,Franz Wagner,ORL,35.78,46.5,25.0,QUESTIONABLE (70%),25.05
+26,Jalen Duren,DET,34.74,45.2,24.3,QUESTIONABLE (70%),24.32
+27,Kevin Porter Jr.,MIL,34.55,44.9,24.2,Healthy,34.55
+28,Naz Reid,MIN,34.53,44.9,24.2,Healthy,34.53
+29,Jarrett Allen,CLE,33.83,44.0,23.7,Healthy,33.83
+30,Jalen Williams,OKC,33.31,43.3,23.3,Healthy,33.31
+31,Donte DiVincenzo,MIN,33.17,43.1,23.2,Healthy,33.17
+32,Andrew Wiggins,MIA,32.91,42.8,23.0,Healthy,32.91
+33,Brandon Miller,CHA,32.41,42.1,22.7,Healthy,32.41
+34,Russell Westbrook,SAC,32.24,41.9,22.6,Healthy,32.24
+35,CJ McCollum,ATL,32.18,41.8,22.5,Healthy,32.18
+36,Jaden McDaniels,MIN,31.89,41.5,22.3,Healthy,31.89
+37,Jaime Jaquez Jr.,MIA,31.45,40.9,22.0,Healthy,31.45
+38,Desmond Bane,ORL,31.41,40.8,22.0,Healthy,31.41
+39,Dyson Daniels,ATL,36.65,47.6,25.7,QUESTIONABLE (70%),25.66
+40,Aaron Gordon,DEN,31.82,41.4,22.3,OUT,0.0
+41,Franz Wagner,ORL,35.78,46.5,25.0,QUESTIONABLE (70%),25.05
+42,Jalen Duren,DET,34.74,45.2,24.3,QUESTIONABLE (70%),24.32
+43,Jaren Jackson Jr.,UTA,39.14,50.9,27.4,Healthy,39.14
+44,Michael Porter Jr.,BKN,38.0,49.4,26.6,OUT,0.0
+45,Evan Mobley,CLE,44.34,57.6,31.0,OUT,0.0
+46,Josh Giddey,CHI,39.13,50.9,27.4,DOUBTFUL (30%),11.74
+47,Jaylon Tyson,CLE,28.62,37.2,20.0,QUESTIONABLE (70%),20.03
+48,Dean Wade,CLE,17.73,23.0,12.4,QUESTIONABLE (70%),12.41
+49,Jalen Smith,CHI,21.44,27.9,15.0,QUESTIONABLE (45%),9.65
+50,Dyson Daniels,ATL,36.65,47.6,25.7,QUESTIONABLE (70%),25.66

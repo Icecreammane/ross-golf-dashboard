@@ -1,0 +1,51 @@
+rank,name,team,projection,ceiling,floor,vegas_adj,defense_adj,pace_adj,ppg,injury_status,adjusted_projection
+1,Nikola Jokić,DEN,68.48,89.0,47.9,5.0,-3.4,0.9,28.9,Healthy,68.48
+2,Jalen Johnson,ATL,56.98,74.1,39.9,4.0,0.0,0.9,23.4,Healthy,56.98
+3,Luka Dončić,LAL,55.43,72.1,38.8,-4.5,0.0,0.6,32.8,Healthy,55.43
+4,Anthony Edwards,MIN,54.51,70.9,38.2,3.6,2.4,0.9,29.6,Healthy,54.51
+5,Shai Gilgeous-Alexander,OKC,52.25,67.9,36.6,-4.1,2.3,0.6,31.8,Healthy,52.25
+6,Donovan Mitchell,CLE,49.22,64.0,34.5,3.6,0.0,0.0,28.9,Healthy,49.22
+7,Tyrese Maxey,PHI,48.68,63.3,34.1,-4.0,2.3,0.2,28.8,Healthy,48.68
+8,Jamal Murray,DEN,48.4,62.9,33.9,3.5,-2.4,0.6,26.0,Healthy,48.4
+9,James Harden,CLE,48.29,62.8,33.8,3.6,0.0,0.0,25.4,Healthy,48.29
+10,Julius Randle,MIN,47.4,61.6,33.2,3.2,2.2,0.8,22.1,Healthy,47.4
+11,Cade Cunningham,DET,47.36,61.6,33.2,-3.9,2.3,-0.1,25.1,Healthy,47.36
+12,Lauri Markkanen,UTA,46.99,61.1,32.9,3.1,2.2,0.1,27.1,Healthy,46.99
+13,Evan Mobley,CLE,44.34,57.6,31.0,3.3,0.0,0.0,17.9,OUT (Calf),0.0
+14,Keyonte George,UTA,44.28,57.6,31.0,2.9,2.1,0.1,23.8,Healthy,44.28
+15,Giannis Antetokounmpo,MIL,43.66,56.8,30.6,-4.0,-2.3,0.0,28.0,Healthy,43.66
+16,Joel Embiid,PHI,42.24,54.9,29.6,-3.5,2.0,0.2,26.6,Healthy,42.24
+17,Deni Avdija,POR,40.77,53.0,28.5,-3.6,0.0,-0.2,25.5,Healthy,40.77
+18,Austin Reaves,LAL,40.67,52.9,28.5,-3.3,0.0,0.4,26.1,Healthy,40.67
+19,Bam Adebayo,MIA,40.19,52.2,28.1,2.8,0.0,-0.2,18.2,Healthy,40.19
+20,Jaren Jackson Jr.,UTA,39.14,50.9,27.4,2.6,1.9,0.1,19.3,Healthy,39.14
+21,Josh Giddey,CHI,39.13,50.9,27.4,-3.4,0.0,0.3,18.6,DOUBTFUL (30%),11.74
+22,Paolo Banchero,ORL,38.97,50.7,27.3,-3.3,1.9,-0.3,21.7,Healthy,38.97
+23,Onyeka Okongwu,ATL,38.77,50.4,27.1,2.8,0.0,0.6,16.3,Healthy,38.77
+24,Rudy Gobert,MIN,38.09,49.5,26.7,2.6,1.8,0.7,10.7,Healthy,38.09
+25,Jusuf Nurkić,UTA,38.03,49.4,26.6,2.5,1.8,0.1,11.0,Healthy,38.03
+26,Michael Porter Jr.,BKN,38.0,49.4,26.6,-3.2,1.8,-0.2,25.0,OUT (Knee),0.0
+27,LeBron James,LAL,37.99,49.4,26.6,-3.3,0.0,0.4,21.8,Healthy,37.99
+28,Nickeil Alexander-Walker,ATL,37.81,49.2,26.5,2.7,0.0,0.6,20.2,Healthy,37.81
+29,Tyler Herro,MIA,36.96,48.0,25.9,2.6,0.0,-0.2,21.9,Healthy,36.96
+30,Dyson Daniels,ATL,36.65,47.6,25.7,2.7,0.0,0.6,11.4,QUESTIONABLE (70%),25.66
+31,Franz Wagner,ORL,35.78,46.5,25.0,-3.0,1.7,-0.3,22.2,Healthy,35.78
+32,Norman Powell,MIA,35.71,46.4,25.0,2.5,0.0,-0.2,23.0,Healthy,35.71
+33,Chet Holmgren,OKC,35.64,46.3,24.9,-2.9,1.7,0.4,17.7,Healthy,35.64
+34,LaMelo Ball,CHA,35.3,45.9,24.7,-3.0,1.7,-0.4,19.1,Healthy,35.3
+35,Domantas Sabonis,SAC,34.96,45.4,24.5,-2.9,1.7,-0.0,15.8,Healthy,34.96
+36,Jalen Duren,DET,34.74,45.2,24.3,-2.9,1.7,-0.1,17.7,Healthy,34.74
+37,Kevin Porter Jr.,MIL,34.55,44.9,24.2,-3.2,-1.8,0.0,17.1,Healthy,34.55
+38,Naz Reid,MIN,34.53,44.9,24.2,2.4,1.6,0.6,14.4,Healthy,34.53
+39,Jarrett Allen,CLE,33.83,44.0,23.7,2.5,0.0,0.0,14.3,Healthy,33.83
+40,Ja Morant,MEM,33.33,43.3,23.3,-2.9,0.0,0.3,19.5,Healthy,33.33
+41,Jalen Williams,OKC,33.31,43.3,23.3,-2.7,1.6,0.4,16.8,Healthy,33.31
+42,Donte DiVincenzo,MIN,33.17,43.1,23.2,2.3,1.6,0.6,13.0,Healthy,33.17
+43,Andrew Wiggins,MIA,32.91,42.8,23.0,2.3,0.0,-0.2,15.7,Healthy,32.91
+44,Brandon Miller,CHA,32.41,42.1,22.7,-2.7,1.6,-0.3,20.3,Healthy,32.41
+45,Russell Westbrook,SAC,32.24,41.9,22.6,-2.7,1.5,-0.0,15.3,Healthy,32.24
+46,CJ McCollum,ATL,32.18,41.8,22.5,2.3,0.0,0.5,18.4,Healthy,32.18
+47,Jaden McDaniels,MIN,31.89,41.5,22.3,2.2,1.5,0.5,14.8,Healthy,31.89
+48,Aaron Gordon,DEN,31.82,41.4,22.3,2.4,-1.7,0.4,17.7,Healthy,31.82
+49,Jaime Jaquez Jr.,MIA,31.45,40.9,22.0,2.2,0.0,-0.2,15.2,Healthy,31.45
+50,Desmond Bane,ORL,31.41,40.8,22.0,-2.6,1.5,-0.2,19.3,Healthy,31.41

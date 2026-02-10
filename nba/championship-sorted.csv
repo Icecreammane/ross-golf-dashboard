@@ -1,0 +1,51 @@
+rank,name,team,adjusted_projection,injury_status,projection_type
+1,Jalen Johnson,ATL,56.98,Healthy,Elite
+2,Anthony Edwards,MIN,54.51,Healthy,Elite
+3,Nikola Jokić,DEN,54.78,PROBABLE (80%),Elite
+4,Donovan Mitchell,CLE,49.22,Healthy,Elite
+5,James Harden,CLE,48.29,Healthy,Elite
+6,Tyrese Maxey,PHI,48.68,Healthy,Elite
+7,Julius Randle,MIN,47.4,Healthy,Elite
+8,Cade Cunningham,DET,47.36,Healthy,Elite
+9,Lauri Markkanen,UTA,46.99,Healthy,Value
+10,Austin Reaves,LAL,40.67,Healthy,Mid-Tier
+11,Bam Adebayo,MIA,40.19,Healthy,Mid-Tier
+12,Jaren Jackson Jr.,UTA,39.14,Healthy,Mid-Tier
+13,Paolo Banchero,ORL,38.97,Healthy,Mid-Tier
+14,Onyeka Okongwu,ATL,38.77,Healthy,Mid-Tier
+15,Nickeil Alexander-Walker,ATL,37.81,Healthy,Mid-Tier
+16,Rudy Gobert,MIN,38.09,Healthy,Mid-Tier
+17,Tyler Herro,MIA,36.96,Healthy,Mid-Tier
+18,Chet Holmgren,OKC,35.64,Healthy,Mid-Tier
+19,LaMelo Ball,CHA,35.3,Healthy,Mid-Tier
+20,Norman Powell,MIA,35.71,Healthy,Mid-Tier
+21,Kevin Porter Jr.,MIL,34.55,Healthy,Depth
+22,Naz Reid,MIN,34.53,Healthy,Depth
+23,Jarrett Allen,CLE,33.83,Healthy,Depth
+24,Jalen Williams,OKC,33.31,Healthy,Depth
+25,Donte DiVincenzo,MIN,33.17,Healthy,Depth
+26,Jamal Murray,DEN,33.88,QUESTIONABLE (70%),Risky
+27,Andrew Wiggins,MIA,32.91,Healthy,Depth
+28,Brandon Miller,CHA,32.41,Healthy,Depth
+29,CJ McCollum,ATL,32.18,Healthy,Depth
+30,Russell Westbrook,SAC,32.24,Healthy,Depth
+31,Jaden McDaniels,MIN,31.89,Healthy,Depth
+32,Jaime Jaquez Jr.,MIA,31.45,Healthy,Depth
+33,Desmond Bane,ORL,31.41,Healthy,Depth
+34,Jusuf Nurkić,UTA,38.03,Healthy,Mid-Tier
+35,Franz Wagner,ORL,25.05,QUESTIONABLE (70%),Risky
+36,Jalen Duren,DET,24.32,QUESTIONABLE (70%),Risky
+37,Joel Embiid,PHI,29.57,QUESTIONABLE (70%),Risky
+38,Deni Avdija,POR,28.54,QUESTIONABLE (70%),Risky
+39,Jaylon Tyson,CLE,20.03,QUESTIONABLE (70%),Risky
+40,Dyson Daniels,ATL,25.66,QUESTIONABLE (70%),Risky
+41,Corey Kispert,ATL,16.94,Healthy,Late-Round
+42,Buddy Hield,ATL,16.73,Healthy,Late-Round
+43,Zaccharie Risacher,ATL,22.71,Healthy,Late-Round
+44,Jonathan Kuminga,ATL,24.94,Healthy,Late-Round
+45,Josh Giddey,CHI,11.74,DOUBTFUL (30%),FADE
+46,Dean Wade,CLE,12.41,QUESTIONABLE (70%),Late-Round
+47,Jalen Smith,CHI,9.65,QUESTIONABLE (45%),Late-Round
+48,Mike Conley,MIN,15.01,Healthy,Late-Round
+49,Keaton Wallace,ATL,10.47,Healthy,Late-Round
+50,Tre Jones,CHI,0.0,DOUBTFUL,FADE

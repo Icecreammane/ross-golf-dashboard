@@ -1,0 +1,51 @@
+id,firstName,lastName,adp,projectedPoints,position,Rank,slotName,teamName
+1,Nikola,Jokic,1,68.48,C,1,C,Denver Nuggets
+2,Jalen,Johnson,2.8,56.98,F,2,F,Atlanta Hawks
+3,Luka,Doncic,2.5,55.43,G,3,G,Los Angeles Lakers
+4,Anthony,Edwards,5.4,54.51,G,4,G,Minnesota Timberwolves
+5,Shai,Gilgeous-Alexander,4,52.25,G,5,G,Oklahoma City Thunder
+6,Donovan,Mitchell,7.7,49.22,G,6,G,Cleveland Cavaliers
+7,Tyrese,Maxey,6.5,48.68,G,7,G,Philadelphia 76ers
+8,Jamal,Murray,16.4,48.4,G,8,G,Denver Nuggets
+9,James,Harden,10.1,48.29,G,9,G,Cleveland Cavaliers
+10,Julius,Randle,18.9,47.4,F,10,F,Minnesota Timberwolves
+11,Cade,Cunningham,4.0,47.36,G,11,G,Detroit Pistons
+12,Lauri,Markkanen,33.8,46.99,F,12,F,Utah Jazz
+13,Evan,Mobley,9,44.34,F,13,F,Cleveland Cavaliers
+14,Keyonte,George,15.6,44.28,G,14,G,Utah Jazz
+15,Giannis,Antetokounmpo,3.0,43.66,F,15,F,Milwaukee Bucks
+16,Joel,Embiid,3.0,42.24,C,16,C,Philadelphia 76ers
+17,Deni,Avdija,22.5,40.77,F,17,F,Portland Trail Blazers
+18,Austin,Reaves,25.3,40.67,G,18,G,Los Angeles Lakers
+19,Bam,Adebayo,12.0,40.19,C,19,C,Miami Heat
+20,Jaren,Jackson Jr.,31.8,39.14,F,20,F,Utah Jazz
+21,Josh,Giddey,35.5,39.13,G,21,G,Chicago Bulls
+22,Paolo,Banchero,8.7,38.97,F,22,F,Orlando Magic
+23,Onyeka,Okongwu,33.2,38.77,F,23,F,Atlanta Hawks
+24,Rudy,Gobert,31.3,38.09,C,24,C,Minnesota Timberwolves
+25,Jusuf,Nurkic,35.7,38.03,C,25,C,Utah Jazz
+26,Michael,Porter Jr.,13.4,38.0,F,26,F,Brooklyn Nets
+27,LeBron,James,13.8,37.99,F,27,F,Los Angeles Lakers
+28,Nickeil,Alexander-Walker,34.2,37.81,G,28,G,Atlanta Hawks
+29,Tyler,Herro,26,36.96,G,29,G,Miami Heat
+30,Dyson,Daniels,22,36.65,G,30,G,Atlanta Hawks
+31,Franz,Wagner,22.5,35.78,F,31,F,Orlando Magic
+32,Norman,Powell,22,35.71,G,32,G,Miami Heat
+33,Chet,Holmgren,11.8,35.64,F,33,F,Oklahoma City Thunder
+34,LaMelo,Ball,18.1,35.3,G,34,G,Charlotte Hornets
+35,Domantas,Sabonis,33.9,34.96,C,35,C,Sacramento Kings
+36,Jalen,Duren,28.1,34.74,C,36,C,Detroit Pistons
+37,Kevin,Porter Jr.,13.4,34.55,G,37,G,Milwaukee Bucks
+38,Naz,Reid,31.3,34.53,F,38,F,Minnesota Timberwolves
+39,Jarrett,Allen,20.1,33.83,C,39,C,Cleveland Cavaliers
+40,Ja,Morant,10,33.33,G,40,G,Memphis Grizzlies
+41,Jalen,Williams,14,33.31,G,41,G,Oklahoma City Thunder
+42,Donte,DiVincenzo,20,33.17,G,42,G,Minnesota Timberwolves
+43,Andrew,Wiggins,35.4,32.91,F,43,F,Miami Heat
+44,Brandon,Miller,28.0,32.41,F,44,F,Charlotte Hornets
+45,Russell,Westbrook,34.0,32.24,G,45,G,Sacramento Kings
+46,CJ,McCollum,18.7,32.18,G,46,G,Atlanta Hawks
+47,Jaden,McDaniels,20,31.89,F,47,F,Minnesota Timberwolves
+48,Aaron,Gordon,13,31.82,F,48,F,Denver Nuggets
+49,Jaime,Jaquez Jr.,26,31.45,G,49,G,Miami Heat
+50,Desmond,Bane,26.5,31.41,G,50,G,Memphis Grizzlies

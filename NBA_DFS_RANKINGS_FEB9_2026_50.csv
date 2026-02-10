@@ -1,0 +1,51 @@
+Rank,Player,Team,Position,Opponent,Base_Projection,Final_Projection,Ceiling,Floor,Std_Dev,Ownership_Est,Leverage_Rating,Game_O/U,Key_Notes
+1,Nikola Jokic,DEN,C,CLE,52.0,61.5,72,48,8.2,87%,CHALK,237.5,Gordon OUT (usage spike +3.2 FP) - Mobley OUT (matchup) - Must-have stud
+2,Donovan Mitchell,CLE,G,DEN,39.4,52.1,68,38,9.1,72%,STACK_PARTNER,237.5,Harden integration 2nd game - pace environment favorable - high usage
+3,James Harden,CLE,G,DEN,38.3,48.7,62,35,7.8,58%,LEVERAGE_PLAY,237.5,2nd game with team - 8 assists debut - underowned vs Mitchell/Jokic
+4,Jalen Johnson,ATL,SF/PF,MIN,42.2,54.3,68,42,8.7,64%,SOLID,237.5,Kuminga OUT (usage +3.2) - triple-double threat - back-to-back concern
+5,Anthony Edwards,MIN,G,ATL,38.9,48.2,58,35,9.4,68%,FADE,237.5,1-for-8 from three Sunday - back-to-back fatigue - shooter variance risk
+6,Jamal Murray,DEN,G,CLE,26.0,42.8,52,28,8.1,52%,CONDITIONAL,237.5,GTD hip - confidence 75% - monitor at lock
+7,Norman Powell,MIA,G,UTA,26.6,38.9,48,22,7.9,41%,CONDITIONAL,242.5,GTD back - blowout risk MIA -8.5 - benching concern
+8,Lauri Markkanen,UTA,PF/C,MIA,34.0,37.2,48,24,8.3,55%,FADE,242.5,Blowout risk MIA -8.5 - early benching likely - usage concerns
+9,Bam Adebayo,MIA,C,UTA,34.0,39.1,48,28,7.2,38%,UNDEROWNED,242.5,UTA worst allowing PPG to centers - best matchup on slate - blowout risk
+10,Paolo Banchero,ORL,SF/PF,MIL,35.0,36.5,46,25,7.8,49%,AVOID,218.5,Lowest O/U on slate - MIL depleted but also low-ceiling game
+11,Cade Cunningham,DET,PG,CHA,40.3,45.2,54,35,7.5,58%,NEUTRAL,223.5,DET -2.5 tight spread - usage 32% - close game scenario
+12,Jalen Williams,OKC,SF/SG,LAL,TBD,41.6,52,18,9.2,22%,CONTRARIAN_PIVOT,220.5,RETURNING from 10 games - SGA/Luka OUT - massive usage spike IF PLAYS (confidence 60%)
+13,Rudy Gobert,MIN,C,ATL,31.0,35.4,45,26,6.8,33%,UNDEROWNED,237.5,High-efficiency floor - 69.6% FG - fast pace (102+) - rebound upside - hidden value
+14,Julius Randle,MIN,PF,ATL,34.4,38.1,47,28,7.6,45%,NEUTRAL,237.5,Home game - fast pace - 22.1 PPG baseline
+15,Michael Porter Jr.,BKN,SF/PF,CHI,32.2,39.8,50,28,8.1,52%,NEUTRAL,223.5,CHI allows 126+ PPG - 25 PPG baseline - status likely clear
+16,Danny Wolf,BKN,PF/C,CHI,TBD,28.4,38,18,6.9,41%,VALUE,223.5,Expected 5x value - CHI allows 3rd-most PPG - 25+ min expected
+17,Jeremiah Fears,NOP,G,SAC,TBD,24.8,35,15,6.2,28%,VALUE_LEVERAGE,~215,Best sub-$5K play - SAC allows 7th-most PPG - deepest leverage
+18,Devin Carter,SAC,G,NOP,TBD,26.1,36,16,6.8,35%,VALUE,~215,Monk/LaVine/Hunter OUT - usage spike +2.1 FP - heavy redistribution
+19,Ziaire Williams,BKN,SG/SF,CHI,TBD,23.5,32,14,5.8,31%,VALUE_FLIER,223.5,Expected 5x value - CHI weak perimeter D
+20,Trey Murphy III,NOP,SG/SF,SAC,TBD,32.1,42,22,6.4,52%,NEUTRAL,~215,30+ FP in 21 of last 21 - SAC weak D - cash play
+21,Josh Giddey,CHI,G,BKN,TBD,29.3,38,18,6.1,38%,CONDITIONAL,223.5,GTD hamstring - confidence 75% - monitor at lock
+22,Cole Anthony,PHX,G,HOU,TBD,27.2,35,16,6.0,25%,FLIER,TBD,Backup PG role - GTD status expected clear
+23,Anfernee Simons,CHI,G,BKN,TBD,30.8,40,22,6.2,48%,NEUTRAL,223.5,Fresh trade from BOS - 30+ in 2 games - BKN bottom-5 D
+24,Jalen Suggs,ORL,G,MIL,TBD,31.2,40,22,6.1,62%,FADE,218.5,Lowest O/U game - ownership 62% vs 31.2 FP - low ceiling
+25,Isaiah Jackson,LAC,C,HOU,TBD,25.6,33,14,5.9,20%,DEEP_FLIER,TBD,GTD (not injury) - 12-14 min bench role - very low ownership
+26,Bennedict Mathurin,LAC,G,HOU,TBD,26.9,35,15,6.0,23%,FLIER,TBD,Role player - GTD status expected clear
+27,Darius Garland,LAC,G,HOU,TBD,28.3,37,16,6.3,32%,CONDITIONAL,TBD,GTD toe - confidence 75% - starter role
+28,Robert Williams III,POR,C,PHI,TBD,24.1,32,8,7.1,16%,AVOID,TBD,GTD knee - confidence 60% - too much uncertainty - expected value 14.4 FP
+29,Scoot Henderson,POR,G,PHI,TBD,26.5,35,12,6.8,19%,FLIER,TBD,GTD hamstring - likely limited if plays - avoid unless status clears
+30,Malik Beasley,MIL,SG,ORL,TBD,23.7,32,12,6.4,18%,AVOID,218.5,Lowest O/U - role player - 15-18 min - low upside
+31,LaMelo Ball,CHA,G,DET,19.1,28.5,38,18,6.9,42%,VALUE,223.5,19.1 PPG baseline - tight game scenario DET -2.5 - 7.5 APG upside
+32,Dyson Daniels,ATL,SG,MIN,TBD,22.3,32,14,6.2,24%,CONDITIONAL,237.5,GTD ankle - 11/6/3 in 31 min before exit Saturday - if plays strong value
+33,Jaren Jackson Jr.,UTA,PF,MIA,19.3,26.4,34,16,6.1,31%,VALUE,242.5,19.3 PPG - block upside (1.5 BPG) - pace environment favorable - O/U boost
+34,Collin Sexton,CHI,G,BKN,TBD,24.1,33,15,5.9,28%,VALUE,223.5,GTD status (not injury) - likely plays - 6-8 min potential vs weak BKN
+35,Tre Jones,CHI,G,BKN,TBD,21.8,30,12,5.8,22%,DEEP_VALUE,223.5,GTD hamstring - if plays: backup PG minutes vs weak D
+36,Jalen Smith,CHI,PF,BKN,TBD,22.6,31,13,6.0,25%,VALUE,223.5,GTD calf - if plays: minutes TBD but favorable matchup
+37,LJ Cryer,GSW,G,MEM,TBD,20.4,29,11,5.7,18%,FLIER,TBD,GTD hamstring - backup PG - low ownership
+38,Peyton Watson,DEN,SF,CLE,TBD,18.9,27,8,5.9,12%,DEEP_FLIER,237.5,Expected out through Mar 9 hamstring but monitor - high-pace game if returns
+39,Christian Braun,DEN,SG,CLE,TBD,21.2,30,12,6.1,19%,CONDITIONAL,237.5,GTD ankle - confidence 70% - CLE matchup favorable
+40,Deni Avdija,POR,SG,PHI,TBD,23.4,32,14,6.0,26%,VALUE,TBD,GTD back - if plays: solid forward role
+41,Kris Murray,POR,PF,PHI,TBD,19.8,28,10,5.8,15%,DEEP_VALUE,TBD,GTD back - expected out through Feb 11
+42,Matisse Thybulle,POR,SF,PHI,TBD,18.3,26,8,5.6,12%,FLIER,TBD,Expected out through Feb 11 - defensive specialist
+43,Shaedon Sharpe,POR,SG,PHI,TBD,19.5,28,10,5.9,14%,FLIER,TBD,Expected out through Feb 11 calf - monitor
+44,OG Anunoby,NYK,SF,TBD,TBD,22.1,31,12,6.2,33%,VALUE,TBD,GTD toe - if plays: elite wing defender
+45,Collin Murray-Boyles,TOR,PF,TBD,TBD,19.4,27,14,8,6.8,18%,DEEP_FLIER,TBD,GTD thumb - role player
+46,Jakob Poeltl,TOR,C,TBD,TBD,24.8,33,15,6.1,29%,VALUE,TBD,GTD back - if plays: solid big man
+47,Lindy Waters III,SAS,SF,TBD,TBD,16.2,23,11,5.5,10%,FLIER,TBD,GTD knee - wing depth player
+48,Anthony Gill,WAS,PF,TBD,TBD,15.8,22,10,5.2,8%,DEEP_FLIER,TBD,GTD hand - bench role
+49,Tre Johnson,WAS,SG,TBD,TBD,18.4,26,12,5.9,11%,FLIER,TBD,GTD ankle - young guard bench role
+50,Kyshawn George,WAS,SF,TBD,TBD,17.9,25,11,5.8,9%,FLIER,TBD,GTD ankle - wing depth

@@ -1,0 +1,51 @@
+rank,name,team,proj_fp,underdog_adp,value_gap,ownership_risk,category
+1,Anthony Edwards,MIN,58.8,5.4,+53.4,LOW,Elite + Value
+2,Jalen Johnson,ATL,57.2,2.8,+54.4,MEDIUM,Elite + Value
+3,Donovan Mitchell,CLE,51.1,7.7,+43.4,LOW,Elite + Value
+4,James Harden,CLE,49.8,10.1,+39.7,LOW,Elite + Value
+5,Tyrese Maxey,PHI,49.3,6.5,+42.8,LOW,Elite + Value
+6,Julius Randle,MIN,49.1,18.9,+30.2,HUGE,Value Play
+7,Cade Cunningham,DET,47.8,4.0,+43.8,MEDIUM,Elite + Value
+8,Lauri Markkanen,UTA,48.2,33.8,+14.4,HUGE,Contrarian Value
+9,Austin Reaves,LAL,46.7,25.3,+21.4,HUGE,Value Play
+10,Nikola Jokić,DEN,47.3,1.0,+46.3,CHALK,Elite (80% Risk)
+11,Bam Adebayo,MIA,45.8,12.0,+33.8,MEDIUM,Value Play
+12,Jaren Jackson Jr.,UTA,41.5,31.8,+9.7,LOW,Filler
+13,Paolo Banchero,ORL,41.2,8.7,+32.5,MEDIUM,Solid Value
+14,Onyeka Okongwu,ATL,42.1,33.2,+8.9,LOW,Stack Depth
+15,Nickeil Alexander-Walker,ATL,41.3,34.2,+7.1,LOW,Stack Depth
+16,Tyler Herro,MIA,41.2,26.0,+15.2,LOW,Value Play
+17,Rudy Gobert,MIN,41.8,31.3,+10.5,HUGE,Contrarian Gem
+18,Chet Holmgren,OKC,39.6,11.8,+27.8,MEDIUM,Solid Value
+19,Jusuf Nurkić,UTA,40.1,35.7,+4.4,LOW,Filler
+20,Norman Powell,MIA,39.8,22.0,+17.8,LOW,Value Play
+21,LaMelo Ball,CHA,38.1,18.1,+20.0,MEDIUM,Value Play
+22,Jamal Murray,DEN,38.6,16.4,+22.2,RISKY,High Risk/Reward
+23,Jalen Duren,DET,38.3,28.1,+10.2,MEDIUM,Probable Play
+24,Kevin Porter Jr.,MIL,37.4,13.4,+24.0,LOW,Value Play
+25,Naz Reid,MIN,39.2,31.3,+7.9,HUGE,Contrarian Gem
+26,CJ McCollum,ATL,37.8,18.7,+19.1,LOW,Value Play
+27,Jarrett Allen,CLE,36.9,20.1,+16.8,LOW,Value Play
+28,Brandon Miller,CHA,36.8,28.0,+8.8,LOW,Filler
+29,Jaden McDaniels,MIN,37.1,20.0,+17.1,LOW,Value Play
+30,Donte DiVincenzo,MIN,35.9,20.0,+15.9,LOW,Value Play
+31,Andrew Wiggins,MIA,36.1,35.4,+0.7,LOW,Filler
+32,Russell Westbrook,SAC,35.4,34.0,+1.4,LOW,Filler
+33,Desmond Bane,ORL,35.3,26.5,+8.8,LOW,Filler
+34,Jalen Williams,OKC,35.1,14.0,+21.1,LOW,Value Play
+35,Jaime Jaquez Jr.,MIA,34.6,26.0,+8.6,LOW,Filler
+36,Joel Embiid,PHI,29.6,3.0,+26.6,CHALK,AVOID (Q Risk)
+37,Deni Avdija,POR,28.8,22.5,+6.3,RISKY,AVOID (Q Ankle)
+38,Franz Wagner,ORL,25.1,22.0,+3.1,RISKY,Skip (Q)
+39,Domantas Sabonis,SAC,24.5,33.9,-9.4,RISKY,FADE (Q)
+40,Christian Braun,DEN,18.4,25.0,-6.6,LOW,Filler
+41,Dyson Daniels,ATL,25.7,22.0,+3.7,RISKY,Skip (Q)
+42,Scoot Henderson,POR,23.8,29.0,-5.2,LOW,Filler
+43,Corey Kispert,ATL,15.2,23.0,-7.8,LOW,FADE
+44,Buddy Hield,ATL,14.5,23.0,-8.5,LOW,FADE
+45,Zaccharie Risacher,ATL,16.8,23.0,-6.2,LOW,FADE
+46,Jaylon Tyson,CLE,20.0,20.0,0.0,RISKY,FADE (Q)
+47,Dean Wade,CLE,12.4,18.0,-5.6,LOW,FADE
+48,Robert Williams,POR,13.5,19.0,-5.5,LOW,FADE
+49,Walter Clayton Jr.,MEM,10.2,16.0,-5.8,LOW,FADE
+50,Deandre Ayton,LAL,21.0,20.0,+1.0,LOW,Filler

@@ -1,0 +1,51 @@
+rank,name,team,adjusted_projection,injury_status,notes
+1,Jalen Johnson,ATL,56.98,Healthy,Elite
+2,Anthony Edwards,MIN,54.51,Healthy,Elite
+3,Donovan Mitchell,CLE,49.22,Healthy,Elite
+4,James Harden,CLE,48.29,Healthy,Elite
+5,Tyrese Maxey,PHI,48.68,Healthy,Elite
+6,Julius Randle,MIN,47.4,Healthy,Elite
+7,Cade Cunningham,DET,47.36,Healthy,Elite
+8,Lauri Markkanen,UTA,46.99,Healthy,Value
+9,Austin Reaves,LAL,40.67,Healthy,Mid
+10,Bam Adebayo,MIA,40.19,Healthy,Mid
+11,Jaren Jackson Jr.,UTA,39.14,Healthy,Mid
+12,Paolo Banchero,ORL,38.97,Healthy,Mid
+13,Onyeka Okongwu,ATL,38.77,Healthy,Mid
+14,Nickeil Alexander-Walker,ATL,37.81,Healthy,Mid
+15,Rudy Gobert,MIN,38.09,Healthy,Mid
+16,Tyler Herro,MIA,36.96,Healthy,Mid
+17,Chet Holmgren,OKC,35.64,Healthy,Mid
+18,LaMelo Ball,CHA,35.3,Healthy,Mid
+19,Norman Powell,MIA,35.71,Healthy,Mid
+20,Nikola Jokić,DEN,54.78,PROBABLE (80%),NOW #20
+21,Kevin Porter Jr.,MIL,34.55,Healthy,Depth
+22,Naz Reid,MIN,34.53,Healthy,Depth
+23,Jarrett Allen,CLE,33.83,Healthy,Depth
+24,Jalen Williams,OKC,33.31,Healthy,Depth
+25,Donte DiVincenzo,MIN,33.17,Healthy,Depth
+26,Jalen Duren,DET,38.03,PROBABLE (80%),VALUE
+27,Andrew Wiggins,MIA,32.91,Healthy,Depth
+28,Brandon Miller,CHA,32.41,Healthy,Depth
+29,CJ McCollum,ATL,32.18,Healthy,Depth
+30,Russell Westbrook,SAC,32.24,Healthy,Depth
+31,Jaden McDaniels,MIN,31.89,Healthy,Depth
+32,Jaime Jaquez Jr.,MIA,31.45,Healthy,Depth
+33,Desmond Bane,ORL,31.41,Healthy,Depth
+34,Jusuf Nurkić,UTA,38.03,Healthy,Mid
+35,Christian Braun,DEN,20.62,PROBABLE (80%),16.5 FP
+36,Jamal Murray,DEN,33.88,QUESTIONABLE (70%),RISKY
+37,Joel Embiid,PHI,29.57,QUESTIONABLE (70%),RISKY
+38,Deni Avdija,POR,28.54,QUESTIONABLE (70%),RISKY
+39,Franz Wagner,ORL,25.05,QUESTIONABLE (70%),RISKY
+40,Dyson Daniels,ATL,25.66,QUESTIONABLE (70%),RISKY
+41,Domantas Sabonis,SAC,34.96,QUESTIONABLE (70%),24.47 FP
+42,Deandre Ayton,LAL,26.26,PROBABLE (80%),21.0 FP
+43,Jaylon Tyson,CLE,28.62,QUESTIONABLE (70%),20.0 FP
+44,Dean Wade,CLE,17.73,QUESTIONABLE (70%),12.41 FP
+45,Robert Williams,POR,19.29,QUESTIONABLE (70%),13.5 FP
+46,Walter Clayton Jr.,MEM,14.53,QUESTIONABLE (70%),10.17 FP
+47,Scoot Henderson,POR,29.4,PROBABLE (80%),23.5 FP
+48,Corey Kispert,ATL,16.94,Healthy,Late
+49,Buddy Hield,ATL,16.73,Healthy,Late
+50,Zaccharie Risacher,ATL,22.71,Healthy,Late

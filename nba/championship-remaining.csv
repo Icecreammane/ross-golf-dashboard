@@ -1,0 +1,40 @@
+rank,name,team,my_proj,underdog_adp,value_gap,status,notes
+1,Anthony Edwards,MIN,58.8,5.4,LIKELY DRAFTED,Healthy,Pace elite
+2,Jalen Johnson,ATL,57.2,2.8,LIKELY DRAFTED,Healthy,Elite
+3,Donovan Mitchell,CLE,51.1,7.7,LIKELY DRAFTED,Healthy,Chase game
+4,Tyrese Maxey,PHI,49.3,6.5,LIKELY DRAFTED,Healthy,Value
+5,Julius Randle,MIN,49.1,18.9,LIKELY DRAFTED,Healthy,Pace + Value
+6,Lauri Markkanen,UTA,48.2,33.8,LIKELY DRAFTED,Healthy,Contrarian
+7,James Harden,CLE,49.8,10.1,AVAILABLE,Healthy,Chase game leverage
+8,Austin Reaves,LAL,46.7,25.3,AVAILABLE,Healthy,Usage boost (Luka out)
+9,Cade Cunningham,DET,47.8,4.0,AVAILABLE,Healthy,Mid-tier solid
+10,Jaren Jackson Jr.,UTA,41.5,31.8,LIKELY DRAFTED,Healthy,Stack depth
+11,Paolo Banchero,ORL,41.2,8.7,AVAILABLE,Healthy,Solid value
+12,Onyeka Okongwu,ATL,42.1,33.2,LIKELY DRAFTED,Healthy,Stack
+13,Nickeil Alexander-Walker,ATL,41.3,34.2,AVAILABLE,Healthy,ATL depth
+14,Bam Adebayo,MIA,45.8,12.0,AVAILABLE,Healthy,Mid-tier value
+15,REMOVED,REMOVED,REMOVED,REMOVED,DRAFTED,REMOVED,Tyler Herro
+16,Rudy Gobert,MIN,41.8,31.3,AVAILABLE,Healthy,Pace contrarian
+17,Chet Holmgren,OKC,39.6,11.8,AVAILABLE,Healthy,Solid floor
+18,Jarrett Allen,CLE,36.9,20.1,AVAILABLE,Healthy,Chase game depth
+19,Desmond Bane,ORL,35.3,26.5,AVAILABLE,Healthy,Filler/depth
+20,Nikola Jokić,DEN,47.3,1.0,AVAILABLE?,PROBABLE 80%,Risk discount
+21,Naz Reid,MIN,39.2,31.3,AVAILABLE,Healthy,Pace gem
+22,CJ McCollum,ATL,37.8,18.7,AVAILABLE,Healthy,ATL stack
+23,LaMelo Ball,CHA,38.1,18.1,AVAILABLE,Healthy,Value play
+24,Jalen Williams,OKC,35.1,14.0,AVAILABLE,Healthy,Value play
+25,Andrew Wiggins,MIA,36.1,35.4,AVAILABLE,Healthy,Filler
+26,Brandon Miller,CHA,36.8,28.0,AVAILABLE,Healthy,Filler
+27,Jaden McDaniels,MIN,37.1,20.0,AVAILABLE,Healthy,MIN depth
+28,Donte DiVincenzo,MIN,35.9,20.0,AVAILABLE,Healthy,MIN depth
+29,Kevin Porter Jr.,MIL,37.4,13.4,AVAILABLE,Healthy,Value play
+30,Russell Westbrook,SAC,35.4,34.0,AVAILABLE,Healthy,Filler
+31,Corey Kispert,ATL,15.2,23.0,AVAILABLE,Healthy,Late round
+32,Buddy Hield,ATL,14.5,23.0,AVAILABLE,Healthy,Late round
+33,Zaccharie Risacher,ATL,16.8,23.0,AVAILABLE,Healthy,Late round
+34,Jamal Murray,DEN,33.88,16.4,AVAILABLE,QUESTIONABLE 70%,High risk
+35,Joel Embiid,PHI,29.6,3.0,AVAILABLE,QUESTIONABLE 70%,FADE - risky chalk
+36,Deni Avdija,POR,28.54,22.5,AVAILABLE,QUESTIONABLE 70%,Skip (Q ankle)
+37,Franz Wagner,ORL,25.05,22.0,AVAILABLE,QUESTIONABLE 70%,Skip (Q)
+38,Domantas Sabonis,SAC,24.5,33.9,AVAILABLE,QUESTIONABLE 70%,FADE (Q)
+39,Dyson Daniels,ATL,25.66,22.0,AVAILABLE,QUESTIONABLE 70%,Skip (Q)

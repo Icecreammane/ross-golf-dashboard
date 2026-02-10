@@ -35,7 +35,7 @@ def restart_gateway():
     """Restart the gateway"""
     log("🔴 DETECTED: Gateway unresponsive - RESTARTING NOW")
     try:
-        subprocess.run(['clawdbot', 'gateway', 'restart'], timeout=30, capture_output=True)
+        subprocess.run(['/Users/clawdbot/.npm-global/bin/clawdbot', 'gateway', 'restart'], timeout=30, capture_output=True)
         time.sleep(3)
         
         if is_gateway_alive():
