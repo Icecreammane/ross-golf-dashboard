@@ -1,13 +1,11 @@
 {
-  "started": "2026-02-07T18:34:28.057955",
-  "last_check": "2026-02-10T08:47:48.006784",
-  "file_hashes": {
-    "/Users/clawdbot/clawd/GOALS.md": "603ae1ce1883bd12cfcca760d2f2fc3a",
-    "/Users/clawdbot/clawd/TASK_QUEUE.md": "8e8357974982a3a5529061ab99b98dad",
-    "/Users/clawdbot/clawd/memory/2026-02-07.md": "6cff0d0a18a8b369750b71cd012f4dc2",
-    "/Users/clawdbot/clawd/memory/2026-02-08.md": "23af31a82068d5177e2d42b392227951",
-    "/Users/clawdbot/clawd/memory/2026-02-10.md": "ad8bb59592ef4547fd34fc8cc371c38c"
-  },
-  "last_escalation": null,
-  "checks_run": 469
+  "status": "running",
+  "last_check": "2026-02-10T13:21:53.850881",
+  "version": "1.0",
+  "checks": [
+    "autonomous",
+    "health",
+    "security"
+  ],
+  "last_full_maintenance": "2026-02-10T13:21:00Z"
 }
