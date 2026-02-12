@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Progress Dashboard - Ross</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-goal {
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .chart-container h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .input-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        
+        .input-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .workout-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .workout-day {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 80px;
+        }
+        
+        .workout-day.has-workout {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .workout-day .date {
+            font-size: 0.8em;
+            margin-bottom: 5px;
+        }
+        
+        .workout-day .type {
+            font-weight: bold;
+        }
+        
+        .last-updated {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .stat-value {
+                font-size: 2em;
+            }
+            
+            .workout-calendar {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Fitness Progress Dashboard</h1>
+            <p>Ross's Journey to Peak Performance</p>
+        </div>
+        
+        <!-- Stats Summary -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Today's Calories</h3>
+                <div class="stat-value" id="today-calories">0</div>
+                <div class="stat-goal">Goal: 2200 cal</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="calorie-progress"></div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Protein Today</h3>
+                <div class="stat-value" id="today-protein">0g</div>
+                <div class="stat-goal">Goal: 200g</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="protein-progress"></div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Current Weight</h3>
+                <div class="stat-value" id="current-weight">--</div>
+                <div class="stat-goal">lbs</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Workouts This Week</h3>
+                <div class="stat-value" id="week-workouts">0</div>
+                <div class="stat-goal">sessions</div>
+            </div>
+        </div>
+        
+        <!-- Calorie Chart -->
+        <div class="chart-container">
+            <h2>📊 Daily Calorie Tracking (Last 7 Days)</h2>
+            <canvas id="calorieChart"></canvas>
+        </div>
+        
+        <!-- Weight Trend -->
+        <div class="chart-container">
+            <h2>⚖️ Weight Progress</h2>
+            <canvas id="weightChart"></canvas>
+        </div>
+        
+        <!-- Workout Calendar -->
+        <div class="chart-container">
+            <h2>🏋️ Workout Calendar (Last 7 Days)</h2>
+            <div class="workout-calendar" id="workout-calendar"></div>
+        </div>
+        
+        <!-- Quick Entry Forms -->
+        <div class="input-section">
+            <h2>Quick Log</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Log Calories</label>
+                    <input type="number" id="input-calories" placeholder="500">
+                </div>
+                <div class="form-group">
+                    <label>Protein (g)</label>
+                    <input type="number" id="input-protein" placeholder="40">
+                </div>
+                <div class="form-group">
+                    <label>Meal Description</label>
+                    <input type="text" id="input-meal" placeholder="Chicken & rice">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button class="btn" onclick="logMeal()">Log Meal</button>
+                </div>
+            </div>
+            
+            <div class="form-grid" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Log Workout</label>
+                    <select id="input-workout-type">
+                        <option value="Legs">Legs</option>
+                        <option value="Chest">Chest</option>
+                        <option value="Back">Back</option>
+                        <option value="Arms">Arms</option>
+                        <option value="Shoulders">Shoulders</option>
+                        <option value="Cardio">Cardio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <input type="text" id="input-workout-notes" placeholder="Great session!">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button class="btn" onclick="logWorkout()">Log Workout</button>
+                </div>
+            </div>
+            
+            <div class="form-grid" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>Log Weight (lbs)</label>
+                    <input type="number" step="0.1" id="input-weight" placeholder="225">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button class="btn" onclick="logWeight()">Log Weight</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="last-updated" id="last-updated">Last updated: --</div>
+    </div>
+    
+    <script>
+        let calorieChart, weightChart;
+        
+        // Initialize charts
+        function initCharts() {
+            const calorieCtx = document.getElementById('calorieChart').getContext('2d');
+            calorieChart = new Chart(calorieCtx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Calories',
+                        data: [],
+                        backgroundColor: 'rgba(102, 126, 234, 0.7)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 3000
+                        }
+                    }
+                }
+            });
+            
+            // Add goal line
+            calorieChart.options.plugins.annotation = {
+                annotations: {
+                    line1: {
+                        type: 'line',
+                        yMin: 2200,
+                        yMax: 2200,
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        label: {
+                            content: 'Goal: 2200',
+                            enabled: true
+                        }
+                    }
+                }
+            };
+            
+            const weightCtx = document.getElementById('weightChart').getContext('2d');
+            weightChart = new Chart(weightCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Weight (lbs)',
+                        data: [],
+                        borderColor: 'rgba(118, 75, 162, 1)',
+                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Load all data
+        async function loadData() {
+            try {
+                // Load summary
+                const summary = await fetch('/api/summary').then(r => r.json());
+                
+                document.getElementById('today-calories').textContent = summary.today_calories;
+                document.getElementById('today-protein').textContent = summary.today_protein + 'g';
+                document.getElementById('current-weight').textContent = summary.latest_weight || '--';
+                document.getElementById('week-workouts').textContent = summary.week_workouts;
+                
+                // Update progress bars
+                const calorieProgress = (summary.today_calories / summary.calorie_goal) * 100;
+                document.getElementById('calorie-progress').style.width = Math.min(calorieProgress, 100) + '%';
+                
+                const proteinProgress = (summary.today_protein / summary.protein_goal) * 100;
+                document.getElementById('protein-progress').style.width = Math.min(proteinProgress, 100) + '%';
+                
+                // Load calories for chart
+                const calories = await fetch('/api/calories').then(r => r.json());
+                updateCalorieChart(calories);
+                
+                // Load weight for chart
+                const weights = await fetch('/api/weight').then(r => r.json());
+                updateWeightChart(weights);
+                
+                // Load workouts for calendar
+                const workouts = await fetch('/api/workouts').then(r => r.json());
+                updateWorkoutCalendar(workouts);
+                
+                // Update timestamp
+                document.getElementById('last-updated').textContent = 
+                    'Last updated: ' + new Date().toLocaleString();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        function updateCalorieChart(calories) {
+            // Group by date and sum
+            const dailyTotals = {};
+            calories.forEach(entry => {
+                const date = entry.date || entry.timestamp?.split('T')[0];
+                if (date) {
+                    dailyTotals[date] = (dailyTotals[date] || 0) + (entry.calories || 0);
+                }
+            });
+            
+            // Get last 7 days
+            const dates = [];
+            const values = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                dates.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+                values.push(dailyTotals[dateStr] || 0);
+            }
+            
+            calorieChart.data.labels = dates;
+            calorieChart.data.datasets[0].data = values;
+            calorieChart.update();
+        }
+        
+        function updateWeightChart(weights) {
+            const dates = weights.map(w => {
+                const date = new Date(w.date);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            });
+            const values = weights.map(w => w.weight);
+            
+            weightChart.data.labels = dates;
+            weightChart.data.datasets[0].data = values;
+            weightChart.update();
+        }
+        
+        function updateWorkoutCalendar(workouts) {
+            const calendar = document.getElementById('workout-calendar');
+            calendar.innerHTML = '';
+            
+            // Get last 7 days
+            const workoutMap = {};
+            workouts.forEach(w => {
+                workoutMap[w.date] = w;
+            });
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'workout-day';
+                
+                if (workoutMap[dateStr]) {
+                    dayDiv.classList.add('has-workout');
+                    dayDiv.innerHTML = `
+                        <div class="date">${date.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' })}</div>
+                        <div class="type">${workoutMap[dateStr].type}</div>
+                    `;
+                } else {
+                    dayDiv.innerHTML = `
+                        <div class="date">${date.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' })}</div>
+                        <div class="type">Rest</div>
+                    `;
+                }
+                
+                calendar.appendChild(dayDiv);
+            }
+        }
+        
+        // Log functions
+        async function logMeal() {
+            const calories = parseInt(document.getElementById('input-calories').value);
+            const protein = parseInt(document.getElementById('input-protein').value) || 0;
+            const meal = document.getElementById('input-meal').value;
+            
+            if (!calories) {
+                alert('Please enter calories');
+                return;
+            }
+            
+            const date = new Date().toISOString().split('T')[0];
+            
+            await fetch('/api/calories', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, calories, meal })
+            });
+            
+            if (protein > 0) {
+                await fetch('/api/macros', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ date, protein, meal })
+                });
+            }
+            
+            document.getElementById('input-calories').value = '';
+            document.getElementById('input-protein').value = '';
+            document.getElementById('input-meal').value = '';
+            
+            loadData();
+        }
+        
+        async function logWorkout() {
+            const type = document.getElementById('input-workout-type').value;
+            const notes = document.getElementById('input-workout-notes').value;
+            const date = new Date().toISOString().split('T')[0];
+            
+            await fetch('/api/workouts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, type, notes })
+            });
+            
+            document.getElementById('input-workout-notes').value = '';
+            
+            loadData();
+        }
+        
+        async function logWeight() {
+            const weight = parseFloat(document.getElementById('input-weight').value);
+            
+            if (!weight) {
+                alert('Please enter weight');
+                return;
+            }
+            
+            const date = new Date().toISOString().split('T')[0];
+            
+            await fetch('/api/weight', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, weight })
+            });
+            
+            document.getElementById('input-weight').value = '';
+            
+            loadData();
+        }
+        
+        // Initialize
+        initCharts();
+        loadData();
+        
+        // Auto-refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

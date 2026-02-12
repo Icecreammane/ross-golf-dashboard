@@ -1,0 +1,59 @@
+{
+  "product_name": "Fitness Enthusiast Budget Tracker",
+  "description": "Track spending on gym memberships, supplements, food, coaching - all in one place",
+  "price_point": "$24.99",
+  "target_market": "People spending $500+/month on fitness",
+  "template_sections": [
+    {
+      "name": "Monthly Budget Overview",
+      "type": "Dashboard",
+      "includes": [
+        "Total monthly spending",
+        "By category breakdown (gym, food, supps, coaching)",
+        "% of income spent on fitness",
+        "ROI calculation (cost per lb muscle gained)"
+      ]
+    },
+    {
+      "name": "Expense Tracker",
+      "type": "Database",
+      "fields": [
+        "Date",
+        "Category (dropdown: Gym, Food, Supplements, Coaching, Equipment)",
+        "Description",
+        "Amount",
+        "Recurring (yes/no)",
+        "ROI Notes"
+      ]
+    },
+    {
+      "name": "Monthly Goals",
+      "type": "Linked Database",
+      "includes": [
+        "Budget by category",
+        "Actual spending vs budget",
+        "Savings targets"
+      ]
+    },
+    {
+      "name": "ROI Tracker",
+      "type": "Calculation",
+      "metrics": [
+        "Cost per pound of muscle gained",
+        "Cost per percentage body fat lost",
+        "Monthly spending trend",
+        "Best ROI categories"
+      ]
+    }
+  ],
+  "marketing_copy": "\nSELL YOUR FITNESS BUDGET TRACKER ON GUMROAD:\n\nTitle: \"Fitness Spending Tracker - Budget Like a Bodybuilder\"\n\nDescription:\nStop wondering where your fitness money goes. \n\nThis Notion template tracks every dollar you spend on your fitness journey - gym memberships, supplements, coaching, competition fees, recovery tools - and shows you the ROI.\n\nPerfect for:\n- Serious lifters tracking bulk/cut spending\n- Athletes optimizing coaching ROI\n- Fitness entrepreneurs managing their own health investment\n- Anyone who spends $500+/month on fitness\n\nIncludes:\n\u2713 Monthly budget dashboard\n\u2713 Expense tracking by category\n\u2713 ROI calculations (cost per lb muscle, cost per 1% body fat)\n\u2713 Spending trend analysis\n\u2713 Budget vs actual tracking\n\nOne-time purchase. Use forever. \n\nPrice: $24.99\n        ",
+  "sales_channels": [
+    "Gumroad (primary)",
+    "Reddit fitness subreddits",
+    "Twitter fitness community",
+    "Email list (if you build one)"
+  ],
+  "build_timeline": "2-3 days",
+  "launch_timeline": "1 day after build complete",
+  "expected_first_month_sales": "15-25 units = $375-625"
+}

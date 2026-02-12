@@ -1,0 +1,62 @@
+{
+  "date": "2026-02-10",
+  "meals": [
+    {
+      "meal": "Breakfast",
+      "time": "7:00 AM",
+      "name": "Eggs (3) + Oatmeal",
+      "calories": 450,
+      "protein": 25,
+      "carbs": 45,
+      "fat": 15
+    },
+    {
+      "meal": "Mid-Morning Snack",
+      "time": "10:00 AM",
+      "name": "Chicken Breast + Veggies",
+      "calories": 200,
+      "protein": 35,
+      "carbs": 8,
+      "fat": 3
+    },
+    {
+      "meal": "Lunch",
+      "time": "12:30 PM",
+      "name": "Grilled Chicken (6oz) + Rice + Veggies",
+      "calories": 550,
+      "protein": 55,
+      "carbs": 50,
+      "fat": 12
+    },
+    {
+      "meal": "Pre-Workout",
+      "time": "4:00 PM",
+      "name": "Protein Bar",
+      "calories": 200,
+      "protein": 20,
+      "carbs": 20,
+      "fat": 7
+    },
+    {
+      "meal": "Dinner",
+      "time": "7:00 PM",
+      "name": "Grilled Steak (7oz) + Potatoes + Asparagus",
+      "calories": 680,
+      "protein": 65,
+      "carbs": 50,
+      "fat": 22
+    }
+  ],
+  "totals": {
+    "calories": 2080,
+    "protein": 200,
+    "carbs": 173,
+    "fat": 59
+  },
+  "vs_goal": {
+    "calories": "2080 (Goal: 2200, -120)",
+    "protein": "200g (Goal: 200g, +0g)",
+    "carbs": "173g (Goal: 250g, -77g)",
+    "fat": "59g (Goal: 70g, -11g)"
+  }
+}

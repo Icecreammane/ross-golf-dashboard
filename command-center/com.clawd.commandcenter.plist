@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.clawd.commandcenter</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/clawdbot/clawd/scripts/start_command_center.sh</string>
+        <string>start</string>
+    </array>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <false/>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/clawdbot/clawd/logs/command_center_launchd.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/clawdbot/clawd/logs/command_center_launchd.err</string>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/clawdbot/clawd/command-center</string>
+</dict>
+</plist>

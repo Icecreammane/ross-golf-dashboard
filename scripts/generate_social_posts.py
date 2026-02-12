@@ -16,7 +16,7 @@ from pathlib import Path
 WORKSPACE = Path("/Users/clawdbot/clawd")
 QUEUE_FILE = WORKSPACE / "data" / "social-posts-queue.json"
 LOG_FILE = WORKSPACE / "logs" / "social-scheduler.log"
-OLLAMA_MODEL = "llama3.1:8b"
+OLLAMA_MODEL = "qwen2.5:32b-instruct-q4_K_M"
 USE_LLM = False  # Set to True to use LLM, False for fast templates
 
 # Setup logging

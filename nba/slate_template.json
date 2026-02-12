@@ -1,0 +1,163 @@
+{
+  "slate_date": "2026-02-20",
+  "platform": "Underdog Fantasy",
+  "contest_type": "DawgBowl",
+  "games": [
+    {
+      "game_time": "7:00 PM ET",
+      "home_team": "BOS",
+      "away_team": "ATL",
+      "home_spread": -8.5,
+      "total": 225.5
+    },
+    {
+      "game_time": "7:30 PM ET",
+      "home_team": "PHI",
+      "away_team": "NYK",
+      "home_spread": -5.0,
+      "total": 218.5
+    },
+    {
+      "game_time": "8:00 PM ET",
+      "home_team": "MIL",
+      "away_team": "CHA",
+      "home_spread": -12.0,
+      "total": 230.0
+    },
+    {
+      "game_time": "8:00 PM ET",
+      "home_team": "MIN",
+      "away_team": "PHX",
+      "home_spread": -3.5,
+      "total": 222.0
+    },
+    {
+      "game_time": "9:00 PM ET",
+      "home_team": "DEN",
+      "away_team": "UTA",
+      "home_spread": -10.5,
+      "total": 227.5
+    },
+    {
+      "game_time": "10:00 PM ET",
+      "home_team": "LAL",
+      "away_team": "DAL",
+      "home_spread": -4.0,
+      "total": 232.5
+    },
+    {
+      "game_time": "10:30 PM ET",
+      "home_team": "GSW",
+      "away_team": "SAC",
+      "home_spread": -6.0,
+      "total": 235.0
+    }
+  ],
+  "players": [
+    {
+      "player_id": "1629029",
+      "name": "Luka Doncic",
+      "team": "DAL",
+      "position": "PG",
+      "salary": 11000
+    },
+    {
+      "player_id": "203999",
+      "name": "Nikola Jokic",
+      "team": "DEN",
+      "position": "C",
+      "salary": 11200
+    },
+    {
+      "player_id": "203507",
+      "name": "Giannis Antetokounmpo",
+      "team": "MIL",
+      "position": "PF",
+      "salary": 10500
+    },
+    {
+      "player_id": "1628369",
+      "name": "Jayson Tatum",
+      "team": "BOS",
+      "position": "SF",
+      "salary": 9800
+    },
+    {
+      "player_id": "201939",
+      "name": "Stephen Curry",
+      "team": "GSW",
+      "position": "PG",
+      "salary": 10000
+    },
+    {
+      "player_id": "1630162",
+      "name": "LaMelo Ball",
+      "team": "CHA",
+      "position": "PG",
+      "salary": 9500
+    },
+    {
+      "player_id": "1629630",
+      "name": "Tyrese Haliburton",
+      "team": "IND",
+      "position": "PG",
+      "salary": 9200
+    },
+    {
+      "player_id": "1630169",
+      "name": "Anthony Edwards",
+      "team": "MIN",
+      "position": "SG",
+      "salary": 9600
+    },
+    {
+      "player_id": "203076",
+      "name": "Anthony Davis",
+      "team": "LAL",
+      "position": "PF",
+      "salary": 10200
+    },
+    {
+      "player_id": "1629027",
+      "name": "Trae Young",
+      "team": "ATL",
+      "position": "PG",
+      "salary": 9400
+    },
+    {
+      "player_id": "203897",
+      "name": "Devin Booker",
+      "team": "PHX",
+      "position": "SG",
+      "salary": 9300
+    },
+    {
+      "player_id": "1628368",
+      "name": "De'Aaron Fox",
+      "team": "SAC",
+      "position": "PG",
+      "salary": 9100
+    },
+    {
+      "player_id": "1630163",
+      "name": "Tyrese Maxey",
+      "team": "PHI",
+      "position": "PG",
+      "salary": 8500
+    },
+    {
+      "player_id": "203081",
+      "name": "Damian Lillard",
+      "team": "MIL",
+      "position": "PG",
+      "salary": 8800
+    },
+    {
+      "player_id": "203954",
+      "name": "Joel Embiid",
+      "team": "PHI",
+      "position": "C",
+      "salary": 10800
+    }
+  ]
+}

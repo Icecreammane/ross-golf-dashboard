@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center - Ross's Dashboard Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Command Center</h1>
+            <p class="subtitle">Your single dashboard hub for everything</p>
+            <div class="last-updated">Last updated: <span id="last-updated">--:--</span></div>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-section">
+            <input type="text" id="search-input" placeholder="🔍 Search for dashboards, files, or services..." />
+            <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Service Status Panel -->
+            <section class="card services-card">
+                <h2>🖥️ Active Services</h2>
+                <div id="services-list" class="services-list">
+                    <div class="loading">Loading services...</div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="card quick-actions-card">
+                <h2>⚡ Quick Actions</h2>
+                <div class="quick-actions">
+                    <a href="http://localhost:3001" target="_blank" class="action-btn">
+                        💪 Fitness Tracker
+                    </a>
+                    <a href="http://localhost:8080" target="_blank" class="action-btn">
+                        🏢 Org Chart
+                    </a>
+                    <button onclick="openFile('/Users/clawdbot/clawd/reports/nba_rankings.md')" class="action-btn">
+                        🏀 NBA Rankings
+                    </button>
+                    <button onclick="openFile('/Users/clawdbot/clawd/memory/cost_summary.json')" class="action-btn">
+                        💰 Cost Summary
+                    </button>
+                    <button onclick="openFile('/Users/clawdbot/clawd/GOALS.md')" class="action-btn">
+                        🎯 Goals
+                    </button>
+                    <button onclick="openFile('/Users/clawdbot/clawd/BUILD_QUEUE.md')" class="action-btn">
+                        🔨 Build Queue
+                    </button>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="card activity-card">
+                <h2>📈 Recent Activity</h2>
+                <div id="activity-feed" class="activity-feed">
+                    <div class="loading">Loading activity...</div>
+                </div>
+            </section>
+
+            <!-- Key Files -->
+            <section class="card files-card">
+                <h2>📁 Key Files</h2>
+                <div id="files-list" class="files-list">
+                    <div class="loading">Loading files...</div>
+                </div>
+            </section>
+
+            <!-- Bookmarks -->
+            <section class="card bookmarks-card">
+                <h2>🔖 Bookmarks</h2>
+                <div class="bookmarks">
+                    <div class="bookmark-section">
+                        <h3>Dashboards</h3>
+                        <ul>
+                            <li><a href="http://localhost:3001" target="_blank">Fitness Tracker</a></li>
+                            <li><a href="http://localhost:8080" target="_blank">Org Chart Dashboard</a></li>
+                            <li><a href="http://localhost:5000" target="_blank">Command Center (This)</a></li>
+                        </ul>
+                    </div>
+                    <div class="bookmark-section">
+                        <h3>Documentation</h3>
+                        <ul>
+                            <li><a href="#" onclick="openFile('/Users/clawdbot/clawd/GOALS.md')">GOALS.md</a></li>
+                            <li><a href="#" onclick="openFile('/Users/clawdbot/clawd/MEMORY.md')">MEMORY.md</a></li>
+                            <li><a href="#" onclick="openFile('/Users/clawdbot/clawd/BUILD_QUEUE.md')">BUILD_QUEUE.md</a></li>
+                        </ul>
+                    </div>
+                    <div class="bookmark-section">
+                        <h3>Scripts</h3>
+                        <ul>
+                            <li><a href="#" onclick="openFile('/Users/clawdbot/clawd/scripts/cost_check.sh')">Cost Check</a></li>
+                            <li><a href="#" onclick="openFile('/Users/clawdbot/clawd/scripts/backup.sh')">Backup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Health -->
+            <section class="card health-card">
+                <h2>🏥 System Health</h2>
+                <div id="health-alerts" class="health-alerts">
+                    <div class="loading">Checking system health...</div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

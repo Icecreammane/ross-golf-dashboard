@@ -1,0 +1,139 @@
+{
+  "date": "2026-02-10",
+  "day": "Tuesday",
+  "timestamp": "2026-02-10T22:55:12.354131",
+  "priorities": {
+    "primary": {
+      "goal": "Ship FitTrack deployment + optimize 2/20 DFS slate",
+      "action": "Build NBA projections model, test on 2/11 slate",
+      "time_estimate": "2-3 hours focused work",
+      "roi": "Direct revenue impact"
+    },
+    "secondary": {
+      "goal": "Hit 200g protein, maintain fitness momentum",
+      "action": "Stick to meal plan + complete workout",
+      "time_estimate": "Throughout day",
+      "roi": "Energy, strength, $500 MRR health"
+    },
+    "tertiary": {
+      "goal": "Build opportunity scanner (AI automation)",
+      "action": "Scan market for product gaps (templates, coaching)",
+      "time_estimate": "1-2 hours",
+      "roi": "Identify next product launch"
+    }
+  },
+  "meal_plan": {
+    "date": "2026-02-10",
+    "meals": [
+      {
+        "meal": "Breakfast",
+        "time": "7:00 AM",
+        "name": "Eggs (3) + Oatmeal",
+        "calories": 450,
+        "protein": 25,
+        "carbs": 45,
+        "fat": 15
+      },
+      {
+        "meal": "Mid-Morning Snack",
+        "time": "10:00 AM",
+        "name": "Chicken Breast + Veggies",
+        "calories": 200,
+        "protein": 35,
+        "carbs": 8,
+        "fat": 3
+      },
+      {
+        "meal": "Lunch",
+        "time": "12:30 PM",
+        "name": "Grilled Chicken (6oz) + Rice + Veggies",
+        "calories": 550,
+        "protein": 55,
+        "carbs": 50,
+        "fat": 12
+      },
+      {
+        "meal": "Pre-Workout",
+        "time": "4:00 PM",
+        "name": "Protein Bar",
+        "calories": 200,
+        "protein": 20,
+        "carbs": 20,
+        "fat": 7
+      },
+      {
+        "meal": "Dinner",
+        "time": "7:00 PM",
+        "name": "Grilled Steak (7oz) + Potatoes + Asparagus",
+        "calories": 680,
+        "protein": 65,
+        "carbs": 50,
+        "fat": 22
+      }
+    ],
+    "totals": {
+      "calories": 2080,
+      "protein": 200,
+      "carbs": 173,
+      "fat": 59
+    },
+    "vs_goal": {
+      "calories": "2080 (Goal: 2200, -120)",
+      "protein": "200g (Goal: 200g, +0g)",
+      "carbs": "173g (Goal: 250g, -77g)",
+      "fat": "59g (Goal: 70g, -11g)"
+    }
+  },
+  "workout": {
+    "date": "2026-02-10",
+    "day": "Tuesday",
+    "name": "UPPER PUSH (Bench Focus)",
+    "focus": "Chest, shoulders, triceps",
+    "exercises": [
+      {
+        "name": "Bench Press",
+        "sets": 4,
+        "reps": "6-8",
+        "target": "Heavy"
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 3,
+        "reps": "8-10",
+        "target": "Chest"
+      },
+      {
+        "name": "Shoulder Press",
+        "sets": 3,
+        "reps": "8-10",
+        "target": "Shoulders"
+      },
+      {
+        "name": "Tricep Dips",
+        "sets": 3,
+        "reps": "8-10",
+        "target": "Triceps"
+      },
+      {
+        "name": "Lateral Raises",
+        "sets": 3,
+        "reps": "12-15",
+        "target": "Shoulders"
+      }
+    ],
+    "duration": "60 min",
+    "intensity": "HIGH",
+    "tips": [
+      "Warm up 5-10 minutes before lifting",
+      "Rest 60-90 seconds between heavy sets",
+      "Hit protein goal of 200g today",
+      "Stay hydrated throughout workout"
+    ]
+  },
+  "quick_intel": {
+    "fittrack_status": "Running locally at http://localhost:3000",
+    "dfs_next_slate": "2/20 (9 days away) - Start optimization Wed 2/19",
+    "revenue_goal": "$500 MRR by March 31 (~6 weeks)",
+    "current_progress": "FitTrack ready to ship, NBA model in testing phase"
+  }
+}

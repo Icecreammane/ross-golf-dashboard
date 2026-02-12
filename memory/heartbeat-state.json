@@ -4,8 +4,9 @@
     "calendar": null,
     "weather": null
   },
-  "morning_brief_sent": "2026-02-10T07:26:32.000000",
-  "evening_checkin_done": "2026-02-08T19:59:39.910899",
+  "morning_brief_sent": "2026-02-11T07:34:00.000000",
+  "evening_checkin_done": "2026-02-11T19:59:39.910899",
+  "credential_rotation_reminder": "2026-02-12T20:00:00",
   "weekly_report_sent": "2026-02-08T17:58:00",
   "security_audit_passed": "2026-02-08T09:03:41",
   "lastBriefDate": "2026-02-08",

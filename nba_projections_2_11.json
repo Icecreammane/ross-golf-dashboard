@@ -1,0 +1,114 @@
+{
+  "slate": "2/11/2026",
+  "timestamp": "2026-02-10T22:41:05.829735",
+  "scoring_format": {
+    "points": 1,
+    "rebounds": 1.2,
+    "assists": 1.5,
+    "steals": 3,
+    "blocks": 3,
+    "turnovers": -1,
+    "three_pointers": 0.5
+  },
+  "projections": {
+    "studs": [
+      {
+        "player": "SGA",
+        "team": "OKC",
+        "opponent": "BKN",
+        "position": "G",
+        "projection": 58.5,
+        "confidence": "HIGH"
+      },
+      {
+        "player": "Jalen Brunson",
+        "team": "NYK",
+        "opponent": "OTT",
+        "position": "G",
+        "projection": 54.2,
+        "confidence": "HIGH"
+      },
+      {
+        "player": "Nikola Jokic",
+        "team": "DEN",
+        "opponent": "POR",
+        "position": "C",
+        "projection": 62.1,
+        "confidence": "HIGH"
+      },
+      {
+        "player": "Donovan Mitchell",
+        "team": "CLE",
+        "opponent": "CHA",
+        "position": "G",
+        "projection": 48.3,
+        "confidence": "HIGH"
+      },
+      {
+        "player": "LeBron James",
+        "team": "LAL",
+        "opponent": "LAC",
+        "position": "F",
+        "projection": 52.1,
+        "confidence": "HIGH"
+      }
+    ],
+    "value_plays": [
+      {
+        "player": "Andrew Nembhard",
+        "team": "IND",
+        "opponent": "WAS",
+        "position": "G",
+        "projection": 42.5,
+        "confidence": "MID",
+        "reason": "High assist rate, weak defense"
+      },
+      {
+        "player": "Josh Hart",
+        "team": "NYK",
+        "opponent": "OTT",
+        "position": "F",
+        "projection": 45.2,
+        "confidence": "MID",
+        "reason": "Rebounder in fast game"
+      },
+      {
+        "player": "Bam Adebayo",
+        "team": "MIA",
+        "opponent": "ATL",
+        "position": "C",
+        "projection": 46.8,
+        "confidence": "MID",
+        "reason": "Defensive anchor, full mins"
+      },
+      {
+        "player": "Tyler Herro",
+        "team": "MIA",
+        "opponent": "ATL",
+        "position": "G",
+        "projection": 38.5,
+        "confidence": "MID",
+        "reason": "Scoring upside if game is fast"
+      }
+    ],
+    "fades": [
+      {
+        "player": "Mavericks role players",
+        "reason": "Playing hot Timberwolves, blowout risk"
+      },
+      {
+        "player": "Nets starters",
+        "reason": "Thunder domination, Q4 garbage time risk"
+      },
+      {
+        "player": "Pacers guards (except Nembhard)",
+        "reason": "14-40 team, unpredictable mins"
+      }
+    ]
+  },
+  "strategy": {
+    "tier_1": "Lock SGA, Jokic, Brunson early (HIGH confidence)",
+    "tier_2": "Hunt Nembhard/Hart/Bam in middle rounds (VALUE)",
+    "tier_3": "FADE Nets role players and Mavs depth (TANKING RISK)"
+  }
+}
