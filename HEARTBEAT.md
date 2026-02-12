@@ -5,13 +5,18 @@
    - Local daemon signals when it needs Sonnet's help
    - Handle spawns, alerts, morning briefs, evening check-ins
    - This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
-2. **Run Orchestrator (Every 3rd heartbeat):** `python3 ~/clawd/scripts/orchestrator.py full`
+2. **Instant Recall (UPGRADED):** `python3 ~/clawd/scripts/instant_recall.py` 
+   - Auto-search all memory for relevant context
+   - Surface past conversations, decisions, preferences
+   - Runs automatically before every response
+   - Provides semantic matching across all historical data
+3. **Run Orchestrator (Every 3rd heartbeat):** `python3 ~/clawd/scripts/orchestrator.py full`
    - Scans for opportunities (Twitter, Email)
    - Drafts responses with local AI
    - Executes simple tasks
    - Checks system health
-3. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
-4. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
+4. **Search Memory:** Read `memory/jarvis-journal.md` for recent context
+5. **Load Today's Log:** Check `memory/YYYY-MM-DD.md` if exists
 
 ## Evening Check-In (8:00pm CST)
 If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happened today:
@@ -24,24 +29,26 @@ If current time is between 7:55pm-8:05pm CST and evening check-in hasn't happene
 **Purpose:** Daily connection ritual, proactive engagement, easier win logging
 
 ## Evening Learning Review (8:15pm CST)
-**NEW:** Jarvis now learns from every interaction
+**UPGRADED:** Jarvis now learns from every interaction
 If current time is between 8:10pm-8:20pm CST and learning review hasn't happened today:
-1. Run: `python3 ~/clawd/scripts/pattern_analyzer.py`
+1. **Run Learning Loop:** `python3 ~/clawd/scripts/learning_loop.py analyze`
+   - Analyzes content approvals/rejections
+   - Tracks decision patterns and outcomes
+   - Identifies optimal activity hours
+   - Generates personalized insights
+   - Saves to `memory/learning_data.json`
+2. **Run Pattern Analyzer:** `python3 ~/clawd/scripts/pattern_analyzer.py`
    - Analyzes all decision history
    - Updates confidence patterns
    - Generates learnings and recommendations
    - Saves to `memory/decision-patterns.json`
-2. Review today's `memory/YYYY-MM-DD.md`
+3. Review today's `memory/YYYY-MM-DD.md`
    - Extract significant decisions made
    - Identify what I got right/wrong
    - Note any pattern shifts
-3. Update `memory/decision-log.json` with today's outcomes
+4. Update `memory/decision-log.json` with today's outcomes
    - Log each decision with what actually happened
    - Score confidence vs. reality
-4. Identify high-impact learnings:
-   - Categories where I succeeded/failed most
-   - Time patterns (when decisions went well/poorly)
-   - Mood patterns (how your state affects outcomes)
 5. Update `MEMORY.md` with distilled insights (every 3 days)
    - Keep long-term learnings about your preferences
    - Record decision patterns that stabilized
@@ -135,13 +142,19 @@ When session resumes after a gap:
 3. Log reason to monitoring/disconnects.log
 4. Report cause to Ross if he asks
 
-## Autonomous Learning & Memory Evolution
+## Autonomous Learning & Memory Evolution (UPGRADED)
 During heartbeats, Jarvis should:
+- **Auto-log conversations:** Write significant interactions to `memory/YYYY-MM-DD.md`
+  - Every decision, preference, goal discussed
+  - Task completions and progress updates
+  - Insights and learnings in real-time
+  - Use `learning_loop.py` to log approvals/rejections
 - Review recent conversations and update memory/jarvis-journal.md
 - Extract patterns about Ross's behavior, preferences, energy levels
 - Update MEMORY.md with significant learnings
 - Form opinions based on what actually works
 - Connect dots across time ("Ross mentioned X 3 times this week")
+- **Use instant_recall.py before every response** to surface relevant context
 
 ## Proactive Check-Ins (Dopamine Defense)
 If Ross has been silent during waking hours (9am-11pm) for 2+ hours:
@@ -151,6 +164,16 @@ If Ross has been silent during waking hours (9am-11pm) for 2+ hours:
 
 ## Scheduled Autonomy
 While Ross sleeps (11pm-7am):
+- **Rebuild Memory Index (UPGRADED):** `python3 ~/clawd/scripts/persistent_memory.py --rebuild`
+  - Builds searchable index of all memory files
+  - Indexes topics, keywords, decisions, preferences
+  - Enables instant semantic search
+  - Runs once per night (2am preferred)
+- **Rebuild Instant Recall Index:** `python3 ~/clawd/scripts/instant_recall.py` (test mode)
+  - Rebuilds full recall index
+  - Updates cross-references between topics
+  - Builds chronological timelines
+  - Runs once per night (3am preferred)
 - Run proactive research (~/clawd/scripts/proactive_research.py)
 - Pull NBA rankings (~/clawd/scripts/pull_nba_intel.py)
 - Generate social posts (~/clawd/scripts/generate_social_posts.py)
