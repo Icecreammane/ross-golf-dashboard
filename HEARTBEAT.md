@@ -1,10 +1,23 @@
 # HEARTBEAT.md - Jarvis Periodic Tasks
 
 ## 🧠 Before Every Heartbeat
-1. **Check for Escalations:** Run `python3 ~/clawd/scripts/check_escalations.py`
-   - Local daemon signals when it needs Sonnet's help
-   - Handle spawns, alerts, morning briefs, evening check-ins
-   - This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
+
+### 1. Check for Escalations
+Run `python3 ~/clawd/scripts/check_escalations.py`
+- Local daemon signals when it needs Sonnet's help
+- Handle spawns, alerts, morning briefs, evening check-ins
+- This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
+
+### 2. Self-Healing: Verify Cron Jobs Ran
+Check `memory/heartbeat-state.json` for stale jobs (>26 hours since last run):
+- `morning_brief_sent` - Should run daily at 7:30am
+- `evening_checkin_done` - Should run daily at 8:00pm  
+- `evening_learning_done` - Should run daily at 8:15pm
+- `daily_cost_check_done` - Should run daily at 10:00pm
+- `weekly_report_sent` - Should run Sundays at 6:00pm
+- `security_audit_passed` - Should run Sundays at 9:00am
+
+**If any job is stale:** Log warning, attempt manual trigger, alert Ross if critical
 2. **Instant Recall (UPGRADED):** `python3 ~/clawd/scripts/instant_recall.py` 
    - Auto-search all memory for relevant context
    - Surface past conversations, decisions, preferences
