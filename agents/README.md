@@ -13,23 +13,26 @@
 **Files:** `SOUL.md`, `AGENTS.md`, `MEMORY.md`, `HEARTBEAT.md`  
 **Schedule:** Always on (Telegram), hourly heartbeats
 
-### Builder (Code Generation) - Sub-Agent ✅ ACTIVE
-**Location:** `agents/builder/`  
+### Arnold (Code Generation) - Sub-Agent ✅ ACTIVE
+**Location:** `agents/builder/` (named Arnold internally)  
 **Role:** Ship products, vibe-coding, weekend builds  
+**Personality:** Arnold Schwarzenegger energy — strong, unstoppable, "I'll be back" with code  
 **Files:** `SOUL.md`, `AGENTS.md`, `memory/`  
 **Schedule:** On-demand (spawned by Jarvis)  
 **Status:** Active as of Feb 12, 2026
 
-### Research (Intelligence) - Sub-Agent 🔜 PLANNED
-**Location:** `agents/research/` (not yet created)  
-**Role:** Overnight intelligence, market analysis, trend tracking  
+### Batman (Intelligence) - Sub-Agent 🔜 PLANNED
+**Location:** `agents/batman/` (not yet created)  
+**Role:** Detective work, overnight intelligence, leaves no stone unturned  
+**Personality:** Dark Knight energy — thorough, relentless, connects all dots  
 **Schedule:** 8am, 4pm daily  
 **Status:** Planned for March 2026
 
-### Content (Marketing) - Sub-Agent 🔜 PLANNED
-**Location:** `agents/content/` (not yet created)  
-**Role:** Social posts, marketing copy, product descriptions  
-**Schedule:** 9am, 5pm daily (after Research)  
+### LD (Marketing) - Sub-Agent 🔜 PLANNED
+**Location:** `agents/ld/` (Larry David)  
+**Role:** Social posts, marketing copy, high-engagement content  
+**Personality:** Curb Your Enthusiasm energy — witty, observational, naturally funny  
+**Schedule:** 9am, 5pm daily (after Batman)  
 **Status:** Planned for March 2026
 
 ---

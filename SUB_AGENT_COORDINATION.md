@@ -14,45 +14,48 @@
 **SOUL:** `SOUL.md`  
 **Memory:** `MEMORY.md` + `memory/YYYY-MM-DD.md`
 
-### Builder (Code Generation) - Sub-Agent
-**Location:** `agents/builder/`  
+### Arnold (Code Generation) - Sub-Agent
+**Location:** `agents/builder/` (named Arnold)  
 **Role:** Ship products, vibe-coding, weekend builds  
+**Personality:** Arnold Schwarzenegger — unstoppable, "I'll be back" with code  
 **SOUL:** `agents/builder/SOUL.md`  
 **Memory:** `agents/builder/memory/YYYY-MM-DD.md`
 
-### Research (Future) - Sub-Agent
-**Location:** `agents/research/` (not yet created)  
-**Role:** Overnight intelligence, market analysis, trend tracking  
-**SOUL:** `agents/research/SOUL.md`  
-**Memory:** `agents/research/memory/YYYY-MM-DD.md`
+### Batman (Intelligence) - Sub-Agent
+**Location:** `agents/batman/`  
+**Role:** Detective work, overnight intelligence, leaves no stone unturned  
+**Personality:** Dark Knight — thorough, relentless, connects all dots  
+**SOUL:** `agents/batman/SOUL.md`  
+**Memory:** `agents/batman/memory/YYYY-MM-DD.md`
 
-### Content (Future) - Sub-Agent
-**Location:** `agents/content/` (not yet created)  
-**Role:** Social posts, marketing copy, product descriptions  
-**SOUL:** `agents/content/SOUL.md`  
-**Memory:** `agents/content/memory/YYYY-MM-DD.md`
+### LD (Content Marketing) - Sub-Agent
+**Location:** `agents/ld/` (Larry David)  
+**Role:** Social posts, marketing copy, high-engagement content  
+**Personality:** Curb Your Enthusiasm — observational, witty, naturally funny  
+**SOUL:** `agents/ld/SOUL.md`  
+**Memory:** `agents/ld/memory/YYYY-MM-DD.md`
 
 ---
 
 ## File-Based Coordination Patterns
 
-### Pattern 1: Research → Content (Future)
+### Pattern 1: Batman → LD (Future)
 
 **Flow:**
 ```
-Research Agent writes → intel/DAILY-INTEL.md
-Content Agent reads intel/DAILY-INTEL.md → drafts posts
+Batman writes → intel/DAILY-INTEL.md
+LD reads intel/DAILY-INTEL.md → drafts posts
 ```
 
 **Why it works:**
-- Research runs overnight (8am, 4pm schedules)
-- Content runs after research (9am, 5pm schedules)
+- Batman runs overnight (8am, 4pm schedules)
+- LD runs after Batman (9am, 5pm schedules)
 - File exists before reader wakes up
 - No timing issues, no API calls, no auth
 
 **Example handoff:**
 ```markdown
-# intel/DAILY-INTEL.md (written by Research)
+# intel/DAILY-INTEL.md (written by Batman)
 
 ## 🔥 High Priority
 ### AI Coding Assistants Market Growing
@@ -62,21 +65,21 @@ Content Agent reads intel/DAILY-INTEL.md → drafts posts
 **Confidence:** HIGH
 ```
 
-Content Agent reads this, drafts tweet:
+LD reads this, drafts tweet:
 ```
 "The AI coding assistant market is exploding. 
 But nobody's building AI-powered fitness coaching yet. 
-That's about to change. 🏋️"
+That's about to change."
 ```
 
-### Pattern 2: Jarvis → Builder (Active Now)
+### Pattern 2: Jarvis → Arnold (Active Now)
 
 **Flow:**
 ```
 Jarvis delegates → Creates task in TASK_QUEUE.md
-Jarvis spawns → Builder session with specific instructions
-Builder builds → Writes to builds/[project]/
-Builder reports → Updates BUILD_LOG.md
+Jarvis spawns → Arnold session with specific instructions
+Arnold builds → Writes to builds/[project]/
+Arnold reports → Updates BUILD_LOG.md
 Jarvis reviews → Approves or requests changes
 ```
 
@@ -86,13 +89,13 @@ Jarvis reviews → Approves or requests changes
 ```markdown
 ## Task: Golf Coaching Landing Page
 **Priority:** High
-**Assigned:** Builder
+**Assigned:** Arnold
 **Due:** Saturday 9am
 **Context:** See reports/golf-coaching-research.md
 **Deliverable:** Working site at localhost:3000 with Stripe
 ```
 
-**Builder reads TASK_QUEUE.md, builds, then writes BUILD_LOG.md:**
+**Arnold reads TASK_QUEUE.md, builds, then writes BUILD_LOG.md:**
 ```markdown
 # Build Log - Golf Coaching Site
 
@@ -419,31 +422,31 @@ Update this file (SUB_AGENT_COORDINATION.md) with:
 ## Current vs Future State
 
 ### Current (Feb 12, 2026)
-**Active agents:** Jarvis (main), Builder (sub-agent)
+**Active agents:** Jarvis (main), Arnold (sub-agent)
 
 **Handoffs:**
-- Jarvis → TASK_QUEUE.md → Builder
-- Builder → BUILD_LOG.md → Jarvis
+- Jarvis → TASK_QUEUE.md → Arnold
+- Arnold → BUILD_LOG.md → Jarvis
 
 **Schedules:**
 - Jarvis: Always on + hourly heartbeats
-- Builder: On-demand spawns
+- Arnold: On-demand spawns
 
-**Status:** Foundational system working. Builder active this weekend.
+**Status:** Foundational system working. Arnold active this weekend.
 
 ### Future (March 2026)
-**Planned agents:** Research, Content
+**Planned agents:** Batman (intelligence), LD (content)
 
 **New handoffs:**
-- Research → intel/DAILY-INTEL.md → Content
-- Research → intel/DAILY-INTEL.md → Jarvis (strategic context)
-- Content → drafts/tweets.md → Jarvis (approval flow)
+- Batman → intel/DAILY-INTEL.md → LD
+- Batman → intel/DAILY-INTEL.md → Jarvis (strategic context)
+- LD → drafts/social/*.md → Jarvis (approval flow)
 
 **Schedules:**
-- Research: 8am, 4pm daily
-- Content: 9am, 5pm daily (after Research)
+- Batman: 8am, 4pm daily
+- LD: 9am, 5pm daily (after Batman)
 
-**Goal:** Autonomous content pipeline. Research runs overnight, content drafts ready by morning.
+**Goal:** Autonomous content pipeline. Batman researches overnight, LD drafts ready by morning.
 
 ---
 
@@ -509,7 +512,7 @@ Don't build six on day one. Add when you feel the pain.
 
 ---
 
-**Status:** SUB_AGENT_COORDINATION v1.0  
-**Active agents:** Jarvis, Builder  
-**Next:** Research Agent (March 2026)  
+**Status:** SUB_AGENT_COORDINATION v1.1  
+**Active agents:** Jarvis, Arnold  
+**Planned agents:** Batman (March 2026), LD (March 2026)  
 **Last updated:** February 12, 2026
