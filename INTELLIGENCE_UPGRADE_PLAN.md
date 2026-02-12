@@ -40,7 +40,46 @@ python3 scripts/pattern_analyzer.py --initialize
 
 ## Phase 2: This Weekend (Feb 15-16)
 
-### 3. Context Telepathy ⏱️ 10 min
+### 3. GitHub Reorganization ⏱️ 15 min
+**Task:** Rename repo + light restructure
+
+**Part A: Rename Repo (2 min)**
+1. GitHub: Settings → Repository name → `ross-workspace` (or `jarvis-workspace`)
+2. Update local remote: `git remote set-url origin https://github.com/Icecreammane/ross-workspace.git`
+3. Test: `git fetch` to verify
+
+**Part B: Restructure Directories (10 min)**
+```bash
+# Create organized structure
+mkdir -p products intelligence analytics infrastructure
+
+# Move projects
+mv fitness-tracker products/
+mv revenue-dashboard products/
+mv mission-control products/
+
+# Move Jarvis systems
+mv scripts intelligence/
+mv memory intelligence/
+mv reports intelligence/
+
+# Move data projects
+mv nba analytics/
+
+# Move ops
+mv monitoring infrastructure/
+mv security-logs infrastructure/
+
+# Update paths in relevant configs/scripts
+# (Jarvis will handle this programmatically)
+```
+
+**Part C: Update Documentation (3 min)**
+- Update README.md with new structure
+- Update AGENTS.md workspace references
+- Commit: "Reorganize workspace structure"
+
+### 4. Context Telepathy ⏱️ 10 min
 **Script:** `scripts/context_telepathy.py`
 
 **What it does:**
