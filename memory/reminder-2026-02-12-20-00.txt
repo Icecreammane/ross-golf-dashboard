@@ -1,0 +1,17 @@
+🔐 REMINDER: Tonight's Upgrades (Phase 1)
+
+Time: 8:00pm CST, February 12, 2026
+Priority: HIGH
+
+**Part 1: Security (~5 min)**
+Rotate 3 credentials exposed in git history:
+1. xAI API Key
+2. Google OAuth Client ID
+3. Google OAuth Client Secret
+
+**Part 2: Intelligence (~1 min)**
+Activate Pattern Analyzer - starts learning decision patterns
+
+Details: See INTELLIGENCE_UPGRADE_PLAN.md
+
+When Ross is ready, say "let's do it" to start (~6 min total).
