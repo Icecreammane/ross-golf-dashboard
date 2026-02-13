@@ -284,3 +284,17 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+## 🧠 MEMORY PROTOCOL UPDATE (2026-02-13)
+
+**MANDATORY BEFORE EVERY RESPONSE:**
+1. Run instant_recall with user's message context
+2. Read memory/YYYY-MM-DD.md for yesterday + today
+3. Search memory for project-specific context
+
+**DO NOT:**
+- Suggest things we've already built
+- Re-explain decisions we've already made
+- Ask questions we've already answered
+
+**Ross's directive:** "I feel like we constantly waste time rehashing what we've already done. If you could just remember each session, that would really help us."
