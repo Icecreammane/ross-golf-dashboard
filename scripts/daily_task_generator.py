@@ -39,8 +39,14 @@ def load_recent_progress():
 def generate_tasks_with_ai(goals, recent_progress):
     """Use AI to generate 4-5 specific, actionable tasks"""
     from openai import OpenAI
+    import sys
+    sys.path.insert(0, str(WORKSPACE / "scripts"))
+    from jarvis_helpers import smart_route, log_cost
     
     client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+    
+    # Use smart routing to pick best model
+    model = smart_route("Generate 4-5 daily tasks based on goals and recent progress")
     
     prompt = f"""Based on these goals and recent progress, generate 4-5 specific, actionable tasks for today.
 
@@ -71,9 +77,17 @@ Return ONLY valid JSON (no markdown, no explanation):
 }}"""
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=model,  # Use routed model
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7
+    )
+    
+    # Log cost for tracking
+    log_cost(
+        model=model,
+        workflow="daily-task-generation",
+        input_tokens=response.usage.prompt_tokens,
+        output_tokens=response.usage.completion_tokens
     )
     
     # Parse response
