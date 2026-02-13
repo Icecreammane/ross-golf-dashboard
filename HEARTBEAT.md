@@ -8,7 +8,22 @@ Run `python3 ~/clawd/scripts/check_escalations.py`
 - Handle spawns, alerts, morning briefs, evening check-ins
 - This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
 
-### 2. Self-Healing: Verify Cron Jobs Ran
+### 2. Food Logging Check ⚠️ CRITICAL
+Run `python3 ~/clawd/scripts/auto_food_logger.py`
+- Scans for new photos in media/inbound
+- Checks if they're logged in fitness tracker
+- Creates alert if unlogged food photos detected
+- If alert exists: **IMMEDIATELY** analyze photos and log meals
+- **Ross logs food ONCE - never ask to repeat**
+
+**If food_alert.json exists:**
+1. Read alert file
+2. Analyze each photo with vision model
+3. Log meals to fitness tracker with descriptions
+4. Confirm logged to Ross
+5. Delete alert file
+
+### 3. Self-Healing: Verify Cron Jobs Ran
 Check `memory/heartbeat-state.json` for stale jobs (>26 hours since last run):
 - `morning_brief_sent` - Should run daily at 7:30am
 - `evening_checkin_done` - Should run daily at 8:00pm  
