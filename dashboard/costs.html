@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Cost Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #ff006e, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 40px auto;
+        }
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #00ff88;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+        .alert {
+            background: #2a1a1a;
+            border-left: 4px solid #ff4d4d;
+            padding: 16px;
+            margin-bottom: 30px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .charts {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .chart-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        canvas {
+            max-height: 300px;
+        }
+        @media (max-width: 900px) {
+            .charts { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💰 API Cost Dashboard</h1>
+        <div class="subtitle">Real-time cost tracking · Updated February 13, 2026 at 04:42 PM</div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">$0</div>
+            <div class="stat-label">Today</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">$0</div>
+            <div class="stat-label">Last 7 Days</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">$0</div>
+            <div class="stat-label">Last 30 Days</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">$0.0/day</div>
+            <div class="stat-label">Daily Average</div>
+        </div>
+    </div>
+
+    <div class="charts">
+        <div class="chart-card">
+            <div class="chart-title">Cost by Workflow (Last 7 Days)</div>
+            <canvas id="workflowChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Cost by Model (Last 7 Days)</div>
+            <canvas id="modelChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">Daily Spending Trend</div>
+            <canvas id="trendChart"></canvas>
+        </div>
+    </div>
+    
+    <script>
+
+        // Workflow chart
+        new Chart(document.getElementById('workflowChart'), {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Cost ($)',
+                    data: [],
+                    backgroundColor: 'rgba(0, 255, 136, 0.8)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { ticks: { color: '#888' }, grid: { color: '#2a2a2a' } },
+                    x: { ticks: { color: '#888' }, grid: { display: false } }
+                }
+            }
+        });
+
+        // Model chart
+        new Chart(document.getElementById('modelChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [],
+                    backgroundColor: ['#ff006e', '#ffa500', '#00d4ff', '#00ff88', '#8338ec']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#888' } }
+                }
+            }
+        });
+
+        // Trend chart
+        new Chart(document.getElementById('trendChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Daily Cost ($)',
+                    data: [],
+                    borderColor: '#00d4ff',
+                    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { ticks: { color: '#888' }, grid: { color: '#2a2a2a' } },
+                    x: { ticks: { color: '#888' }, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
