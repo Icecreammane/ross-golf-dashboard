@@ -1,0 +1,11 @@
+{
+  "last_recall_query": "Test: How's the FitTrack voice logging feature we built?",
+  "last_log_time": null,
+  "conversation_thread": [
+    {
+      "message": "Test: How's the FitTrack voice logging feature we built?",
+      "timestamp": "2026-02-13T08:12:28.803052",
+      "context_found": 8
+    }
+  ]
+}
