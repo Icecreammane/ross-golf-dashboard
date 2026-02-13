@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Mission Control</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+        .kanban {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .column {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .column-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #2a2a2a;
+        }
+        .todo { border-top: 4px solid #00d4ff; }
+        .in-progress { border-top: 4px solid #ffa500; }
+        .done { border-top: 4px solid #00ff88; }
+        .task-card {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: move;
+        }
+        .task-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .task-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .tag {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #2a2a2a;
+        }
+        .priority-high { background: #ff4d4d; color: #fff; }
+        .priority-medium { background: #ffa500; color: #000; }
+        .priority-low { background: #00d4ff; color: #000; }
+        .task-goal {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+        }
+        .stat-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #00ff88;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        @media (max-width: 900px) {
+            .kanban { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 Jarvis Mission Control</h1>
+        <div class="subtitle">AI-Generated Daily Tasks · Updated February 13, 2026 at 02:13 PM</div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">5</div>
+            <div class="stat-label">To Do</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">In Progress</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0%</div>
+            <div class="stat-label">Progress</div>
+        </div>
+    </div>
+    
+    <div class="kanban">
+        <div class="column todo">
+            <div class="column-header">📋 To Do</div>
+
+            <div class="task-card">
+                <div class="task-title">Develop frictionless voice logging feature enhancement</div>
+                <div class="task-meta">
+                    <span class="tag priority-high">HIGH</span>
+                    <span class="tag">code</span>
+                    <span class="tag">120 min</span>
+                </div>
+                <div class="task-goal">🎯 Ship revenue products - Fitness tracker SaaS</div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">Create and publish 3 promotional social media posts for Golf Coaching subscription</div>
+                <div class="task-meta">
+                    <span class="tag priority-high">HIGH</span>
+                    <span class="tag">content</span>
+                    <span class="tag">90 min</span>
+                </div>
+                <div class="task-goal">🎯 Quick wins first - Golf coaching</div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">Conduct market research on Notion templates pricing and competition</div>
+                <div class="task-meta">
+                    <span class="tag priority-medium">MEDIUM</span>
+                    <span class="tag">research</span>
+                    <span class="tag">60 min</span>
+                </div>
+                <div class="task-goal">🎯 Quick wins first - Notion templates</div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">Integrate calorie and protein auto-calculation into fitness tracking app</div>
+                <div class="task-meta">
+                    <span class="tag priority-medium">MEDIUM</span>
+                    <span class="tag">code</span>
+                    <span class="tag">120 min</span>
+                </div>
+                <div class="task-goal">🎯 Hit daily macros</div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-title">Analyze February user feedback for fitness tracker improvements</div>
+                <div class="task-meta">
+                    <span class="tag priority-medium">MEDIUM</span>
+                    <span class="tag">research</span>
+                    <span class="tag">60 min</span>
+                </div>
+                <div class="task-goal">🎯 Improve fitness tracking</div>
+            </div>
+
+        </div>
+        <div class="column in-progress">
+            <div class="column-header">⚡ In Progress</div>
+
+        </div>
+        <div class="column done">
+            <div class="column-header">✅ Done</div>
+
+        </div>
+    </div>
+</body>
+</html>

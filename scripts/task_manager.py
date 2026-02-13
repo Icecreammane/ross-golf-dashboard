@@ -1,162 +1,100 @@
 #!/usr/bin/env python3
 """
-Task Manager CLI - Manually add/view/complete tasks
+Task Manager - Move tasks between Kanban columns
 """
 
 import json
 import sys
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 
-QUEUE_FILE = Path("/Users/clawdbot/clawd/data/task-queue.json")
+WORKSPACE = Path.home() / "clawd"
+KANBAN_FILE = WORKSPACE / "data" / "kanban.json"
 
-def load_queue():
-    """Load task queue"""
-    if not QUEUE_FILE.exists():
-        return {"tasks": [], "last_updated": "", "task_count": 0}
-    
-    with open(QUEUE_FILE) as f:
+def load_kanban():
+    with open(KANBAN_FILE) as f:
         return json.load(f)
 
-def save_queue(data):
-    """Save task queue"""
-    data["last_updated"] = datetime.now().isoformat()
-    data["task_count"] = len(data["tasks"])
+def save_kanban(kanban):
+    with open(KANBAN_FILE, 'w') as f:
+        json.dump(kanban, f, indent=2)
+    # Regenerate dashboard
+    import subprocess
+    subprocess.run([sys.executable, str(WORKSPACE / "scripts" / "daily_task_generator.py")], 
+                   capture_output=True)
+
+def move_task(task_id, to_column):
+    """Move a task to a different column"""
+    kanban = load_kanban()
     
-    with open(QUEUE_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+    # Find and remove task
+    task = None
+    for column in ['todo', 'in_progress', 'done']:
+        for i, t in enumerate(kanban[column]):
+            if t['id'] == task_id:
+                task = kanban[column].pop(i)
+                break
+        if task:
+            break
+    
+    if not task:
+        print(f"❌ Task {task_id} not found")
+        return False
+    
+    # Update status and timestamp
+    task['status'] = to_column
+    if to_column == 'in_progress' and 'started_at' not in task:
+        task['started_at'] = datetime.now().isoformat()
+    if to_column == 'done':
+        task['completed_at'] = datetime.now().isoformat()
+    
+    # Add to new column
+    kanban[to_column].append(task)
+    
+    save_kanban(kanban)
+    print(f"✅ Moved task to {to_column}: {task['title']}")
+    return True
 
 def list_tasks():
-    """Display all tasks"""
-    data = load_queue()
-    tasks = data.get("tasks", [])
+    """List all tasks"""
+    kanban = load_kanban()
     
-    if not tasks:
-        print("📭 Task queue is empty")
-        return
+    print("\n📋 TO DO:")
+    for task in kanban['todo']:
+        print(f"  [{task['id']}] {task['title']} ({task['priority']})")
     
-    print(f"\n📋 Task Queue ({len(tasks)} tasks)\n")
-    print("=" * 80)
+    print("\n⚡ IN PROGRESS:")
+    for task in kanban['in_progress']:
+        print(f"  [{task['id']}] {task['title']}")
     
-    for i, task in enumerate(tasks, 1):
-        status = "✅" if task.get("completed") else "⏳"
-        source = task.get("source", "unknown")
-        priority = task.get("priority", 0)
-        
-        print(f"\n{status} [{i}] {task['title']}")
-        print(f"    Priority: {priority} | Type: {task.get('type', 'unknown')} | Source: {source}")
-        print(f"    {task['description']}")
-        if task.get("context"):
-            print(f"    Context: {task['context']}")
-    
-    print("\n" + "=" * 80)
+    print("\n✅ DONE:")
+    for task in kanban['done'][:5]:  # Show last 5
+        print(f"  [{task['id']}] {task['title']}")
 
-def add_task(title, description, priority=200):
-    """Add a manual task"""
-    data = load_queue()
-    
-    task = {
-        "id": f"manual_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
-        "title": title,
-        "description": description,
-        "priority": priority,
-        "type": "manual",
-        "context": "Manually added by Ross",
-        "created": datetime.now().isoformat(),
-        "source": "manual"
-    }
-    
-    # Add task and re-sort by priority
-    data.setdefault("tasks", []).append(task)
-    data["tasks"].sort(key=lambda t: t.get("priority", 0), reverse=True)
-    save_queue(data)
-    
-    print(f"✅ Added task: {title}")
-    print(f"   Priority: {priority}")
+def start_task(task_id):
+    """Move task to in_progress"""
+    return move_task(task_id, 'in_progress')
 
-def complete_task(task_number):
-    """Mark task as completed"""
-    data = load_queue()
-    tasks = data.get("tasks", [])
-    
-    if task_number < 1 or task_number > len(tasks):
-        print(f"❌ Invalid task number: {task_number}")
-        return
-    
-    task = tasks[task_number - 1]
-    task["completed"] = True
-    task["completed_at"] = datetime.now().isoformat()
-    
-    save_queue(data)
-    print(f"✅ Completed: {task['title']}")
+def complete_task(task_id):
+    """Move task to done"""
+    return move_task(task_id, 'done')
 
-def remove_task(task_number):
-    """Remove a task"""
-    data = load_queue()
-    tasks = data.get("tasks", [])
-    
-    if task_number < 1 or task_number > len(tasks):
-        print(f"❌ Invalid task number: {task_number}")
-        return
-    
-    task = tasks.pop(task_number - 1)
-    save_queue(data)
-    print(f"🗑️  Removed: {task['title']}")
-
-def clear_completed():
-    """Remove all completed tasks"""
-    data = load_queue()
-    tasks = data.get("tasks", [])
-    
-    before = len(tasks)
-    data["tasks"] = [t for t in tasks if not t.get("completed")]
-    after = len(data["tasks"])
-    
-    save_queue(data)
-    print(f"🧹 Cleared {before - after} completed tasks")
-
-def main():
-    """CLI entry point"""
+if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print("Task Manager - Usage:")
-        print("  python3 task_manager.py list")
-        print("  python3 task_manager.py add 'Title' 'Description' [priority]")
-        print("  python3 task_manager.py complete <number>")
-        print("  python3 task_manager.py remove <number>")
-        print("  python3 task_manager.py clear")
-        return
+        print("Usage:")
+        print("  task_manager.py list")
+        print("  task_manager.py start <task_id>")
+        print("  task_manager.py complete <task_id>")
+        sys.exit(1)
     
-    command = sys.argv[1].lower()
+    command = sys.argv[1]
     
-    if command == "list":
+    if command == 'list':
         list_tasks()
-    
-    elif command == "add":
-        if len(sys.argv) < 4:
-            print("❌ Usage: add 'Title' 'Description' [priority]")
-            return
-        title = sys.argv[2]
-        description = sys.argv[3]
-        priority = int(sys.argv[4]) if len(sys.argv) > 4 else 200
-        add_task(title, description, priority)
-    
-    elif command == "complete":
-        if len(sys.argv) < 3:
-            print("❌ Usage: complete <task_number>")
-            return
-        complete_task(int(sys.argv[2]))
-    
-    elif command == "remove":
-        if len(sys.argv) < 3:
-            print("❌ Usage: remove <task_number>")
-            return
-        remove_task(int(sys.argv[2]))
-    
-    elif command == "clear":
-        clear_completed()
-    
+    elif command == 'start' and len(sys.argv) > 2:
+        start_task(sys.argv[2])
+    elif command == 'complete' and len(sys.argv) > 2:
+        complete_task(sys.argv[2])
     else:
-        print(f"❌ Unknown command: {command}")
-
-if __name__ == "__main__":
-    main()
+        print("Unknown command")
+        sys.exit(1)
