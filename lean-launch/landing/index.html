@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean - Log meals in 3 seconds</title>
+    <meta name="description" content="Voice logging + AI that actually works. Track your nutrition effortlessly with Lean.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #06b6d4;
+            --green: #10b981;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--green) 100%);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subhead {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gray);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 48px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.4);
+        }
+
+        .demo-placeholder {
+            margin-top: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+            min-height: 400px;
+            border: 2px dashed var(--gray);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 20px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 80px;
+            letter-spacing: -0.02em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: white;
+            border-radius: 16px;
+            border: 2px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 20px;
+            background: var(--light-gray);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 48px;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--cyan);
+            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .pricing-card .price-period {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-card li {
+            padding: 12px 0;
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            margin-right: 12px;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 2px solid var(--cyan);
+            background: white;
+            color: var(--cyan);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-button:hover {
+            background: var(--cyan);
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--green) 100%);
+            color: white;
+            border: none;
+        }
+
+        .pricing-card.featured .pricing-button:hover {
+            transform: scale(1.02);
+        }
+
+        /* Email Capture Section */
+        .email-capture {
+            padding: 120px 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .email-capture h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .email-capture p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .email-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 280px;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .email-submit {
+            padding: 18px 36px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .email-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+            }
+
+            .demo-placeholder {
+                padding: 40px 20px;
+                min-height: 300px;
+            }
+
+            .features, .pricing, .email-capture {
+                padding: 80px 20px;
+            }
+
+            .section-title {
+                margin-bottom: 50px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-input, .email-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><span class="gradient-text">Log meals in 3 seconds</span></h1>
+            <p class="subhead">Voice logging + AI that actually works</p>
+            <a href="#early-access" class="cta-button gradient-bg">Start Free</a>
+            
+            <div class="demo-placeholder">
+                <span>🎬 Demo GIF / Video Placeholder<br>Show voice logging in action</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Everything you need, <span class="gradient-text">nothing you don't</span></h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon gradient-bg">🎤</div>
+                    <h3>Voice Logging</h3>
+                    <p>Hold button, speak, done. No typing, no tedious data entry. Just talk naturally and Lean handles the rest.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon gradient-bg">📸</div>
+                    <h3>Photo Scanning</h3>
+                    <p>Snap a photo, AI estimates everything, you confirm. The fastest way to log complex meals.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon gradient-bg">🎯</div>
+                    <h3>AI Goal Calculator</h3>
+                    <p>Enter your goal, get exact calorie targets. No guesswork, no complicated formulas. Just results.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon gradient-bg">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Photos, graphs, and streak tracking. Watch your journey unfold with beautiful visualizations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, <span class="gradient-text">honest pricing</span></h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0<span class="price-period">/forever</span></div>
+                    <ul>
+                        <li>50 meals per month</li>
+                        <li>Voice & photo logging</li>
+                        <li>Basic progress tracking</li>
+                        <li>AI goal calculator</li>
+                    </ul>
+                    <button class="pricing-button" onclick="scrollToEarlyAccess()">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge gradient-bg">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price gradient-text">$4.99<span class="price-period">/month</span></div>
+                    <ul>
+                        <li>Unlimited meal logging</li>
+                        <li>Advanced analytics</li>
+                        <li>Photo timeline</li>
+                        <li>Streak tracking</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="pricing-button" onclick="scrollToEarlyAccess()">Start Free Trial</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Lifetime</h3>
+                    <div class="price">$49<span class="price-period">/one-time</span></div>
+                    <ul>
+                        <li>Everything in Pro</li>
+                        <li>Forever. No subscriptions.</li>
+                        <li>All future updates</li>
+                        <li>Early access to features</li>
+                        <li>Support indie development</li>
+                    </ul>
+                    <button class="pricing-button" onclick="scrollToEarlyAccess()">Claim Lifetime Deal</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture Section -->
+    <section class="email-capture" id="early-access">
+        <div class="container">
+            <h2><span class="gradient-text">Get early access</span></h2>
+            <p>Join the waitlist and be first to log your first meal</p>
+            
+            <form class="email-form" action="mailto:bigmeatyclawd@gmail.com?subject=Lean Early Access Request" method="get">
+                <input type="email" name="body" class="email-input" placeholder="your@email.com" required>
+                <button type="submit" class="email-submit gradient-bg">Join Waitlist</button>
+            </form>
+            
+            <!-- Alternative: Tally embed (uncomment to use) -->
+            <!--
+            <iframe 
+                src="https://tally.so/embed/YOUR-TALLY-FORM-ID?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0" 
+                title="Lean Early Access">
+            </iframe>
+            -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Lean. Built with ❤️ for people who hate logging meals.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToEarlyAccess() {
+            document.getElementById('early-access').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Simple analytics: log when someone clicks CTA
+        document.querySelectorAll('.cta-button, .pricing-button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('CTA clicked:', this.textContent);
+                // Add your analytics here (Google Analytics, Plausible, etc.)
+            });
+        });
+    </script>
+</body>
+</html>

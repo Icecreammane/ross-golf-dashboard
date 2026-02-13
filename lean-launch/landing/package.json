@@ -1,0 +1,17 @@
+{
+  "name": "lean-landing",
+  "version": "1.0.0",
+  "description": "Lean meal logging app - Marketing landing page",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod --dir=."
+  },
+  "keywords": [
+    "landing-page",
+    "lean",
+    "meal-logging"
+  ],
+  "author": "Jarvis",
+  "license": "MIT"
+}
