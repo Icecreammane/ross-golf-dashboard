@@ -196,11 +196,35 @@ During heartbeats, Jarvis should:
 - Connect dots across time ("Ross mentioned X 3 times this week")
 - **Use instant_recall.py before every response** to surface relevant context
 
-## Proactive Check-Ins (Dopamine Defense)
-If Ross has been silent during waking hours (9am-11pm) for 2+ hours:
-- Check in: "Working on something? Or stuck?"
-- Interrupt potential scroll spirals early
-- Offer a quick win task if he seems idle
+## Proactive Check-Ins (Dopamine Defense) ✅ IMPLEMENTED
+Every heartbeat, run the Dopamine Defense System:
+
+```python
+from scripts.dopamine_defense import check_and_interrupt
+from scripts.activity_tracker import record_interaction
+
+# Don't record heartbeat as interaction - only user messages
+# Check if interrupt needed
+result = check_and_interrupt()
+
+if result["should_interrupt"]:
+    # Send via Telegram
+    send_telegram_message(result["message"])
+```
+
+**System Details:**
+- Tracks activity via `scripts/activity_tracker.py`
+- Detects idle >20 min during work hours (9am-11pm CST)
+- Sends intervention with random quick win task
+- 60-minute cooldown prevents spam
+- Tracks success rate and response times
+- See `docs/DOPAMINE_DEFENSE.md` for full documentation
+
+**Integration Notes:**
+- Only user messages count as activity (not heartbeats)
+- System automatically rotates quick win suggestions
+- Records interrupts and responses for learning
+- Evening report includes dopamine defense stats
 
 ## Scheduled Autonomy
 While Ross sleeps (11pm-7am):
