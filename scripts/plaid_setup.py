@@ -46,11 +46,10 @@ def get_plaid_client(creds):
     
     configuration = Configuration(
         host=host,
-        api_key={
-            'clientId': creds['client_id'],
-            'secret': creds['secret'],
-        }
+        api_key={'clientId': creds['client_id'], 'secret': creds['secret']}
     )
+    configuration.api_key['PLAID-CLIENT-ID'] = creds['client_id']
+    configuration.api_key['PLAID-SECRET'] = creds['secret']
     
     api_client = ApiClient(configuration)
     return plaid_api.PlaidApi(api_client)

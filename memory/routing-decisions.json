@@ -4578,6 +4578,158 @@
       },
       "latency": 14.806315958,
       "timestamp": "2026-02-16T09:56:18.709071"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:01:18.789622"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.0048059999999999995,
+      "tokens": {
+        "prompt": 152,
+        "completion": 290
+      },
+      "latency": 27.455805833,
+      "timestamp": "2026-02-16T10:01:46.267555"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:06:46.428251"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.0062759999999999995,
+      "tokens": {
+        "prompt": 152,
+        "completion": 388
+      },
+      "latency": 36.944678291,
+      "timestamp": "2026-02-16T10:07:23.389423"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:12:23.421655"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.004191,
+      "tokens": {
+        "prompt": 152,
+        "completion": 249
+      },
+      "latency": 23.795494167,
+      "timestamp": "2026-02-16T10:12:47.233496"
+    },
+    {
+      "task": "You are monitoring Ross's calendar. Check for:\n1. Events starting in the next 2 hours\n2. Conflicts o",
+      "routing": {
+        "model": "ollama",
+        "complexity": 5,
+        "reasoning": "Medium task (complexity 5): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:12:47.249989"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.0024449999999999997,
+      "tokens": {
+        "prompt": 115,
+        "completion": 140
+      },
+      "latency": 12.83364525,
+      "timestamp": "2026-02-16T10:13:00.089167"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:18:00.200263"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.005436,
+      "tokens": {
+        "prompt": 152,
+        "completion": 332
+      },
+      "latency": 31.830954709,
+      "timestamp": "2026-02-16T10:18:32.061879"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:23:32.149983"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.004926,
+      "tokens": {
+        "prompt": 152,
+        "completion": 298
+      },
+      "latency": 28.698396333,
+      "timestamp": "2026-02-16T10:24:00.875787"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:29:00.959573"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.004926,
+      "tokens": {
+        "prompt": 152,
+        "completion": 298
+      },
+      "latency": 28.66744,
+      "timestamp": "2026-02-16T10:29:29.644058"
+    },
+    {
+      "task": "You are monitoring Ross's calendar. Check for:\n1. Events starting in the next 2 hours\n2. Conflicts o",
+      "routing": {
+        "model": "ollama",
+        "complexity": 5,
+        "reasoning": "Medium task (complexity 5): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T10:29:29.659172"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.00207,
+      "tokens": {
+        "prompt": 115,
+        "completion": 115
+      },
+      "latency": 10.856691084,
+      "timestamp": "2026-02-16T10:29:40.526871"
     }
   ]
 }
