@@ -1120,6 +1120,25 @@
       },
       "latency": 15.004434083,
       "timestamp": "2026-02-15T22:45:45.648233"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-15T22:50:45.708453"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.0052109999999999995,
+      "tokens": {
+        "prompt": 152,
+        "completion": 317
+      },
+      "latency": 31.019435625,
+      "timestamp": "2026-02-15T22:51:16.749836"
     }
   ]
 }
