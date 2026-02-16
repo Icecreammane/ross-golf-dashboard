@@ -290,6 +290,12 @@ def format_brief_for_telegram(brief):
         lines.append(f"• Yesterday Revenue: ${stats.get('daily_revenue', 0):,.0f}")
         lines.append(f"• Weather: {stats.get('weather_temp', 0)}°F, {stats.get('weather_conditions', 'Unknown')}")
     
+    # Add Mission Control link
+    lines.append("")
+    lines.append("─" * 30)
+    lines.append("📊 *[Open Mission Control](http://localhost:8081/mission-control)*")
+    lines.append("_Your central hub for all automations, live activity, and dashboards_")
+    
     return "\n".join(lines)
 
 

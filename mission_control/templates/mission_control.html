@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission Control - Jarvis Dashboard</title>
+    <title>Mission Control v3 - The Central Hub</title>
     <style>
         * {
             margin: 0;
@@ -40,6 +40,31 @@
             font-size: 1.1em;
         }
 
+        .live-indicator {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .live-indicator.active {
+            background: #10b98133;
+            color: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .live-indicator.idle {
+            background: #64748b33;
+            color: #64748b;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .last-update {
             text-align: center;
             color: #64748b;
@@ -51,7 +76,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
         }
 
@@ -63,12 +88,22 @@
             border: 1px solid #334155;
         }
 
+        .card.featured {
+            grid-column: span 2;
+        }
+
         .card-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #334155;
+        }
+
+        .card-header-left {
+            display: flex;
+            align-items: center;
         }
 
         .card-header h2 {
@@ -81,6 +116,301 @@
             font-size: 1.5em;
         }
 
+        .expand-btn {
+            padding: 4px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+
+        .expand-btn:hover {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        /* LIVE ACTIVITY FEED */
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0f172a;
+            border-radius: 8px;
+            border-left: 3px solid #475569;
+            transition: all 0.2s;
+        }
+
+        .activity-item:hover {
+            background: #1e293b;
+        }
+
+        .activity-item.success {
+            border-left-color: #10b981;
+        }
+
+        .activity-item.error {
+            border-left-color: #ef4444;
+        }
+
+        .activity-item.in-progress {
+            border-left-color: #3b82f6;
+        }
+
+        .activity-icon {
+            font-size: 1.5em;
+            margin-right: 12px;
+            min-width: 30px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .activity-tool {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .activity-time {
+            color: #64748b;
+            font-size: 0.85em;
+        }
+
+        .activity-action {
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        .activity-cost {
+            color: #f59e0b;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        /* AUTOMATIONS STATUS */
+        .automation-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0f172a;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+        }
+
+        .automation-item.active {
+            border-left-color: #10b981;
+        }
+
+        .automation-item.paused {
+            border-left-color: #64748b;
+        }
+
+        .automation-item.stopped {
+            border-left-color: #ef4444;
+        }
+
+        .automation-left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .automation-icon {
+            font-size: 1.5em;
+            margin-right: 12px;
+        }
+
+        .automation-info {
+            flex: 1;
+        }
+
+        .automation-name {
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .automation-details {
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+
+        .automation-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .automation-status.active {
+            background: #10b98133;
+            color: #10b981;
+        }
+
+        .automation-status.paused {
+            background: #64748b33;
+            color: #64748b;
+        }
+
+        .automation-status.stopped {
+            background: #ef444433;
+            color: #ef4444;
+        }
+
+        /* MEMORY HEALTH */
+        .memory-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 6px 0;
+            background: #0f172a;
+            border-radius: 6px;
+        }
+
+        .memory-label {
+            color: #94a3b8;
+        }
+
+        .memory-value {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .memory-status {
+            text-align: center;
+            padding: 15px;
+            background: #0f172a;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 2px solid #10b981;
+        }
+
+        .memory-status.degraded {
+            border-color: #f59e0b;
+        }
+
+        .memory-status.unhealthy {
+            border-color: #ef4444;
+        }
+
+        .memory-status-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .memory-status-text {
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        .memory-status.degraded .memory-status-text {
+            color: #f59e0b;
+        }
+
+        .memory-status.unhealthy .memory-status-text {
+            color: #ef4444;
+        }
+
+        /* QUICK LINKS */
+        .quick-links-section {
+            margin-bottom: 20px;
+        }
+
+        .quick-links-title {
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            margin: 6px 0;
+            background: #0f172a;
+            border-radius: 6px;
+            color: #3b82f6;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+        }
+
+        .quick-link:hover {
+            background: #1e293b;
+            border-color: #3b82f6;
+        }
+
+        .quick-link-status {
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .quick-link-status.running {
+            background: #10b98133;
+            color: #10b981;
+        }
+
+        .quick-link-status.live {
+            background: #3b82f633;
+            color: #3b82f6;
+        }
+
+        .quick-link-status.paused {
+            background: #64748b33;
+            color: #64748b;
+        }
+
+        /* COST DASHBOARD */
+        .cost-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0f172a;
+            border-radius: 8px;
+        }
+
+        .cost-label {
+            color: #94a3b8;
+        }
+
+        .cost-value {
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .cost-value.low {
+            color: #10b981;
+        }
+
+        .cost-value.medium {
+            color: #f59e0b;
+        }
+
+        .cost-value.high {
+            color: #ef4444;
+        }
+
+        /* LEGACY COMPONENTS */
         .service-item {
             display: flex;
             align-items: center;
@@ -98,10 +428,6 @@
 
         .service-item.unhealthy {
             border-left-color: #ef4444;
-        }
-
-        .service-item.warning {
-            border-left-color: #f59e0b;
         }
 
         .service-name {
@@ -138,115 +464,10 @@
             color: #3b82f6;
         }
 
-        .cost-metric {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px;
-            margin: 8px 0;
-            background: #0f172a;
-            border-radius: 8px;
-        }
-
-        .cost-label {
-            color: #94a3b8;
-        }
-
-        .cost-value {
-            font-weight: 700;
-            font-size: 1.2em;
-        }
-
-        .cost-value.low {
-            color: #10b981;
-        }
-
-        .cost-value.medium {
-            color: #f59e0b;
-        }
-
-        .cost-value.high {
-            color: #ef4444;
-        }
-
-        .action-item {
-            padding: 10px;
-            margin: 6px 0;
-            background: #0f172a;
-            border-radius: 6px;
-            border-left: 2px solid #475569;
-            font-size: 0.9em;
-        }
-
-        .action-item.error {
-            border-left-color: #ef4444;
-        }
-
-        .action-item.high-cost {
-            border-left-color: #f59e0b;
-        }
-
-        .action-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-        }
-
-        .action-tool {
-            font-weight: 600;
-            color: #3b82f6;
-        }
-
-        .action-time {
-            color: #64748b;
-            font-size: 0.85em;
-        }
-
-        .action-details {
-            color: #94a3b8;
-            font-size: 0.85em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .action-cost {
-            color: #f59e0b;
-            font-size: 0.85em;
-            margin-top: 4px;
-        }
-
-        .metric-big {
+        .loading {
             text-align: center;
-            padding: 20px;
-            background: #0f172a;
-            border-radius: 8px;
-            margin: 10px 0;
-        }
-
-        .metric-big .value {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .metric-big .label {
-            color: #94a3b8;
-            margin-top: 8px;
-        }
-
-        .quick-link {
-            display: block;
-            padding: 10px 15px;
-            margin: 6px 0;
-            background: #0f172a;
-            border-radius: 6px;
-            color: #3b82f6;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .quick-link:hover {
-            background: #1e293b;
+            padding: 40px;
+            color: #64748b;
         }
 
         .health-bar {
@@ -275,50 +496,40 @@
             background: #ef4444;
         }
 
-        .loading {
+        .metric-big {
             text-align: center;
-            padding: 40px;
-            color: #64748b;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .filter-btn {
-            padding: 6px 12px;
+            padding: 20px;
             background: #0f172a;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .metric-big .value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .metric-big .label {
             color: #94a3b8;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: all 0.2s;
+            margin-top: 8px;
         }
 
-        .filter-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .filter-btn:hover {
-            background: #1e293b;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .grid {
                 grid-template-columns: 1fr;
+            }
+            .card.featured {
+                grid-column: span 1;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🎯 Mission Control</h1>
-        <div class="subtitle">Real-time Jarvis Operations Dashboard</div>
+        <h1>🎯 Mission Control v3</h1>
+        <div class="subtitle">The Central Hub - Real-Time Jarvis Operations</div>
+        <div id="live-indicator" class="live-indicator idle">⚪ Idle</div>
     </div>
 
     <div class="last-update" id="last-update">
@@ -326,92 +537,112 @@
     </div>
 
     <div class="grid">
-        <!-- Live Services -->
-        <div class="card">
+        <!-- LIVE ACTIVITY FEED -->
+        <div class="card featured">
             <div class="card-header">
-                <span class="icon">🟢</span>
-                <h2>Live Services</h2>
+                <div class="card-header-left">
+                    <span class="icon">🚀</span>
+                    <h2>Live Activity Feed</h2>
+                </div>
+                <button class="expand-btn" onclick="toggleExpanded('activity')">Show All</button>
             </div>
-            <div id="services-container">
-                <div class="loading">Loading services...</div>
+            <div id="activity-container">
+                <div class="loading">Loading live activity...</div>
             </div>
         </div>
 
-        <!-- Cost Dashboard -->
+        <!-- AUTOMATIONS STATUS -->
+        <div class="card featured">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <span class="icon">⚙️</span>
+                    <h2>Daily Automations</h2>
+                </div>
+            </div>
+            <div id="automations-container">
+                <div class="loading">Loading automations...</div>
+            </div>
+        </div>
+
+        <!-- MEMORY HEALTH -->
         <div class="card">
             <div class="card-header">
-                <span class="icon">💰</span>
-                <h2>Cost Dashboard</h2>
+                <div class="card-header-left">
+                    <span class="icon">🧠</span>
+                    <h2>Memory Health</h2>
+                </div>
+            </div>
+            <div id="memory-container">
+                <div class="loading">Loading memory health...</div>
+            </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <span class="icon">🔗</span>
+                    <h2>Quick Access</h2>
+                </div>
+            </div>
+            <div id="quick-links-container">
+                <div class="loading">Loading quick links...</div>
+            </div>
+        </div>
+
+        <!-- COST DASHBOARD -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <span class="icon">💰</span>
+                    <h2>Cost Dashboard</h2>
+                </div>
             </div>
             <div id="costs-container">
                 <div class="loading">Loading costs...</div>
             </div>
         </div>
 
-        <!-- System Health -->
+        <!-- SYSTEM HEALTH -->
         <div class="card">
             <div class="card-header">
-                <span class="icon">📊</span>
-                <h2>System Health</h2>
+                <div class="card-header-left">
+                    <span class="icon">📊</span>
+                    <h2>System Health</h2>
+                </div>
             </div>
             <div id="health-container">
                 <div class="loading">Loading health...</div>
             </div>
         </div>
-
-        <!-- Confidence Tracker -->
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">💪</span>
-                <h2>Confidence Tracker</h2>
-            </div>
-            <div id="confidence-container">
-                <div class="loading">Loading confidence...</div>
-            </div>
-        </div>
-
-        <!-- Live Action Tracker -->
-        <div class="card" style="grid-column: span 2;">
-            <div class="card-header">
-                <span class="icon">🚀</span>
-                <h2>Live Action Tracker</h2>
-            </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="high-cost">High Cost</button>
-                <button class="filter-btn" data-filter="errors">Errors</button>
-            </div>
-            <div id="actions-container">
-                <div class="loading">Loading actions...</div>
-            </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="card">
-            <div class="card-header">
-                <span class="icon">🔗</span>
-                <h2>Quick Links</h2>
-            </div>
-            <a href="http://localhost:5001" target="_blank" class="quick-link">Lean Tracker (Local)</a>
-            <a href="https://lean-fitness-tracker-production.up.railway.app/" target="_blank" class="quick-link">Lean Tracker (Production)</a>
-            <a href="https://relaxed-malasada-fe5aa1.netlify.app/" target="_blank" class="quick-link">Landing Page</a>
-            <a href="/Users/clawdbot/clawd/memory" class="quick-link">Memory Files</a>
-            <a href="/Users/clawdbot/clawd/logs" class="quick-link">Session Logs</a>
-        </div>
     </div>
 
     <script>
-        let currentFilter = 'all';
+        let expandedViews = {
+            activity: false
+        };
 
+        // Fetch all data
         async function fetchData() {
             try {
                 const response = await fetch('/api/status');
                 const data = await response.json();
                 
-                updateServices(data.services);
+                updateActivity(data.activity, data.is_active);
+                updateAutomations(data.automations);
+                updateMemoryHealth(data.memory);
                 updateCosts(data.costs);
                 updateHealth(data.health);
-                updateConfidence(data.confidence);
+                
+                // Update live indicator
+                const indicator = document.getElementById('live-indicator');
+                if (data.is_active) {
+                    indicator.className = 'live-indicator active';
+                    indicator.innerHTML = '🔴 LIVE';
+                } else {
+                    indicator.className = 'live-indicator idle';
+                    indicator.innerHTML = '⚪ Idle';
+                }
                 
                 document.getElementById('last-update').textContent = 
                     `Last updated: ${new Date(data.timestamp).toLocaleTimeString()}`;
@@ -420,37 +651,169 @@
             }
         }
 
-        async function fetchActions() {
+        async function fetchQuickLinks() {
             try {
-                const response = await fetch(`/api/actions?filter=${currentFilter}`);
-                const actions = await response.json();
-                updateActions(actions);
+                const response = await fetch('/api/quick-links');
+                const links = await response.json();
+                updateQuickLinks(links);
             } catch (error) {
-                console.error('Error fetching actions:', error);
+                console.error('Error fetching quick links:', error);
             }
         }
 
-        function updateServices(services) {
-            const container = document.getElementById('services-container');
-            container.innerHTML = services.map(service => `
-                <div class="service-item ${service.healthy ? 'healthy' : 'unhealthy'}">
-                    <div>
-                        <div class="service-name">${service.name}</div>
-                        ${service.details ? `<div class="service-details">${formatDetails(service.details)}</div>` : ''}
+        // Update LIVE ACTIVITY FEED
+        function updateActivity(actions, isActive) {
+            const container = document.getElementById('activity-container');
+            
+            if (!actions || actions.length === 0) {
+                container.innerHTML = '<div class="loading">No recent activity</div>';
+                return;
+            }
+            
+            const limit = expandedViews.activity ? actions.length : 10;
+            const displayActions = actions.slice(0, limit);
+            
+            container.innerHTML = displayActions.map(action => {
+                const resultClass = action.result === 'error' ? 'error' : 
+                                   action.result === 'success' ? 'success' : 'in-progress';
+                
+                return `
+                    <div class="activity-item ${resultClass}">
+                        <div class="activity-icon">${action.status_icon}</div>
+                        <div class="activity-content">
+                            <div class="activity-header">
+                                <span class="activity-tool">${action.tool}</span>
+                                <span class="activity-time">${action.display_time}</span>
+                            </div>
+                            <div class="activity-action">${action.action}</div>
+                            ${action.cost_estimate ? `<div class="activity-cost">Cost: $${action.cost_estimate.toFixed(4)}</div>` : ''}
+                        </div>
                     </div>
-                    <span class="status-badge status-${service.status}">${service.status}</span>
+                `;
+            }).join('');
+        }
+
+        // Update AUTOMATIONS STATUS
+        function updateAutomations(automations) {
+            const container = document.getElementById('automations-container');
+            
+            if (!automations || automations.length === 0) {
+                container.innerHTML = '<div class="loading">No automations configured</div>';
+                return;
+            }
+            
+            container.innerHTML = automations.map(auto => `
+                <div class="automation-item ${auto.status}">
+                    <div class="automation-left">
+                        <div class="automation-icon">${auto.icon}</div>
+                        <div class="automation-info">
+                            <div class="automation-name">${auto.name}</div>
+                            <div class="automation-details">
+                                ${auto.last_run ? `Last: ${formatTime(auto.last_run)}` : 'Never run'} 
+                                • Next: ${auto.next_run}
+                                ${auto.result ? `<br>${auto.result}` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="automation-status ${auto.status}">${auto.status}</div>
                 </div>
             `).join('');
         }
 
-        function formatDetails(details) {
-            if (typeof details === 'string') return details;
-            if (details.url) return details.url;
-            if (details.pid) return `PID: ${details.pid}`;
-            if (details.port) return `Port: ${details.port}`;
-            return JSON.stringify(details);
+        // Update MEMORY HEALTH
+        function updateMemoryHealth(memory) {
+            const container = document.getElementById('memory-container');
+            
+            const statusClass = memory.status === 'healthy' ? '' : 
+                               memory.status === 'degraded' ? 'degraded' : 'unhealthy';
+            
+            const statusIcon = memory.status === 'healthy' ? '✅' : 
+                              memory.status === 'degraded' ? '⚠️' : '❌';
+            
+            container.innerHTML = `
+                <div class="memory-status ${statusClass}">
+                    <div class="memory-status-icon">${statusIcon}</div>
+                    <div class="memory-status-text">${memory.status.toUpperCase()}</div>
+                </div>
+                
+                <div class="memory-metric">
+                    <span class="memory-label">SESSION_SUMMARY Updated</span>
+                    <span class="memory-value">${memory.session_summary_updated || 'Unknown'}</span>
+                </div>
+                
+                <div class="memory-metric">
+                    <span class="memory-label">Files Tracked</span>
+                    <span class="memory-value">${memory.files_tracked}</span>
+                </div>
+                
+                <div class="memory-metric">
+                    <span class="memory-label">Topics Indexed</span>
+                    <span class="memory-value">${memory.topics_indexed}</span>
+                </div>
+                
+                <div class="memory-metric">
+                    <span class="memory-label">Decision Logs</span>
+                    <span class="memory-value">${memory.decision_logs}</span>
+                </div>
+                
+                ${memory.last_index_update ? `
+                    <div class="memory-metric">
+                        <span class="memory-label">Index Updated</span>
+                        <span class="memory-value">${memory.last_index_update}</span>
+                    </div>
+                ` : ''}
+            `;
         }
 
+        // Update QUICK LINKS
+        function updateQuickLinks(links) {
+            const container = document.getElementById('quick-links-container');
+            
+            let html = '';
+            
+            // Daily Use
+            html += '<div class="quick-links-section">';
+            html += '<div class="quick-links-title">Daily Use</div>';
+            links.daily_use.forEach(link => {
+                const statusClass = link.status === 'running' ? 'running' : link.status === 'paused' ? 'paused' : 'live';
+                html += `
+                    <a href="${link.url}" target="_blank" class="quick-link">
+                        <span>${link.name}</span>
+                        <span class="quick-link-status ${statusClass}">${link.status}</span>
+                    </a>
+                `;
+            });
+            html += '</div>';
+            
+            // Production
+            html += '<div class="quick-links-section">';
+            html += '<div class="quick-links-title">Production</div>';
+            links.production.forEach(link => {
+                html += `
+                    <a href="${link.url}" target="_blank" class="quick-link">
+                        <span>${link.name}</span>
+                        <span class="quick-link-status live">${link.status}</span>
+                    </a>
+                `;
+            });
+            html += '</div>';
+            
+            // Admin
+            html += '<div class="quick-links-section">';
+            html += '<div class="quick-links-title">Admin</div>';
+            links.admin.forEach(link => {
+                html += `
+                    <a href="${link.url}" class="quick-link">
+                        <span>${link.name}</span>
+                    </a>
+                `;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html;
+        }
+
+        // Update COSTS
         function updateCosts(costs) {
             const container = document.getElementById('costs-container');
             const todayClass = costs.today < 10 ? 'low' : costs.today < 40 ? 'medium' : 'high';
@@ -469,11 +832,11 @@
                     <span class="cost-label">Projected Monthly</span>
                     <span class="cost-value">$${costs.projected_monthly.toFixed(2)}</span>
                 </div>
-                ${costs.top_operations.length > 0 ? `
+                ${costs.top_operations && costs.top_operations.length > 0 ? `
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #334155;">
                         <div style="color: #94a3b8; margin-bottom: 8px; font-size: 0.9em;">Top Operations Today:</div>
                         ${costs.top_operations.map(op => `
-                            <div class="action-details" style="margin: 4px 0;">
+                            <div style="margin: 4px 0; font-size: 0.85em; color: #94a3b8;">
                                 ${op.description || op.operation} - $${op.cost.toFixed(4)}
                             </div>
                         `).join('')}
@@ -482,6 +845,7 @@
             `;
         }
 
+        // Update SYSTEM HEALTH
         function updateHealth(health) {
             const container = document.getElementById('health-container');
             const diskClass = health.disk.percent < 80 ? 'good' : health.disk.percent < 90 ? 'warning' : 'critical';
@@ -490,7 +854,7 @@
             container.innerHTML = `
                 <div class="cost-metric">
                     <span class="cost-label">Disk Space</span>
-                    <span class="cost-value">${health.disk.used_gb}GB / ${health.disk.total_gb}GB</span>
+                    <span class="cost-value">${health.disk.used_gb} / ${health.disk.total_gb}</span>
                 </div>
                 <div class="health-bar">
                     <div class="health-bar-fill ${diskClass}" style="width: ${health.disk.percent}%"></div>
@@ -498,7 +862,7 @@
                 
                 <div class="cost-metric" style="margin-top: 15px;">
                     <span class="cost-label">Memory</span>
-                    <span class="cost-value">${health.memory.used_gb}GB / ${health.memory.total_gb}GB</span>
+                    <span class="cost-value">${health.memory.used_gb} / ${health.memory.total_gb}</span>
                 </div>
                 <div class="health-bar">
                     <div class="health-bar-fill ${memClass}" style="width: ${health.memory.percent}%"></div>
@@ -513,76 +877,28 @@
             `;
         }
 
-        function updateConfidence(confidence) {
-            const container = document.getElementById('confidence-container');
-            container.innerHTML = `
-                <div class="metric-big">
-                    <div class="value">${confidence.score}/10</div>
-                    <div class="label">Confidence Score</div>
-                </div>
-                <div class="cost-metric">
-                    <span class="cost-label">🔥 Current Stack</span>
-                    <span class="cost-value">${confidence.stack} wins</span>
-                </div>
-                <div class="cost-metric">
-                    <span class="cost-label">Trend</span>
-                    <span class="cost-value">${confidence.trend}</span>
-                </div>
-                ${confidence.last_win ? `
-                    <div style="margin-top: 10px; padding: 10px; background: #0f172a; border-radius: 6px; font-size: 0.85em; color: #94a3b8;">
-                        Last win: ${confidence.last_win}
-                    </div>
-                ` : ''}
-            `;
-        }
-
-        function updateActions(actions) {
-            const container = document.getElementById('actions-container');
-            if (actions.length === 0) {
-                container.innerHTML = '<div class="loading">No actions logged yet</div>';
-                return;
-            }
-            
-            container.innerHTML = actions.map(action => {
-                const isError = action.result === 'error';
-                const isHighCost = action.cost_estimate > 0.01;
-                const className = isError ? 'error' : isHighCost ? 'high-cost' : '';
-                
-                return `
-                    <div class="action-item ${className}">
-                        <div class="action-header">
-                            <span class="action-tool">${action.tool}</span>
-                            <span class="action-time">${formatTime(action.timestamp)}</span>
-                        </div>
-                        <div class="action-details">${action.action}</div>
-                        ${action.cost_estimate ? `<div class="action-cost">Cost: $${action.cost_estimate.toFixed(4)}</div>` : ''}
-                    </div>
-                `;
-            }).join('');
-        }
-
         function formatTime(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleTimeString();
+            if (!timestamp) return 'Never';
+            try {
+                const date = new Date(timestamp);
+                return date.toLocaleString();
+            } catch {
+                return timestamp;
+            }
         }
 
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                fetchActions();
-            });
-        });
+        function toggleExpanded(view) {
+            expandedViews[view] = !expandedViews[view];
+            fetchData();
+        }
 
         // Initial load
         fetchData();
-        fetchActions();
+        fetchQuickLinks();
 
-        // Auto-refresh every 10 seconds
-        setInterval(fetchData, 10000);
-        setInterval(fetchActions, 10000);
+        // Auto-refresh every 5 seconds for activity, 30 seconds for everything else
+        setInterval(fetchData, 5000);
+        setInterval(fetchQuickLinks, 30000);
     </script>
 </body>
 </html>
