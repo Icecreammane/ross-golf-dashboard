@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hinge Auto-Pilot Stats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a1a1a;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .chart-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .matches-list {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .match-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+        
+        .match-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .match-item:last-child {
+            border-bottom: none;
+        }
+        
+        .match-icon {
+            font-size: 2em;
+            margin-right: 16px;
+        }
+        
+        .match-info {
+            flex: 1;
+        }
+        
+        .match-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+        }
+        
+        .match-bio {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .match-score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .settings-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-weight: 500;
+        }
+        
+        .setting-value {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .last-updated {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .empty-icon {
+            font-size: 4em;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Hinge Auto-Pilot</h1>
+            <p class="subtitle">Dating app → Notification system</p>
+        </header>
+        
+        <!-- Overall Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👀</div>
+                <div class="stat-label">Profiles Seen</div>
+                <div class="stat-value" id="total-seen">0</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">💚</div>
+                <div class="stat-label">Likes Sent</div>
+                <div class="stat-value" id="total-likes">0</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-label">Total Matches</div>
+                <div class="stat-value" id="total-matches">0</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-label">Match Rate</div>
+                <div class="stat-value" id="match-rate">0%</div>
+            </div>
+        </div>
+        
+        <!-- Today's Stats -->
+        <div class="chart-card">
+            <h2 class="chart-title">Today's Activity</h2>
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-label">Profiles Today</div>
+                    <div class="stat-value" style="font-size: 1.8em;" id="today-seen">0</div>
+                </div>
+                <div>
+                    <div class="stat-label">Likes Today</div>
+                    <div class="stat-value" style="font-size: 1.8em;" id="today-likes">0</div>
+                </div>
+                <div>
+                    <div class="stat-label">Matches Today</div>
+                    <div class="stat-value" style="font-size: 1.8em;" id="today-matches">0</div>
+                </div>
+                <div>
+                    <div class="stat-label">Likes Remaining</div>
+                    <div class="stat-value" style="font-size: 1.8em;" id="likes-remaining">12</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Preferences -->
+        <div class="settings-panel">
+            <h2 class="chart-title">Your Preferences</h2>
+            <div class="setting-row">
+                <span class="setting-label">Hair Color</span>
+                <span class="setting-value" id="pref-hair">Blonde, Light Brown</span>
+            </div>
+            <div class="setting-row">
+                <span class="setting-label">Height Range</span>
+                <span class="setting-value" id="pref-height">5'6" - 5'9"</span>
+            </div>
+            <div class="setting-row">
+                <span class="setting-label">Age Range</span>
+                <span class="setting-value" id="pref-age">25-32</span>
+            </div>
+            <div class="setting-row">
+                <span class="setting-label">Body Type</span>
+                <span class="setting-value" id="pref-body">Athletic, Fit</span>
+            </div>
+            <div class="setting-row">
+                <span class="setting-label">Max Distance</span>
+                <span class="setting-value" id="pref-distance">20 miles</span>
+            </div>
+            <div class="setting-row">
+                <span class="setting-label">Daily Limit</span>
+                <span class="setting-value" id="pref-limit">12 likes/day</span>
+            </div>
+        </div>
+        
+        <!-- Recent Matches -->
+        <div class="matches-list">
+            <h2 class="chart-title">Recent Matches 🔥</h2>
+            <div id="matches-container">
+                <div class="empty-state">
+                    <div class="empty-icon">😴</div>
+                    <p>No matches yet. Let the auto-pilot do its thing!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="last-updated">
+            Last updated: <span id="last-update">Never</span>
+        </div>
+    </div>
+    
+    <script>
+        // Load data and update dashboard
+        async function loadData() {
+            try {
+                // Load activity data
+                const activityRes = await fetch('../data/hinge_activity.json');
+                const activity = await activityRes.json();
+                
+                // Load matches data
+                const matchesRes = await fetch('../data/hinge_matches.json');
+                const matches = await matchesRes.json();
+                
+                // Load preferences
+                const prefsRes = await fetch('../data/hinge_preferences.json');
+                const prefs = await prefsRes.json();
+                
+                updateDashboard(activity, matches, prefs);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        function updateDashboard(activity, matches, prefs) {
+            // Overall stats
+            document.getElementById('total-seen').textContent = activity.total_profiles_seen || 0;
+            document.getElementById('total-likes').textContent = activity.total_likes_sent || 0;
+            document.getElementById('total-matches').textContent = activity.total_matches || 0;
+            
+            // Match rate
+            const matchRate = activity.total_likes_sent > 0 
+                ? Math.round((activity.total_matches / activity.total_likes_sent) * 100)
+                : 0;
+            document.getElementById('match-rate').textContent = matchRate + '%';
+            
+            // Today's stats
+            const today = new Date().toISOString().split('T')[0];
+            const todayStats = activity.daily_stats[today] || {
+                profiles_seen: 0,
+                profiles_liked: 0,
+                matches: 0
+            };
+            
+            document.getElementById('today-seen').textContent = todayStats.profiles_seen;
+            document.getElementById('today-likes').textContent = todayStats.profiles_liked;
+            document.getElementById('today-matches').textContent = todayStats.matches;
+            
+            // Likes remaining
+            const likesToday = prefs.session.likes_today || 0;
+            const dailyLimit = prefs.automation.daily_limit;
+            document.getElementById('likes-remaining').textContent = dailyLimit - likesToday;
+            
+            // Preferences
+            document.getElementById('pref-hair').textContent = prefs.preferences.hair_color.join(', ');
+            
+            const heightMin = prefs.preferences.height_range[0];
+            const heightMax = prefs.preferences.height_range[1];
+            document.getElementById('pref-height').textContent = 
+                `${Math.floor(heightMin/12)}'${heightMin%12}" - ${Math.floor(heightMax/12)}'${heightMax%12}"`;
+            
+            document.getElementById('pref-age').textContent = 
+                `${prefs.preferences.age_range[0]}-${prefs.preferences.age_range[1]}`;
+            
+            document.getElementById('pref-body').textContent = 
+                prefs.preferences.body_type.map(t => t.charAt(0).toUpperCase() + t.slice(1)).join(', ');
+            
+            document.getElementById('pref-distance').textContent = 
+                `${prefs.preferences.distance_max_miles} miles`;
+            
+            document.getElementById('pref-limit').textContent = 
+                `${prefs.automation.daily_limit} likes/day`;
+            
+            // Matches list
+            const matchesContainer = document.getElementById('matches-container');
+            if (matches.matches && matches.matches.length > 0) {
+                matchesContainer.innerHTML = matches.matches
+                    .slice(-10)  // Last 10 matches
+                    .reverse()
+                    .map(match => {
+                        const bio = (match.bio || 'No bio').split('\n').slice(0, 2).join(' ');
+                        const score = match.analysis ? match.analysis.score : '?';
+                        return `
+                            <div class="match-item">
+                                <div class="match-icon">🔥</div>
+                                <div class="match-info">
+                                    <div class="match-name">${match.name || 'Unknown'}, ${match.age || '?'}</div>
+                                    <div class="match-bio">${bio}</div>
+                                </div>
+                                <div class="match-score">${score}/10</div>
+                            </div>
+                        `;
+                    })
+                    .join('');
+            }
+            
+            // Last updated
+            document.getElementById('last-update').textContent = new Date().toLocaleString();
+        }
+        
+        // Load data on page load
+        loadData();
+        
+        // Refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
