@@ -15,7 +15,12 @@ cd /Users/clawdbot/clawd/mission_control
 python3 app.py
 ```
 
-Then visit: **http://localhost:8080/mission-control**
+Or use the startup script:
+```bash
+bash /Users/clawdbot/clawd/scripts/start_mission_control.sh
+```
+
+Then visit: **http://localhost:8081/mission-control**
 
 ### What You'll See
 
