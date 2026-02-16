@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard + Tax Helper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .card .value {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .card .subtitle {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .tax-widget {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .tax-widget h2 {
+            color: white;
+        }
+        
+        .tax-widget .value {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tax-widget .subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .category-list {
+            margin-top: 20px;
+        }
+        
+        .category-item {
+            background: rgba(0,0,0,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .category-item .name {
+            font-weight: 600;
+            color: #1a1a1a;
+            text-transform: capitalize;
+        }
+        
+        .category-item .amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #11998e;
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .export-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .card .value {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Financial Dashboard</h1>
+            <p>Smart expense tracking with automated tax deduction detection</p>
+        </div>
+        
+        <div class="grid">
+            <!-- YTD Deductions Widget -->
+            <div class="card tax-widget">
+                <h2>Year-to-Date Deductions</h2>
+                <div class="value" id="ytd-total">$0</div>
+                <div class="subtitle">Potential tax savings for 2026</div>
+            </div>
+            
+            <!-- This Month Deductions -->
+            <div class="card">
+                <h2>This Month</h2>
+                <div class="value" id="monthly-total">$0</div>
+                <div class="subtitle">Deductions identified</div>
+            </div>
+            
+            <!-- Current Balance -->
+            <div class="card">
+                <h2>Current Balance</h2>
+                <div class="value" id="balance">$0</div>
+                <div class="subtitle">Available funds</div>
+            </div>
+        </div>
+        
+        <div class="section-title">🏆 Top Deductible Categories</div>
+        
+        <div class="card">
+            <h2>This Month's Top 3</h2>
+            <div class="category-list" id="top-categories">
+                <div class="loading">Loading tax data...</div>
+            </div>
+            
+            <button class="export-btn" onclick="exportToCSV()">
+                📊 Export Tax Deductions to CSV
+            </button>
+        </div>
+        
+        <div class="section-title">📈 YTD Breakdown by Category</div>
+        
+        <div class="card">
+            <h2>All Deduction Categories</h2>
+            <div class="category-list" id="ytd-categories">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load tax dashboard data
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/tax/dashboard');
+                const data = await response.json();
+                
+                // Update YTD total
+                document.getElementById('ytd-total').textContent = 
+                    `$${data.ytd_total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                
+                // Update monthly total
+                document.getElementById('monthly-deductions').textContent = 
+                    `$${data.monthly_deductions.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                
+                // Update top 3 categories
+                const topCategoriesDiv = document.getElementById('top-categories');
+                topCategoriesDiv.innerHTML = '';
+                
+                if (data.top_3_categories && data.top_3_categories.length > 0) {
+                    data.top_3_categories.forEach(([category, amount]) => {
+                        const categoryHTML = `
+                            <div class="category-item">
+                                <div class="name">${category.replace(/_/g, ' ')}</div>
+                                <div class="amount">$${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                            </div>
+                        `;
+                        topCategoriesDiv.innerHTML += categoryHTML;
+                    });
+                } else {
+                    topCategoriesDiv.innerHTML = '<p style="color: #999;">No deductions identified yet</p>';
+                }
+                
+                // Update YTD breakdown
+                const ytdCategoriesDiv = document.getElementById('ytd-categories');
+                ytdCategoriesDiv.innerHTML = '';
+                
+                if (data.ytd_by_category && Object.keys(data.ytd_by_category).length > 0) {
+                    Object.entries(data.ytd_by_category)
+                        .sort((a, b) => b[1] - a[1])
+                        .forEach(([category, amount]) => {
+                            const categoryHTML = `
+                                <div class="category-item">
+                                    <div class="name">${category.replace(/_/g, ' ')}</div>
+                                    <div class="amount">$${amount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                                </div>
+                            `;
+                            ytdCategoriesDiv.innerHTML += categoryHTML;
+                        });
+                } else {
+                    ytdCategoriesDiv.innerHTML = '<p style="color: #999;">No YTD deductions yet</p>';
+                }
+                
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+        
+        // Export to CSV
+        async function exportToCSV() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            
+            try {
+                const response = await fetch('/api/tax/export/csv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        start_date: startOfYear.toISOString().split('T')[0],
+                        end_date: now.toISOString().split('T')[0]
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(`✅ Exported ${data.total_deductions.toFixed(2)} in deductions to ${data.filename}`);
+                } else {
+                    alert('❌ Export failed');
+                }
+            } catch (error) {
+                console.error('Error exporting:', error);
+                alert('❌ Export failed');
+            }
+        }
+        
+        // Load data on page load
+        loadDashboardData();
+        
+        // Refresh every 60 seconds
+        setInterval(loadDashboardData, 60000);
+    </script>
+</body>
+</html>
