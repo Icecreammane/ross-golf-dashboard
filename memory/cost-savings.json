@@ -1,12 +1,12 @@
 {
-  "total_saved": 0.298434,
+  "total_saved": 0.311121,
   "sessions": [],
   "daily_stats": {
     "2026-02-15": {
-      "total_tasks": 75,
-      "ollama_tasks": 75,
+      "total_tasks": 78,
+      "ollama_tasks": 78,
       "sonnet_tasks": 0,
-      "total_saved": 0.298434,
+      "total_saved": 0.311121,
       "total_cost": 0.0
     }
   }
