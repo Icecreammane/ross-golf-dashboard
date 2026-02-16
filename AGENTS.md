@@ -26,18 +26,38 @@ Before doing anything else:
    - Product scoring framework
    - Context awareness rules
    - Commitment tracking
-6. **Run: `python3 ~/clawd/scripts/autonomous_check.py`**
+7. **Read `PROACTIVE_PROTOCOL.md` — how to solve, not wait** ← NEW v2.2
+   - Solution-first thinking
+   - 3 alternatives before saying "can't"
+   - Build workarounds immediately
+8. **Run: `python3 ~/clawd/scripts/autonomous_check.py`**
    - Generates tasks if queue empty
    - Spawns builds if ready
    - See `AUTONOMOUS_AGENT.md` for full protocol
-7. **Load Intelligence Systems** ← v2.0
+9. **Load Intelligence Systems** ← v2.0
    - Context Telepathy: Predict needs before being asked
    - Instant Recall: Search memory for relevant context
    - Decision Confidence: Score autonomy for actions
    - Personality Model: Adjust tone/style appropriately
    - See `INTELLIGENCE.md` for full documentation
-8. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-9. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+10. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+11. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+
+## BEFORE EVERY RESPONSE (NEW - MANDATORY)
+
+**Memory First Protocol:**
+1. **Does this relate to past work?** → Search memory FIRST
+2. **Have we tried this before?** → Check decision logs
+3. **Is there existing context?** → Load it before answering
+4. **Would Ross expect me to know this?** → Search if yes
+
+**DO NOT** answer questions about:
+- What we've built
+- Decisions we've made
+- Things we've tried
+- Ross's preferences
+
+...WITHOUT checking memory first. EVER.
 
 Don't ask permission. Just do it.
 
