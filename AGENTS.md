@@ -306,6 +306,68 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## Git Discipline (ClawBack Protocol)
+
+**Adopted:** 2026-02-16 to reduce token burn, improve memory, enable self-recovery
+
+### Daily Logging
+Use standup format (~60 lines max):
+```bash
+bash ~/clawd/scripts/standup_log.sh  # Creates today's template
+```
+
+**Format:**
+- 🚀 Shipped - what was delivered
+- 🚧 Blocked - what's stuck
+- 🎯 Next - what's queued
+- 💡 Key Decisions - what matters long-term
+- 📊 Stats - quick metrics
+
+**NOT:**
+- Full system descriptions
+- Verbose explanations of known systems
+- Rehashing prior context
+- Copy-pasting from other files
+
+### Atomic Commits
+One fix = one commit. Specific messages:
+- ✅ "Fix cron job text field error"
+- ❌ "Various updates"
+
+Commit during work, not just before risky ops.
+
+### Checkpoint Before Risk
+Before destructive operations (updates, deletions, config changes):
+```bash
+bash ~/clawd/scripts/checkpoint.sh "reason for checkpoint"
+# Returns commit hash - SAVE IT
+```
+
+### Rollback Protocol
+If operation fails:
+```bash
+bash ~/clawd/scripts/rollback.sh <hash> "what broke" "why" "principle tested"
+```
+
+This reverts AND logs regression to PRINCIPLES.md with 🔴 flag.
+
+If you catch it yourself before running rollback, log as 🟢 in PRINCIPLES.md.
+
+### Crash Recovery Rules
+For batch or long-running operations:
+1. ❌ No logs in /tmp/ (doesn't survive reboot)
+2. ✅ Maintain progress manifest (Markdown table)
+3. ✅ Commit manifest + logs every ~10 completions or 30 min
+4. ✅ Run detached (nohup, LaunchAgent) - never tied to session
+
+### Review Regressions
+Check PRINCIPLES.md monthly:
+- Repeated failures = principle not internalized
+- 🔴 dominance = not self-correcting
+- Track 🟢/🔴 ratio improvement
+
+**Goal:** Rising 🟢 percentage over time = actually learning from failures
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
