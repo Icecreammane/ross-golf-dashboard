@@ -13,10 +13,15 @@ Before doing anything else:
    - Don't rely on message timestamps (they can be old)
    - Know what day it is, what time of day, weekend vs weekday
    - This avoids saying "Good Friday night!" on Saturday
-2. Read `SOUL.md` — this is who you are
-3. Read `USER.md` — this is who you're helping
-4. **Read `GOALS.md` — this is what we're working toward**
-5. **Read `DECISION_PROTOCOL.md` — this is how you decide** ← NEW v2.1
+2. **Read `SESSION_SUMMARY.md`** ← **MANDATORY - YOUR MEMORY FROM LAST SESSION**
+   - What we shipped
+   - Live URLs and deployments
+   - Active projects and their status
+   - Context you need
+3. Read `SOUL.md` — this is who you are
+4. Read `USER.md` — this is who you're helping
+5. **Read `GOALS.md` — this is what we're working toward**
+6. **Read `DECISION_PROTOCOL.md` — this is how you decide** ← NEW v2.1
    - When to act vs ask
    - Product scoring framework
    - Context awareness rules

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control - Jarvis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0e1a;
+            color: #e4e6eb;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1e293b;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #94a3b8;
+            font-size: 1.1em;
+        }
+
+        .last-update {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .card-header h2 {
+            font-size: 1.3em;
+            margin-left: 10px;
+            color: #f1f5f9;
+        }
+
+        .card-header .icon {
+            font-size: 1.5em;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 8px 0;
+            background: #0f172a;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+        }
+
+        .service-item.healthy {
+            border-left-color: #10b981;
+        }
+
+        .service-item.unhealthy {
+            border-left-color: #ef4444;
+        }
+
+        .service-item.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .service-name {
+            font-weight: 500;
+            color: #f1f5f9;
+        }
+
+        .service-details {
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-running {
+            background: #10b98133;
+            color: #10b981;
+        }
+
+        .status-stopped {
+            background: #ef444433;
+            color: #ef4444;
+        }
+
+        .status-deployed {
+            background: #3b82f633;
+            color: #3b82f6;
+        }
+
+        .cost-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0f172a;
+            border-radius: 8px;
+        }
+
+        .cost-label {
+            color: #94a3b8;
+        }
+
+        .cost-value {
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .cost-value.low {
+            color: #10b981;
+        }
+
+        .cost-value.medium {
+            color: #f59e0b;
+        }
+
+        .cost-value.high {
+            color: #ef4444;
+        }
+
+        .action-item {
+            padding: 10px;
+            margin: 6px 0;
+            background: #0f172a;
+            border-radius: 6px;
+            border-left: 2px solid #475569;
+            font-size: 0.9em;
+        }
+
+        .action-item.error {
+            border-left-color: #ef4444;
+        }
+
+        .action-item.high-cost {
+            border-left-color: #f59e0b;
+        }
+
+        .action-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .action-tool {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .action-time {
+            color: #64748b;
+            font-size: 0.85em;
+        }
+
+        .action-details {
+            color: #94a3b8;
+            font-size: 0.85em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .action-cost {
+            color: #f59e0b;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .metric-big {
+            text-align: center;
+            padding: 20px;
+            background: #0f172a;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .metric-big .value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .metric-big .label {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .quick-link {
+            display: block;
+            padding: 10px 15px;
+            margin: 6px 0;
+            background: #0f172a;
+            border-radius: 6px;
+            color: #3b82f6;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .quick-link:hover {
+            background: #1e293b;
+        }
+
+        .health-bar {
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .health-bar-fill.good {
+            background: #10b981;
+        }
+
+        .health-bar-fill.warning {
+            background: #f59e0b;
+        }
+
+        .health-bar-fill.critical {
+            background: #ef4444;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .filter-btn:hover {
+            background: #1e293b;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 Mission Control</h1>
+        <div class="subtitle">Real-time Jarvis Operations Dashboard</div>
+    </div>
+
+    <div class="last-update" id="last-update">
+        Loading...
+    </div>
+
+    <div class="grid">
+        <!-- Live Services -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🟢</span>
+                <h2>Live Services</h2>
+            </div>
+            <div id="services-container">
+                <div class="loading">Loading services...</div>
+            </div>
+        </div>
+
+        <!-- Cost Dashboard -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">💰</span>
+                <h2>Cost Dashboard</h2>
+            </div>
+            <div id="costs-container">
+                <div class="loading">Loading costs...</div>
+            </div>
+        </div>
+
+        <!-- System Health -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">📊</span>
+                <h2>System Health</h2>
+            </div>
+            <div id="health-container">
+                <div class="loading">Loading health...</div>
+            </div>
+        </div>
+
+        <!-- Confidence Tracker -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">💪</span>
+                <h2>Confidence Tracker</h2>
+            </div>
+            <div id="confidence-container">
+                <div class="loading">Loading confidence...</div>
+            </div>
+        </div>
+
+        <!-- Live Action Tracker -->
+        <div class="card" style="grid-column: span 2;">
+            <div class="card-header">
+                <span class="icon">🚀</span>
+                <h2>Live Action Tracker</h2>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="high-cost">High Cost</button>
+                <button class="filter-btn" data-filter="errors">Errors</button>
+            </div>
+            <div id="actions-container">
+                <div class="loading">Loading actions...</div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🔗</span>
+                <h2>Quick Links</h2>
+            </div>
+            <a href="http://localhost:5001" target="_blank" class="quick-link">Lean Tracker (Local)</a>
+            <a href="https://lean-fitness-tracker-production.up.railway.app/" target="_blank" class="quick-link">Lean Tracker (Production)</a>
+            <a href="https://relaxed-malasada-fe5aa1.netlify.app/" target="_blank" class="quick-link">Landing Page</a>
+            <a href="/Users/clawdbot/clawd/memory" class="quick-link">Memory Files</a>
+            <a href="/Users/clawdbot/clawd/logs" class="quick-link">Session Logs</a>
+        </div>
+    </div>
+
+    <script>
+        let currentFilter = 'all';
+
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                updateServices(data.services);
+                updateCosts(data.costs);
+                updateHealth(data.health);
+                updateConfidence(data.confidence);
+                
+                document.getElementById('last-update').textContent = 
+                    `Last updated: ${new Date(data.timestamp).toLocaleTimeString()}`;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        async function fetchActions() {
+            try {
+                const response = await fetch(`/api/actions?filter=${currentFilter}`);
+                const actions = await response.json();
+                updateActions(actions);
+            } catch (error) {
+                console.error('Error fetching actions:', error);
+            }
+        }
+
+        function updateServices(services) {
+            const container = document.getElementById('services-container');
+            container.innerHTML = services.map(service => `
+                <div class="service-item ${service.healthy ? 'healthy' : 'unhealthy'}">
+                    <div>
+                        <div class="service-name">${service.name}</div>
+                        ${service.details ? `<div class="service-details">${formatDetails(service.details)}</div>` : ''}
+                    </div>
+                    <span class="status-badge status-${service.status}">${service.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function formatDetails(details) {
+            if (typeof details === 'string') return details;
+            if (details.url) return details.url;
+            if (details.pid) return `PID: ${details.pid}`;
+            if (details.port) return `Port: ${details.port}`;
+            return JSON.stringify(details);
+        }
+
+        function updateCosts(costs) {
+            const container = document.getElementById('costs-container');
+            const todayClass = costs.today < 10 ? 'low' : costs.today < 40 ? 'medium' : 'high';
+            const weekClass = costs.week < 50 ? 'low' : costs.week < 250 ? 'medium' : 'high';
+            
+            container.innerHTML = `
+                <div class="cost-metric">
+                    <span class="cost-label">Today</span>
+                    <span class="cost-value ${todayClass}">$${costs.today.toFixed(2)}</span>
+                </div>
+                <div class="cost-metric">
+                    <span class="cost-label">This Week</span>
+                    <span class="cost-value ${weekClass}">$${costs.week.toFixed(2)}</span>
+                </div>
+                <div class="cost-metric">
+                    <span class="cost-label">Projected Monthly</span>
+                    <span class="cost-value">$${costs.projected_monthly.toFixed(2)}</span>
+                </div>
+                ${costs.top_operations.length > 0 ? `
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #334155;">
+                        <div style="color: #94a3b8; margin-bottom: 8px; font-size: 0.9em;">Top Operations Today:</div>
+                        ${costs.top_operations.map(op => `
+                            <div class="action-details" style="margin: 4px 0;">
+                                ${op.description || op.operation} - $${op.cost.toFixed(4)}
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function updateHealth(health) {
+            const container = document.getElementById('health-container');
+            const diskClass = health.disk.percent < 80 ? 'good' : health.disk.percent < 90 ? 'warning' : 'critical';
+            const memClass = health.memory.percent < 80 ? 'good' : health.memory.percent < 90 ? 'warning' : 'critical';
+            
+            container.innerHTML = `
+                <div class="cost-metric">
+                    <span class="cost-label">Disk Space</span>
+                    <span class="cost-value">${health.disk.used_gb}GB / ${health.disk.total_gb}GB</span>
+                </div>
+                <div class="health-bar">
+                    <div class="health-bar-fill ${diskClass}" style="width: ${health.disk.percent}%"></div>
+                </div>
+                
+                <div class="cost-metric" style="margin-top: 15px;">
+                    <span class="cost-label">Memory</span>
+                    <span class="cost-value">${health.memory.used_gb}GB / ${health.memory.total_gb}GB</span>
+                </div>
+                <div class="health-bar">
+                    <div class="health-bar-fill ${memClass}" style="width: ${health.memory.percent}%"></div>
+                </div>
+                
+                <div class="cost-metric" style="margin-top: 15px;">
+                    <span class="cost-label">Gateway Status</span>
+                    <span class="status-badge ${health.gateway ? 'status-running' : 'status-stopped'}">
+                        ${health.gateway ? 'Running' : 'Stopped'}
+                    </span>
+                </div>
+            `;
+        }
+
+        function updateConfidence(confidence) {
+            const container = document.getElementById('confidence-container');
+            container.innerHTML = `
+                <div class="metric-big">
+                    <div class="value">${confidence.score}/10</div>
+                    <div class="label">Confidence Score</div>
+                </div>
+                <div class="cost-metric">
+                    <span class="cost-label">🔥 Current Stack</span>
+                    <span class="cost-value">${confidence.stack} wins</span>
+                </div>
+                <div class="cost-metric">
+                    <span class="cost-label">Trend</span>
+                    <span class="cost-value">${confidence.trend}</span>
+                </div>
+                ${confidence.last_win ? `
+                    <div style="margin-top: 10px; padding: 10px; background: #0f172a; border-radius: 6px; font-size: 0.85em; color: #94a3b8;">
+                        Last win: ${confidence.last_win}
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        function updateActions(actions) {
+            const container = document.getElementById('actions-container');
+            if (actions.length === 0) {
+                container.innerHTML = '<div class="loading">No actions logged yet</div>';
+                return;
+            }
+            
+            container.innerHTML = actions.map(action => {
+                const isError = action.result === 'error';
+                const isHighCost = action.cost_estimate > 0.01;
+                const className = isError ? 'error' : isHighCost ? 'high-cost' : '';
+                
+                return `
+                    <div class="action-item ${className}">
+                        <div class="action-header">
+                            <span class="action-tool">${action.tool}</span>
+                            <span class="action-time">${formatTime(action.timestamp)}</span>
+                        </div>
+                        <div class="action-details">${action.action}</div>
+                        ${action.cost_estimate ? `<div class="action-cost">Cost: $${action.cost_estimate.toFixed(4)}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString();
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                fetchActions();
+            });
+        });
+
+        // Initial load
+        fetchData();
+        fetchActions();
+
+        // Auto-refresh every 10 seconds
+        setInterval(fetchData, 10000);
+        setInterval(fetchActions, 10000);
+    </script>
+</body>
+</html>

@@ -81,6 +81,7 @@
 ## Preferences
 - **Voice:** OpenAI TTS "Onyx" (deep, authoritative) via jarvis_voice.py
 - **Communication:** Direct, analytical, timeline-driven, "What's the next step?"
+- **Model preference:** Local models first (local-smart default), Claude for complex reasoning only
 
 ## My Role
 - Strategic thinking partner (not just executor)
