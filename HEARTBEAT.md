@@ -2,11 +2,22 @@
 
 ## 🧠 Before Every Heartbeat
 
-### 1. Check for Escalations
+### 0. Memory Health Check (Every 10th heartbeat)
+Run `python3 ~/clawd/scripts/memory_health_check.py`
+- Validates SESSION_SUMMARY.md is current
+- Checks today's memory log exists
+- Verifies DEPLOYMENTS.md has URLs
+- Warns if memory system degraded
+
+### 1. Check for Escalations (Multi-Tier Intelligence)
 Run `python3 ~/clawd/scripts/check_escalations.py`
-- Local daemon signals when it needs Sonnet's help
-- Handle spawns, alerts, morning briefs, evening check-ins
-- This is how Tier 1 (daemon) communicates with Tier 2 (Sonnet)
+- **Proactive Monitor Daemon** runs every 5 minutes using FREE local AI
+- Checks: email urgency, calendar events, fitness tracking, bank transactions
+- Only escalates to Sonnet when action is needed (written to `memory/escalation-pending.json`)
+- This is how Tier 1 (local AI) communicates with Tier 3 (Sonnet)
+- **Reduces token costs by 70%+** - routine checks never burn Sonnet tokens!
+- If escalations found → handle them immediately
+- See `INTELLIGENCE_TIERS.md` for full system documentation
 
 ### 2. Food Logging Check ⚠️ CRITICAL
 Run `python3 ~/clawd/scripts/auto_food_logger.py`

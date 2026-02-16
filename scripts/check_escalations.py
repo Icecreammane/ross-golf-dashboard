@@ -1,104 +1,98 @@
 #!/usr/bin/env python3
 """
-Escalation Checker - Read signals from daemon and determine action
-
-Called by heartbeat to check if daemon needs Sonnet's help.
-Returns JSON with escalation details or {"status": "no_escalations"}
+Check Escalations - Read escalation file created by proactive_monitor.py
+Called during Sonnet's heartbeat to handle items that need human attention
 """
 
 import json
-import sys
-from pathlib import Path
+import os
 from datetime import datetime
+from typing import Dict, Optional
 
-WORKSPACE = Path.home() / "clawd"
-ESCALATIONS = WORKSPACE / "escalations"
+WORKSPACE = "/Users/clawdbot/clawd"
+ESCALATION_FILE = os.path.join(WORKSPACE, "memory", "escalation-pending.json")
 
-def load_signals():
-    """Load all pending signal files"""
-    if not ESCALATIONS.exists():
-        return []
-    
-    signals = []
-    for signal_file in ESCALATIONS.glob("*.json"):
-        try:
-            with open(signal_file) as f:
-                signal = json.load(f)
-                signal["file"] = str(signal_file)
-                signals.append(signal)
-        except Exception as e:
-            print(f"Error loading {signal_file}: {e}", file=sys.stderr)
-    
-    # Sort by priority (urgent > high > medium > low)
-    priority_order = {"urgent": 0, "high": 1, "medium": 2, "low": 3}
-    signals.sort(key=lambda s: priority_order.get(s.get("priority", "medium"), 2))
-    
-    return signals
 
-def format_escalation(signal):
-    """Format signal for Sonnet to handle"""
-    signal_type = signal.get("type", "unknown")
-    data = signal.get("data", {})
-    priority = signal.get("priority", "medium")
-    created = signal.get("created", "unknown")
+def load_escalations() -> Optional[Dict]:
+    """Load pending escalations if they exist"""
+    if not os.path.exists(ESCALATION_FILE):
+        return None
     
-    # Build action message based on signal type
-    actions = {
-        "goals_updated": {
-            "action": "notify",
-            "message": f"🎯 {data.get('message', 'Goals updated')}",
-            "requires_response": False
-        },
-        "task_queue_growing": {
-            "action": "notify",
-            "message": f"📋 Task backlog: {data.get('pending_tasks')} tasks pending",
-            "requires_response": True
-        },
-        "generate_tasks": {
-            "action": "spawn",
-            "task": "Generate new tasks from GOALS.md and add to TASK_QUEUE.md",
-            "requires_response": False
-        },
-        "system_health": {
-            "action": "notify",
-            "message": f"⚠️ System issues: {', '.join(data.get('issues', []))}",
-            "requires_response": True
-        },
-        "daemon_crashed": {
-            "action": "notify",
-            "message": f"🚨 Daemon crashed: {data.get('error', 'Unknown error')}",
-            "requires_response": True
-        }
-    }
+    try:
+        with open(ESCALATION_FILE, 'r') as f:
+            data = json.load(f)
+        
+        # Check if escalations are recent (within last hour)
+        timestamp = datetime.fromisoformat(data["timestamp"])
+        age_minutes = (datetime.now() - timestamp).total_seconds() / 60
+        
+        if age_minutes > 60:
+            # Stale escalations, ignore
+            print(f"⚠️  Escalations are {age_minutes:.0f} minutes old, ignoring")
+            return None
+        
+        return data
+    except Exception as e:
+        print(f"Error loading escalations: {e}")
+        return None
+
+
+def format_escalation_message(escalations: Dict) -> str:
+    """Format escalations into a readable message"""
+    if not escalations or escalations["total_count"] == 0:
+        return None
     
-    escalation = actions.get(signal_type, {
-        "action": "notify",
-        "message": f"Signal: {signal_type}",
-        "requires_response": False
-    })
+    lines = [
+        f"🔔 **Proactive Monitor Alert** ({escalations['total_count']} items)",
+        ""
+    ]
     
-    escalation.update({
-        "signal_file": signal["file"],
-        "priority": priority,
-        "created": created,
-        "type": signal_type
-    })
+    # Group by priority
+    for priority in ["high", "medium", "low"]:
+        items = [e for e in escalations["escalations"] if e["priority"] == priority]
+        if items:
+            emoji = {"high": "🔴", "medium": "🟡", "low": "🟢"}[priority]
+            lines.append(f"{emoji} **{priority.upper()} PRIORITY:**")
+            
+            for item in items:
+                item_type = item["type"].replace("_", " ").title()
+                summary = item["data"].get("summary", "No summary")
+                lines.append(f"   • {item_type}: {summary}")
+            
+            lines.append("")
     
-    return escalation
+    # Add timestamp
+    timestamp = datetime.fromisoformat(escalations["timestamp"])
+    lines.append(f"_Checked at {timestamp.strftime('%I:%M %p')}_")
+    
+    return "\n".join(lines)
+
+
+def clear_escalations():
+    """Clear the escalation file after handling"""
+    if os.path.exists(ESCALATION_FILE):
+        os.remove(ESCALATION_FILE)
+        print("✅ Cleared escalation file")
+
 
 def main():
-    """Check for escalations and return action"""
-    signals = load_signals()
+    """Main function - check and display escalations"""
+    escalations = load_escalations()
     
-    if not signals:
-        print(json.dumps({"status": "no_escalations"}))
+    if not escalations:
+        print("ESCALATION_CHECK: None")
         return
     
-    # Return highest priority escalation
-    escalation = format_escalation(signals[0])
-    escalation["pending_count"] = len(signals)
+    message = format_escalation_message(escalations)
     
-    print(json.dumps(escalation, indent=2))
+    if message:
+        print("ESCALATION_CHECK: Found")
+        print("\n" + message)
+        
+        # Don't auto-clear - let Sonnet decide when to clear after handling
+    else:
+        print("ESCALATION_CHECK: None")
+
 
 if __name__ == "__main__":
     main()
