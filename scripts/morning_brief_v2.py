@@ -144,18 +144,37 @@ def get_fitness():
 
 
 def get_jobs():
-    """Get top job matches"""
+    """Get top job matches from overnight job hunter"""
     try:
-        jobs_data = load_json_safe(DATA_DIR / "job_matches.json", {"jobs": []})
+        # Look for today's job hunter results
+        today = datetime.now().strftime('%Y-%m-%d')
+        jobs_file = DATA_DIR / f"jobs_{today}.json"
+        
+        # If today's doesn't exist, try yesterday's
+        if not jobs_file.exists():
+            yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+            jobs_file = DATA_DIR / f"jobs_{yesterday}.json"
+        
+        jobs_data = load_json_safe(jobs_file, {"jobs": []})
         jobs = jobs_data.get("jobs", [])
         
         # Get high-rated jobs (8+)
-        top_jobs = [j for j in jobs if j.get("match_score", 0) >= 8]
-        top_jobs = sorted(top_jobs, key=lambda x: x.get("match_score", 0), reverse=True)[:3]
+        top_jobs = [j for j in jobs if j.get("score", 0) >= 8]
+        top_jobs = sorted(top_jobs, key=lambda x: x.get("score", 0), reverse=True)[:3]
+        
+        # Format for brief (use 'score' field from job_hunter)
+        formatted_jobs = []
+        for job in top_jobs:
+            formatted_jobs.append({
+                "title": job.get("title", ""),
+                "company": job.get("company", ""),
+                "location": job.get("location", ""),
+                "match_score": job.get("score", 0)
+            })
         
         return {
-            "count": len(top_jobs),
-            "jobs": top_jobs
+            "count": len(formatted_jobs),
+            "jobs": formatted_jobs
         }
     except Exception as e:
         log(f"❌ Jobs error: {e}")
