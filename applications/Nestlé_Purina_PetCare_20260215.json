@@ -1,0 +1,30 @@
+{
+  "job_id": "Nestl\u00e9_Purina_PetCare_20260215",
+  "created_at": "2026-02-15T22:48:20.767044",
+  "status": "draft",
+  "job": {
+    "title": "Senior Food Scientist - Product Development",
+    "company": "Nestl\u00e9 Purina PetCare",
+    "location": "Tampa, FL",
+    "url": "https://www.indeed.com/viewjob?jk=example1",
+    "match_score": 10,
+    "description": "Lead R&D formulation projects for premium pet food brands. Develop new products from concept through commercialization. Food science degree required, pet food experience preferred."
+  },
+  "cover_letter": "Dear Hiring Manager,\n\nI am writing to express my strong interest in the Senior Food Scientist - Product Development position at Nestl\u00e9 Purina PetCare. With my current role as a Senior Product Development Scientist at Mars Petcare, I have developed extensive experience in R&D formulation and product innovation that aligns perfectly with your requirements.\n\nIn my tenure at Mars, I have successfully led product development initiatives including the Nutro renovation project and IAMS NCH development. My work in Portfolio Architecture has given me a comprehensive understanding of bringing products from concept through commercialization. These experiences have honed my skills in formulation science, sensory evaluation, and cross-functional team leadership.\n\nWhat excites me most about this opportunity at Nestl\u00e9 Purina PetCare is the chance to contribute to innovative product development while relocating to Florida, which has been a personal goal. I am particularly drawn to Nestl\u00e9 Purina PetCare's commitment to quality and innovation in the industry.\n\nKey qualifications I bring:\n\u2022 5+ years of R&D experience in food science and product development\n\u2022 Proven track record in formulation optimization and product launches\n\u2022 Deep expertise in nutritional science and sensory evaluation\n\u2022 Strong project management and cross-functional collaboration skills\n\u2022 Passion for innovation and continuous improvement\n\nI am eager to bring my expertise in product development to Nestl\u00e9 Purina PetCare and would welcome the opportunity to discuss how my background can contribute to your team's success.\n\nThank you for considering my application. I look forward to speaking with you soon.\n\nBest regards,\nRoss Caster\nSenior Product Development Scientist\n(615) 555-0123\nross.caster@example.com",
+  "resume_path": "GENERATE_NEEDED",
+  "form_data": {
+    "first_name": "Ross",
+    "last_name": "Caster",
+    "full_name": "Ross Caster",
+    "email": "ross.caster@example.com",
+    "phone": "(615) 555-0123",
+    "linkedin": "https://www.linkedin.com/in/rosscaster",
+    "current_title": "Senior Product Development Scientist",
+    "current_company": "Mars Petcare",
+    "years_experience": 5,
+    "education": "Bachelor of Science in Food Science",
+    "current_location": "Nashville, TN",
+    "willing_to_relocate": true,
+    "desired_location": "Florida"
+  }
+}

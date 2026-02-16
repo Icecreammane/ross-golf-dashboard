@@ -13,6 +13,22 @@
       "reps": 8,
       "sets": 1,
       "transcript": "log bench press 185 pounds 8 reps"
+    },
+    {
+      "date": "2026-02-15T22:48:25.983081",
+      "exercise": "bench press",
+      "weight": 185,
+      "reps": 8,
+      "sets": 1,
+      "transcript": "log bench press 185 pounds 8 reps"
+    },
+    {
+      "date": "2026-02-15T22:49:53.532358",
+      "exercise": "bench press",
+      "weight": 185,
+      "reps": 8,
+      "sets": 1,
+      "transcript": "log bench press 185 pounds 8 reps"
     }
   ],
   "nutrition": [
@@ -41,6 +57,12 @@
       "food": "i just ate chicken breast",
       "calories": 0,
       "transcript": "i just ate chicken breast"
+    },
+    {
+      "date": "2026-02-15T22:49:53.563679",
+      "food": "i just ate chicken breast 300 calories",
+      "calories": 300,
+      "transcript": "i just ate chicken breast 300 calories"
     }
   ]
 }
