@@ -4540,6 +4540,44 @@
       },
       "latency": 36.589835458,
       "timestamp": "2026-02-16T09:50:35.970895"
+    },
+    {
+      "task": "You are monitoring Ross's email inbox. Check for:\n1. Urgent messages that need immediate attention\n2",
+      "routing": {
+        "model": "ollama",
+        "complexity": 3,
+        "reasoning": "Medium task (complexity 3): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T09:55:36.080526"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.004791,
+      "tokens": {
+        "prompt": 152,
+        "completion": 289
+      },
+      "latency": 27.765649,
+      "timestamp": "2026-02-16T09:56:03.874174"
+    },
+    {
+      "task": "You are monitoring Ross's calendar. Check for:\n1. Events starting in the next 2 hours\n2. Conflicts o",
+      "routing": {
+        "model": "ollama",
+        "complexity": 5,
+        "reasoning": "Medium task (complexity 5): summaries, drafts, simple analysis",
+        "confidence": 0.85,
+        "timestamp": "2026-02-16T09:56:03.895106"
+      },
+      "model_used": "ollama",
+      "cost": 0.0,
+      "saved": 0.0027749999999999997,
+      "tokens": {
+        "prompt": 115,
+        "completion": 162
+      },
+      "latency": 14.806315958,
+      "timestamp": "2026-02-16T09:56:18.709071"
     }
   ]
 }
